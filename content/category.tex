@@ -49,11 +49,11 @@ Commutative rings form a category
 $\Rings$ with objects being rings 
 and morphisms being ring homomorphisms.
 
-Similarly, the category $\Mod R$ of $R$-modules
-has objects being $R$-modules and morphisms being 
-$R$-module homomorphisms.
-A special case of this is vector spaces (when $R=k$ is a field)
-and abelian groups (when $R=\ZZ$).
+Similarly, the category $\Mod A$ of $A$-modules
+has objects being $A$-modules and morphisms being 
+$A$-module homomorphisms.
+A special case of this is vector spaces (when $A=k$ is a field)
+and abelian groups (when $A=\ZZ$).
 \end{example}
 We can also study maps between two categories,
 called the \vocab{functor}.
@@ -180,23 +180,23 @@ so $P_1$ and $P_2$ are isomorphic.
 Notice how this argument does not use 
 the nature of our category $\calC$ at all.
 Thus, if one changes category $\calC$ to other categories
-(e.g., $\Rings$ or $\Mod{R}$), then 
+(e.g., $\Rings$ or $\Mod{A}$), then 
 the exact same argument shows that any two products are isomorphic.
 What's left, however, is to show that product
 exists for each category that you want to define a product.
 
 \paragraph{Polynomial Rings}
-Let $R$ be a ring. Then, the polynomial ring $R[x]$
-is the ring $S$ with element $x\in S$ and morphism 
-$\iota : R\to S$ satisfying the following 
-universal property: ``for ring $S'$, element $y\in S'$, 
-and any morphism $\phi : R\to S'$,
-there exists a unique morphism $f : S\to S'$
+Let $A$ be a ring. Then, the polynomial ring $A[x]$
+is the ring $B$ with element $x\in B$ and morphism 
+$\iota : A\to B$ satisfying the following 
+universal property: ``for ring $B'$, element $y\in B'$, 
+and any morphism $\phi : A\to B'$,
+there exists a unique morphism $f : B\to B'$
 such that $f(x)=y$ and the diagram 
 \begin{center}
 \begin{tikzcd}
-    & R \arrow[ld, "\iota", swap]  \arrow[rd, "\phi"] \\
-    S \arrow[rr, "f"]& & S'  \\
+    & A \arrow[ld, "\iota", swap]  \arrow[rd, "\phi"] \\
+    B \arrow[rr, "f"]& & B'  \\
     x \arrow[u, "\in", phantom, sloped]
     \arrow[rr, maps to] & & y \arrow[u, "\in", phantom, sloped] 
 \end{tikzcd}
@@ -205,17 +205,17 @@ commutes".
 \begin{exercise}
 Using the same argument as products, 
 verify that the universal property given above 
-characterizes $S$ up to isomorphism.
+characterizes $B$ up to isomorphism.
 \end{exercise}
-We now check that a ring $S$ satisfying the above universal 
+We now check that a ring $B$ satisfying the above universal 
 property exists. 
 To do this, we give the usual construction: define 
-$$S = \{a_0 + a_1x + \dots + a_nx^n : 
-a_0,a_1,\dots,a_n\in R\},$$
+$$B = \{a_0 + a_1x + \dots + a_nx^n : 
+a_0,a_1,\dots,a_n\in A\},$$
 and the addition / multiplication operations 
 are the standard polynomial addition / multiplication.
-Then, for any $S'$ and $\phi$ satisfying the above,
-one can see that the map $f : S\to S'$ is forced to be
+Then, for any $B'$ and $\phi$ satisfying the above,
+one can see that the map $f : B\to B'$ is forced to be
 $$f(a_0 + a_1x + \dots + a_nx^n)
 = \phi(a_0) + \phi(a_1)y + \dots + \phi(a_n)y^n.$$
 We leave the reader to check that this defines 
@@ -254,16 +254,16 @@ there exists a bijective corresondence between
 $$\{\text{morphisms } \phi : P'\to P\} 
 \ \longleftrightarrow\ 
 \{(\text{morphisms }\mu' : P'\to M \text{ and } \nu' : P'\to N)\}.$$
-\item $(S,x)$ is a polynomial ring if for each $S'$,
+\item $(B,x)$ is a polynomial ring if for each $B'$,
 there exists a bijective correspondence between 
-$$\{\text{morphisms } S\to S'\} 
+$$\{\text{morphisms } B\to B'\} 
 \ \longleftrightarrow\ 
-\{\text{morphisms } R\to S', \text{ image of }x\}.$$
+\{\text{morphisms } A\to B', \text{ image of }x\}.$$
 \end{itemize}
 In the first case, the universal property is classifying 
 morphisms from any object to $P$,
 while in the second case, the universal property is classifying
-morphisms from $S$ to any object.
+morphisms from $B$ to any object.
 
 These represent two types of universal properties of $X$:
 properties classifying the set of morphisms \textbf{from} $X$

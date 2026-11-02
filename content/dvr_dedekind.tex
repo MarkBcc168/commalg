@@ -14,7 +14,7 @@ In this case, every \textit{nonzero} prime ideal is maximal.
 The two main examples to keep in mind are
 \begin{itemize}
     \item ring of integers $\mathcal O_K$ in a number field;
-    \item $\Spec R$ of an algebraic curve.
+    \item $\Spec A$ of an algebraic curve.
 \end{itemize}
 
 \section{Discrete Valuation Ring}
@@ -89,33 +89,33 @@ Consequence of this facts include
 We have the following big theorem.
 \begin{theorem}[Characterization of DVR]
     \label{thm:dvr}
-    Let $(R,\mathfrak m)$ be a local Noetherian domain
+    Let $(A,\mathfrak m)$ be a local Noetherian domain
     with dimension $1$ (i.e., $\mathfrak m$ is the only nonzero
     prime ideal). 
-    Let $k=R/\mm$ be the residue field
-    and $K=\Frac R$.
+    Let $k=A/\mm$ be the residue field
+    and $K=\Frac A$.
     Then, the following are equivalent.
     \begin{enumerate}[label=(\alph*)]
-	\item $R$ is a DVR.
-	\item $R$ is integrally closed in $K$.
+	\item $A$ is a DVR.
+	\item $A$ is integrally closed in $K$.
 	\item $\mathfrak m$ is principal.
 	\item $\dim_k \mathfrak m/\mathfrak m^2 = 1$.
         \item Every nonzero ideal is a power of $\mm$.
-	\item There exists $\pi\in R$ such that
+	\item There exists $\pi\in A$ such that
 	    all ideals are in form $(0)$ or $(\pi^n)$.
     \end{enumerate}
 \end{theorem}
 \begin{remark}[DVR, integrally closed, and smoothness]
-    If $R$ is the ring obtained by localizing $k[x,y]/(f)$
+    If $A$ is the ring obtained by localizing $k[x,y]/(f)$
     at the maximal ideal $(x-a,y-b)$,
-    then $\dim R = 1$ (by \Cref{thm:dim_transcendence}).
+    then $\dim A = 1$ (by \Cref{thm:dim_transcendence}).
     Moreover, condition (d) $\dim_k \mm / \mm^2 = 1$ is the easiest
-    to check whether $R$ is a DVR.
+    to check whether $A$ is a DVR.
     Roughly speaking $\mm^2$ mods out the quadratic or higher term,
     so $\mm/\mm^2$ only cares about linear approximation
     of $f$ near point $(a,b)$. 
     Working out the details, it turns out that 
-    $$R\text{ is a DVR} \iff \text{at least one of }
+    $$A\text{ is a DVR} \iff \text{at least one of }
     \left.\frac{\partial f}{\partial x}\right|_{(a,b)}
     \text{ and } \left.\frac{\partial f}{\partial y}\right|_{(a,b)}
     \text{ is nonzero},$$
@@ -136,7 +136,7 @@ We have the following big theorem.
 \end{remark}
 \begin{proof}
     \textbf{(a) $\Rightarrow$ (b).}
-    True because $R$ is a PID, hence UFD,
+    True because $A$ is a PID, hence UFD,
     and integrally closed (\Cref{prop:ufd_integrally_closed}).
 
     \textbf{(b) $\Rightarrow$ (c).}
@@ -144,9 +144,9 @@ We have the following big theorem.
     Let $a\neq 0\in \mm$.
     We first claim that
     there exists $n$ such that $\mathfrak m^n\subset (a)$.
-    To prove this, $\Spec R/(a)$ has only one point,
-    so $R/(a)$ is Artinian. 
-    Thus, in $R/(a)$, we have from 
+    To prove this, $\Spec A/(a)$ has only one point,
+    so $A/(a)$ is Artinian. 
+    Thus, in $A/(a)$, we have from 
     \Cref{thm:artinian_local_ring} that $\overline{\mathfrak m}^n=0$,
     so $\mathfrak m^n\subseteq (a)$%
     \footnote{Note that we are using the easy implication (b) implies (d) in \Cref{thm:artinian_local_ring}.
@@ -155,7 +155,7 @@ We have the following big theorem.
     so there exists $b\in\mathfrak m^{n-1}\setminus (a)$.
 
     Let $x=\frac ab\in K$. Then, since $b\notin (a)$,
-    we have $\frac ba\notin R$,
+    we have $\frac ba\notin A$,
     so it is not integral.
     \begin{itemize}
 	\item If $\frac ba\mathfrak m\subseteq\mathfrak m$,
@@ -165,10 +165,10 @@ We have the following big theorem.
 	\item If $\frac ba\mathfrak m\subsetneq\mathfrak m$,
     then, we note that $b\frakm \subseteq \mm^n\subseteq (a)$,
     so $b\mm \subseteq (a)$. Dividing by $a$ both sides
-    gives $\tfrac ba\mm\subseteq R$.
+    gives $\tfrac ba\mm\subseteq A$.
     Therefore, $\frac ba\mm$ is an ideal,
     but it is not contained in \textit{the} maximal ideal $\mm$,
-    so $\frac ba\mathfrak m = R$. Hence, $\mm = (a/b)$.
+    so $\frac ba\mathfrak m = A$. Hence, $\mm = (a/b)$.
     \end{itemize}
 
     \textbf{(c) $\Rightarrow$ (d).}
@@ -188,12 +188,12 @@ We have the following big theorem.
 
     \textbf{(c) $\Rightarrow$ (e).}
     Suppose $\mm=(\pi)$.
-    Now, given $I\subset R$, we claim that we can find $k$ such that $I\subset (\pi^k)$
+    Now, given $I\subset A$, we claim that we can find $k$ such that $I\subset (\pi^k)$
     but $I\subsetneq (\pi^{k+1})$.
     If such $k$ does not exist, then $I\subseteq (\pi^k)$
     for all $k$, which means that we have an infinite ascending chain of ideals
     $$I\ \subsetneq\ \pi^{-1}I\ \subsetneq\ \pi^{-2}I\ \subsetneq\  \dots,$$
-    contradicting the fact that $R$ is Noetherian.
+    contradicting the fact that $A$ is Noetherian.
     
     Having found such $k$, we 
     pick $f\in I\setminus (\pi^{k+1})$, so $f=\pi^kg$
@@ -210,24 +210,24 @@ We have the following big theorem.
     Thus, every ideal is of the form $\mm^n = (\pi^n)$.
     
     \textbf{(f) $\Rightarrow$ (a).}
-    We define $v : R\to\ZZ\cup\{\infty\}$ as follows:
-    for each $a\in R$, by (e), the ideal $(a)$ must be in form
+    We define $v : A\to\ZZ\cup\{\infty\}$ as follows:
+    for each $a\in A$, by (e), the ideal $(a)$ must be in form
     $(\pi^e)$ for some integer $e\geq 0$.
     We set $e=v(a)$.
     This $v$ clearly satisfies
     \begin{itemize}
         \item $v(a+b) \geq \min(v(a), v(b))$; and
-        \item $v(ab) = v(a)v(b)$ for all $a,b\in R$.
+        \item $v(ab) = v(a)v(b)$ for all $a,b\in A$.
     \end{itemize}
     Now, extend $v$ to $K$ by $v(x/y) = v(x)-v(y)$.
     One can see that the above two properties still hold.
-    Finally, we have to show that $a\in R$ if and only if $v(a)\geq 0$.
+    Finally, we have to show that $a\in A$ if and only if $v(a)\geq 0$.
     The $(\Rightarrow)$ direction is clear.
     For the $(\Leftarrow)$ direction, suppose that 
-    $a,b\in R$ such that $v(a/b)\geq 0$, or $v(a)\geq v(b)$.
-    Then, $(b)\subseteq (a)$, so $b$ divides $a$, so $a/b\in R$.
+    $a,b\in A$ such that $v(a/b)\geq 0$, or $v(a)\geq v(b)$.
+    Then, $(b)\subseteq (a)$, so $b$ divides $a$, so $a/b\in A$.
     Hence, we conclude that $v$ is a discrete valuation
-    with valuation ring $R$.
+    with valuation ring $A$.
 \end{proof}
 %
 %
@@ -240,15 +240,15 @@ We have the following big theorem.
 \subsection{Definition and Unique Factorization}
 The definition of Dedekind Domain is in the proposition.
 \begin{proposition}[Dedekind Domain]
-    Let $R$ be a domain, Noetherian, and one-dimensional
+    Let $A$ be a domain, Noetherian, and one-dimensional
     (every nonzero prime ideal is maximal).
     Then, the following are equivalent.
     \begin{enumerate}[label=(\alph*)]
-    \item $R$ is integrally closed.
-    \item Every localization of nonzero prime  $R_\pp$ is a DVR.
+    \item $A$ is integrally closed.
+    \item Every localization of nonzero prime  $A_\pp$ is a DVR.
     \item Every primary ideal is a power of a prime ideal.
     \end{enumerate}
-    We say that $R$ is \vocab{Dedekind Domain} if
+    We say that $A$ is \vocab{Dedekind Domain} if
     it meets the (equivalent) conditions of the proposition.
 \end{proposition}
 Since DVR corresponds to objects at smooth points,
@@ -260,34 +260,34 @@ objects.}
 \begin{proof}
     \textbf{(a) $\Leftrightarrow$ (b).}
     Since being integrally closed is local (\Cref{prop:integral_closure_local}),
-    we get that $R$ is integrally closed 
-    if and only if $R_\pp$ is integrally closed for 
+    we get that $A$ is integrally closed 
+    if and only if $A_\pp$ is integrally closed for 
     all nonzero prime ideal $\pp$.
     By \Cref{thm:dvr} ((b) implies (a)), this is equivalent to
-    $R_\pp$ being DVR for all nonzero prime ideal $\pp$.
+    $A_\pp$ being DVR for all nonzero prime ideal $\pp$.
 
     \textbf{(b) $\Rightarrow$ (c).}
     The $(0)$-primary ideal is clearly just $(0)$.
     Thus, it suffices to consider only $\pp$-primary
     for all nonzero prime $\pp$.
     If $Q$ is $\pp$-primary, then
-    $Q_\pp$ sits inside a DVR $R_\pp$, so $Q_\pp = \pp^kR_\pp$,
-    and so by contracting to $R$, we get that $Q=\pp^k$.
+    $Q_\pp$ sits inside a DVR $A_\pp$, so $Q_\pp = \pp^kA_\pp$,
+    and so by contracting to $A$, we get that $Q=\pp^k$.
 
     \textbf{(c) $\Rightarrow$ (b).}
     Now, suppose (c) holds: every primary is a prime power.
-    Let $\pp$ be any nonzero prime ideal of $R$,
-    and consider any ideal $I\subset R_\pp$.
-    Note that the only prime ideals of $I$ and $R_\pp$
-    are $(0)$ and $\pp$, so $\Ass(R_\pp/I) = \{\pp\}$
+    Let $\pp$ be any nonzero prime ideal of $A$,
+    and consider any ideal $I\subset A_\pp$.
+    Note that the only prime ideals of $I$ and $A_\pp$
+    are $(0)$ and $\pp$, so $\Ass(A_\pp/I) = \{\pp\}$
     (it cannot be empty),
     so $I$ is $\pp$-primary.
 
-    Thus, the contraction of $I$ to $R$ is $\pp$-primary,
+    Thus, the contraction of $I$ to $A$ is $\pp$-primary,
     and so it must be a power of $\pp$.
     This means that $I = \pp^k$ for some $k$,
     and \Cref{thm:dvr} ((e) implies (a)) concludes that 
-    $R_\pp$ is a DVR.
+    $A_\pp$ is a DVR.
 \end{proof}
 \begin{corollary}[Dedekind domains has unique factorization of ideals]
     In a Dedekind Domain, any ideal
@@ -304,7 +304,7 @@ objects.}
     But this follows from that $\pp_i$ and $\pp_j$ are coprime.
 \end{proof}
 \begin{exercise}
-Prove that if $R$ is a Dedekind domain, then $R$ is a PID 
+Prove that if $A$ is a Dedekind domain, then $A$ is a PID 
 if and only if it is a UFD.
 \end{exercise}
 We now give some examples of Dedekind Domain.
@@ -790,11 +790,11 @@ Let $A$ be the localization of $\mathbb C[x,y]/(y^3-x^5-x)$ at maximal ideal $(x
 \end{alphenum}
 \end{problem}
 \begin{problem}
-Let $\mathbb Z_{(2)} = \{\tfrac ab : a,b\in\mathbb Z, 2\nmid b\}\subseteq \mathbb Q$. Let $R=\mathbb Z_{(2)}[x]/(x^5+2x+2)$, which is an integral extension of $\mathbb Z_{(2)}$.
+Let $\mathbb Z_{(2)} = \{\tfrac ab : a,b\in\mathbb Z, 2\nmid b\}\subseteq \mathbb Q$. Let $A=\mathbb Z_{(2)}[x]/(x^5+2x+2)$, which is an integral extension of $\mathbb Z_{(2)}$.
 \begin{alphenum}
-\item Prove that $R$ is a DVR. 
-(In particular, you have to show that $R$ is a local ring first.)
-\item What is the valuation of $2$ in $R$?
+\item Prove that $A$ is a DVR. 
+(In particular, you have to show that $A$ is a local ring first.)
+\item What is the valuation of $2$ in $A$?
 \end{alphenum}
 \end{problem}
 \begin{problem}

@@ -7,12 +7,12 @@
 We have met the notion of dimension of a ring in
 \Cref{sec:dim_intro}.
 To reproduce the definition, recall that
-for any ring $R$, the \vocab{Krull dimension}
-\notation{$\dimK R$}{Krull dimension}
-$\dimK R$ is the maximum nonnegative integer
+for any ring $A$, the \vocab{Krull dimension}
+\notation{$\dimK A$}{Krull dimension}
+$\dimK A$ is the maximum nonnegative integer
 $n$ such that there exists a chain of prime ideals
 $$\pp_0\subsetneq \pp_1 \subsetneq \pp_2
-\subsetneq \dots\subsetneq \pp_n \ \subset\ R.$$
+\subsetneq \dots\subsetneq \pp_n \ \subset\ A.$$
 This notion of dimension is notoriously difficult
 to deduce its properties.
 For example, proving that $\dim \CC[x_1,\dots,x_n]=n$,
@@ -22,24 +22,24 @@ To give a more robust theory of dimension,
 we first note that we can reduce to the study of local ring.
 Since any chain of prime ideals should terminate at a maximal ideal,
 we deduce that
-$$\dimK R = \max_{\mm\text{ maximal}} \dimK R_\mm 
-= \max_{\pp\text{ prime}} \dimK R_\pp.$$
-Thus, the study of $\dimK R$ is reduced to the study
-of $\dimK R$ of a local ring.
+$$\dimK A = \max_{\mm\text{ maximal}} \dimK A_\mm 
+= \max_{\pp\text{ prime}} \dimK A_\pp.$$
+Thus, the study of $\dimK A$ is reduced to the study
+of $\dimK A$ of a local ring.
 
-Given a Noetherian local ring $R$ with maximal ideal $\mm$,
+Given a Noetherian local ring $A$ with maximal ideal $\mm$,
 we will define two other types of dimensions:
 \begin{itemize}
     \item the \vocab{primary ideal dimension}
-    $\dimP R$,
+    $\dimP A$,
     which is the minimum number of generators
     across all $\mm$-primary ideals;
     \item the \vocab{Hilbert dimension}
-    $\dimH R$, which is more complicated and will be discussed
+    $\dimH A$, which is more complicated and will be discussed
     in \Cref{sec:hilbert_dim}.
 \end{itemize}
 Then, the main theorem is 
-$\dimK R = \dimH R = \dimP R$ for any local ring $R$.
+$\dimK A = \dimH A = \dimP A$ for any local ring $A$.
 
 Before discussing dimension in more detail,
 let us close with the following warning.
@@ -51,7 +51,7 @@ not be Noetherian.
 \end{warn}
 \section{Preliminary: Length of a Module}
 \begin{definition}[Composition Series]
-    Given a ring $R$ and $R$-module $M$,
+    Given a ring $A$ and $A$-module $M$,
     a \vocab{composition series} of a module $M$
     is a chain
     $$M=M_0\supsetneq M_1\supsetneq M_2
@@ -62,15 +62,15 @@ not be Noetherian.
 \end{definition}
 \begin{exercise}
     Prove that $M$ is simple if and only if 
-    $M=R/\mm$ for a maximal ideal $\mm$.
+    $M=A/\mm$ for a maximal ideal $\mm$.
 \end{exercise}
 This definition is an analogue of vector space.
-In particular, if $R=k$ is a field and $M\simeq k^n$,
+In particular, if $A=k$ is a field and $M\simeq k^n$,
 then we have the composition series
 $$k^d \supset k^{d-1}\supset\dots\supset k^1\supset k^0=\{0\}.$$
 However, in contrast to vector spaces,
 composition series of a module does not always exist.
-For example, if $M=R=\mathbb Z$,
+For example, if $M=A=\mathbb Z$,
 then anything in the chain must be isomorphic to $\mathbb Z$,
 so we cannot get it down to zero.
 \begin{definition}[Length]
@@ -216,10 +216,10 @@ We now prove some more properties of a length.
 Before going into the definition, let us see 
 some examples first.
 \begin{example}[Dimension of $k[x_1,\dots,x_n]$]
-    Let $R = k[x_1,\dots,x_n]_{(x_1,\dots,x_n)}$
+    Let $A = k[x_1,\dots,x_n]_{(x_1,\dots,x_n)}$
     (localized at maximal ideal $(x_1,\dots,x_n)$).
-    Then, $R$ is a local ring with maximal ideal 
-    $\mm=(x_1,\dots,x_n)$ and $R/\mm=k$.
+    Then, $A$ is a local ring with maximal ideal 
+    $\mm=(x_1,\dots,x_n)$ and $A/\mm=k$.
     As a $k$-vector space, $\mm^i/\mm^{i+1}$ 
     is a linear combinations of terms $x_1^{a_1}\cdots x_n^{a_n}$
     where $a_1+\dots+a_n = i$. Thus,
@@ -233,7 +233,7 @@ some examples first.
     the dimension.
 \end{example}
 \begin{example}[Artinian local ring]
-    On the other hand, if $R$ is the Artinian local ring,
+    On the other hand, if $A$ is the Artinian local ring,
     which has dimension $0$, then $\dim_k \mm^i/\mm^{i+1}$
     is not a polynomial.
     Instead, we only know (by \Cref{thm:artinian_local_ring})
@@ -244,7 +244,7 @@ some examples first.
     then again, $\dim_k \mm^i/\mm^{i+1}$
     is a polynomial of degree one less than the dimension.
 \end{example}
-Given a Noetherian local ring $R$ with maximal ideal $\mm$,
+Given a Noetherian local ring $A$ with maximal ideal $\mm$,
 the above two examples lead us to consider the sequence
 $$\ell_i = \dim_k \mm^i/\mm^{i+1}.$$
 A sequence $(\ell_i)_{i\geq 0}$ is said to be 
@@ -258,30 +258,30 @@ is eventually polynomial with degree $\deg p$.
 the degree of zero polynomial is $-1$.}
 \begin{theorem}[Hilbert dimension]
     \label{thm:hilbert_dim}
-    If $R$ is a Noetherian local ring with maximal ideal $\mm$,
+    If $A$ is a Noetherian local ring with maximal ideal $\mm$,
     then the \vocab{Hilbert-Samuel function}
-    $$\ell_i = \dim_{R/\mm} \mm^i/\mm^{i+1}$$
+    $$\ell_i = \dim_{A/\mm} \mm^i/\mm^{i+1}$$
     is eventually polynomial.
     
     If it is eventually polynomial with degree $d$,
     then we define the \vocab{Hilbert dimension}
-    \notation{$\dimH R$}{Hilbert dimension}
-    $$\dimH R := d+1.$$
+    \notation{$\dimH A$}{Hilbert dimension}
+    $$\dimH A := d+1.$$
 \end{theorem}
 We will prove this theorem in a greater generality
 (that we will need later) in the next section.
 \subsection{Proof of Polynomiality}
-\paragraph{Setup} Let $S_\bullet = S_0\oplus S_1\oplus\dots$
+\paragraph{Setup} Let $B_\bullet = B_0\oplus B_1\oplus\dots$
 be a graded ring such that
 \begin{itemize}
-    \item $S_0$ is Artinian.
-    \item $S_\bullet$ is generated (as an $S_0$-algebra)
-    by finitely many elements in $S_1$.
+    \item $B_0$ is Artinian.
+    \item $B_\bullet$ is generated (as an $B_0$-algebra)
+    by finitely many elements in $B_1$.
 \end{itemize}
 Let $M_\bullet = M_0\oplus M_1\oplus\dots$ be a finitely-generated
-$S_\bullet$-module.
+$B_\bullet$-module.
 This implies that, for each $i$, 
-$M_i$ is finitely-generated $S_0$-module,
+$M_i$ is finitely-generated $B_0$-module,
 hence has finite length (by \Cref{cor:artinian_finite_length}).
 
 \paragraph{Main Theorem}
@@ -289,23 +289,23 @@ Now, we state the main theorem.
 \begin{theorem}[Hilbert-Serre]
     \label{thm:hilbert_dim_module}
     Assuming the above setup, the sequence
-    $$\ell_i := l_{S_0}(M_i)$$
+    $$\ell_i := l_{B_0}(M_i)$$
     is eventually polynomial.
-    (The subscript in $l_{S_0}$ means the length
-    as $S_0$-module.)
+    (The subscript in $l_{B_0}$ means the length
+    as $B_0$-module.)
     
-    Furthermore, if $S_\bullet$ is generated by 
-    $m$ elements in $S_1$, 
+    Furthermore, if $B_\bullet$ is generated by 
+    $m$ elements in $B_1$, 
     then it is eventually polynomial of degree at most $m-1$.
 \end{theorem}
 To deduce \Cref{thm:hilbert_dim} from \Cref{thm:hilbert_dim_module},
 we plug in the \textbf{associated graded ring}
 (\Cref{def:gr})
-$$S_\bullet = M_\bullet = \gr_\mm R = \bigoplus_{i\geq 0} \mm^i/\mm^{i+1},$$
+$$B_\bullet = M_\bullet = \gr_\mm A = \bigoplus_{i\geq 0} \mm^i/\mm^{i+1},$$
 and clearly the generators of $\mm$,
 which sits in $\mm/\mm^2$, are sufficient
 to generate $\mm^i/\mm^{i+1}$ for all $i$,
-so $S_\bullet$ is finitely-generated at degree $1$.
+so $B_\bullet$ is finitely-generated at degree $1$.
 
 (As a consequence, we get that the Hilbert dimension 
 is at most the minimum number of generators of $\mm$.
@@ -324,7 +324,7 @@ which will play a key role in proving dimension theorem.)
     We use induction on $m$,
     the number of generators. The base case $m=0$ is clear
     because then, $M_\bullet$ is finitely-generated 
-    $S_0$-module, so $M_n=0$ for all large $n$.
+    $B_0$-module, so $M_n=0$ for all large $n$.
     Thus, $\ell_i$ is eventually a zero polynomial,
     which has degree $-1$.
 
@@ -338,67 +338,67 @@ which will play a key role in proving dimension theorem.)
     \stackrel{\cdot x}\longto M_{i+1} 
     \longto L_{i+1}\longto 0,$$
     which gives (by \Cref{cor:length_exact})
-    $$l_{S_0}(K_i) - l_{S_0}(M_i) + l_{S_0}(M_{i+1}) - l_{S_0}(L_i) = 0.$$
+    $$l_{B_0}(K_i) - l_{B_0}(M_i) + l_{B_0}(M_{i+1}) - l_{B_0}(L_i) = 0.$$
     Note that $K_\bullet$ and $L_\bullet$ are graded 
-    $S_\bullet/(x)$-module. Note that $S_1/(x)$
+    $B_\bullet/(x)$-module. Note that $B_1/(x)$
     is generated by other $m-1$ generators,
     so by induction hypothesis,
-    $l_{S_0}(K_\bullet)$ and $l_{S_0}(L_\bullet)$
+    $l_{B_0}(K_\bullet)$ and $l_{B_0}(L_\bullet)$
     is eventually polynomial of degree at most $m-2$.
-    Thus, $l_{S_0}(M_{i+1}) - l_{S_0}(M_i)
-    = l_{S_0}(L_i) - l_{S_0}(K_i)$
+    Thus, $l_{B_0}(M_{i+1}) - l_{B_0}(M_i)
+    = l_{B_0}(L_i) - l_{B_0}(K_i)$
     is eventually polynomial of degree at most $m-2$.
     The elementary fact at the beginning concludes.
 \end{proof}
 We note the following useful fact.
 \begin{proposition}[Alternative definition of $\dimH$]
     \label{prop:alternative_length}
-    If $Q$ is an ideal of $R$, then the following are equivalent:
+    If $Q$ is an ideal of $A$, then the following are equivalent:
     \begin{alphenum}
-    \item $\ell_i = l_{R/Q}(Q^i/Q^{i+1})$
+    \item $\ell_i = l_{A/Q}(Q^i/Q^{i+1})$
     is eventually polynomial of degree $d$.
-    \item $p_i = l_{R/Q}(R/Q^i)$
+    \item $p_i = l_{A/Q}(A/Q^i)$
     is eventually polynomial of degree $d+1$.
     \end{alphenum}
 \end{proposition}
 \begin{proof}
 The exact sequence
-$$0\longto Q^i/Q^{i+1} \longto R/Q^{i+1}
-\longto R/Q^i\longto 0$$
+$$0\longto Q^i/Q^{i+1} \longto A/Q^{i+1}
+\longto A/Q^i\longto 0$$
 gives 
-$$l_{R/Q}(R/Q^{i+1}) - l_{R/Q}(R/Q^i) = l(Q^{i+1}/Q^i),$$
+$$l_{A/Q}(A/Q^{i+1}) - l_{A/Q}(A/Q^i) = l(Q^{i+1}/Q^i),$$
 so $p_i-p_{i+1} = \ell_i$, 
 which implies the result by finite difference.
 \end{proof}
 By plugging in $Q=\mm$, the Hilbert dimension 
-can also be defined as the degree of $l(R/\mm^i)$.
+can also be defined as the degree of $l(A/\mm^i)$.
 
 \section{Primary Ideal Dimension and Dimension Theorem}
 \subsection{Primary Ideal Dimension}
 We make the third definition of dimension:
 \begin{definition}[Primary ideal dimension]
-    For any local ring $R$ with maximal ideal $\mm$,
+    For any local ring $A$ with maximal ideal $\mm$,
     we define the \vocab{primary ideal dimension},
-    denoted $\dimP R$, to be the minimum
+    denoted $\dimP A$, to be the minimum
     nonnegative integer $s$ for which there exists
     an $\mm$-primary ideal $Q$ generated by 
     $\leq s$ elements.
-    \notation{$\dimP R$}{primary ideal dimension}
+    \notation{$\dimP A$}{primary ideal dimension}
 \end{definition}
 \begin{example}[Examples of primary ideal dimension]
     \begin{itemize}
-    \item Consider $R=\CC[x_1,\dots,x_n]_{(x_1,\dots,x_n)}$,
+    \item Consider $A=\CC[x_1,\dots,x_n]_{(x_1,\dots,x_n)}$,
     which is a local ring with maximal ideal
     $\mm = (x_1,\dots,x_n)$. 
     The ideal $\mm$ is $\mm$-primary and has $n$ generators,
-    so we get that $\dimP R \leq n$.
-    \item Let $R$ be an Artinian local ring 
+    so we get that $\dimP A \leq n$.
+    \item Let $A$ be an Artinian local ring 
     with maximal ideal $\mm$.
     By \Cref{thm:artinian_local_ring}, $\mm^N=(0)$
     for some $N$, so $(0)$ is  $\mm$-primary,
-    which needs $0$ generators, so $\dimP R = 0$.
+    which needs $0$ generators, so $\dimP A = 0$.
     \item Consider
-    $$R = \frac{\CC[x,y]_{(x,y)}}{(xy)}$$
+    $$A = \frac{\CC[x,y]_{(x,y)}}{(xy)}$$
     which is a local ring with maximal ideal $\mm=(x,y)$.
     This ideal is generated by two elements.
     However, $Q=(x+y)$ is $\mm$-primary because
@@ -407,7 +407,7 @@ We make the third definition of dimension:
     $Q$ is $\mm$-primary.
 
     In particular, this implies that 
-    $\dimP R \leq 1$, and it is not enough to count
+    $\dimP A \leq 1$, and it is not enough to count
     the number of generators of $\mm$.
     \end{itemize}
     Notice that $\dimP$ is easier to provide
@@ -419,28 +419,28 @@ There is no surprise that the main theorem
 that we will prove is the following.
 \begin{theorem}[Dimension Theorem]
     \label{thm:dimension}
-    For any Noetherian local ring $R$, we have
-    $$\dimK R = \dimH R = \dimP R.$$
-    Hence, we can safely call them all $\dim R$.
+    For any Noetherian local ring $A$, we have
+    $$\dimK A = \dimH A = \dimP A.$$
+    Hence, we can safely call them all $\dim A$.
 \end{theorem}
 
 Proving this will occupy the rest of this subsection.
 We will show a chain of inequalities
-$$\dimP R \stackrel{\text{(1)}}\geq \dimH R 
-\stackrel{\text{(2)}}\geq \dimK R 
-\stackrel{\text{(3)}}\geq \dimP R.$$
+$$\dimP A \stackrel{\text{(1)}}\geq \dimH A 
+\stackrel{\text{(2)}}\geq \dimK A 
+\stackrel{\text{(3)}}\geq \dimP A.$$
 \Cref{subsec:dimP_dimH} will prove (1),
 \Cref{subsec:dimH_dimK} will prove (2),
 and \Cref{subsec:dimK_dimP} will prove (3).
 Each inequality takes some amount of work.
 
 For the rest of this section,
-$R$ is a Noetherian local ring, $\mm$ is the maximal ideal,
-and $k=R/\mm$ is the residue field.
+$A$ is a Noetherian local ring, $\mm$ is the maximal ideal,
+and $k=A/\mm$ is the residue field.
 
 \subsection{The Primary Ideal Dimension is at least the Hilbert Dimension}
 \label{subsec:dimP_dimH}
-We prove $\dimP R\geq \dimH R$. 
+We prove $\dimP A\geq \dimH A$. 
 In plain terms, given a primary ideal $Q$
 with $m$ generators, we have to show that 
 $\dim_k \mm^{i+1}/\mm^i$ is eventually polynomial
@@ -456,18 +456,18 @@ $\dim_k \mm^{i+1}/\mm^i$.
 
 
 
-To do that, we let $M$ and $R$ be the associated graded ring
+To do that, we let $M$ and $B$ be the associated graded ring
 corresponding to the $Q$-adic filtration
-$$M=S=\gr_Q(R)=\bigoplus_{i\geq 0} Q^i / Q^{i+1}.$$
+$$M=B=\gr_Q(A)=\bigoplus_{i\geq 0} Q^i / Q^{i+1}.$$
 We check the hypothesis of \Cref{thm:hilbert_dim_module}.
 \begin{itemize}
-    \item $S_0 = R/Q$ is Artinian because \Cref{thm:artinian_local_ring} 
+    \item $B_0 = A/Q$ is Artinian because \Cref{thm:artinian_local_ring} 
     (condition (c)) applies.
-    \item $S$ is clearly generated in degree $1$
+    \item $B$ is clearly generated in degree $1$
     by the $m$ generators of $Q$.
 \end{itemize}
 Thus, by \Cref{thm:hilbert_dim_module}, the sequence
-$l_{R/Q}(Q^i/Q^{i+1})$ is eventually polynomial
+$l_{A/Q}(Q^i/Q^{i+1})$ is eventually polynomial
 with degree $d\leq m-1$.
 
 Now, let $d'$ be the degree of $\dim_k\mm^{i+1}/\mm^i$.
@@ -475,53 +475,53 @@ We claim that $d=d'$, which will finish the proof.
 To do this, observe the following. 
 \begin{itemize}
     \item By \Cref{prop:alternative_length},
-    $l_{R/Q}(R/Q^i)$ is eventually polynomial with degree $d+1$.
+    $l_{A/Q}(A/Q^i)$ is eventually polynomial with degree $d+1$.
     \item By \Cref{prop:alternative_length} again,
-    $l_{R/\mm}(R/\mm^i)$ is eventually polynomial
+    $l_{A/\mm}(A/\mm^i)$ is eventually polynomial
     with degree $d'+1$.
-    \item Since $R$ is Noetherian and $\sqrt Q=\mm$,
+    \item Since $A$ is Noetherian and $\sqrt Q=\mm$,
     we get that $Q\supseteq \mm^c$ for some $c$.
     This implies that there is a chain of two surjections
-    $$R/\mm^{ci} \relbar\joinrel\twoheadrightarrow R/Q^i
-    \relbar\joinrel\twoheadrightarrow R/\mm^i,$$
+    $$A/\mm^{ci} \relbar\joinrel\twoheadrightarrow A/Q^i
+    \relbar\joinrel\twoheadrightarrow A/\mm^i,$$
     which gives 
-    $$l_{R/\mm}(R/\mm^{ci}) \geq l_{R/\mm}(R/Q^i) \geq 
-    l_{R/\mm}(R/\mm^i).$$
+    $$l_{A/\mm}(A/\mm^{ci}) \geq l_{A/\mm}(A/Q^i) \geq 
+    l_{A/\mm}(A/\mm^i).$$
     Thus, as $i\to\infty$,
-    $l_{R/\mm}(R/Q^i)$, a polynomial of degree $d+1$,
+    $l_{A/\mm}(A/Q^i)$, a polynomial of degree $d+1$,
     is squeezed between two polynomials of degree $d'+1$.
     Hence, $d+1=d'+1$, so $d=d'$.
 \end{itemize}
 Hence, the degree of $\dim_k \mm^{i+1}/\mm^i$
-is $d\leq m-1$, so $\dimH R \leq m$.
+is $d\leq m-1$, so $\dimH A \leq m$.
 
 \subsection{The Hilbert Dimension is at least the Krull Dimension}
 \label{subsec:dimH_dimK}
-In this section, we show that $\dimH R \geq \dimK R$.
+In this section, we show that $\dimH A \geq \dimK A$.
 The idea is to slice by a non-zero divisor $f\in\mm$
-(i.e., replace $R$ with $R/(f)$).
+(i.e., replace $A$ with $A/(f)$).
 We show that the slicing \textbf{must} decrease 
 the Hilbert dimension by at least $1$,
 but it decreases the Krull dimension by at most $1$.
 This will allow us to use induction.
 \begin{lemma}[Slicing decreases Hilbert dimension]
     \label{lem:hilbert_dim_slicing}
-    Let $R$ be a Noetherian local ring with maximal ideal $\mm$.
+    Let $A$ be a Noetherian local ring with maximal ideal $\mm$.
     Let $f\in\mm$ that is not a zero divisor.
     Then,
-    $$\dimH R/(f) \leq \dimH R - 1.$$
+    $$\dimH A/(f) \leq \dimH A - 1.$$
 \end{lemma}
 \begin{proof}
-    Let $k=R/\mm$ and $R'=R/(f)$.
+    Let $k=A/\mm$ and $A'=A/(f)$.
     Consider the short exact sequence
-    $$0\longto \frac{(f)}{\mm^i\cap (f)} \longto \frac{R}{\mm^i} 
-    \longto \frac{R'}{\mm^iR'}\longto 0,$$
-    where the first map is embedding $(f)$ into $R$
-    and the second map comes from quotient projection $R\to R'$.
+    $$0\longto \frac{(f)}{\mm^i\cap (f)} \longto \frac{A}{\mm^i} 
+    \longto \frac{A'}{\mm^iA'}\longto 0,$$
+    where the first map is embedding $(f)$ into $A$
+    and the second map comes from quotient projection $A\to A'$.
     Taking dimensions gives
     \begin{align*}
-    \dim_k\left(R'/\mm^i R'\right) 
-    &= \dim_k(R/\mm^i) - \dim_k\left(
+    \dim_k\left(A'/\mm^i A'\right) 
+    &= \dim_k(A/\mm^i) - \dim_k\left(
     \frac{(f)}{(f)\cap \mm^i}\right).
     \end{align*}
     By Artin-Rees Lemma (\Cref{thm:artin_rees}),
@@ -529,67 +529,67 @@ This will allow us to use induction.
     This implies that there exists a constant $c$
     for which $(f)\cap \mm^i = f\mm^{i+c}$
     for all sufficiently large $i$.
-    This implies $(f)/((f)\cap \mm^i) \simeq R/\mm^{i+c}$
-    as $R$-module for all sufficiently large $i$.
+    This implies $(f)/((f)\cap \mm^i) \simeq A/\mm^{i+c}$
+    as $A$-module for all sufficiently large $i$.
     Therefore, 
-    $$\dim_k(R'/\mm^i R') 
-    = \dim_k(R/\mm^i) - \dim_k(R/\mm^{i+c}),$$
+    $$\dim_k(A'/\mm^i A') 
+    = \dim_k(A/\mm^i) - \dim_k(A/\mm^{i+c}),$$
     which is indeed a polynomial of degree at most 
-    $\dimH R-1$.
+    $\dimH A-1$.
 \end{proof}
 We now proceed to prove the second part of the theorem.
-\begin{proof}[Proof of $\dimH R\geq \dimK R$]
-    We will do induction on $\dimH R$.
+\begin{proof}[Proof of $\dimH A\geq \dimK A$]
+    We will do induction on $\dimH A$.
 
-    If $\dimH R=0$, then $l(R/\mm^n)$ is constant for
+    If $\dimH A=0$, then $l(A/\mm^n)$ is constant for
     sufficiently large $n$.
     In particular, we have $\mm^n = \mm^{n+1} = \mm^{n+2}=\dots$,
     so by Nakayama (\Cref{cor:nakayama_local_ring}), 
     we get that $\mm^n=0$, so
     condition (d) of \Cref{thm:artinian_local_ring} applies.
-    Hence, $R$ is Artinian, so $\dimK R=0$.
+    Hence, $A$ is Artinian, so $\dimK A=0$.
 
-    Otherwise, assume $\dimH R>0$, then consider
+    Otherwise, assume $\dimH A>0$, then consider
     the chain of prime ideals
     $$\pp_0\subset\pp_1\subset\dots\subset\pp_s,$$
-    and we want to show that $\dimH R\geq s$.
+    and we want to show that $\dimH A\geq s$.
 
     The first thing we will do is to mod out by $\pp_0$.
     In particular, note that
-    $$l(R/\mm^i) = l\left(\frac{R/\pp_0}{\mm^i}\right)
-    \implies \dimH R \geq \dimH R/\pp_0.$$
-    Therefore, by replacing $R$ with $R/\pp_0$,
-    we can assume $\pp_0 = (0)$ and $R$ is a domain.
+    $$l(A/\mm^i) = l\left(\frac{A/\pp_0}{\mm^i}\right)
+    \implies \dimH A \geq \dimH A/\pp_0.$$
+    Therefore, by replacing $A$ with $A/\pp_0$,
+    we can assume $\pp_0 = (0)$ and $A$ is a domain.
 
     The point of above is to make it easier
     to find a non-zero divisor for the lemma.
     In particular, for any $f\in\pp_1\setminus\{0\}$,
     $f$ is not a zero divisor.
-    Now, we all we need is to cut the chain down to $R/(f)$.
+    Now, we all we need is to cut the chain down to $A/(f)$.
     We set $\overline\pp_i = \pp_i/(f)$, so that
     $$\overline\pp_1\subset\overline\pp_2\subset\dots
-    \subset \overline\pp_s \subset R/(f),$$
-    so we get a chain of length $s-1$ in $R/f$.
+    \subset \overline\pp_s \subset A/(f),$$
+    so we get a chain of length $s-1$ in $A/f$.
     In particular, the induction hypothesis implies
-    $\dimH R/(f)\geq s-1$. Hence,
-    $$\dimH  R \geq \dimH R/(f) + 1 = s,$$
+    $\dimH A/(f)\geq s-1$. Hence,
+    $$\dimH  A \geq \dimH A/(f) + 1 = s,$$
     so we are done.
 \end{proof}
 \subsection{The Krull Dimension is at least the Primary Ideal Dimension}
 \label{subsec:dimK_dimP}
 Finally, we prove the last inequality that
-$\dimK R \geq \dimP R$.
+$\dimK A \geq \dimP A$.
 In plain language, we have to find an $\mm$-primary
-ideal generated by at most $\dimK R$ elements.
+ideal generated by at most $\dimK A$ elements.
 To do that, we use induction on the new measure of complexity of ideals, called \vocab{height}.
 \begin{definition}[Height]
-    For any ring $R$, the \vocab{height} 
+    For any ring $A$, the \vocab{height} 
     (also known as the \vocab{codimension}) of a prime ideal
     $\pp$, denoted $\height \pp$
     is the maximum length of a chain of primes 
     $\pp_0\subset\pp_1\subset\dots\subset\pp_n=\pp$
     ending at $\pp$.
-    In other words, $\height\pp = \dim R_\pp$.
+    In other words, $\height\pp = \dim A_\pp$.
 
     The height of an ideal $I$ is defined as
     \notation{$\height I$}{height}
@@ -599,32 +599,32 @@ To do that, we use induction on the new measure of complexity of ideals, called 
 We have the following easy properties of heights.
 \begin{proposition}[Basic properties of height]
     \label{prop:height}
-    If $R$ is a local ring with maximal ideal $\mm$,
+    If $A$ is a local ring with maximal ideal $\mm$,
     then we have the following.
     \begin{enumerate}[label=(\alph*)]
-	\item $\height \pp + \dim R/\pp
-	    \leq\dim R$.
+	\item $\height \pp + \dim A/\pp
+	    \leq\dim A$.
 	\item $\height I =0$
-    if and only if $I$ is contained in a minimal prime of $R$.
-	\item $\height I= \dim R$ if and only if
+    if and only if $I$ is contained in a minimal prime of $A$.
+	\item $\height I= \dim A$ if and only if
     $\sqrt I=\mm.$
     \end{enumerate}
 \end{proposition}
 \begin{proof}
     \begin{enumerate}[label=(\alph*)]
 	\item By correspondence theorem,
-    a chain in $R/\pp$ corresponds to a chain in $R$
-    containing $\pp$, so we can stick the chain of $R/\pp$
+    a chain in $A/\pp$ corresponds to a chain in $A$
+    containing $\pp$, so we can stick the chain of $A/\pp$
     with the chain in $\height \pp$
-    to get a chain of $R$, which must have 
-    length at most $\dim R$.
+    to get a chain of $A$, which must have 
+    length at most $\dim A$.
     \item $\height I=0$ if and only if
     there is a prime $\pp$ such that $\height \pp=0$.
     This prime $\pp$ must be a minimal prime,
-    so $I$ is contained in a minimal prime of $R$.
-    \item We note that if $\height I=\dim R$,
+    so $I$ is contained in a minimal prime of $A$.
+    \item We note that if $\height I=\dim A$,
     then for any $\pp\supset I$, we have the chain
-    $\pp = \pp_{\dim R}\supset\pp_{\dim R-1}
+    $\pp = \pp_{\dim A}\supset\pp_{\dim A-1}
     \supset\dots\supset \pp_0$,
     so $\pp$ is actually a maximal ideal.
     There is only one maximal ideal in $I$,
@@ -633,8 +633,8 @@ We have the following easy properties of heights.
 \end{enumerate}
 \end{proof}
     
-\begin{proof}[Proof of $\dimK R\geq \dimP R$]
-    Let $d=\dimK R$.
+\begin{proof}[Proof of $\dimK A\geq \dimP A$]
+    Let $d=\dimK A$.
    We need to find an $\mm$-primary ideal generated by 
    $\leq d$ elements.
    The key claim is the following:
@@ -643,11 +643,11 @@ We have the following easy properties of heights.
    such that $\height((x_1,\dots,x_i))\geq i$.''
 
    This key claim implies the theorem because
-   we can find $x_1,\dots,x_{\dim R}$ satisfying
+   we can find $x_1,\dots,x_{\dim A}$ satisfying
    the condition.
-   Then, $Q=(x_1,\dots,x_{\dim R})$
+   Then, $Q=(x_1,\dots,x_{\dim A})$
    is $\mm$-primary by \Cref{prop:height} (c),
-   implying that $\dimP R \leq d$.
+   implying that $\dimP A \leq d$.
 
    To prove the key claim,
    we find $x_1,\dots,x_i$ inductively.
@@ -658,7 +658,7 @@ We have the following easy properties of heights.
    containing $(x_1,\dots,x_{i-1})$); 
    there are finitely many because 
    \Cref{cor:finitely_minimal_primes} 
-   applied on $R/(x_1,\dots,x_{i-1})$.
+   applied on $A/(x_1,\dots,x_{i-1})$.
    These primes have height at most $i-1 \leq d-1$,
    so they are not equal to $\mm$.
    In particular, $\mm\neq \pp_j$ for all $j$,
@@ -682,7 +682,7 @@ We now harvest some consequences of the dimension theorem.
 First, although dimension of Noetherian rings need not be finite,
 we note the following clear corollary.
 \begin{corollary}
-    If $R$ is Noetherian local ring, then $\dim R$ is finite.
+    If $A$ is Noetherian local ring, then $\dim A$ is finite.
 \end{corollary}
 \begin{proof}
     Clear from either Hilbert dimension or primary
@@ -690,48 +690,48 @@ we note the following clear corollary.
 \end{proof}
 \begin{proposition}[Slicing by $f$]
     \label{prop:local_ring_slice}
-    If $R$ is a Noetherian local ring with maximal ideal
+    If $A$ is a Noetherian local ring with maximal ideal
     $\mm$ and $f\in\mm$
     is not a zero divisor, then 
-    $$\dim R/(f) = \dim R - 1$$
+    $$\dim A/(f) = \dim A - 1$$
 \end{proposition}
 \begin{proof}
-    We showed the upper bound $\dim R/(f) \leq \dim R-1$
+    We showed the upper bound $\dim A/(f) \leq \dim A-1$
     over the course of proving dimension theorem 
     (\Cref{lem:hilbert_dim_slicing}).
     To prove the lower bound, we use primary ideal dimension:
     suppose that $(x_1,\dots,x_d)$ 
     generates an $\mm/(f)$-primary ideal.
-    Then, its contraction to $R$, which is ideal
+    Then, its contraction to $A$, which is ideal
     $(f,x_1,\dots,x_d)$ would generate an $\mm$-primary ideal as well.
-    Hence, $\dim R \leq \dim R/(f) + 1$, as desired.
+    Hence, $\dim A \leq \dim A/(f) + 1$, as desired.
 \end{proof}
 \begin{example}
-    Suppose that you want to compute $\dim R$, where
-    $$R = \frac{\CC[x,y,z]}{(xy+yz+zx)}$$
+    Suppose that you want to compute $\dim A$, where
+    $$A = \frac{\CC[x,y,z]}{(xy+yz+zx)}$$
     using the above property. 
-    We claim that for any maximal ideal $\mm$ of $R$,
-    we have $\dim R_\mm = 2$. To see why,
-    note that a maximal ideal $\mm$ of $R$
+    We claim that for any maximal ideal $\mm$ of $A$,
+    we have $\dim A_\mm = 2$. To see why,
+    note that a maximal ideal $\mm$ of $A$
     is a contraction of a maximal ideal 
     $\frakn \subseteq \CC[x,y,z]$ such that $xy+yz+zx\in\frakn$.
     Note that $\CC[x,y,z]$ is a domain, so $xy+yz+zx$
     is not a zero divisor. Thus, by the above \Cref{prop:local_ring_slice},
-    $$\dim R_\mm = \dim \frac{\CC[x,y,z]_{\frakn}}{(xy+yz+zx)}
+    $$\dim A_\mm = \dim \frac{\CC[x,y,z]_{\frakn}}{(xy+yz+zx)}
     = \dim \CC[x,y,z]_\frakn - 1 = 3 - 1 = 2.$$
     Thus, taking supremum across all ideals $\mm$
-    gives $\dim R = 2$.
+    gives $\dim A = 2$.
 
     (This argument would have worked if $xy+yz+zx$
     is replaced with any $f\neq 0\in\CC[x,y,z]$.)
 \end{example}
 \begin{proposition}[Dimension of completion]
-    If $R$ is a Noetherian local ring with maximal ideal $\mm$
-    and $\widehat R$ is the $\mm$-adic completion,
-    then $\dim \widehat  R = \dim R$.
+    If $A$ is a Noetherian local ring with maximal ideal $\mm$
+    and $\widehat A$ is the $\mm$-adic completion,
+    then $\dim \widehat  A = \dim A$.
 \end{proposition}
 \begin{proof}
-    By \Cref{prop:completion_local}, $\widehat R$
+    By \Cref{prop:completion_local}, $\widehat A$
     is local with maximal ideal $\widehat\mm$,
     which is a completion of $\mm$ as a module.
     From \Cref{cor:completion_isomorphism},
@@ -742,24 +742,24 @@ we note the following clear corollary.
 \subsection{Krull's Principal Ideal Theorem}
 \begin{theorem}[Krull's Height Theorem]
 \label{thm:krull_height}
-Let $R$ be a Noetherian ring, and $I$ be an ideal with
+Let $A$ be a Noetherian ring, and $I$ be an ideal with
 $n$ generators. Then, $\height I \leq n$.
 (Translation: every prime ideal minimal over $I$
 has height at most $n$.)
 \end{theorem}
 \begin{proof}
     Let $\pp$ be a minimal prime among those containing $I$.
-    Then, $\height(IR_\pp) = \dim R_\pp$, so by
-    \Cref{prop:height}, $IR_\pp$ is $\pp R_\pp$-primary.
+    Then, $\height(IA_\pp) = \dim A_\pp$, so by
+    \Cref{prop:height}, $IA_\pp$ is $\pp A_\pp$-primary.
     Hence, using primary ideal dimension, we have
-    $$\height \pp = \dim R_\pp  = \dimP R_\pp \leq n,$$
+    $$\height \pp = \dim A_\pp  = \dimP A_\pp \leq n,$$
     so $\height I \leq n$.
 \end{proof}
 A special case of this is the following.
 \begin{corollary}[Krull's Principal Ideal Theorem,
 or Krull's Hauptidealsatz]
 \label{cor:krull_principal}
-Let $R$ be a Noetherian ring and $f\in R$. 
+Let $A$ be a Noetherian ring and $f\in A$. 
 Let $\pp$ be a prime ideal minimal among those containing $f$.
 \begin{alphenum}
     \item $\height\pp \leq 1$.
@@ -769,11 +769,11 @@ Let $\pp$ be a prime ideal minimal among those containing $f$.
 \begin{proof}
     (a) follows immediately from \Cref{thm:krull_height}.
     To prove (b), note that if $\height\pp = 0$,
-    then, $R_\pp$ has dimension $0$, hence Artinian
+    then, $A_\pp$ has dimension $0$, hence Artinian
     (by \Cref{thm:artinian_local_ring} (b)).
-    This means that $f\in \pp R_\pp$ is nilpotent
+    This means that $f\in \pp A_\pp$ is nilpotent
     (by \Cref{thm:artinian_local_ring} (d)), hence
-    a zero divisor in $R$, a contradiction.
+    a zero divisor in $A$, a contradiction.
 \end{proof}
 \begin{remark}
     There are other proofs of Krull's principal ideal theorem
@@ -785,7 +785,7 @@ We also note the following useful property,
 although the proof is deferred to \Cref{cor:dim_poly}.
 \begin{proposition}[Dimension of polynomial ring]
     \label{prop:dim_poly}
-    If $R$ is a Noetherian ring, then $\dim R[x] = \dim R + 1$.
+    If $A$ is a Noetherian ring, then $\dim A[x] = \dim A + 1$.
 \end{proposition}
 %
 %
@@ -795,19 +795,19 @@ although the proof is deferred to \Cref{cor:dim_poly}.
 %
 \section{Regular Local Ring}
 \subsection{Definition and Basic Properties}
-For any Noetherian local ring $R$ with maximal ideal $\mm$
-and $k=R/\mm$, we note that
+For any Noetherian local ring $A$ with maximal ideal $\mm$
+and $k=A/\mm$, we note that
 \begin{align*}
-    \dim R &\geq \#(\text{generators of }\mm) 
+    \dim A &\geq \#(\text{generators of }\mm) 
     \tag{primary ideal dimension} \\
     &\geq \dim_k(\mm/\mm^2)
     \tag{Nakayama; \Cref{cor:nakayama_generation}}.
 \end{align*}
 \begin{definition}[Regular local rings]
-    A Noetherian local ring $(R,\mm)$ 
+    A Noetherian local ring $(A,\mm)$ 
     is a \vocab{regular local ring} if the three above
     quantities are all equal:
-    $$\dim R = \dim_{R/\mm} \mm/\mm^2
+    $$\dim A = \dim_{A/\mm} \mm/\mm^2
     = \#(\text{generators of }\mm).$$
     (Equivalently, the first two are equal.
     Also, we always assume that regular local rings
@@ -815,12 +815,12 @@ and $k=R/\mm$, we note that
 \end{definition}
 \begin{example}[Regular local rings of dimension $0$ and $1$.]
 \begin{itemize}
-    \item $R$ is regular local with dimension $0$,
+    \item $A$ is regular local with dimension $0$,
     if and only if $\mm=\mm^2$,
     which (by Nakayama; \Cref{cor:nakayama_local_ring})
-    is equivalent to either $\mm=0$ or $R$ is a field.
-    \item $R$ is a regular local ring with dimension 
-    $1$ if and only if $R$ is a DVR 
+    is equivalent to either $\mm=0$ or $A$ is a field.
+    \item $A$ is a regular local ring with dimension 
+    $1$ if and only if $A$ is a DVR 
     (by \Cref{thm:dvr} (d)).
 
     Thus, regular local ring generalizes the concept
@@ -832,15 +832,15 @@ Regular local rings correspond to rings of smooth varieties
 localized at a point.
 We will not explain this connection precisely.
 Let us first confine ourself to a simpler example of hypersurface
-$$R = \left(\frac{k[x_1,\dots,x_n]}{(f)}\right)_{(x_1,\dots,x_n)}$$
+$$A = \left(\frac{k[x_1,\dots,x_n]}{(f)}\right)_{(x_1,\dots,x_n)}$$
 where $k$ is an algebraically closed field
 and $f\in k[x_1,\dots,x_n]$ such that $f(0,\dots,0)=0$.
-Thus, $\dim R = n-1$.
+Thus, $\dim A = n-1$.
 We write
 $$f(x_1,\dots,x_n) = a_1x_1 + \dots + a_nx_n + 
 (\text{higher degree terms}).$$
 
-Let $\overline\mm$ be the maximal ideal of $R$,
+Let $\overline\mm$ be the maximal ideal of $A$,
 which correspond to the maximal ideal $\mm$ 
 of the localization 
 $k[x_1,\dots,x_n]_{(x_1,\dots,x_n)}$. Then, we have
@@ -852,15 +852,15 @@ $$\frac{\overline\mm}{\overline\mm^2}
 which has dimension $n-1$ if and only if 
 at least one of $a_i$ is nonzero.
 
-Equivalently, $R$ is a regular local ring if and only if
+Equivalently, $A$ is a regular local ring if and only if
 at least one partial derivative 
 $\partial f / \partial x_i$ does not vanish at $(0,\dots,0)$.
 \tcbline
-In general, if $R$ is a localization at $(x_1,\dots,x_n)$ of
+In general, if $A$ is a localization at $(x_1,\dots,x_n)$ of
 ring in form
 $$k[x_1,\dots,x_n]/(f_1,\dots,f_r)$$
 that has dimension $n-r$,
-then $R$ is a regular local ring if and only if
+then $A$ is a regular local ring if and only if
 the Jacobian matrix
 $$\left(\left.\frac{\partial f_i}{\partial x_j}\right|_{(0,\dots,0)}\right)
 _{1\leq i\leq r, 1\leq j\leq n}$$
@@ -882,45 +882,45 @@ difficult. In the section, we will present something
 that we can prove with all tools developed thus far.
 The main highlight is that with mild conditions
 (that holds in the case of any variety),
-the $\mm$-adic completion of regular local ring $R$
+the $\mm$-adic completion of regular local ring $A$
 must be isomorphic to $k[[x_1,\dots,x_d]]$.
 Then, in \Cref{subsec:regular_local_hard_facts}, 
 we state some nice facts that we \emph{cannot} prove.
 
 First, we study the associated graded ring
-$\gr_\mm R$ (\Cref{def:gr}), defined by
-$$\gr_\mm R = \bigoplus_{i\geq 0} \mm^i/\mm^{i+1}$$
+$\gr_\mm A$ (\Cref{def:gr}), defined by
+$$\gr_\mm A = \bigoplus_{i\geq 0} \mm^i/\mm^{i+1}$$
 and show that they are the nicest as possible.
 \begin{proposition}[$\gr$ of regular local ring]
     \label{prop:gr_regular_local}
-    If $R$ is regular local with maximal ideal $\mm$
+    If $A$ is regular local with maximal ideal $\mm$
     and dimension $d$, then
-    $\gr_\mm R \simeq k[x_1,\dots,x_d]$.
+    $\gr_\mm A \simeq k[x_1,\dots,x_d]$.
 
-    \noindent Consequently, $\dim_{R/\mm} \mm^i/\mm^{i+1}
+    \noindent Consequently, $\dim_{A/\mm} \mm^i/\mm^{i+1}
     = \binom{i+d-1}{d-1}$.
 \end{proposition}
 \begin{proof}
     Let $\mm = (t_1,\dots,t_d)$ be the minimal generating set.
     Then, we have a surjective map
     \begin{align*}
-        k[x_1,\dots,x_d] &\to \gr_\mm R \\
+        k[x_1,\dots,x_d] &\to \gr_\mm A \\
         x_i &\mapsto t_i
     \end{align*}
     We have to show that this is injective.
     Suppose that a nonzero homogeneous $f$ of degree $s$
     maps to $0$.
     Then, the map collapse to a surjective map $k[x_1,\dots,x_d]/(f)
-    \to \operatorname{gr}_\mm R$. Therefore,
-    $$\dim \operatorname{gr}_\mm R
+    \to \operatorname{gr}_\mm A$. Therefore,
+    $$\dim \operatorname{gr}_\mm A
     \leq \dim \frac{k[x_1,\dots,x_d]}{(f)}
     = d-1.$$
     However, if $P = \bigoplus_{i\geq 1} \mm^i/\mm^{i+1}$
     be the ideal of positive degree,
-    then $(\gr_\mm R)_P$ (localize at $P$)
-    have the same associated graded ring as $R$,
-    hence having the same Hilbert dimension as $R$.
-    Thus, $\dim\gr_\mm R \geq \dim (\gr_\mm R)_P 
+    then $(\gr_\mm A)_P$ (localize at $P$)
+    have the same associated graded ring as $A$,
+    hence having the same Hilbert dimension as $A$.
+    Thus, $\dim\gr_\mm A \geq \dim (\gr_\mm A)_P 
     = d$. This is a contradiction.
 \end{proof}
 \begin{corollary}
@@ -931,8 +931,8 @@ and show that they are the nicest as possible.
     There exists $i,j$ such that
     $a\in\mm^i\setminus\mm^{i+1}$
     and $b\in\mm^j\setminus\mm^{j+1}$.
-    Thus, $\overline a \in (\operatorname{gr}_\mm R)_i$
-    and $\overline b\in (\operatorname{gr}_\mm R)_j$
+    Thus, $\overline a \in (\operatorname{gr}_\mm A)_i$
+    and $\overline b\in (\operatorname{gr}_\mm A)_j$
     are both nonzero,
     so we have $\overline a\overline b \neq 0$.
     Thus, $ab\in\mm^{i+j}\setminus\mm^{i+j+1}$,
@@ -941,31 +941,31 @@ and show that they are the nicest as possible.
 \begin{theorem}[Completion of regular local rings
 is $k[[x_1,\dots,x_d]]$]
     \label{thm:completion_regular_local}
-    Let $R$ be a regular local ring of dimension $d$,
-    $\mm$ be the maximal ideal, and $k=R/\mm$.
+    Let $A$ be a regular local ring of dimension $d$,
+    $\mm$ be the maximal ideal, and $k=A/\mm$.
     If every element $a\in k$ can be lifted to
-    $\widetilde a\in R$ such that $a\equiv \widetilde a\pmod\mm$,
+    $\widetilde a\in A$ such that $a\equiv \widetilde a\pmod\mm$,
     then
-    $$\widehat R \simeq k[[x_1,\dots,x_d]]$$
-    (where $\widehat R$ denotes the $\mm$-adic completion).
+    $$\widehat A \simeq k[[x_1,\dots,x_d]]$$
+    (where $\widehat A$ denotes the $\mm$-adic completion).
 \end{theorem}
 Note that the lifting map condition holds whenever
-$R = k[x_1,\dots,x_n]/I$ for some ideal $I$.
+$A = k[x_1,\dots,x_n]/I$ for some ideal $I$.
 Thus, this theorem shows that completion of any smooth
 variety is isomorphic to $k[[x_1,\dots,x_d]]$!
 \begin{proof}
 The idea is that from \Cref{prop:gr_regular_local},
 we already have the isomorphism
-$k[x_1,\dots,x_d]\to \gr_\mm R$. 
+$k[x_1,\dots,x_d]\to \gr_\mm A$. 
 One needs to realize this as $\gr\psi$,
-where $\psi : k[x_1,\dots,x_d] \to R$ is a map.
+where $\psi : k[x_1,\dots,x_d] \to A$ is a map.
 Then, we will be able to use \Cref{lem:gr_injective_surjective}
-to conclude that $\widehat\psi : k[[x_1,\dots,x_d]] \to \widehat R$
+to conclude that $\widehat\psi : k[[x_1,\dots,x_d]] \to \widehat A$
 is an isomorphism.
 
 To do this, let $\mm = (t_1,\dots,t_d)$ as above. Define 
 \begin{align*}
-    \psi : k[x_1,\dots,x_d] &\to R \\
+    \psi : k[x_1,\dots,x_d] &\to A \\
     a &\mapsto \widetilde a \quad\text{for all } a\in k \\
     x_i &\mapsto t_i
 \end{align*}
@@ -980,14 +980,14 @@ regular local rings are of the form $k[[x_1,\dots,x_n]]$.
 It turns out that the answer is no;
 there is a whole other family of regular local rings.
 \begin{example}
-    Let $A$ be a complete DVR (e.g., $A=\ZZ_p$).
-    Let $\frakn=(\pi)$ be its maximal ideal and $A/\frakn=k$.
+    Let $B$ be a complete DVR (e.g., $B=\ZZ_p$).
+    Let $\frakn=(\pi)$ be its maximal ideal and $B/\frakn=k$.
     We claim that
-    $$R = A[[x_1,\dots,x_d]]$$
+    $$A = B[[x_1,\dots,x_d]]$$
     is regular local of dimension $d+1$ with
     maximal ideal $\mm = (\pi,x_1,\dots,x_d)$. 
     This is because one can verify that
-    $\gr_\mm R = k[\overline \pi, \overline x_1,
+    $\gr_\mm A = k[\overline \pi, \overline x_1,
     \dots,\overline x_d].$
     For example, $\ZZ_p[[x,y]]$ is regular local
     which is not of the above form.
@@ -1001,18 +1001,18 @@ facts about regular local rings that we will
 not be able to prove.
 
 \begin{theorem}[Auslander–Buchsbaum]
-    If $R$ is a regular local ring, then $R$ is a UFD
+    If $A$ is a regular local ring, then $A$ is a UFD
     (hence integrally closed).
 \end{theorem}
 See \cite[Thm. 19.19]{eisenbud} for the proof.
-Note that the weaker fact that $R$ is integrally
+Note that the weaker fact that $A$ is integrally
 closed is doable by elementary methods.
 
 We also have a surprisingly difficult theorem by Serre.
 \begin{theorem}[Serre]
-    If $R$ is a regular local ring,
+    If $A$ is a regular local ring,
     then for any prime ideal $\pp$, the localization
-    $R_\pp$ is still regular.
+    $A_\pp$ is still regular.
 \end{theorem}
 See \cite[Cor. 19.14]{eisenbud} for the proof.
 
@@ -1034,36 +1034,36 @@ Prove that any surjective map $\phi : A\to B$ is an isomorphism.
 \end{problem}
 \begin{problem}
 \label{prob:dim_pathology}
-For a ring $R$, the property that ``$R$ is Noetherian''
-and ``$\dim R$ is finite'' seem related in some ways.
+For a ring $A$, the property that ``$A$ is Noetherian''
+and ``$\dim A$ is finite'' seem related in some ways.
 However, neither one imply the other.
 The following problems provide a counterexamples.
 \begin{alphenum}
-\item Consider $R=\CC[x_1,x_2,\dots]$. Let 
+\item Consider $A=\CC[x_1,x_2,\dots]$. Let 
 $$\pp_i = (x_{i^2}, x_{i^2+1}, x_{i^2+2}, \dots, 
 x_{(i+1)^2+1})$$
-and let $S=R\setminus \bigcup_{i=1}^\infty \pp_i$,
+and let $S=A\setminus \bigcup_{i=1}^\infty \pp_i$,
 which is a multiplicative set.
-Thus, $S^{-1}R$ is Noetherian 
+Thus, $S^{-1}A$ is Noetherian 
 (by \Cref{prop:noetherian_ring_properties}).
-Prove that $\dim S^{-1}R = \infty$.
+Prove that $\dim S^{-1}A = \infty$.
 
-Hence $R$ is Noetherian does not imply that $\dim R$
+Hence $A$ is Noetherian does not imply that $\dim A$
 is finite.
 This counterexample was first discovered by Nagata.
 \item Prove that the ring of algebraic integers 
 has dimension $1$ (and we know that it is not Noetherian by 
 \Cref{prob:algebraic_integer}).
-Hence, $\dim R$ is finite does not imply that 
-$R$ is Noetherian.
+Hence, $\dim A$ is finite does not imply that 
+$A$ is Noetherian.
 \end{alphenum}
 \end{problem}
 \begin{problem}
-For each of the rings $R$ and maximal ideal $\mm$ in \Cref{prob:compute_gr}, compute the Hilbert dimension of $R_\mm$.
+For each of the rings $A$ and maximal ideal $\mm$ in \Cref{prob:compute_gr}, compute the Hilbert dimension of $A_\mm$.
 \end{problem}
 \begin{problem}
-Let $R=\CC[x,y]/(y^2-x^3-x)$ and $\mm=(x,y)$.
-Find an $\mm$-primary ideal of $R_\mm$ that is principal (hence showing that $\dim R_\mm \leq 1$).
+Let $A=\CC[x,y]/(y^2-x^3-x)$ and $\mm=(x,y)$.
+Find an $\mm$-primary ideal of $A_\mm$ that is principal (hence showing that $\dim A_\mm \leq 1$).
 \end{problem}
 \begin{problem}
 Prove that a domain $A$ is a UFD if and only if 
@@ -1109,25 +1109,25 @@ but includes regular local rings and many non-smooth examples.
 This problem gives an introduction to 
 the theory of Cohen-Macaulay rings.
 
-Let $R$ be a Noetherian local ring. 
-A \vocab{regular sequence} is a sequence $f_1,\dots,f_n\in R$
-such that $(f_1,\dots,f_n)\neq R$ 
+Let $A$ be a Noetherian local ring. 
+A \vocab{regular sequence} is a sequence $f_1,\dots,f_n\in A$
+such that $(f_1,\dots,f_n)\neq A$ 
 and $x_i$ is not a zero divisor in 
-$R/(f_1,\dots,f_{i-1})$. 
+$A/(f_1,\dots,f_{i-1})$. 
 You should think of $f_1,\dots,f_n$ as equations, 
 and we are slicing by the equations $f_i$. 
 
-The \vocab{depth} of $R$, denoted $\operatorname{depth} R$ 
-is the maximum length of regular sequences of $R$. 
-A ring $R$ is \vocab{Cohen-Macaulay} if 
-$\operatorname{depth} R = \dim R$.
-Informally, this means that you can slice $\dim R$ equations.
+The \vocab{depth} of $A$, denoted $\operatorname{depth} A$ 
+is the maximum length of regular sequences of $A$. 
+A ring $A$ is \vocab{Cohen-Macaulay} if 
+$\operatorname{depth} A = \dim A$.
+Informally, this means that you can slice $\dim A$ equations.
 \begin{alphenum}
-\item Prove that $\operatorname{depth} R \leq \dim R$ 
-for every ring $R$.
-\item Suppose that $R$ has dimension $1$. 
-Prove that $R$ is Cohen-Macaulay 
-if and only all associated primes of $R$ 
+\item Prove that $\operatorname{depth} A \leq \dim A$ 
+for every ring $A$.
+\item Suppose that $A$ has dimension $1$. 
+Prove that $A$ is Cohen-Macaulay 
+if and only all associated primes of $A$ 
 are minimal.
 (In particular, by \Cref{prob:ass_reduced},
 any reduced Noetherian local ring with dimension $1$ 

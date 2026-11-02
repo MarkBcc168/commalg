@@ -810,35 +810,35 @@ for flat modules, which will be stated and proved in
 To prove this theorem, we begin with a small lemma that allows us to find ideals.
 \begin{lemma}[Lying Over Criterion]
     \label{lem:lying_over_criterion}
-   Let $R\subset R'$ be a ring extension
+   Let $A\subset A'$ be a ring extension
    (not necessarily integral!).
-   For any prime ideal $\pp\subset R$ the following are equivalent:
+   For any prime ideal $\pp\subset A$ the following are equivalent:
    \begin{alphenum}
-       \item There exists a prime ideal $\pp'\subset R'$ such that $\pp'\cap R=\pp$.
-       \item $\pp R' \cap R = \pp$.
+       \item There exists a prime ideal $\pp'\subset A'$ such that $\pp'\cap A=\pp$.
+       \item $\pp A' \cap A = \pp$.
    \end{alphenum}
 \end{lemma}
 \begin{proof}
     We first prove that (a) implies (b).
-    To do this, we note that $\pp R'\subseteq\pp'$, so
-    $$\pp \ \subseteq\ \pp R'\cap R \ \subseteq\ \pp'\cap R \ =\ \pp,$$
-    so all equalities occur, implying that $\pp R'\cap R=\pp$.
+    To do this, we note that $\pp A'\subseteq\pp'$, so
+    $$\pp \ \subseteq\ \pp A'\cap A \ \subseteq\ \pp'\cap A \ =\ \pp,$$
+    so all equalities occur, implying that $\pp A'\cap A=\pp$.
 
     Next, we prove that (b) implies (a).
     The strategy is that we want prime ideal 
-    that does not meet $R\setminus\pp$, so we invert that set.
-    Localize $R'$ with multiplicative set 
-    $S=R\setminus\pp$ to get $R_\pp$.
-    Then, $\pp R' \cap S = (\pp R'\cap R)\setminus\pp =
+    that does not meet $A\setminus\pp$, so we invert that set.
+    Localize $A'$ with multiplicative set 
+    $S=A\setminus\pp$ to get $A_\pp$.
+    Then, $\pp A' \cap S = (\pp A'\cap A)\setminus\pp =
     \emptyset$ (by assumption (b)). 
-    Thus, $\pp R'_\pp$ is a proper ideal of $R'_\pp$,
-    and hence contained in a maximal ideal $\mm \subseteq R'_\pp$.
+    Thus, $\pp A'_\pp$ is a proper ideal of $A'_\pp$,
+    and hence contained in a maximal ideal $\mm \subseteq A'_\pp$.
     By \Cref{thm:prime_ideal_localize},
-    $\mm$ must be in form $\pp' R'_{\pp}$ for some 
-    prime ideal $\pp'\subset R'$ such that $\pp'\cap (R\setminus\pp)\neq\emptyset$.
-    Since $\pp R'_\pp\subset \mm$, it follows that 
+    $\mm$ must be in form $\pp' A'_{\pp}$ for some 
+    prime ideal $\pp'\subset A'$ such that $\pp'\cap (A\setminus\pp)\neq\emptyset$.
+    Since $\pp A'_\pp\subset \mm$, it follows that 
     $\pp\subset \pp'$.
-    Combining previous two sentences gives $\pp'\cap R=\pp$.
+    Combining previous two sentences gives $\pp'\cap A=\pp$.
 \end{proof}
 % In the world of Algebraic Geometry,
 % $B$ is also a finitely-generated ring extension,
@@ -1223,7 +1223,7 @@ If you take algebraic geometry, you will see that
 a lot of definitions (e.g., morphisms, and when
 they are the same) on varieties over $k$
 are usually defined by the behavior over $\overline k$.
-In the world of affine schemes (i.e., $\Spec R$),
+In the world of affine schemes (i.e., $\Spec A$),
 this is completely natural because we naturally
 have $\overline k$-points in $\Spec k[x_1,\dots,x_n]$.
 \end{remark}
@@ -1274,8 +1274,8 @@ of the following two reasons.
     \item We claim that $\dim \ZZ=1$ because the prime ideals
     of $\ZZ$ are $(0)$, which is contained in 
     $(2)$, $(3)$, $(5)$, \dots.
-    \item More generally, if $R$ is a PID that is not a field, 
-    we claim that $\dim R=1$. The ideal $(0)$ is contained 
+    \item More generally, if $A$ is a PID that is not a field, 
+    we claim that $\dim A=1$. The ideal $(0)$ is contained 
     in $(a)$ for any non-unit $a\neq 0$.
     Meanwhile, if $(a)$ is prime where $a\neq 0$, 
     then $a$ is irreducible,
@@ -1305,7 +1305,7 @@ Going-up theorem (\Cref{thm:going_up}) controls dimension.
     First, we show $\dim A\geq \dim B$.
     Given any prime ideal chain $\qq_0\subsetneq \qq_1 
     \subsetneq \dots\subsetneq \qq_n$ of $B$,
-    one let $\pp_i = \qq_i\cap S$, forming a chain of 
+    one let $\pp_i = \qq_i\cap A$, forming a chain of 
     prime ideal $\pp_0\subsetneq \pp_1 
     \subsetneq \dots\subsetneq \pp_n$ of $A$.
     The equality cannot occur because if $\pp_i=\pp_{i+1}$,
@@ -1319,7 +1319,7 @@ Going-up theorem (\Cref{thm:going_up}) controls dimension.
     (exists by \Cref{thm:lying_over}),
     and then by Going Up Theorem (\Cref{thm:going_up}),
     construct the chain $\qq_0\subsetneq \qq_1\subsetneq \dots 
-    \subsetneq\qq_n$ such that $\pp_i=\qq_i\cap R$.
+    \subsetneq\qq_n$ such that $\pp_i=\qq_i\cap A$.
     Clearly, $\qq_i\neq \qq_{i+1}$.
 
     Hence, we conclude that $\dim A=\dim B$.
@@ -1515,14 +1515,14 @@ label("$\mathfrak p$",(x(1.32), y(1.32), z(1.32)), red);
 \end{problem}
 \begin{problem}
 Find a Noether normalization and the dimension of the ring
-$$R = \frac{\mathbb C[x,y,z]}{(x^2-y^3-1, xyz-1)}.$$
+$$A = \frac{\mathbb C[x,y,z]}{(x^2-y^3-1, xyz-1)}.$$
 \end{problem}
 \begin{problem}
 \label{prob:generalized_nullstellensatz}
-Let $\mathfrak n$ be a maximal ideal of $R=\mathbb R[x_1,\dots,x_n]$.
+Let $\mathfrak n$ be a maximal ideal of $A=\mathbb R[x_1,\dots,x_n]$.
 \begin{alphenum}
-\item Prove that there exists $a=(a_1,\dots,a_n)\in\mathbb C^n$ such that if $\mathfrak m_a = (x_1-a_1,\dots,x_n-a_n)\subset\mathbb C[x_1,\dots,x_n]$, then $\mathfrak m_a\cap R = \mathfrak n$.
-\item Let $a,b\in\mathbb C^n$. Prove that $\mathfrak m_a \cap R= \mathfrak m_b\cap R$ if and only if $a=b$ or $a=\overline b$ (where $\overline b$ is the complex conjugate of $b$.)
+\item Prove that there exists $a=(a_1,\dots,a_n)\in\mathbb C^n$ such that if $\mathfrak m_a = (x_1-a_1,\dots,x_n-a_n)\subset\mathbb C[x_1,\dots,x_n]$, then $\mathfrak m_a\cap A = \mathfrak n$.
+\item Let $a,b\in\mathbb C^n$. Prove that $\mathfrak m_a \cap A= \mathfrak m_b\cap A$ if and only if $a=b$ or $a=\overline b$ (where $\overline b$ is the complex conjugate of $b$.)
 \end{alphenum}
 Thus, we establish a bijection between maximal ideals of $\mathbb R[x_1,\dots,x_n]$ and tuples in $\mathbb C^n$ modulo conjugation. 
 You can generalize this result by replacing $\RR$ and $\CC$

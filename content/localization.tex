@@ -4,14 +4,14 @@
 In this chapter, we will discuss one of the most
 important construction in commutative algebra: localization.
 The motivation of localization is the construction of
-the fraction field $\Frac R$ from an integral domain $R$.
+the fraction field $\Frac A$ from an integral domain $A$.
 We would like to generalize this construction
 to specify which element can and cannot be
 the denominator.
 Soon, we will quickly see that this construction
-allows us to ``zoom into'' the ring $R$ and study them
+allows us to ``zoom into'' the ring $A$ and study them
 at the level of either open sets (read: $D(f)$
-for $f\in R$) or points (read: prime ideals $\pp$).
+for $f\in A$) or points (read: prime ideals $\pp$).
 In the latter case, we get a local ring,
 which is usually easier to study.
 
@@ -20,56 +20,56 @@ which is usually easier to study.
 We will define localization by
 its universal property and then construct it later.
 \begin{definition}[Multiplicative set]
-    Given a ring $R$, a subset $S\subseteq R$ is 
+    Given a ring $A$, a subset $S\subseteq A$ is 
     a \vocab{multiplicative set} 
     if and only any finite product of elements 
     in $S$ is in $S$.
     In particular, the empty product, $1$, must be in $S$.
 \end{definition}
 \begin{definition}[Localization]
-    \notation{$S^{-1}R$}{localization of a ring}
-    Let $R$ be a ring.
-    Let $S\subset R$ be a multiplicative set. Then,
-    the \vocab{localization of ring} $S^{-1}R$ is a ring with
-    map $\phi : R\to S^{-1}R$ such that
+    \notation{$S^{-1}A$}{localization of a ring}
+    Let $A$ be a ring.
+    Let $S\subset A$ be a multiplicative set. Then,
+    the \vocab{localization of ring} $S^{-1}A$ is a ring with
+    map $\phi : A\to S^{-1}A$ such that
     \begin{itemize}
 	\item $\phi(s)$ is a unit for all $s\in S$.
 	\item \textbf{Universal property.}
-        For any $R$-Algebra $A$ with map
-	$\psi : R\to A$ such that $\psi(s)$ is a unit
+        For any $A$-Algebra $B$ with map
+	$\psi : A\to B$ such that $\psi(s)$ is a unit
 	for all $s\in S$, the map $\psi$ factors through
-	$S^{-1}R$: there is a unique map $
-	\widetilde\psi : S^{-1}R\to A$
+	$S^{-1}A$: there is a unique map $
+	\widetilde\psi : S^{-1}A\to B$
 	such that $\psi = \widetilde\psi \circ\phi$.
     \begin{center}
     \begin{tikzcd}
-        S \arrow[rr] & & A^\times \\[-8pt]
-        R \arrow[rr,"\psi"] \arrow[rd,"\phi",swap] & & A \\
-        & S^{-1}R \arrow[ru, "\widetilde\psi",swap]
+        S \arrow[rr] & & B^\times \\[-8pt]
+        A \arrow[rr,"\psi"] \arrow[rd,"\phi",swap] & & B \\
+        & S^{-1}A \arrow[ru, "\widetilde\psi",swap]
     \end{tikzcd}
     \end{center}
     \end{itemize}
 \end{definition}
 \begin{theorem}
-    $S^{-1}R$ exists and is unique.
+    $S^{-1}A$ exists and is unique.
 \end{theorem}
 As usual with universal property, the uniqueness
 is automatic.
 
 To construct localization, let the set of fractions be
-$$R\times S = \left\{\frac as := (a,s)\right\}.$$
+$$A\times S = \left\{\frac as := (a,s)\right\}.$$
 Of course, we have to handle something like
 $\frac 12 = \frac 36$. We thus define an equivalence relation
 $\frac as \sim \frac bt$ if and only if $at-bs=0$.
 However, this is not an
-equivalence relation (when $R$ is not a domain).
+equivalence relation (when $A$ is not a domain).
 
 To salvage this, we make a slightly different construction:
 We say that
 $$\frac as\sim\frac bt\iff u(at-bs)=0\text{ for some } u\in S,$$
 and one can check that this is an equivalence relation,
 and we may let
-$$S^{-1}R = \frac{S\times R}{\sim}.$$
+$$S^{-1}A = \frac{S\times A}{\sim}.$$
 
 We may define addition and multiplication by
 the usual high school fraction operations:
@@ -81,18 +81,18 @@ When writing this, one needs to check that the
 equivalence relation behaves
 well with respect to addition and multiplication.
 This is very tedious and hence omitted.
-We can also define the inclusion $R\to A$ as
+We can also define the inclusion $A\to B$ as
 $\phi(a)=\frac a1$.
 \begin{proposition}
-    The construction of $S^{-1}R$ above
+    The construction of $S^{-1}A$ above
     satisfies universal property.
 \end{proposition}
 \begin{proof}
-    Given $\psi : R\to A$ such that $\psi(s)^{-1}$ exists
+    Given $\psi : A\to B$ such that $\psi(s)^{-1}$ exists
     for all $s\in S$,
     one can define the map
     \begin{align*}
-	\widetilde\psi : S^{-1}R &\to A \\
+	\widetilde\psi : S^{-1}A &\to B \\
 	\frac as &\mapsto \psi(a)\psi(s)^{-1}.
     \end{align*}
     One can check that this map respects the 
@@ -114,16 +114,16 @@ $\phi(a)=\frac a1$.
 %
 \subsection{Examples}
 \begin{example}[Fraction Field]
-    \notation{$\Frac R$}{fraction field}
-    If $R$ is a domain and $S=R\setminus\{0\}$, then
-    $$S^{-1}R  =: \Frac R$$
+    \notation{$\Frac A$}{fraction field}
+    If $A$ is a domain and $S=A\setminus\{0\}$, then
+    $$S^{-1}A  =: \Frac A$$
     is a field.
 
-    For example, if $R=\ZZ$ and $S=\ZZ\setminus\{0\}$,
+    For example, if $A=\ZZ$ and $S=\ZZ\setminus\{0\}$,
     then $\Frac \ZZ = S^{-1}\ZZ = \QQ$.
 \end{example}
 \begin{example}[Localization at one element]
-    Take $R=\mathbb C[x]$ and $S=\{(x-1)^k : k\geq 0\}$.
+    Take $A=\mathbb C[x]$ and $S=\{(x-1)^k : k\geq 0\}$.
     Then,
     $$S^{-1}\mathbb C[x]
     = \left\{\frac{g(x)}{(x-1)^k} : g\in\CC[x]\right\}.$$
@@ -132,13 +132,13 @@ $\phi(a)=\frac a1$.
 \end{example}
 % Let's make a similar example but with two variables.
 % \begin{example}
-%     Take $R=\mathbb C[x,y]$ and $S=(y-x^2)^k$.
+%     Take $A=\mathbb C[x,y]$ and $S=(y-x^2)^k$.
 %     Then, $S^{-1}\mathbb C[x,y]$ is a set of
 %     two-variable rational function defined at
 %     $\mathbb C^2 \setminus (\text{parabola }y=x^2)$.
 % \end{example}
 \begin{example}[Two common localizations, in $\ZZ$]
-    Take $R=\mathbb Z$. There are two common localization
+    Take $A=\mathbb Z$. There are two common localization
     about some prime, say $5$.
     \begin{itemize}
 	\item Take $S=\{5^k : k\geq 0\}$, we get
@@ -149,21 +149,21 @@ $\phi(a)=\frac a1$.
     \end{itemize}
 \end{example}
 \begin{example}[The two most important examples of localization]
-    Let $R$ be a ring. Then, there are two important examples.
+    Let $A$ be a ring. Then, there are two important examples.
     \begin{alphenum}
 	\item \vocab[localization away from $f$]{Localization away from $f$.}
-        \notation{$R[f^{-1}]$, $R_f$}{localization
+        \notation{$A[f^{-1}]$, $A_f$}{localization
         away from $f$}
-        For any $f\in R$, take
+        For any $f\in A$, take
 	    $S = \{1,f,f^2,\dots,\}$ to get
-	    $$S^{-1}R = R_f = R[f^{-1}]
-	    = \frac{R[x]}{(xf-1)}.$$
+	    $$S^{-1}A = A_f = A[f^{-1}]
+	    = \frac{A[x]}{(xf-1)}.$$
 	\item \vocab[localization at prime ideal $\pp$]{Localization at prime ideal $\pp$.}
         For any prime ideal $\mathfrak p$, take
-	    $S=R\setminus\mathfrak p$ to get
-	    $$S^{-1}R = R_{\mathfrak p}.$$
-        \notation{$R_\pp$}{localization at $\pp$}
-	    When $R$ is a domain and $\mathfrak p=(0)$,
+	    $S=A\setminus\mathfrak p$ to get
+	    $$S^{-1}A = A_{\mathfrak p}.$$
+        \notation{$A_\pp$}{localization at $\pp$}
+	    When $A$ is a domain and $\mathfrak p=(0)$,
 	    we get the fraction field.
     \end{alphenum}
 \end{example}
@@ -174,12 +174,12 @@ $\phi(a)=\frac a1$.
 \subsection{Ideals of Localization}
 % First, let's state an obvious fact.
 % \begin{proposition}
-%     If $R$ is a domain, then
-%     $R\subset S^{-1}R\subset\Frac R$.
+%     If $A$ is a domain, then
+%     $A\subset S^{-1}A\subset\Frac A$.
 % \end{proposition}
 % Now, let's look at how localization works in quotient.
 % \begin{proposition}
-%     Let $R$ be a ring, $S$ be multiplicatively closed,
+%     Let $A$ be a ring, $S$ be multiplicatively closed,
 %     
 % \end{proposition}
 % \begin{proof}
@@ -187,36 +187,36 @@ $\phi(a)=\frac a1$.
 % \end{proof}
 % Here is an example of applying the above proposition.
 % \begin{example}
-%     Let $R=\mathbb C[x,y]/(xy)$ and 
+%     Let $A=\mathbb C[x,y]/(xy)$ and 
 %     $S=\{1,x,x^2,\dots\}$. Then,
 %     $\overline S=\{1,\overline x,\overline x^2,
 %     \dots\}$, so
-%     $$\overline S^{-1}R = \frac{\mathbb C[x,y]\left[\frac 1x\right]}
+%     $$\overline S^{-1}A = \frac{\mathbb C[x,y]\left[\frac 1x\right]}
 %     {(xy)} = \frac{\mathbb C\left[x,y,\frac 1x\right]}
 %     {(xy)}.$$
 % \end{example}
 Let's discuss how ideals behave under localization.
 From the map
-$\phi : R\to S^{-1}R$, the ideal $I$ extends to ideal
+$\phi : A\to S^{-1}A$, the ideal $I$ extends to ideal
 \notation{$S^{-1}I$}{localization of ideal $I$}
 $$S^{-1}I := \left\{\frac is : i\in I\right\} 
-\ \subseteq\ S^{-1}R.$$
+\ \subseteq\ S^{-1}A.$$
 
-It turns out that every ideal of $S^{-1}R$ is of this form.
+It turns out that every ideal of $S^{-1}A$ is of this form.
 \begin{proposition}[Every ideal is extended ideal]
     \label{prop:ideal_is_extended}
-    For all ideal $J\subseteq S^{-1}R$,
+    For all ideal $J\subseteq S^{-1}A$,
     we have $S^{-1}(\phi^{-1}(J)) = J$.
     
-    \noindent In particular, every ideal in $S^{-1}R$ is of the form 
-    $S^{-1}I$ for some ideal $I\subseteq R$.
+    \noindent In particular, every ideal in $S^{-1}A$ is of the form 
+    $S^{-1}I$ for some ideal $I\subseteq A$.
 \end{proposition}
 \begin{proof}
-For all $a\in R$ and $s\in S$,
+For all $a\in A$ and $s\in S$,
 each of the following is equivalent to the next.
 \begin{itemize}
 \item $\frac as\in J$
-\item $\frac a1\in J$. (Proof: $s$ is a unit in $S^{-1}R$).
+\item $\frac a1\in J$. (Proof: $s$ is a unit in $S^{-1}A$).
 \item $a\in\phi^{-1}(J)$.
 \item $\frac as\in S^{-1}(\phi^{-1}(J))$. \qedhere
 \end{itemize}
@@ -224,12 +224,12 @@ each of the following is equivalent to the next.
 
 \begin{theorem}[Prime ideals of localization]
 \label{thm:prime_ideal_localize}
-    Let $R$ be a ring, $S$ multiplicatively closed,
-    and $\phi : R\to S^{-1}R$ be the canonical map.
+    Let $A$ be a ring, $S$ multiplicatively closed,
+    and $\phi : A\to S^{-1}A$ be the canonical map.
     There is a correspondence between
     \begin{align*}
-	\{\text{prime ideals of } S^{-1}R\} &\leftrightarrow 
-	    \{\text{prime ideal } \mathfrak p\subset R
+	\{\text{prime ideals of } S^{-1}A\} &\leftrightarrow 
+	    \{\text{prime ideal } \mathfrak p\subset A
 	    \text{ such that } \mathfrak p\cap S = \emptyset\}
 	\\
 	\mathfrak q &\mapsto \phi^{-1}\frakq \\
@@ -245,11 +245,11 @@ each of the following is equivalent to the next.
     Moreover, $\phi^{-1}\frakq$ does not meet $S$ because
     if $s\in S$ and $s\in \phi^{-1}\frakq$,
     then $\phi(s)\in\frakq$, but $\phi(s)=\frac s1$ is a unit
-    in $S^{-1}R$, so $\qq=S^{-1}R$, a contradiction.
+    in $S^{-1}A$, so $\qq=S^{-1}A$, a contradiction.
     
     \item \textbf{The second map is well-defined.}
     Let $\pp$ be a prime ideal that does not meet $S$.
-    We first show that for all $a\in R$ and $s\in S$,
+    We first show that for all $a\in A$ and $s\in S$,
     \begin{equation}
         \label{eq:localize_ideal_condition}
         \tfrac as \in S^{-1}\pp\ \iff\ a\in\pp.
@@ -263,15 +263,15 @@ each of the following is equivalent to the next.
     so $a\in \pp$.
 
     Finally, if $\tfrac as$ and $\tfrac bt$ are in 
-    $S^{-1}R$ such that $\tfrac as \cdot\tfrac bt\in S^{-1}\pp$,
+    $S^{-1}A$ such that $\tfrac as \cdot\tfrac bt\in S^{-1}\pp$,
     then by \eqref{eq:localize_ideal_condition}, 
     $ab\in \pp$, and so either $a\in\pp$ or $b\in\pp$.
     Thus, either $\tfrac as\in S^{-1}\pp$ 
     or $\tfrac bt\in S^{-1}\pp$. Hence, $S^{-1}\pp$ is prime.
-    \item \textbf{For all prime $\qq\subseteq S^{-1}R$, 
+    \item \textbf{For all prime $\qq\subseteq S^{-1}A$, 
     we have $S^{-1}(\phi^{-1}\qq)=\qq$.}
     Follows from \Cref{prop:ideal_is_extended}.
-    \item \textbf{For all prime $\pp\subseteq R$
+    \item \textbf{For all prime $\pp\subseteq A$
     that does not meet $S$, we have $\phi^{-1}(S^{-1}\pp)
     = \pp$.}
     Indeed, each of the  following is equivalent to the next
@@ -286,35 +286,35 @@ Recall that spectrum of a ring is the topological space
 of prime ideals of a ring.
 \begin{corollary}[Spectrum of localization
     away from an element]
-    For all $f\in R$, we have
-    $$\Spec R\left[1/f\right]
+    For all $f\in A$, we have
+    $$\Spec A\left[1/f\right]
     \simeq D(f) = \{\mathfrak p : f\notin\mathfrak p\},$$
-    which is an open subset of $\Spec R$.
+    which is an open subset of $\Spec A$.
 \end{corollary}
 \begin{corollary}[Spectrum of localization
     at a prime ideal]
     For all prime ideal $\mathfrak p$,
     we have 
     \begin{alphenum}
-    \item $\Spec R_{\mathfrak p}
+    \item $\Spec A_{\mathfrak p}
     \simeq \{\mathfrak q : \mathfrak q \subset\mathfrak p\}$.
-    \item $R_\pp$ is a local ring with unique maximal ideal
-    $\pp R_\pp$.
+    \item $A_\pp$ is a local ring with unique maximal ideal
+    $\pp A_\pp$.
     \end{alphenum}
 \end{corollary}
 We now explain where the term localization comes from.
 \begin{itemize}
-    \item $\Spec R[1/f]$ is the open subset $D(f)$ of $\Spec R$ of points where $\tfrac 1f$ is defined. 
-    In other words, functions in $R[1/f]$ are rational functions
+    \item $\Spec A[1/f]$ is the open subset $D(f)$ of $\Spec A$ of points where $\tfrac 1f$ is defined. 
+    In other words, functions in $A[1/f]$ are rational functions
     defined on the open set $D(f)$.
     We are localizing \textbf{away from}
     points that $f$ vanishes, and this explains
     why it gets the name ``localization away from $f$''.
-    \item In contrast, $\Spec R/(f)$ is $V(f)$,
+    \item In contrast, $\Spec A/(f)$ is $V(f)$,
     which is complement of $D(f)$.
-    \item $\Spec R_\pp$ is the intersection 
+    \item $\Spec A_\pp$ is the intersection 
     of all open sets containing $\pp$.
-    Thus, functions (read, elements) in $R_\pp$ 
+    Thus, functions (read, elements) in $A_\pp$ 
     corresponds to rational functions 
     defined on some neighborhood of $\pp$.
     In particular, we are essentially zooming into 
@@ -363,31 +363,31 @@ We omit all proofs because they
 are all routine. (In fact, you should be able to prove
 it yourself.)
 
-As as setup, let $R$ be a ring, $S$ be a multiplicatively closed subset, and $\phi : R\to S^{-1}R$
+As as setup, let $A$ be a ring, $S$ be a multiplicatively closed subset, and $\phi : A\to S^{-1}A$
 be the canonical map $a\mapsto \tfrac a1$.
 \begin{proposition}[Localization Commutes with Quotient]
-Let $I$ be an ideal of $R$ and 
-$\overline S$ be the image of $S$ in $R/I$, then
-$$\overline S^{-1}(R/I) = \frac{S^{-1}R}{(\phi(I))}.$$
+Let $I$ be an ideal of $A$ and 
+$\overline S$ be the image of $S$ in $A/I$, then
+$$\overline S^{-1}(A/I) = \frac{S^{-1}A}{(\phi(I))}.$$
 \end{proposition}
 \begin{proposition}[Localization in Stages]
 Let $T$ be another multiplicatively closed subset of $A$,
-and let $U$ be the image of $T$ in $S^{-1}R$.
+and let $U$ be the image of $T$ in $S^{-1}A$.
 Then,
-$$U^{-1}(S^{-1}R) = (ST)^{-1}R,$$
+$$U^{-1}(S^{-1}A) = (ST)^{-1}A,$$
 where $ST=\{st : s\in S, t\in T\}$.
 \end{proposition}
 \begin{proposition}[Localization Commutes with Nilradical]
     \label{prop:localization_nilradical}
-    We have $S^{-1}(\Nil R) = \Nil(S^{-1}R)$.
-    In particular, if $R$ is reduced
-    (no nilpotent element), then so is $S^{-1}R$.
+    We have $S^{-1}(\Nil A) = \Nil(S^{-1}A)$.
+    In particular, if $A$ is reduced
+    (no nilpotent element), then so is $S^{-1}A$.
 \end{proposition}
 \begin{proposition}[Properties Preserved by Localization]
     \begin{alphenum}
-    \item If $R$ is a domain, then $S^{-1}R$ is a domain.
-    \item If $R$ is a PID, then $S^{-1}R$ is a PID.
-    \item If $R$ is a UFD, then $S^{-1}R$ is a UFD.
+    \item If $A$ is a domain, then $S^{-1}A$ is a domain.
+    \item If $A$ is a PID, then $S^{-1}A$ is a PID.
+    \item If $A$ is a UFD, then $S^{-1}A$ is a UFD.
     \end{alphenum}
 \end{proposition}
 \begin{exercise}
@@ -405,14 +405,14 @@ If you wish, prove all of the above theorems.
 \section{Localization of Modules}
 \subsection{Definition and Basic Properties}
 The easiest way to define localization of modules
-is to base change from $R$ to $S^{-1}R$.
+is to base change from $A$ to $S^{-1}A$.
 \begin{definition}[Localization of modules]
     \notation{$S^{-1}M$}{localization of a module}
-    Let $R$ be a ring and $S$ be multiplicatively closed.
-    Then, $S^{-1}R$ is an $R$-algebra.
+    Let $A$ be a ring and $S$ be multiplicatively closed.
+    Then, $S^{-1}A$ is an $A$-algebra.
     Thus, one can define \vocab{localization of module} $M$
     as
-    $$S^{-1}M := S^{-1}R\otimes_R M.$$
+    $$S^{-1}M := S^{-1}A\otimes_A M.$$
 \end{definition}
 This can be constructed explicitly as follows.
 \begin{proposition}[Explicit construction]
@@ -428,13 +428,13 @@ This can be constructed explicitly as follows.
     Let $M' = (M\times S)/\sim$ be the construction above.
     The map
     \begin{align*}
-        S^{-1}R \times M &\to M' \\
+        S^{-1}A \times M &\to M' \\
         \frac as \times m &\mapsto \frac{am}s
     \end{align*}
     is bilinear, and hence descend down to the map
-    $S^{-1}R\otimes_R M \to M'$. Clearly, this map is surjective.
+    $S^{-1}A\otimes_A M \to M'$. Clearly, this map is surjective.
     Now, we show that it is injective.
-    First, we claim that every element in $S^{-1}R\otimes_R M$
+    First, we claim that every element in $S^{-1}A\otimes_A M$
     can be written in form $\tfrac 1s\otimes m$
     where $s\in S$ and $m\in M$. To prove this, suppose 
     we have one such element $x=\sum_{i=1}^n \tfrac{a_i}{s_i}
@@ -456,10 +456,10 @@ This can be constructed explicitly as follows.
 \end{proof}
 \subsection{Exactness}
 Having localized modules, one can think of localization
-as a functor between $R$-modules.
+as a functor between $A$-modules.
 This functor is automatically right-exact
 by \Cref{thm:tensor_is_right_exact}
-because it is tensoring with $S^{-1}R$.
+because it is tensoring with $S^{-1}A$.
 However, more is true.
 \begin{theorem}[Localization is exact]
     \label{thm:localization_exact}
@@ -484,18 +484,18 @@ However, more is true.
 \end{proof}
 \begin{corollary}[Localization is flat]
     \label{cor:localization_flat}
-    For any ring $R$ and any multiplicative set $S$,
-    we have $S^{-1}R$ is a flat $R$-module.
+    For any ring $A$ and any multiplicative set $S$,
+    we have $S^{-1}A$ is a flat $A$-module.
 \end{corollary}
 (In particular, $\QQ$ is a flat $\ZZ$-module.)
 %
 %
 %
 \subsection{Localization Commutes with Everything II}
-Let $S$ be a multiplicative set of $R$.
+Let $S$ be a multiplicative set of $A$.
 \begin{proposition}[Localization Commutes with Sum
 and Intersection]
-    If $M$ is an $R$-module and $N$ and $P$
+    If $M$ is an $A$-module and $N$ and $P$
     are submodules of $M$, then
     \begin{alphenum}
     \item $S^{-1}(M/N) = S^{-1}M/S^{-1}N$.
@@ -505,12 +505,12 @@ and Intersection]
 \end{proposition}
 \begin{proposition}[Localization Commutes with Tensor Product and Hom]
     \label{prop:localize_tensor_hom}
-    Let $M$ and $N$ be $R$-modules, then
+    Let $M$ and $N$ be $A$-modules, then
     \begin{alphenum}
     \item 
-    $S^{-1}(M\otimes_R N) = S^{-1}M \otimes_{S^{-1}R} S^{-1}N.$
-    \item $S^{-1}\Hom_R(M,N)
-    = \Hom_{S^{-1}R}(S^{-1}M, S^{-1}N)$.
+    $S^{-1}(M\otimes_A N) = S^{-1}M \otimes_{S^{-1}A} S^{-1}N.$
+    \item $S^{-1}\Hom_A(M,N)
+    = \Hom_{S^{-1}A}(S^{-1}M, S^{-1}N)$.
     \end{alphenum}
 \end{proposition}
 \begin{exercise}
@@ -521,13 +521,13 @@ Prove both of the above theorems.
  %  Same kind of argument.
  %    Show that one can define maps
  %    \begin{align*}
-	% M\otimes N &\to S^{-1}M\otimes_{S^{-1}R}S^{-1}N \\
+	% M\otimes N &\to S^{-1}M\otimes_{S^{-1}A}S^{-1}N \\
 	% m\otimes n &\mapsto \frac m1 \otimes \frac n1,
  %    \end{align*}
  %    and the inverse
  %    \begin{align*}
-	% S^{-1}M\otimes_{S^{-1}R} S^{-1}N
-	% &\to S^{-1}(M\otimes_R N) \\
+	% S^{-1}M\otimes_{S^{-1}A} S^{-1}N
+	% &\to S^{-1}(M\otimes_A N) \\
 	% \frac ms \otimes \frac nt &\mapsto \frac{m\otimes n}{st}.
 	% \qedhere
  %    \end{align*}
@@ -539,7 +539,7 @@ transfers to the global ring. The first one is
 being the zero module or not.
 \begin{proposition}[Being zero module is stalk-local]
     \label{prop:zero_local}
-    Let $M$ be an $R$-module. The following are equivalent.
+    Let $M$ be an $A$-module. The following are equivalent.
     \begin{alphenum}
 	\item $M=0$
 	\item $M_{\mathfrak p} = 0$
@@ -561,10 +561,10 @@ being the zero module or not.
     However, this means that $\Ann(y)\not\subset\mathfrak m$
     for each $\mathfrak m$, so by Krull's theorem
     \Cref{thm:krull},
-    $\Ann(y) = R$, so $y=0$.
+    $\Ann(y) = A$, so $y=0$.
 \end{proof}
 We say that $M_{\mathfrak p}$ is a \vocab{stalk}
-of $M$ at point $[\pp]\in\Spec R$.
+of $M$ at point $[\pp]\in\Spec A$.
 Thus, the previous proposition says that
 ``$M=0$ is a \vocab{stalk-local property}''.
 We now discuss more stalk-local properties.
@@ -599,7 +599,7 @@ We now discuss more stalk-local properties.
 \end{proof}
 The above proposition gives a good way to check 
 whether $m_1,\dots,m_n$ generates $M$ or not.
-Let $\phi : R^{\oplus n}\to M$ sending the $i$-th
+Let $\phi : A^{\oplus n}\to M$ sending the $i$-th
 basis element to $m_i$.
 With knowledge of localization, we have that
 \begin{align*}
@@ -622,11 +622,11 @@ because the last thing is a vector space.
 Now, let's discuss some more local properties.
 
 \begin{corollary}[Reduced is stalk-local]
-    $R$ is reduced if and only if $R_{\mathfrak m}$ is reduced for
+    $A$ is reduced if and only if $A_{\mathfrak m}$ is reduced for
     all maximal ideals $\mathfrak m$.
 \end{corollary}
 \begin{proof}
-    Apply \Cref{prop:zero_local} to $\Nil(R)$,
+    Apply \Cref{prop:zero_local} to $\Nil(A)$,
     noting that localization commutes with nilradical
     \Cref{prop:localization_nilradical}
 \end{proof}
@@ -642,15 +642,15 @@ Now, let's discuss some more local properties.
     Given an injective map $L\to N$,
     then $L_{\mathfrak m}\to N_{\mathfrak m}$
     is injective. Thus, we get the injective map
-    $$M_{\mathfrak m}\otimes_{R_{\mathfrak m}}
-    L_{\mathfrak m} \to M_{\mathfrak m}\otimes_{R_{\mathfrak m}}
+    $$M_{\mathfrak m}\otimes_{A_{\mathfrak m}}
+    L_{\mathfrak m} \to M_{\mathfrak m}\otimes_{A_{\mathfrak m}}
     N_{\mathfrak m}.$$
     However, from the lemma above, we have that
     both sides are isomorphic to
-    $$(M\otimes_R L)_{\mathfrak m} \to 
-    (M\otimes_R N)_{\mathfrak m}.$$
+    $$(M\otimes_A L)_{\mathfrak m} \to 
+    (M\otimes_A N)_{\mathfrak m}.$$
     Then, since injectivity is local property,
-    we get an injective map $M\otimes_R L\to M\otimes_R N$.
+    we get an injective map $M\otimes_A L\to M\otimes_A N$.
     All the maps are natural, so we get the same
     map as what we wanted.
 \end{proof}
@@ -658,7 +658,7 @@ We have seen many stalk-local properties.
 However, not all properties are stalk-local.
 \begin{example}[Finitely-generated is not stalk-local]
     Being finitely-generated is not a stalk-local property.
-    For example, let $R=\ZZ$ and 
+    For example, let $A=\ZZ$ and 
     $$M = \tfrac 12 \ZZ + \tfrac 13 \ZZ + \tfrac 15 \ZZ 
     + \tfrac 17\ZZ + \dots\ \subseteq\ \QQ$$
     (the sum runs through primes).
@@ -709,7 +709,7 @@ We do one example that we can simply calculate explicitly.
     \item If $f_2=3$, then $I_{f_2}$ is locally free
     because $2\cdot 3 = (1+\sqrt{-5})(1-\sqrt{-5})$,
     and since $3$ is a unit, it follows that 
-    $2$ is divisible by $1+\sqrt{-5}$ in $R_{f_2}$,
+    $2$ is divisible by $1+\sqrt{-5}$ in $A_{f_2}$,
     so $I_{f_2}$ is generated by $1+\sqrt{-5}$.
     \end{itemize}
     For every prime ideal $\pp$,
@@ -878,14 +878,14 @@ Let $A$ be a ring.
 \end{proof}
 \section{Problems}
 \begin{problem}
-Construct a ring $R\neq 0$ such that $R_{\mathfrak p}$ is a domain for all prime ideals $\mathfrak p$ but $R$ is not a domain.
+Construct a ring $A\neq 0$ such that $A_{\mathfrak p}$ is a domain for all prime ideals $\mathfrak p$ but $A$ is not a domain.
 \end{problem}
 \begin{problem}
 Give a new proof of \Cref{prop:nilradical} 
-by considering localization $R_f$.
+by considering localization $A_f$.
 \end{problem}
 \begin{problem}
-Let $R$ be a ring and $\mathfrak p$ be a prime ideal of $R$ that is minimal under inclusion. Prove that every element of
+Let $A$ be a ring and $\mathfrak p$ be a prime ideal of $A$ that is minimal under inclusion. Prove that every element of
 $\mathfrak p$ is a zero divisor.
 \end{problem}
 \begin{problem}
@@ -910,7 +910,7 @@ prove that $\sum_{i=1}^n (-1)^i\operatorname{rank}_A(M_i) = 0$.
 \end{alphenum}
 \end{problem}
 \begin{problem}
-Let $R$ be a ring, and let $M$ be a \textbf{finitely-presented} module.
+Let $A$ be a ring, and let $M$ be a \textbf{finitely-presented} module.
 \begin{enumerate}[label=(\alph*)]
 \item Prove that if $\mathfrak p$ is a prime ideal such that $M_{\mathfrak p}$ is free, then there exists $f\notin \mathfrak p$ such that $M_f$ is free.%
 \footnote{Geometric interpretation: free over point $\mathfrak p$ implies free over open neighborhood $D(f)\ni\mathfrak p$.}
@@ -918,7 +918,7 @@ Let $R$ be a ring, and let $M$ be a \textbf{finitely-presented} module.
 \begin{itemize}
 \item $M_{\mathfrak m}$ is free for all maximal ideals $\mathfrak m$.
 \item $M_{\mathfrak p}$ is free for all prime ideals $\mathfrak p$.
-\item There exists $f_1,\dots,f_n\in R$ generating a unit ideal such that $M_{f_i}$ is free for all $i=1,2,\dots,n$.
+\item There exists $f_1,\dots,f_n\in A$ generating a unit ideal such that $M_{f_i}$ is free for all $i=1,2,\dots,n$.
 \end{itemize}
 \end{enumerate}
 \end{problem}

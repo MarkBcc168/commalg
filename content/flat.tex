@@ -1,11 +1,11 @@
 \chapter{Flatness}
 \label{chap:flatness}
-Recall from \Cref{def: flat} that we defined an $R$-module $M$ to be flat if tensoring by $M$ preserves exactness. As tensor is already right-exact, this is equivalent to preserving injection, i.e., if $A\to B$ is injective, then so is the induced map $A\otimes_R M\to B\otimes_R M$. In this chapter, we will explore the properties and uses of flat modules.
+Recall from \Cref{def: flat} that we defined an $A$-module $M$ to be flat if tensoring by $M$ preserves exactness. As tensor is already right-exact, this is equivalent to preserving injection, i.e., if $L\to N$ is injective, then so is the induced map $L\otimes_A M\to N\otimes_A M$. In this chapter, we will explore the properties and uses of flat modules.
 
 The first thing that you probably have noticed is that
 in order to prove that $M$ is flat, one needs to check
 that it preserves injectivity for all
-injective morphisms $A\to B$ (including infintely-generated ones). 
+injective morphisms $L\to N$ (including infintely-generated ones). 
 This is a horrible condition to check.
 This, in \Cref{sec:homological_algebra} and \Cref{sec:flatness_and_tor}, we develop
 conditions to check if a module is flat (or not flat).
@@ -14,27 +14,27 @@ The cleanest way to do this require formidable machinery
 in homological algebra, which borrows tools from algebraic
 topology to study algebra. One can motivate this as follows:
 whenever you see a right exact functor, like
-$0\to A\to B\to C\to 0$, which implies the right exact sequence
-$$A\otimes_R M \longto B\otimes_R M \longto C\otimes_R M\longto 0,$$
+$0\to L\to N\to P\to 0$, which implies the right exact sequence
+$$L\otimes_A M \longto N\otimes_A M \longto P\otimes_A M\longto 0,$$
 you should dream of extending the sequence indefinitely leftward,
 giving the \vocab{left-derived functor}.
 In this case, the exact sequence we will construct is
     \begin{center}
     \begin{tikzcd}
     & \dots \arrow[r]
-    & \Tor_2^R(C,M) \arrow[lld] \\
-    \Tor_1^R(A,M)  \arrow[r]
-    & \Tor_1^R(B,M) \arrow[r]
-    & \Tor_1^R(C,M) \arrow[lld] \\
-    A\otimes_R M  \arrow[r]
-    & B\otimes_R M \arrow[r]
-    & C\otimes_R M \arrow[r] & 0
+    & \Tor_2^A(P,M) \arrow[lld] \\
+    \Tor_1^A(L,M)  \arrow[r]
+    & \Tor_1^A(N,M) \arrow[r]
+    & \Tor_1^A(P,M) \arrow[lld] \\
+    L\otimes_A M  \arrow[r]
+    & N\otimes_A M \arrow[r]
+    & P\otimes_A M \arrow[r] & 0
     \end{tikzcd}
 \end{center}
 In some sense, $\Tor$ measures the failure of exactness
 of tensor product, and thus useful for
 understanding flatness.
-We will define $\Tor_i^R(A,M)$ at the beginning of 
+We will define $\Tor_i^A(L,M)$ at the beginning of 
 \Cref{sec:flatness_and_tor}.
 Then, we provide various flatness criteria
 that we get from understanding the $\Tor$ functor.
@@ -176,7 +176,7 @@ It can be proven by a similary tedious argument,
 so we omit the proof.
 \subsection{Free Resolutions}
 \begin{definition}[Free Resolution]
-    Given an $R$-module $M$, a \vocab{free resolution} of $M$ is a chain complex of free $R$-modules which has $0$-th homology group $M$ and $n$-th homology group $0$ for $n\neq 0$.
+    Given an $A$-module $M$, a \vocab{free resolution} of $M$ is a chain complex of free $A$-modules which has $0$-th homology group $M$ and $n$-th homology group $0$ for $n\neq 0$.
 \end{definition}
 \begin{example}
     As a $\ZZ$-module, $\ZZ/n\ZZ$ has a free resolution given by \[\cdots \longto 0 \longto \ZZ \stackrel{\cdot n}\longto \ZZ \longto 0 \longto \cdots.\]
@@ -189,10 +189,10 @@ Every module $M$ has a free resolution. Indeed, we can first take a free module 
 Every right-exact functor induces a left derived functor. In the case of the tensor product, the derived functor is $\Tor$.
 \begin{definition}[The $\Tor$ functor]
     \label{def:tor}
-    \notation{$\Tor_n^R(M,N)$}{$n$-th Tor functor}
-    Given $R$-modules $M$ and $N$, let $N_*$ be a free resolution of $N$, and let $M\otimes N_*$ denote the chain complex induced by tensoring each component of $N_*$ with $M$. Then, the \vocab{$n$-th Tor functor} is defined as \[\Tor_n^R(M,N) := H_n(M\otimes N_*).\]
+    \notation{$\Tor_n^A(M,N)$}{$n$-th Tor functor}
+    Given $A$-modules $M$ and $N$, let $N_*$ be a free resolution of $N$, and let $M\otimes N_*$ denote the chain complex induced by tensoring each component of $N_*$ with $M$. Then, the \vocab{$n$-th Tor functor} is defined as \[\Tor_n^A(M,N) := H_n(M\otimes N_*).\]
 \end{definition}
-In particular, $\Tor_0^R$ is simply $\otimes_R$.
+In particular, $\Tor_0^A$ is simply $\otimes_A$.
 \begin{example}[$\Tor$ of $\ZZ$-modules]
     We will compute $\Tor_i^\ZZ(\ZZ/m\ZZ, \ZZ/n\ZZ)$. Using the free resolution of $\ZZ/n\ZZ$ in the previous section, we simply want the homology groups of \[\cdots\to 0\longto \ZZ/m\ZZ\stackrel{\cdot n}\longto \ZZ/m\ZZ \longto 0\longto\cdots.\] The image of multiplication by $n$ in $\ZZ/m\ZZ$ is all the multiples of $\gcd(m,n)$, and the kernel is isomorphic to $\ZZ/\gcd(m,n)\ZZ$, so \[\Tor_0^\ZZ(\ZZ/m\ZZ,\ZZ/n\ZZ) \simeq \Tor_1^\ZZ(\ZZ/m\ZZ,\ZZ/n\ZZ) \simeq \ZZ/\gcd(m,n)\ZZ,\] and $\Tor_i^\ZZ(\ZZ/m\ZZ,\ZZ/n\ZZ)=0$ for $i\ge 2$.
 \end{example}
@@ -200,25 +200,25 @@ Tor satisfies some nice properties, but proving many them is beyond the scope of
 \begin{theorem}[Properties of $\Tor$]
 \label{thm:tor_properties}
 \begin{alphenum}
-    \item $\Tor_n^R(M,N)$ does not depend on the choice of free resolution $N_*$.
-    \item If $0\to A\to B\to C\to 0$ is a short exact sequence of $R$-modules, then there is a long exact sequence 
+    \item $\Tor_n^A(M,N)$ does not depend on the choice of free resolution $N_*$.
+    \item If $0\to L\to N\to P\to 0$ is a short exact sequence of $A$-modules, then there is a long exact sequence 
     \begin{center}
     \begin{tikzcd}
     & \dots \arrow[r]
-    & \Tor_2^R(C,M) \arrow[lld] \\
-    \Tor_1^R(A,M)  \arrow[r]
-    & \Tor_1^R(B,M) \arrow[r]
-    & \Tor_1^R(C,M) \arrow[lld] \\
-    A\otimes_R M  \arrow[r]
-    & B\otimes_R M \arrow[r]
-    & C\otimes_R M \arrow[r] & 0
+    & \Tor_2^A(P,M) \arrow[lld] \\
+    \Tor_1^A(L,M)  \arrow[r]
+    & \Tor_1^A(N,M) \arrow[r]
+    & \Tor_1^A(P,M) \arrow[lld] \\
+    L\otimes_A M  \arrow[r]
+    & N\otimes_A M \arrow[r]
+    & P\otimes_A M \arrow[r] & 0
     \end{tikzcd}
     \end{center}
-    \item $\Tor_n^R(M,N) \simeq \Tor_n^R(N,M)$.
+    \item $\Tor_n^A(M,N) \simeq \Tor_n^A(N,M)$.
     \item If $I$ is a directed set and $(N_i)_{i\in I}$
     is a diagram, then
-    $$\Tor_n^R\left(M, \varinjlim_{i\in I} N_i\right)
-    = \varinjlim_{i\in I} \Tor_n^R(M, N_i)$$
+    $$\Tor_n^A\left(M, \varinjlim_{i\in I} N_i\right)
+    = \varinjlim_{i\in I} \Tor_n^A(M, N_i)$$
     (cf. colimit in \Cref{sec:colimit}).
 \end{alphenum}
 \end{theorem}
@@ -236,31 +236,31 @@ Tor satisfies some nice properties, but proving many them is beyond the scope of
     \begin{tikzcd}
         & \dots \arrow[d] & \dots \arrow[d] & \dots \arrow[d] \\
         0 \arrow[r] 
-        & A\otimes_R M_i  \arrow[r] \arrow[d]
-        & B\otimes_R M_i  \arrow[r] \arrow[d]
-        & C\otimes_R M_i  \arrow[r]\arrow[d]
+        & L\otimes_A M_i  \arrow[r] \arrow[d]
+        & N\otimes_A M_i  \arrow[r] \arrow[d]
+        & P\otimes_A M_i  \arrow[r]\arrow[d]
         & 0 \\
         0 \arrow[r] 
-        & A\otimes_R M_{i-1}  \arrow[r] \arrow[d]
-        & B\otimes_R M_{i-1}  \arrow[r] \arrow[d]
-        & C\otimes_R M_{i-1}  \arrow[r] \arrow[d]
+        & L\otimes_A M_{i-1}  \arrow[r] \arrow[d]
+        & N\otimes_A M_{i-1}  \arrow[r] \arrow[d]
+        & P\otimes_A M_{i-1}  \arrow[r] \arrow[d]
         & 0  \\
         & \dots & \dots & \dots
     \end{tikzcd}
     \end{center}
     In particular, we have the exact sequence
     of chain complexes 
-    $0\to A\otimes_R M_* \to B\otimes_R M_*
-    \to C\otimes_R M_*\to 0$.
+    $0\to L\otimes_A M_* \to N\otimes_A M_*
+    \to P\otimes_A M_*\to 0$.
     Then, the homology long exact sequence
     \Cref{thm:long_exact_homology} gives the desired
     long exact sequence.
     \item Intuitively, this should be true because
-    tensor product is symmetric ($M\otimes_R N = N\otimes_R M$),
+    tensor product is symmetric ($M\otimes_A N = N\otimes_A M$),
     but this turns out to be a very difficult one to prove.
     Roughly speaking, we take a free resolution
     of both $M$ and $N$. Then, take their product
-    $M_i\otimes_R N_j$ to get a double complex 
+    $M_i\otimes_A N_j$ to get a double complex 
     (that looks like an infinite grid). 
     Then, one manipulates
     homology groups of the double complex and proves the result
@@ -272,8 +272,8 @@ Tor satisfies some nice properties, but proving many them is beyond the scope of
     hence preserving kernels, images, and homology
     groups in a chain complex.
     \item Colimit commutes with tensor product:
-    $M\otimes_R \varinjlim_{i\in I} N_i = 
-    \varinjlim_{i\in I} (M\otimes_R N_i)$
+    $M\otimes_A \varinjlim_{i\in I} N_i = 
+    \varinjlim_{i\in I} (M\otimes_A N_i)$
     by \Cref{prob:colimit_tensor}.
     \end{itemize}
     Thus, every step in the definition of $\Tor$
@@ -286,13 +286,13 @@ Tor satisfies some nice properties, but proving many them is beyond the scope of
 \subsection{Ideal-theoretic Criterion of Flatness}
 \begin{theorem}[Ideal-theoretic Criterion of Flatness]
     \label{thm:ideal_flat}
-    Let $M$ be an $R$-module. The following are equivalent:
+    Let $M$ be an $A$-module. The following are equivalent:
     \begin{alphenum}
         \item $M$ is flat.
-        \item $\Tor_i^R(M,N) = 0$ for all $R$-modules $N$ and $i\ge 1$.
-        \item $\Tor_1^R(M,N)=0$ for all $R$-modules $N$.
-        \item $\Tor_1^R(M, R/I) = 0$ for all ideals $I\subseteq R$.
-        %\item $\Tor_1^R(M, R/I) = 0$ for all finitely-generated ideals $I\subseteq R$.
+        \item $\Tor_i^A(M,N) = 0$ for all $A$-modules $N$ and $i\ge 1$.
+        \item $\Tor_1^A(M,N)=0$ for all $A$-modules $N$.
+        \item $\Tor_1^A(M, A/I) = 0$ for all ideals $I\subseteq A$.
+        %\item $\Tor_1^A(M, A/I) = 0$ for all finitely-generated ideals $I\subseteq A$.
     \end{alphenum}
 \end{theorem}
 \begin{proof}
@@ -305,48 +305,48 @@ Tor satisfies some nice properties, but proving many them is beyond the scope of
     \textbf{(d) $\Rightarrow$ (a).} 
     We prove this in three steps.
     \begin{enumerate}
-    \item  \textbf{$\Tor_1^R(M,N)=0$ for all finitely-generated modules $N$.}
+    \item  \textbf{$\Tor_1^A(M,N)=0$ for all finitely-generated modules $N$.}
     We use induction on the number of generators $n$ of $N$.
-    First, if $n=1$, then $N\simeq R/I$ for some ideal $I$,
+    First, if $n=1$, then $N\simeq A/I$ for some ideal $I$,
     so the result is clear.
     Now, assume that the result is true for $n-1$ generators.
     Let $N$ be a module with $n$ generators
     $e_1,\dots,e_n$. Then, we have the exact sequence
-    $$0\longto R[e_n] \longto N \longto N/R[e_n]\longto 0,$$
+    $$0\longto A[e_n] \longto N \longto N/A[e_n]\longto 0,$$
     which gives long exact sequence
     (by \Cref{thm:tor_properties} (b))
-    $$\dots\longto \Tor_1^R(M,R[e_n]) \longto \Tor_1^R(M,N) \longto \Tor_1^R(M,N/R[e_n])
+    $$\dots\longto \Tor_1^A(M,A[e_n]) \longto \Tor_1^A(M,N) \longto \Tor_1^A(M,N/A[e_n])
     \longto \dots.$$
-    Since $N/R[x]$ is generated by $e_1,\dots,e_{n-1}$,
+    Since $N/A[x]$ is generated by $e_1,\dots,e_{n-1}$,
     we have by induction hypothesis that
-    $\Tor_1^R(M, R[e_n]) = \Tor_1^R(M, N/R[e_n]) = 0$,
-    so $\Tor_1^R(M,N) = 0$.
-    \item \textbf{$\Tor_1^R(M,N)=0$ for all modules $N$.}
+    $\Tor_1^A(M, A[e_n]) = \Tor_1^A(M, N/A[e_n]) = 0$,
+    so $\Tor_1^A(M,N) = 0$.
+    \item \textbf{$\Tor_1^A(M,N)=0$ for all modules $N$.}
     Note that $N$ is a colimit of finitely-generated modules
     $\lim_{i\in I} N_i$ (by \Cref{prop:direct_limit_fingen}).
-    We know that from Step 1. that $\Tor_1^R(M,N_i)=0$, so 
+    We know that from Step 1. that $\Tor_1^A(M,N_i)=0$, so 
     by \Cref{thm:tor_properties} (d), we get that
-    $$\Tor_1^R(M,N) = 
-    \Tor_1^R \left(M, \varinjlim_{i\in I} N_i \right)
-    = \varinjlim_{i\in I} \Tor_1^R(M,N_i)
+    $$\Tor_1^A(M,N) = 
+    \Tor_1^A \left(M, \varinjlim_{i\in I} N_i \right)
+    = \varinjlim_{i\in I} \Tor_1^A(M,N_i)
     = \varinjlim_{i\in I} 0 = 0.$$
     \item \textbf{$M$ is flat.}
-    Let $\phi : A\to B$ be injective.
-    Then, the exact sequence $0\to A\to B\to B/A\to 0$
+    Let $\phi : L\to N$ be injective.
+    Then, the exact sequence $0\to L\to N\to N/L\to 0$
     gives  the long exact sequence
-    $$0 = \Tor_1^R(B/A, M)
-    \longto A\otimes M \longto B\otimes M
-    \longto (B/A)\otimes M\longto 0,$$
-    giving that $A\otimes M\to B\otimes M$ is injective.
+    $$0 = \Tor_1^A(N/L, M)
+    \longto L\otimes M \longto N\otimes M
+    \longto (N/L)\otimes M\longto 0,$$
+    giving that $L\otimes M\to N\otimes M$ is injective.
     \qedhere
     \end{enumerate}
 \end{proof}
 How useful are these conditions? It turns out the last two have a natural interpretation.
 \begin{theorem}
-    $\Tor_1^R(M,R/I) = 0$ if and only if $\varphi:I\otimes_R M\to M$ given by $i\otimes m\mapsto im$ is injective.
+    $\Tor_1^A(M,A/I) = 0$ if and only if $\varphi:I\otimes_A M\to M$ given by $i\otimes m\mapsto im$ is injective.
 \end{theorem}
 \begin{proof}
-    Consider the short exact sequence $0\to I\to R\to R/I\to 0$. Since $R\otimes M=M$ and $\Tor_1^R(R,M)=0$ (free modules are flat), we get a long exact sequence \[0\longto \Tor_1^R(R/I,M)\stackrel\alpha\longto I\otimes M\stackrel\beta\longto M\longto (R/I)\otimes M\longto 0.\] Since $\alpha$ is injective, its image is $0$ if and only if $\Tor_1^R(R/I,M)=0$. On the other hand, $\Im \alpha = \Ker \beta$, and $\Ker \beta=0$ if and only if $\beta: I\otimes M\to M$ is injective. Thus, the two are equivalent.
+    Consider the short exact sequence $0\to I\to A\to A/I\to 0$. Since $A\otimes M=M$ and $\Tor_1^A(A,M)=0$ (free modules are flat), we get a long exact sequence \[0\longto \Tor_1^A(A/I,M)\stackrel\alpha\longto I\otimes M\stackrel\beta\longto M\longto (A/I)\otimes M\longto 0.\] Since $\alpha$ is injective, its image is $0$ if and only if $\Tor_1^A(A/I,M)=0$. On the other hand, $\Im \alpha = \Ker \beta$, and $\Ker \beta=0$ if and only if $\beta: I\otimes M\to M$ is injective. Thus, the two are equivalent.
 \end{proof}
 We can now do a nontrivial example of checking 
 that a morphism is flat.
@@ -382,13 +382,13 @@ that a morphism is flat.
     $x+y-b$ for all $b\neq a$.)
     
     To check this, we use ideal-theoretic criterion.
-    The good news is $R=\CC[z]_{(z-a)}$ has not many ideals:
+    The good news is $A=\CC[z]_{(z-a)}$ has not many ideals:
     $(z-a)^n$!
-    Then, it suffices to show that $\Tor_1^R(M, R/(z-a)^n) = 0$.
+    Then, it suffices to show that $\Tor_1^A(M, A/(z-a)^n) = 0$.
     To do this, we consider the free resolution
     \begin{center}
     \begin{tikzcd}[column sep = 1.5cm]
-        R \arrow[r,"\cdot(z-a)^n"] & R 
+        A \arrow[r,"\cdot(z-a)^n"] & A 
     \end{tikzcd}
     \end{center}
     Tensor with $M$:
@@ -405,22 +405,22 @@ that a morphism is flat.
 In the case of local rings, we can say a lot more about flatness.
 \begin{theorem}[Flat Modules over Local Rings are Free]
     \label{thm:flat_local_ring}
-    Let $R$ be a local ring with maximal ideal $\frakm$, and let $M$ be a finitely-presented $R$-module. The following are equivalent:
+    Let $A$ be a local ring with maximal ideal $\frakm$, and let $M$ be a finitely-presented $A$-module. The following are equivalent:
     \begin{alphenum}
         \item $M$ is free.
         \item $M$ is flat.
-        \item $\Tor_1^R(R/\frakm, M)=0$.
+        \item $\Tor_1^A(A/\frakm, M)=0$.
     \end{alphenum}
 \end{theorem}
 \begin{proof}
     Note $\text{(a)}\Rightarrow\text{(b)}$ is trivial, and $\text{(b)}\Rightarrow\text{(c)}$ was proved in \Cref{thm:ideal_flat}.
     Thus, we prove that (c) implies (a).
 
-    Suppose $\Tor_1^R(R/\frakm, M)=0$. Observe that $M/\mathfrak mM$ is a module over the field $R/\mathfrak m$, so it is free. As it is also finitely generated, we can find $m_1$, $m_2$, $\dots$, $m_n\in M$ such that their images $\overline{m_1}$, $\dots$, $\overline{m_n}$ in $M/\mathfrak mM$ form a basis. By Nakayama (\Cref{cor:nakayama_generation}), 
+    Suppose $\Tor_1^A(A/\frakm, M)=0$. Observe that $M/\mathfrak mM$ is a module over the field $A/\mathfrak m$, so it is free. As it is also finitely generated, we can find $m_1$, $m_2$, $\dots$, $m_n\in M$ such that their images $\overline{m_1}$, $\dots$, $\overline{m_n}$ in $M/\mathfrak mM$ form a basis. By Nakayama (\Cref{cor:nakayama_generation}), 
     $m_1$, $\dots$, $m_n$ generate $M$.
 
-    Now define a free $R$-module $F$ with basis $\{f_1, \dots, f_n\}$, and consider the surjective map $\beta: F\to M$ which maps $f_i\mapsto m_i$ for all $i$. Let $K=\Ker \beta$, with the embedding $\alpha:K\to F$. We have a short exact sequence \[0\longto K\stackrel\alpha\longto F\stackrel\beta\longto M\longto 0.\] Note that for any module $N$, $N\otimes R/\frakm = N/\frakm N$. Thus, by tensoring the sequence with $R/\frakm$, we have an exact sequence 
-    \[0 = \Tor_1^R(M, R/\frakm) \longto K/\frakm K\stackrel{\alpha_*}\longto F/\frakm F\stackrel{\beta_*}\longto M/\frakm M\longto 0.\] 
+    Now define a free $A$-module $F$ with basis $\{f_1, \dots, f_n\}$, and consider the surjective map $\beta: F\to M$ which maps $f_i\mapsto m_i$ for all $i$. Let $K=\Ker \beta$, with the embedding $\alpha:K\to F$. We have a short exact sequence \[0\longto K\stackrel\alpha\longto F\stackrel\beta\longto M\longto 0.\] Note that for any module $N$, $N\otimes A/\frakm = N/\frakm N$. Thus, by tensoring the sequence with $A/\frakm$, we have an exact sequence 
+    \[0 = \Tor_1^A(M, A/\frakm) \longto K/\frakm K\stackrel{\alpha_*}\longto F/\frakm F\stackrel{\beta_*}\longto M/\frakm M\longto 0.\] 
     Let $\overline{f_i}$ denote the image of $f_i$ in $F/\frakm F$. Then, $\beta_*$ maps $\overline{f_i}\mapsto \overline{m_i}$, so it maps the basis $\{\overline{f_1},\dots, \overline{f_n}\}$ of $F/\frakm F$ to the basis $\{\overline{m_1},\dots, \overline{m_n}\}$ of $M/\frakm M$. Hence, $\beta_*$ is an isomorphism. By the exactness of the sequence above, $\alpha_*$ is injective and has image $0$, so $K/\frakm K=0$. Since $M$ is finitely presented, $K$ is finitely generated
     \footnote{This is a bit subtle because by definition,
     $M$ is finitely-presented means that there exists 
@@ -432,15 +432,15 @@ In the case of local rings, we can say a lot more about flatness.
     We leave this fact as an exercise to the reader.
     
     Alternatively, if you don't want to think about this issue,
-    assume that $R$ is Noetherian.}, 
+    assume that $A$ is Noetherian.}, 
     so by Nakayama, $K=0$. It follows that $M\simeq F$ is free.
 \end{proof}
 \begin{corollary}[Equivalence of Flat and Locally Free]
     \label{cor:flat_locally_free}
-    Let $R$ be a ring and $M$ be a finitely-presented $R$-module. Then, $M$ is flat if and only if $M$ is locally free (i.e., for every prime ideal $\frakp$, $M_\frakp$ is free).
+    Let $A$ be a ring and $M$ be a finitely-presented $A$-module. Then, $M$ is flat if and only if $M$ is locally free (i.e., for every prime ideal $\frakp$, $M_\frakp$ is free).
 \end{corollary}
 \begin{proof}
-    If $M$ is flat, then for all prime $\frakp$, $M_\frakp$ is a flat $R_\frakp$-module and hence free.
+    If $M$ is flat, then for all prime $\frakp$, $M_\frakp$ is a flat $A_\frakp$-module and hence free.
 
     If $M_\frakp$ is free for all prime $\frakp$, then $M_\frakm$ is free and hence flat for all maximal $\frakm$. By \Cref{prop:local_flat}, $M$ is flat.
 \end{proof}
@@ -451,36 +451,36 @@ Most morphisms of variety is not finite.
 Therefore, we give a more powerful condition 
 that allows us to work on non-finitely-generated ring as well.
 \begin{theorem}[Local criteria of flatness]
-Let $R$ and $S$ be Noetherian local rings.
+Let $A$ and $B$ be Noetherian local rings.
 Let $\frakm$ and $\frakn$ be maximal ideals of 
-$R$ and $S$, respectively.
-Let $\phi : R\to S$ be a \vocab{local morphism},
+$A$ and $B$, respectively.
+Let $\phi : A\to B$ be a \vocab{local morphism},
 i.e., $\phi^{-1}\frakn = \frakm$.
 
-Let $M$ be a finitely-generated $S$-module.
-If $\Tor_1^R(M,R/\frakm) = 0$,
-then $M$ is flat over $R$.
+Let $M$ be a finitely-generated $B$-module.
+If $\Tor_1^A(M,A/\frakm) = 0$,
+then $M$ is flat over $A$.
 \end{theorem}
 \begin{proof}
-    It suffices to show that $\Tor_1^R(M,R/I)=0$
-    for all ideals $I\subset R$. 
+    It suffices to show that $\Tor_1^A(M,A/I)=0$
+    for all ideals $I\subset A$. 
     If this is not true, take $I$ to be the maximal
     among all counterexamples
-    (we can do this since $R$ is Noetherian).
+    (we can do this since $A$ is Noetherian).
     Pick $f\in\frakm\setminus I$. We have two cases. 
     \begin{itemize}
-	\item \textbf{If $f$ is not a zero divisor in $R/I$},
+	\item \textbf{If $f$ is not a zero divisor in $A/I$},
     then we get a short exact sequence
-    $$0\longto R/I\stackrel{f}\longto R/I
-    \longto R/((f)+I)\longto 0.$$
+    $$0\longto A/I\stackrel{f}\longto A/I
+    \longto A/((f)+I)\longto 0.$$
     The ideal $(f)+I$ strictly contains $I$,
-    so by maximality, we have $\Tor_1^R(M,R/((f)+I)) = 0$.
+    so by maximality, we have $\Tor_1^A(M,A/((f)+I)) = 0$.
     Therefore, we get a surjective map
-    $$\Tor_1^R(M,R/I) \stackrel{\cdot f}\longto \Tor_1^R(M,R/I).$$
-    To avoid clutter, let $N=\Tor_1^R(M,R/I)$,
-    which has the structure of $S$-module 
+    $$\Tor_1^A(M,A/I) \stackrel{\cdot f}\longto \Tor_1^A(M,A/I).$$
+    To avoid clutter, let $N=\Tor_1^A(M,A/I)$,
+    which has the structure of $B$-module 
     because $M\otimes \bullet$ has the structure
-    of $S$-module,
+    of $B$-module,
     and from above, we get a surjective map
     $N\to N$ by multiplication by $\phi(f)$.
     Then, $N=(\phi(f))N$, so by Nakayama's lemma,
@@ -489,15 +489,15 @@ then $M$ is flat over $R$.
     However, from $\phi^{-1}\frakn = \frakm$, we get that
     $\phi(f)\in \frakn$. Thus, $(1-x\phi(f))$ is a unit,
     so $n=0$ for all $n\in N$, so $N=0$.
-    Thus, $\Tor_1^R(M,R/I)=0$.
-    \item \textbf{If $f$ is a zero divisor in $R/I$,}
-    then let $J = \Ann_{R/I}(f)$, so $J$ strictly contains $I$.
+    Thus, $\Tor_1^A(M,A/I)=0$.
+    \item \textbf{If $f$ is a zero divisor in $A/I$,}
+    then let $J = \Ann_{A/I}(f)$, so $J$ strictly contains $I$.
     Then, we have an exact sequence
-    $$0\longto R/J\longto R/I\longto R/((f)+I) \longto 0.$$
+    $$0\longto A/J\longto A/I\longto A/((f)+I) \longto 0.$$
     Again, by maximality assumption,
-    $\Tor_1^R(M,R/J)=0$ and $\Tor_1^R(M,R/((f)+I))=0$.
+    $\Tor_1^A(M,A/J)=0$ and $\Tor_1^A(M,A/((f)+I))=0$.
     which implies by long exact sequence that 
-    $\Tor_1^R(M,R/I)=0$.
+    $\Tor_1^A(M,A/I)=0$.
     This is a contradiction. \qedhere
     \end{itemize}
 \end{proof}
@@ -529,102 +529,102 @@ In \Cref{thm:going_down}, we proved a version of going down for integral extensi
 \end{theorem}
 Before we prove this, we will need a new definition.
 \subsection{Faithful Flatness}
-One way of stating the definition of flatness is as follows: a module $M$ is flat if $A\to B\to C$ being exact implies $A\otimes M\to B\otimes M\to C\otimes M$ is exact.
+One way of stating the definition of flatness is as follows: a module $M$ is flat if $L\to N\to P$ being exact implies $L\otimes M\to N\otimes M\to P\otimes M$ is exact.
 \begin{definition}
-    A module $M$ is \vocab{faithfully flat} if the following is true: $A\to B\to C$ is exact \textbf{if and only if} $A\otimes M\to B\otimes M\to C\otimes M$ is exact.
+    A module $M$ is \vocab{faithfully flat} if the following is true: $L\to N\to P$ is exact \textbf{if and only if} $L\otimes M\to N\otimes M\to P\otimes M$ is exact.
 
     Similarly, a morphism of rings $\varphi : A\to B$
     is \vocab{faithfully flat} if it makes $B$
     a faithfully flat $A$-algebra.
 \end{definition}
 \begin{example}
-    Finitely-generated free modules are faithfully flat, as $A\otimes_R R^{\oplus n} \cong A^{\oplus n}$. (In fact, all free modules are faithfully flat.)
+    Finitely-generated free modules are faithfully flat, as $N\otimes_A A^{\oplus n} \cong N^{\oplus n}$. (In fact, all free modules are faithfully flat.)
 
     An example of a flat module which is not faithfully flat is $\QQ$ as a $\ZZ$-module. Indeed, by \Cref{cor:localization_flat}, $\QQ = (\ZZ\setminus \{0\})^{-1}\ZZ$ is flat. Further note $(\ZZ/n\ZZ)\otimes \QQ = 0$, as $m\otimes q = (nm)\otimes (q/n) = 0$ for all $m$ and $q$. Thus, while \[\ZZ/n\ZZ\stackrel{\cdot 1}\longto \ZZ/ n\ZZ\stackrel{\cdot 1}\longto \ZZ/n\ZZ\] 
     is not exact, its tensor with $\QQ$ is $0\to 0\to 0$, which is exact.
 \end{example}
 \begin{definition}[Residue Field]
-    Let $R$ be a ring and $\pp\subseteq R$ be a prime ideal. The \vocab{residue field} is defined as
+    Let $A$ be a ring and $\pp\subseteq A$ be a prime ideal. The \vocab{residue field} is defined as
     \notation{$\kappa(\pp)$}{residue field}
-    \[\kappa(\pp) := \Frac(R/\pp).\]
+    \[\kappa(\pp) := \Frac(A/\pp).\]
 \end{definition}
 \begin{theorem}
     \label{thm:faithful_flat_conditions}
-    Let $M$ be a flat $R$-module. The following are equivalent;
+    Let $M$ be a flat $A$-module. The following are equivalent;
     \begin{alphenum}
         \item $M$ is faithfully flat.
-        \item If $N\otimes_R M=0$, then $N=0$.
-        \item For all prime ideals $\pp\subseteq R$, $\kappa(\pp)\otimes_R M \neq 0$.
-        \item For all maximal ideals $\frakm\subseteq R$, $\kappa(\frakm)\otimes_R M \neq 0$.
+        \item If $N\otimes_A M=0$, then $N=0$.
+        \item For all prime ideals $\pp\subseteq A$, $\kappa(\pp)\otimes_A M \neq 0$.
+        \item For all maximal ideals $\frakm\subseteq A$, $\kappa(\frakm)\otimes_A M \neq 0$.
     \end{alphenum}
 \end{theorem}
 \begin{proof}
     It is clear that $\text{(b)}\Rightarrow\text{(c)}\Rightarrow\text{(d)}$.
 
-    \textbf{(a) $\Rightarrow$ (b).} Suppose $M$ is faithfully flat. If $M\otimes N=0$, then $0\to M\otimes_R 0\to M\otimes_R N\to M\otimes_R 0\to 0$ is exact, so $0\to 0\to N\to 0\to 0$ is exact. Thus, $N=0$.
+    \textbf{(a) $\Rightarrow$ (b).} Suppose $M$ is faithfully flat. If $M\otimes N=0$, then $0\to M\otimes_A 0\to M\otimes_A N\to M\otimes_A 0\to 0$ is exact, so $0\to 0\to N\to 0\to 0$ is exact. Thus, $N=0$.
 
-    \textbf{(b) $\Rightarrow$ (a).} Suppose $N\otimes_R M=0$ only when $N=0$, and suppose for modules $A$, $B$, and $C$, the tensored sequence \[A\otimes_R M\stackrel{\alpha_*}\longto B\otimes_R M\stackrel{\beta_*}\longto C\otimes_R M\] is exact. Then, $\Im(\beta\alpha)\otimes_R M = \Im(\beta_*\alpha_*)=0$, so $\Im(\beta\alpha) = 0$, i.e., $\Im \alpha\subseteq \Ker \beta$. By flatness, \[\frac{\Ker\beta}{\Im\alpha} \otimes_R M = \frac{\Ker\beta\otimes_R M}{\Ker\alpha\otimes_R M} = \frac{\Ker\beta_*}{\Im\alpha_*} = 0,\] so $\Ker\beta / \Im \alpha = 0$, i.e., $A\to B\to C$ is exact. Thus, $M$ is faithfully flat.
+    \textbf{(b) $\Rightarrow$ (a).} Suppose $N\otimes_A M=0$ only when $N=0$, and suppose for modules $L$, $N$, and $P$, the tensored sequence \[L\otimes_A M\stackrel{\alpha_*}\longto N\otimes_A M\stackrel{\beta_*}\longto P\otimes_A M\] is exact. Then, $\Im(\beta\alpha)\otimes_A M = \Im(\beta_*\alpha_*)=0$, so $\Im(\beta\alpha) = 0$, i.e., $\Im \alpha\subseteq \Ker \beta$. By flatness, \[\frac{\Ker\beta}{\Im\alpha} \otimes_A M = \frac{\Ker\beta\otimes_A M}{\Ker\alpha\otimes_A M} = \frac{\Ker\beta_*}{\Im\alpha_*} = 0,\] so $\Ker\beta / \Im \alpha = 0$, i.e., $L\to N\to P$ is exact. Thus, $M$ is faithfully flat.
 
-    \textbf{(d) $\Rightarrow$ (b).} Suppose $M\otimes_R \kappa(\frakm) \neq 0$ for all maximal $\frakm$. Consider any nonzero module $N$. Let $x\in N$ be a nonzero element. Observe $R/\Ann(x)$ embeds into $N$ under the map, so $(R/\Ann(x)) \otimes_R M$ embeds into $N\otimes_R M$.
+    \textbf{(d) $\Rightarrow$ (b).} Suppose $M\otimes_A \kappa(\frakm) \neq 0$ for all maximal $\frakm$. Consider any nonzero module $N$. Let $x\in N$ be a nonzero element. Observe $A/\Ann(x)$ embeds into $N$ under the map, so $(A/\Ann(x)) \otimes_A M$ embeds into $N\otimes_A M$.
     
-    Let $\frakm$ be any maximal ideal containing $\Ann(x)$. Then, $(R/\Ann(x))\otimes_R M$ surjects onto $(R/\frakm)\otimes_R M$. The latter is nonzero by assumption, so the former is also nonzero. It embeds into $N\otimes_R M$, so $N\otimes_R M\neq 0$, as desired.
+    Let $\frakm$ be any maximal ideal containing $\Ann(x)$. Then, $(A/\Ann(x))\otimes_A M$ surjects onto $(A/\frakm)\otimes_A M$. The latter is nonzero by assumption, so the former is also nonzero. It embeds into $N\otimes_A M$, so $N\otimes_A M\neq 0$, as desired.
 \end{proof}
-The module $M\otimes_R \kappa(\pp)$ has a geometric
+The module $M\otimes_A \kappa(\pp)$ has a geometric
 significance: it is a \vocab{fiber}.
 To see this, we first note that since localization
 commutes with quotient, we get 
-$\kappa(\pp) \simeq R_\pp/\pp R_\pp$, so we have the 
+$\kappa(\pp) \simeq A_\pp/\pp A_\pp$, so we have the 
 exact sequence
-$$\pp R_\pp \longto R_\pp \longto \kappa(\pp) \longto 0,$$
+$$\pp A_\pp \longto A_\pp \longto \kappa(\pp) \longto 0,$$
 so tensoring gives
-$$\pp M_\pp \longto M_\pp \longto \kappa(\pp)\otimes_R M\longto 0,$$
+$$\pp M_\pp \longto M_\pp \longto \kappa(\pp)\otimes_A M\longto 0,$$
 which implies that
 \begin{equation}
 \label{eq:fiber}
-\kappa(\pp)\otimes_R M \simeq M_\pp / \pp M_\pp.
+\kappa(\pp)\otimes_A M \simeq M_\pp / \pp M_\pp.
 \end{equation}
 
-Now, suppose that $M=S$ is an $R$-algebra.
-Then, $\kappa(\pp) \otimes_R S \simeq S_\pp/\pp S_\pp$
-as $R$-algebra as well.
+Now, suppose that $M=B$ is an $A$-algebra.
+Then, $\kappa(\pp) \otimes_A B \simeq B_\pp/\pp B_\pp$
+as $A$-algebra as well.
 We claim the following:
 \begin{proposition}[Points in fiber indeed corresponds to preimage]
     \label{prop:fiber}
-    If $\phi : R\to S$ be a morphism
-    (so $S$ is an $R$-algebra), then 
+    If $\phi : A\to B$ be a morphism
+    (so $B$ is an $A$-algebra), then 
     there is a bijective correspondence between
-    $$\{\text{prime ideals of }\kappa(\pp)\otimes_R S\}
+    $$\{\text{prime ideals of }\kappa(\pp)\otimes_A B\}
     \longleftrightarrow 
-    \{\text{prime ideals } \qq\subset S 
+    \{\text{prime ideals } \qq\subset B 
     \text{ such that } \phi^{-1}\qq = \pp\}.$$
 \end{proposition}
 \begin{proof}
-    Recall \eqref{eq:fiber} that $\kappa(\pp)\otimes_R S 
-    = S_\pp/\pp S_\pp$.
-    First, note that $S_\pp$ is a localization of $S$
-    with multiplicative set $\phi(R/\pp)$.
-    Thus, every prime ideal of $S_\pp$ (and hence $S_\pp/\pp S_\pp$)
-    is extended from a prime ideal $\qq\in S$.
+    Recall \eqref{eq:fiber} that $\kappa(\pp)\otimes_A B 
+    = B_\pp/\pp B_\pp$.
+    First, note that $B_\pp$ is a localization of $B$
+    with multiplicative set $\phi(A/\pp)$.
+    Thus, every prime ideal of $B_\pp$ (and hence $B_\pp/\pp B_\pp$)
+    is extended from a prime ideal $\qq\in B$.
     Observe the following:
     \begin{itemize}
-    \item In order to get a prime ideal in $S_\pp$,
-    we must have $\qq\cap \phi(R\setminus\pp) = \emptyset$,
+    \item In order to get a prime ideal in $B_\pp$,
+    we must have $\qq\cap \phi(A\setminus\pp) = \emptyset$,
     This is equivalent to $\phi^{-1}\qq \subseteq \pp$
     (which we left as an easy exercise to check).
-    \item In order to get a prime ideal in $S_\pp/\pp S_\pp$,
-    we must have $\qq R_\pp \supseteq \phi(\pp)R_\pp$,
+    \item In order to get a prime ideal in $B_\pp/\pp B_\pp$,
+    we must have $\qq A_\pp \supseteq \phi(\pp)A_\pp$,
     which means $\qq\supseteq\phi(\pp)$
     or equivalently $\phi^{-1}\qq \supseteq \pp$.
     \end{itemize}
     Combining both items gives $\qq$ extends to 
-    a prime ideal in $S_\pp/\pp S_\pp$ if and only if
+    a prime ideal in $B_\pp/\pp B_\pp$ if and only if
     $\phi^{-1}\qq=\pp$.
 \end{proof}
-In particular, $\Spec(\kappa(\pp)\otimes_R S)
+In particular, $\Spec(\kappa(\pp)\otimes_A B)
 \simeq \phi^{-1}(\{\pp\})$.
-This is why $\kappa(\pp)\otimes_R S$ is 
+This is why $\kappa(\pp)\otimes_A B$ is 
 an algebraic realization of the fiber of
-$\phi^\# : \Spec S\to\Spec R$ at $\pp$.
+$\phi^\# : \Spec B\to\Spec A$ at $\pp$.
 
 \subsection{Proof of Going Down}
 \begin{corollary}[Faithfully flat implies surjective]
@@ -666,11 +666,11 @@ We now prove an important result that flat morphisms
 have constant dimension of fibers.
 \begin{theorem}[Flatness implies constant dimension of fibers]
     \label{thm:flat_dim_fiber}
-    If $R$ and $S$ are Noetherian local rings with maximal ideals
-    $\frakm$ and $\frakn$ and $\varphi : R\to S$
+    If $A$ and $B$ are Noetherian local rings with maximal ideals
+    $\frakm$ and $\frakn$ and $\varphi : A\to B$
     is a ring morphism such that $\varphi^{-1}\frakn = \frakm$.
     Then,
-    $$\dim S \leq \dim R + \dim S/\frakm S.$$
+    $$\dim B \leq \dim A + \dim B/\frakm B.$$
     Moreover, if $\varphi$ is flat, then the equality holds.
 \end{theorem}
 Before proving this theorem, let us consider geometric interpretation.
@@ -716,31 +716,31 @@ and of $A$ at $\pp$.
     This violates \eqref{eq:dim_fiber}.
 \end{example}
 \begin{proof}[Proof of \Cref{thm:flat_dim_fiber}]
-    Let $d=\dim R$ and $e=\dim S/\mm S$. 
-    From primary ideal dimension, there exists an $\mm$-primary ideal $(x_1,\dots, x_n)\subseteq R$, i.e., there exists $n_1$ for which $\mm^{n_1} \subseteq (x_1,\dots, x_n)\subseteq \mm$ (this utilizes $R$ is Noetherian).
-    Similarly, there exists $n_2$ and an $\frakn/\mm S$-primary ideal $(y_1,\dots, y_e)\subseteq \frakn$ containing $\mm S$ such that 
-    \[\left(\frac{\mathfrak n}{\mathfrak mS}\right)^{n_2} \subseteq \frac{(y_1,\dots, y_e)}{\mathfrak mS}\subseteq \frac{\mathfrak n}{\mathfrak mS}.\] Since $S/\mm S$ is local with maximal ideal $\frakn /\mm S$, we know $\frakn^{n_2} \subseteq (y_1,\dots, y_e) + \mm S$. Thus, 
+    Let $d=\dim A$ and $e=\dim B/\mm B$. 
+    From primary ideal dimension, there exists an $\mm$-primary ideal $(x_1,\dots, x_n)\subseteq A$, i.e., there exists $n_1$ for which $\mm^{n_1} \subseteq (x_1,\dots, x_n)\subseteq \mm$ (this utilizes $A$ is Noetherian).
+    Similarly, there exists $n_2$ and an $\frakn/\mm B$-primary ideal $(y_1,\dots, y_e)\subseteq \frakn$ containing $\mm B$ such that 
+    \[\left(\frac{\mathfrak n}{\mathfrak mB}\right)^{n_2} \subseteq \frac{(y_1,\dots, y_e)}{\mathfrak mB}\subseteq \frac{\mathfrak n}{\mathfrak mB}.\] Since $B/\mm B$ is local with maximal ideal $\frakn /\mm B$, we know $\frakn^{n_2} \subseteq (y_1,\dots, y_e) + \mm B$. Thus, 
     \begin{align*}
-    \frakn^{n_1n_2} &\subseteq ((y_1,\dots, y_e) + \mm S)^{n_1} 
+    \frakn^{n_1n_2} &\subseteq ((y_1,\dots, y_e) + \mm B)^{n_1} 
     \\ 
-    &\subseteq (y_1,\dots, y_e) + (x_1,\dots, x_d)S \\
+    &\subseteq (y_1,\dots, y_e) + (x_1,\dots, x_d)B \\
     &=(y_1,\dots, y_e,\varphi(x_1),\dots, \varphi(x_d))  \\
     &\subseteq \frakn,
     \end{align*}
     so there exists an $\nn$-primary ideal with $d+e$ generators.
-    We conclude $\dim S\le d+e$, the desired inequality.
+    We conclude $\dim B\le d+e$, the desired inequality.
     
     Now suppose $\varphi$ is flat. Given a chain of prime ideals
     \begin{align*}
         \pp_0\subsetneq \pp_1\subsetneq\dots\subsetneq \pp_d 
         = \frakm
-        \ &\subseteq \ R \\
-        \frac{\qq_0}{\mm S}\subsetneq \frac{\qq_1}{\mm S}\subsetneq\dots\subsetneq \frac{\qq_e}{\mm S} 
-        \ &\subseteq \ \frac{S}{\mm S}
+        \ &\subseteq \ A \\
+        \frac{\qq_0}{\mm B}\subsetneq \frac{\qq_1}{\mm B}\subsetneq\dots\subsetneq \frac{\qq_e}{\mm B} 
+        \ &\subseteq \ \frac{B}{\mm B}
     \end{align*}
-    (where $\qq_0\supseteq \mm S$), one construct 
-    a chain of prime ideals in $S$ as follows.
-    Note that $\mm \supseteq \varphi^{-1}\qq_0\supseteq \varphi^{-1}\mm S\supseteq \mm$, so
+    (where $\qq_0\supseteq \mm B$), one construct 
+    a chain of prime ideals in $B$ as follows.
+    Note that $\mm \supseteq \varphi^{-1}\qq_0\supseteq \varphi^{-1}\mm B\supseteq \mm$, so
     $\varphi^{-1}\qq_0=\mm$, so $\qq_0$ lies above $\pp_d=\mm$,
     so by going down theorem \Cref{thm:going_down_flat}, 
     there exists prime ideals 
@@ -750,17 +750,17 @@ and of $A$ at $\pp$.
     in the diagram below.
     \begin{center}
     \begin{tikzcd}[column sep=0.7cm]
-    S/\mm S: & & & & 
-    & \dfrac{\qq_0}{\mm S}
+    B/\mm B: & & & & 
+    & \dfrac{\qq_0}{\mm B}
     \arrow[r, "\subsetneq", phantom]\arrow[d, no head]
-    &\dfrac{\qq_1}{\mm S}
+    &\dfrac{\qq_1}{\mm B}
     \arrow[r, "\subsetneq", phantom]\arrow[d, no head]
     & \dots 
     \arrow[r, "\subsetneq", phantom]
-    & \dfrac{\qq_e}{\mm S}
+    & \dfrac{\qq_e}{\mm B}
     \arrow[d, no head]
     \\
-    S:
+    B:
     & {\overline\pp_0}  
     \arrow[r, "\subsetneq", phantom] \arrow[d, no head, dashed]
     & {\overline\pp_1} 
@@ -773,7 +773,7 @@ and of $A$ at $\pp$.
     & \qq_1 \arrow[r, "\subsetneq", phantom]
     & \dots \arrow[r, "\subsetneq", phantom]
     & \qq_e \\
-    R: & \pp_0 \arrow[r, "\subsetneq", phantom]
+    A: & \pp_0 \arrow[r, "\subsetneq", phantom]
     & \pp_1 \arrow[r, "\subsetneq", phantom]
     & \dots \arrow[r, "\subsetneq", phantom]
     & \pp_{d-1} \arrow[r, "\subsetneq", phantom]
@@ -790,25 +790,25 @@ As an application,
 we now give the deferred proof of \Cref{prop:dim_poly}.
 \begin{corollary}[Dimension of polynomial ring]
     \label{cor:dim_poly}
-    Let $R$ be a Noetherian ring. Then, $\dim R[x] = \dim R+1$.
+    Let $A$ be a Noetherian ring. Then, $\dim A[x] = \dim A+1$.
 \end{corollary}
 \begin{proof}
-    First, we note that the morphism $R\to R[x]$ is flat
-    because $R[x]$ is a free $R$-module.
-    Let $\qq$ be a prime ideal of $R[x]$, and let 
-    $\pp$ be its contraction to $R$. By the previous corollary,
+    First, we note that the morphism $A\to A[x]$ is flat
+    because $A[x]$ is a free $A$-module.
+    Let $\qq$ be a prime ideal of $A[x]$, and let 
+    $\pp$ be its contraction to $A$. By the previous corollary,
     we get that
-    $$\dim R[x]_\qq = \dim R_\pp + \dim(R[x]_\qq / \pp R[x]_\qq).$$
+    $$\dim A[x]_\qq = \dim A_\pp + \dim(A[x]_\qq / \pp A[x]_\qq).$$
     However, we note that since localization commutes 
     with everything,
-    $$R[x]_\qq / \pp R[x]_\qq = (R[x] / \pp R[x])_{\qq} 
-    = ((R/\pp)[x])_{\qq} = \kappa(\pp)[x]_\qq,$$
+    $$A[x]_\qq / \pp A[x]_\qq = (A[x] / \pp A[x])_{\qq} 
+    = ((A/\pp)[x])_{\qq} = \kappa(\pp)[x]_\qq,$$
     which has dimension $1$. Therefore,
-    $$\dim R[x]_\qq = \dim R_\pp + 1$$
+    $$\dim A[x]_\qq = \dim A_\pp + 1$$
     for all prime ideal $\qq$. Taking maximum across
-    all prime ideal $\qq$ (noting that $\Spec R[x] \to \Spec R$
+    all prime ideal $\qq$ (noting that $\Spec A[x] \to \Spec A$
     is surjective because $\pp[x]$ maps to $\pp$),
-    we get that $\dim R[x]=\dim R+1$.
+    we get that $\dim A[x]=\dim A+1$.
 \end{proof}
 \section{Problems}
 \begin{problem}
@@ -821,30 +821,30 @@ Prove that $M$ is flat if and only if the multiplication by $t$ map
 $M/tM \to tM$ is an isomorphism.
 \end{problem}
 \begin{problem}
-Let $R=\CC[x,y]/(xy)$. Compute $\Tor_n^R(R/(x), R/(x))$.
+Let $A=\CC[x,y]/(xy)$. Compute $\Tor_n^A(A/(x), A/(x))$.
 Your answer should depend on whether $n=0$, $n$ is odd,
 or $n$ is even and positive.
 \end{problem}
 \begin{problem}
-Let $R$ be a regular local ring of dimension $n$ with maximal ideal $\frakm$
+Let $A$ be a regular local ring of dimension $n$ with maximal ideal $\frakm$
 and residue field $k$.
 From the proof of \Cref{prob:cohen_macaulay} (c), 
 there exists a sequence $x_1,x_2,\dots,x_n\in \mm$ 
 such that $\mm = (x_1,\dots,x_n)$ and 
-$x_i$ is not a zero-divisor of $R/(x_1,\dots,x_{i-1})$.
+$x_i$ is not a zero-divisor of $A/(x_1,\dots,x_{i-1})$.
 \begin{alphenum}
-\item Prove that for any $R$-module $M$, we have 
-$\Tor^R_i(M,k) = 0$ for all $i>n$.
+\item Prove that for any $A$-module $M$, we have 
+$\Tor^A_i(M,k) = 0$ for all $i>n$.
 
 (Hint: There are at least two ways to do this.
-One is to use $0\to R/(x_1,\dots,x_i) \to R/(x_1,\dots,x_i)
-\to R/(x_1,\dots,x_{i+1})\to 0$.
+One is to use $0\to A/(x_1,\dots,x_i) \to A/(x_1,\dots,x_i)
+\to A/(x_1,\dots,x_{i+1})\to 0$.
 The other is to explicitly find a free resolution of $k$)
-\item Prove that any $R$-module $M$ 
+\item Prove that any $A$-module $M$ 
 has a free resolution $F_n\to \dots \to F_1\to F_0$
 of length at most $n$.\footnote{The following converse holds:
-if $R$ is Noetherian local ring such that the residue field $k$
-has a finite free resolution, then $R$ is regular.
+if $A$ is Noetherian local ring such that the residue field $k$
+has a finite free resolution, then $A$ is regular.
 See \cite[Theorem 19.12]{eisenbud} for the proof.}
 
 (Hint: start with any free resolution $\dots \to F_1\to F_0$.

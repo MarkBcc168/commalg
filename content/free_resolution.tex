@@ -1,14 +1,14 @@
 \chapter{More About Free Resolutions}
 The goal of this appendix is to prove
 \Cref{thm:tor_properties} (a),
-that $\Tor_i^R(M,N)$ 
+that $\Tor_i^A(M,N)$ 
 does not depend on the choice of free resolution of $N$.
 To do this, we need to introduce a little more 
 homological algebra.
 \section{Chain Homotopy}
 First, we define morphism between two chain complexes.
 \begin{definition}[Morphism between chain complexes]
-    Let $C_*$ and $D_*$ be two chain complexes of $R$-modules.
+    Let $C_*$ and $D_*$ be two chain complexes of $A$-modules.
     A \vocab{morphism} between two chain complexes
     $f : C_*\to D_*$ is the sequence of morphisms
     $\dots, f_0, f_1,\dots$ such that the following diagram commutes
@@ -27,21 +27,21 @@ First, we define morphism between two chain complexes.
     \end{tikzcd}
     \end{center}
     This promotes the set of chain complexes
-    of $R$-modules to be a category $\operatorname{ch}(\Mod R)$.
-    \notation{$\operatorname{ch}(\Mod R)$}{category
-    of chain complexes of $R$-modules}
+    of $A$-modules to be a category $\operatorname{ch}(\Mod A)$.
+    \notation{$\operatorname{ch}(\Mod A)$}{category
+    of chain complexes of $A$-modules}
 \end{definition}
 For any morphism $f : C_* \to D_*$,
 you can check that $f_n$ induces a map
 $H_n(f) : H_n(C_*) \to H_n(D_*)$.
 (This makes $H_n$ a functor 
-$H_n : \operatorname{ch}(\Mod R) \to \Mod R$.)
+$H_n : \operatorname{ch}(\Mod A) \to \Mod A$.)
 \notation{$H_n(f)$}{induced map of homology groups}
 For any two maps $f,g$, we are interested
 in the condition at which $H_n(f) = H_n(g)$.
 One sufficient condition is chain homotopy.
 \begin{definition}[Chain homotopy]
-    Let $C_*$ and $D_*$ be two chain complexes of $R$-modules.
+    Let $C_*$ and $D_*$ be two chain complexes of $A$-modules.
     A \vocab{chain homotopy} between two morphisms
     $f,g : C_*\to D_*$ is a sequence of morphism 
     $h_n : C_n \to D_{n+1}$ such that
@@ -68,7 +68,7 @@ One sufficient condition is chain homotopy.
 \section{Fundamental Theorem of Homological Algebra}
 \begin{theorem}[Fundamental theorem of homological algebra]
 \label{thm:homological_alg}
-Let $N$ and $N'$ be two $R$-modules.
+Let $N$ and $N'$ be two $A$-modules.
 Let $N_*$ and $N'_*$ be free resolutions of $N$ and $N'$.
 Then, any morphism $\phi : N\to N'$ can be lifted to
 morphism between free resolutions $\widetilde\phi : N_*\to N'_*$.
@@ -199,7 +199,7 @@ Furthermore, any two lifts are chain homotopic.
 We now prove \Cref{thm:tor_properties} (a).
 \begin{theorem}[Tor does not depend on free resolution]
     \label{thm:tor_free_res}
-    The functor $\Tor_n^R(M,N)$ 
+    The functor $\Tor_n^A(M,N)$ 
     (defined in \Cref{def:tor}) does not depend on the 
     choice of $N_*$.
 \end{theorem}
@@ -225,6 +225,6 @@ We now prove \Cref{thm:tor_properties} (a).
     $H_n(\phi_*)$ and $H_n(\psi_*)$
     provide isomorphism between
     $H_n(M\otimes N_*) \simeq H_n(M\otimes N'_*)$.
-    This implies that $\Tor_n^R(M,N)$ gives the same result
+    This implies that $\Tor_n^A(M,N)$ gives the same result
     for two resolutions $N_*$ and $N'_*$.
 \end{proof}

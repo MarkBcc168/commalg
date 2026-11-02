@@ -22,7 +22,7 @@ and looks like ``points'' (i.e., has dimension $0$).
 There are two main types of chain condition
 that we will discuss.
 \begin{definition}[Noetherian and Artininan modules]
-    Let $R$ be a ring, and $M$ be an $R$-module.
+    Let $A$ be a ring, and $M$ be an $A$-module.
     \begin{itemize}
     \item $M$ is a \vocab{Noetherian module} if it satisfies
 	the \vocab{ascending chain condition (ACC)}:
@@ -36,9 +36,9 @@ that we will discuss.
 	$$M\supset M_1\supsetneq M_2\supsetneq M_3
 	\supsetneq\dots$$
     \end{itemize}
-    We say that $R$ is a \vocab{Noetherian ring} 
+    We say that $A$ is a \vocab{Noetherian ring} 
     (resp. \vocab{Artinian ring})
-    if $R$ is Noetherian (resp. Artinian) as an $R$-module.
+    if $A$ is Noetherian (resp. Artinian) as an $A$-module.
 \end{definition}
 Now, let's do a basic example.
 \begin{example}
@@ -47,7 +47,7 @@ Now, let's do a basic example.
     \item Finite abelian groups (as a $\mathbb Z$-module)
 	are both Noetherian and Artinian
 	because they are finite.
-    \item $R=\mathbb Z/(n)$ is both
+    \item $A=\mathbb Z/(n)$ is both
 	Noetherian and Artinian for the same reason.
     \item PID's are Noetherian rings:
 	if there is a chain
@@ -61,7 +61,7 @@ Now, let's do a basic example.
     Consequently, $\ZZ$ and $\CC[x]$ are Noetherian.
     \item $\mathbb Z$ is not Artinian ring:
 	$\mathbb Z\supset (2)\supset (4)\supset (8)\supset\dots$.
-    \item $R=\mathbb Z$ and $M=\mathbb Z[1/p]
+    \item $A=\mathbb Z$ and $M=\mathbb Z[1/p]
 	/\mathbb Z$ is Artinian but not Noetherian.
 	Any submodule of $M$ is in form
 	$M_n = \frac{1}{p^n}\mathbb Z/\mathbb Z$,
@@ -86,7 +86,7 @@ special kind of rings that we will describe later.
 \subsection{Properties of Noetherian and Artinian Modules}
 \begin{proposition}
     \label{prop:noetherian_module_fin_gen}
-    An $R$-module $M$ is Noetherian if and only if
+    An $A$-module $M$ is Noetherian if and only if
     every submodule is finitely-generated.
 \end{proposition}
 \begin{proof}
@@ -94,8 +94,8 @@ special kind of rings that we will describe later.
     pick $x_1\in N$, $x_2\notin\Span(x_1)$,
     $x_3\notin\Span(x_1,x_2)$, \dots.
     Then, one has
-    $$Rx_1\subsetneq Rx_1+Rx_2\subsetneq
-     Rx_1+Rx_2+Rx_3\subsetneq\dots,$$
+    $$Ax_1\subsetneq Ax_1+Ax_2\subsetneq
+     Ax_1+Ax_2+Ax_3\subsetneq\dots,$$
      a contradiction.
 
      ($\Leftarrow$) Suppose that we have a chain
@@ -110,7 +110,7 @@ special kind of rings that we will describe later.
 Now, we start giving how to generate Noetherian modules.
 \begin{proposition}[Exact Sequence Property]
     \label{prop:chain_condition_exact}
-    Consider an exact sequence of $R$-modules
+    Consider an exact sequence of $A$-modules
     $$0\longto M_1\stackrel\phi\longto M_2\stackrel\pi\longto M_3\longto 0.$$
     Then,
     \begin{enumerate}[label=(\alph*)]
@@ -175,35 +175,35 @@ Now, we start giving how to generate Noetherian modules.
     then $M_1\oplus \dots\oplus M_n$ is Noetherian
     (resp. Artinian).
 \end{corollary}
-If $R$ is Noetherian ring,
+If $A$ is Noetherian ring,
 checking if a module is Noetherian
 is even more convenient.
 \begin{proposition}[Noetherian iff finitely-generated]
-    If $R$ is Noetherian ring,
+    If $A$ is Noetherian ring,
     then $M$ is Noetherian if and only if 
-    $M$ is finitely-generated as an $R$-module.
+    $M$ is finitely-generated as an $A$-module.
 \end{proposition}
 \begin{proof}
     $(\Rightarrow)$ is clear from \Cref{prop:noetherian_module_fin_gen}.
     For $(\Leftarrow)$, consider an exact sequence
-    $R^{\oplus n}\to M\to 0$.
-    We know that $R^{\oplus n}$ is Noetherian,
+    $A^{\oplus n}\to M\to 0$.
+    We know that $A^{\oplus n}$ is Noetherian,
     so $M$ is Noetherian by the exact
     sequence property \Cref{prop:chain_condition_exact} (a).
 \end{proof}
 \begin{exercise}
-Let $R$ be a Noetherian ring.
+Let $A$ be a Noetherian ring.
 \begin{alphenum}
-\item Prove that any submodule of finitely-generated $R$-module 
+\item Prove that any submodule of finitely-generated $A$-module 
 is also finitely-generated.
 \item Prove that any finitely-generated module is 
 finitely-presented.
 \end{alphenum}
 \end{exercise}
 \begin{exercise}
-    If $R$ is an Artinian ring, prove that 
+    If $A$ is an Artinian ring, prove that 
     $M$ is Artinian module if and only if $M$ is
-    finitely-generated as an $R$-module.
+    finitely-generated as an $A$-module.
 \end{exercise}
 %
 %
@@ -216,45 +216,45 @@ finitely-presented.
 We now restrict our attention to Noetherian rings.
 First, from \Cref{prop:noetherian_module_fin_gen}, we have
 \begin{corollary}
-$R$ is Noetherian
+$A$ is Noetherian
 if and only if every ideal of $I$ is finitely-generated.
 \end{corollary}
 Now, we begin stating properties.
 \begin{proposition}[Quotient, localization, product
 of Noetherian ring is Noetherian]
     \label{prop:noetherian_ring_properties}
-    Let $R$ be a Noetherian ring.
+    Let $A$ be a Noetherian ring.
     \begin{enumerate}[label=(\alph*)]
-    \item $R/I$ is Noetherian for all ideal $I$;
-    \item $S^{-1}R$ is Noetherian for any multiplicative set $S$;
-    \item $R\times S$ is Noetherian for any Noetherian rings
-    $R$ and $S$.
+    \item $A/I$ is Noetherian for all ideal $I$;
+    \item $S^{-1}A$ is Noetherian for any multiplicative set $S$;
+    \item $A\times B$ is Noetherian for any Noetherian rings
+    $A$ and $B$.
     \end{enumerate}
 \end{proposition}
 \begin{proof}
     \begin{enumerate}[label=(\alph*)]
     \item
-    Let $\pi : R\to R/I$ be the quotient map.
+    Let $\pi : A\to A/I$ be the quotient map.
     By correspondence theorem \Cref{thm:correspondence},
-    all ideals of $R/I$ must be in form $\pi(J)$ 
-    for some ideal $J\subseteq R$.
+    all ideals of $A/I$ must be in form $\pi(J)$ 
+    for some ideal $J\subseteq A$.
     If $J = (x_1,\dots,x_n)$,
     then $\pi(J) = (\pi(x_1),\dots,\pi(x_n))$ is finitely-generated.
     \item
     By \Cref{prop:ideal_is_extended},
-    any ideal $J\subset S^{-1}R$ is an extension
-    of some ideal $I\subset R$.
+    any ideal $J\subset S^{-1}A$ is an extension
+    of some ideal $I\subset A$.
     If $I=(x_1,\dots,x_n)$, then
     $J = \left(\frac{x_1}1, \dots,\frac{x_n}1\right)$.
     \item 
-    Let $\pi_1 : R\times S\to R$ and $\pi_2 : R\times S\to S$
+    Let $\pi_1 : A\times B\to A$ and $\pi_2 : A\times B\to B$
     be the projection maps.
-    Given an ideal $J\subset R\times S$,
-    let $J_R = \pi_1(J)$ and $J_S = \pi_2(J)$.
+    Given an ideal $J\subset A\times B$,
+    let $J_A = \pi_1(J)$ and $J_B = \pi_2(J)$.
 
-    We claim that $J = J_R\times J_S$.
+    We claim that $J = J_A\times J_B$.
     To do so,
-    given $(a,b)\in J_R\times J_S$.
+    given $(a,b)\in J_A\times J_B$.
     We have $(a,c)\in J$ for some $c$
     and $(d,b)\in J$ for some $d$, then
     $$(a,b) = (a,c)\cdot (1,0) + (d,b)\cdot (0,1)\in J.$$
@@ -265,8 +265,8 @@ of Noetherian ring is Noetherian]
 \begin{theorem}[Hilbert's Basis Theorem]
     \index{Hilbert's basis theorem}
     \label{thm:hilbert_basis}
-    If $R$ is Noetherian, then so is $R[x]$
-    (and hence $R[x_1,\dots,x_n]$).
+    If $A$ is Noetherian, then so is $A[x]$
+    (and hence $A[x_1,\dots,x_n]$).
 \end{theorem}
 This allows us to deduce, for example, that
 $\mathbb C[x_1,\dots,x_n]$ and
@@ -280,18 +280,18 @@ However, typical proofs (e.g., the one below)
 is not algorithmic in nature.
 The set of generators you get is exponential.
 \begin{proof}
-    Let $I\subset R[x]$ be an ideal.
+    Let $I\subset A[x]$ be an ideal.
     We want to show that $I$ is finitely-generated.
-    We want to use the fact that $R$ is Noetherian.
+    We want to use the fact that $A$ is Noetherian.
     The key idea is to look at the leading coefficients.
     Define an ideal
-    $$J_n = \{a\in R : \text{there exists } f\in I
+    $$J_n = \{a\in A : \text{there exists } f\in I
 	\text{ with degree } n\text{ and leading 
     coefficient } a\} \cup \{0\}.$$
     Clearly, $J_n$ is an ideal.
     Moreover, $J_n\subset J_{n+1}$ because if $f\in I$
     of degree $n$, then $xf\in I$ of degree $n+1$.
-    Therefore, since $R$ is Noetherian,
+    Therefore, since $A$ is Noetherian,
     we have $J_n=J_{n+1}=\dots$ for all $n$.
     Even further, for each $m\leq n$,
     we have $J_m$ is finitely generated, say by
@@ -308,7 +308,7 @@ The set of generators you get is exponential.
     \item If $r\geq n$, let $f(x) = cx^r + \cdots$.
 	Then, $c\in J_r = J_n$, so $c$ is generated
 	by $(a_{n,i})$. This means there exists
-	$b_i\in R$ such that $c = \sum b_i a_{n,i}$.
+	$b_i\in A$ such that $c = \sum b_i a_{n,i}$.
 	Then, we have
 	$$\sum b_i f_{n,i}(x)\cdot x^{r-n} = cx^r
 	+ \text{lower-order terms}.$$
@@ -328,12 +328,12 @@ in Algebraic Geometry.
 We end with some warning.
 \begin{warn}    
     \begin{itemize}
-    \item If $R$ is a Noetherian ring,
-    then subring $S\subseteq R$ is not necessarily Noetherian.
-    Example: $S=k[x_1,x_2,\dots]$ and $R=\Frac S$.
-    \item If $R$ and $S$ are $T$-algebra, 
-    and $R$, $S$, $T$ are all Noetherian,
-    then $R\otimes_T S$ is not necessarily Noetherian.
+    \item If $A$ is a Noetherian ring,
+    then subring $B\subseteq A$ is not necessarily Noetherian.
+    Example: $B=k[x_1,x_2,\dots]$ and $A=\Frac B$.
+    \item If $A$ and $B$ are $T$-algebra, 
+    and $A$, $B$, $T$ are all Noetherian,
+    then $A\otimes_T B$ is not necessarily Noetherian.
     The counterexample is $\QQ(x_1,x_2,\dots) \otimes_\QQ 
     \QQ(x_1,x_2,\dots)$ is not Noetherian;
     see \cite[Theorem 11]{Vamos}
@@ -365,13 +365,13 @@ not Noetherian because one can take infinitely nested intervals.
 There is no surprising that this definition
 is rigged so that it is equivalent to Noetherian rings.
 \begin{proposition}
-    If $R$ is Noetherian, then $\Spec R$ is a Noetherian space.
+    If $A$ is Noetherian, then $\Spec A$ is a Noetherian space.
 \end{proposition}
 \begin{proof}
     There exists a correspondence between
     \begin{align*}
-        \{\text{closed sets of }\Spec R\}
-        &\ \leftrightarrow\ \{\text{radical ideals of }R\} \\
+        \{\text{closed sets of }\Spec A\}
+        &\ \leftrightarrow\ \{\text{radical ideals of }A\} \\
         Z &\ \mapsto\ I(Z) = \bigcap_{\pp\in Z} \pp \\
         V(J) &\ \mapsfrom\ J
     \end{align*}
@@ -385,7 +385,7 @@ is rigged so that it is equivalent to Noetherian rings.
     which violates the Noetherian condition.
 \end{proof}
 \subsection{Irreducible Components}
-We now give a way to decompose $\Spec R$.
+We now give a way to decompose $\Spec A$.
 \begin{definition}[Reducible topological spaces]
     A topological space $X$ is \vocab[reducible topological space]{reducible} if $X=Y_1\cup Y_2$
     (not necessarily disjoint)
@@ -400,11 +400,11 @@ Let us make some examples for the spectrum.
     \item $\Spec\mathbb Z$ is irreducible
     because closed set is finite,
     so no two closed sets union to $X$.
-    \item More generally, if $R$ is a domain,
-    then $\Spec R$ is irreducible, because if 
-    $\Spec R = Y_1\cup Y_2$, then $(0)$ must be in at 
+    \item More generally, if $A$ is a domain,
+    then $\Spec A$ is irreducible, because if 
+    $\Spec A = Y_1\cup Y_2$, then $(0)$ must be in at 
     least one of $Y_i$'s, but closure of $(0)$
-    is the entire $\Spec R$.
+    is the entire $\Spec A$.
     \item On the other hand, $\Spec\mathbb C[x,y]/(xy)$
     is reducible because 
     $\mathbb C[x,y]/(xy)$ is the union of $x$-axis
@@ -469,12 +469,12 @@ The Noetherian condition will guarantee finiteness.
     Therefore, $\{Y_i\}$ and $\{Z_j\}$ are the same set.
 \end{proof}
 We now interpret this result algebraically.
-First, we can characterize when $\Spec R$ is irreducible.
+First, we can characterize when $\Spec A$ is irreducible.
 \begin{proposition}
     The following are equivalent.
     \begin{alphenum}
-    \item $\Spec R$ is irreducible.
-    \item $\Nil(R)$ is a prime ideal.
+    \item $\Spec A$ is irreducible.
+    \item $\Nil(A)$ is a prime ideal.
     \end{alphenum}
 \end{proposition}
 \begin{proof}
@@ -482,48 +482,48 @@ First, we can characterize when $\Spec R$ is irreducible.
     For completeness, we provide a complete proof below.
     
     \textbf{(a) implies (b).}
-    If $a,b\notin \Nil(R)$ such that $ab\in\Nil(R)$,
+    If $a,b\notin \Nil(A)$ such that $ab\in\Nil(A)$,
     so $(ab)^n=0$ for some $n$.
-    We claim that $\Spec R = V(a)\cup V(b)$.
+    We claim that $\Spec A = V(a)\cup V(b)$.
     To see this, given any prime ideal $\pp$,
     $(ab)^n=0$, so $a\in\pp$ or $b\in\pp$,
     so $\pp\in V(a)$ or $\pp\in V(b)$.
-    Finally, note that $V(a)\neq \Spec R$
-    because $a\notin\Nil(R)$, so by \Cref{prop:nilradical},
+    Finally, note that $V(a)\neq \Spec A$
+    because $a\notin\Nil(A)$, so by \Cref{prop:nilradical},
     there exists a prime ideal not in $V(a)$.
-    Similarly, $V(b)\neq\Spec R$. Thus, $\Spec R$
+    Similarly, $V(b)\neq\Spec A$. Thus, $\Spec A$
     is not irreducible.
 
     \textbf{(b) implies (a).}
-    We claim that the closure of $\Nil(R)$ is $\Spec R$.
-    To see why, consider a closed set $V(I)$ containing $\Nil(R)$,
-    so $I\subseteq \Nil(R)$, which in turn contains $\pp$
+    We claim that the closure of $\Nil(A)$ is $\Spec A$.
+    To see why, consider a closed set $V(I)$ containing $\Nil(A)$,
+    so $I\subseteq \Nil(A)$, which in turn contains $\pp$
     for all prime ideal $\pp$. Thus, every prime 
-    $\pp\in\Spec R$ is in $V(I)$.
+    $\pp\in\Spec A$ is in $V(I)$.
 
-    Hence, if any irreducible closed set contains $\Nil(R)$,
-    it must be entire $\Spec R$.
-    This shows that $\Spec R$ is irreducible.
+    Hence, if any irreducible closed set contains $\Nil(A)$,
+    it must be entire $\Spec A$.
+    This shows that $\Spec A$ is irreducible.
 \end{proof}
 \begin{corollary}
     \label{cor:prime_ideal_irreducible_closed_sets}
     \begin{alphenum}
     \item There exists a bijective correspondance
     \begin{align*}
-        \{\text{prime ideals of }R\} 
-        &\ \leftrightarrow\ \{\text{irreducible closed sets of }R\} \\
+        \{\text{prime ideals of }A\} 
+        &\ \leftrightarrow\ \{\text{irreducible closed sets of }A\} \\
         \pp &\ \mapsto\ V(\pp).
     \end{align*}
     \item The correspondence above takes minimal prime ideals
-    to maximal irreducible closed sets of $R$.
+    to maximal irreducible closed sets of $A$.
     \end{alphenum}
 \end{corollary}
 \begin{proof}
     \begin{alphenum}
     \item If $I$ is a radical ideal, the following are equivalent:
     \begin{itemize}
-        \item $V(I) = \Spec R/I$ is irreducible.
-        \item $R/I$ is a domain (proof: $R/I$ is reduced).
+        \item $V(I) = \Spec A/I$ is irreducible.
+        \item $A/I$ is a domain (proof: $A/I$ is reduced).
         \item $I$ is a prime ideal.
     \end{itemize}
     \item Follows from that $V$ is inclusion reversing,
@@ -534,24 +534,24 @@ First, we can characterize when $\Spec R$ is irreducible.
 Thus, we have deduce the following corollaries.
 \begin{corollary}[Noetherian rings have finitely many minimal primes]
     \label{cor:finitely_minimal_primes}
-    If $R$ is Noetherian ring, then there are finitely
+    If $A$ is Noetherian ring, then there are finitely
     many minimal primes.
 \end{corollary}
 \begin{proof}
-    Combine \Cref{prop:irreducible_decomp} (on $X=\Spec R$)
+    Combine \Cref{prop:irreducible_decomp} (on $X=\Spec A$)
     and \Cref{cor:prime_ideal_irreducible_closed_sets}.
 \end{proof}
 \begin{corollary}
-    If $R$ is Noetherian ring, then
-    for every ideal $I\subset R$, there are
+    If $A$ is Noetherian ring, then
+    for every ideal $I\subset A$, there are
     finitely prime ideals minimal among those containing $I$.
 \end{corollary}
 \begin{proof}
-    Apply the previous corollary to $R/I$.
+    Apply the previous corollary to $A/I$.
 \end{proof}
 Let us now interpret these results.
-Let $R$ be a Noetherian ring and $I$ be a radical ideal.
-Then, $V(I) \simeq \Spec(R/I)$ can be written as
+Let $A$ be a Noetherian ring and $I$ be a radical ideal.
+Then, $V(I) \simeq \Spec(A/I)$ can be written as
 union of $V(\pp)$, where $\pp$ is a prime ideal
 minimal among those containing $I$. This means
 $$V(I) = \bigcup_{i=1}^n V(\mathfrak p_i)
@@ -585,28 +585,28 @@ Recall that a ring has dimension $0$ if and only if
 every prime ideal is maximal.
 \begin{theorem}[Artinian local rings]
 \label{thm:artinian_local_ring}
-Let $R$ be a local ring with maximal ideal $\mm$. 
+Let $A$ be a local ring with maximal ideal $\mm$. 
 The following are equivalent.
 \begin{alphenum}
-    \item $R$ is Artinian.
-    \item $R$ is Noetherian and has dimension $0$
+    \item $A$ is Artinian.
+    \item $A$ is Noetherian and has dimension $0$
     (i.e., has $\mm$ as the only prime ideal).
-    \item $R$ is Noetherian and $\mm = \Nil(R)$.
-    \item $R$ is Noetherian and 
+    \item $A$ is Noetherian and $\mm = \Nil(A)$.
+    \item $A$ is Noetherian and 
     $\mm^N=0$ for some integer $N\geq 0$.
 \end{alphenum}
 \end{theorem}
-This theorem tells us that a local ring $R$ is Artinian 
-if and only if $\Spec R$ has one point.
+This theorem tells us that a local ring $A$ is Artinian 
+if and only if $\Spec A$ has one point.
 \begin{proof}
     We first do the easy part of showing that (b), (c), and (d) are all equivalent.
     \begin{itemize}
     \item \textbf{(b) $\Leftrightarrow$ (c).}
     Follows immediately from the fact that 
-    $\Nil(R)$ is intersection of prime ideals (\Cref{prop:nilradical}).
+    $\Nil(A)$ is intersection of prime ideals (\Cref{prop:nilradical}).
     \item \textbf{(c) $\Rightarrow$ (d).}
     Let $\mm$ be generated by $x_1,\dots,x_n$.
-    Since $\mm=\Nil(R)$, all elements $x_1,\dots,x_n$
+    Since $\mm=\Nil(A)$, all elements $x_1,\dots,x_n$
     are nilpotent, so there exists $e$ such that
     $x_1^e = x_2^e = \dots = x_n^e = 0$.
     Now, we claim that $\mm^{ne}=0$. To see this, note that
@@ -614,17 +614,17 @@ if and only if $\Spec R$ has one point.
     $x_1^{f_1} \cdots x_n^{f_n}$ where $f_1+\dots+f_n\geq ne$.
     This monomial is zero because $f_i\geq e$ for some $i$.
     \item \textbf{(d) $\Rightarrow$ (c).}
-    From $\mm^N=0$, taking radical both sides gives $\mm=\Nil(R)$.
+    From $\mm^N=0$, taking radical both sides gives $\mm=\Nil(A)$.
     \end{itemize}
 
     Finally, we move on to the difficult part of showing that
     (a) and (d) are equivalent.
     This is done in two steps.
     \begin{enumerate}
-    \item \textbf{If $R$ is Artinian,
+    \item \textbf{If $A$ is Artinian,
     then $\mm^N=0$ for some $N$.}
     Consider a descending chain $\mm\supset \mm^2 \supset\dots$.
-    Since $R$ is Artinian,
+    Since $A$ is Artinian,
     we have $\mm^N = \mm^{N+1}$ for some $N$.
 
     It's so tempting to apply Nakayama's Lemma (\Cref{cor:nakayama_local_ring}),
@@ -639,7 +639,7 @@ if and only if $\Spec R$ has one point.
     \mm^N J\neq (0)\}.$$
     We have $\Sigma\neq\emptyset$ since $(1)\in\Sigma$.
     We then find $J\in\Sigma$ that is minimal
-    (this is a finite process because $R$ is Artinian).
+    (this is a finite process because $A$ is Artinian).
     Then, there exists $x\in J$ such that $\mm^N x\neq 0$.
     However, $\mm^N \cdot (x)\neq 0$, so since $J$ is minimal,
     we have that $J=(x)$!
@@ -654,25 +654,25 @@ if and only if $\Spec R$ has one point.
     to get that $J=(0)$,
     and this is a contradiction.
     \item \textbf{If $\mm^N=0$ for some $N$,
-    then $R$ is Artinian if and only if 
-    $R$ is Noetherian.}
+    then $A$ is Artinian if and only if 
+    $A$ is Noetherian.}
 
     We consider the filtration
-    $$R\supset \mathfrak m\supset \mathfrak m^2
+    $$A\supset \mathfrak m\supset \mathfrak m^2
     \supset \dots \mathfrak m^{N-1}\supset \mathfrak m^N=0.$$
     Then, the following are equivalent.
     \begin{itemize}
-    \item $R$ is Noetherian as $R$-module.
-    \item $\mm^{i-1}/\mm^i$ is Noetherian as $R$-modules for all $i=1,2,\dots,N$. (Use \Cref{prop:chain_condition_exact}.)
-    \item $\mm^{i-1}/\mm^i$ is Noetherian as $R/\mm$-modules for all $i=1,2,\dots,N$.
-    \item $\dim_{R/\mm}(\mm^{i-1}/\mm^i) < \infty$
+    \item $A$ is Noetherian as $A$-module.
+    \item $\mm^{i-1}/\mm^i$ is Noetherian as $A$-modules for all $i=1,2,\dots,N$. (Use \Cref{prop:chain_condition_exact}.)
+    \item $\mm^{i-1}/\mm^i$ is Noetherian as $A/\mm$-modules for all $i=1,2,\dots,N$.
+    \item $\dim_{A/\mm}(\mm^{i-1}/\mm^i) < \infty$
     for all $i=1,2,\dots,N$.
-    \item $\mm^{i-1}/\mm^i$ is Artinian as $R/\mm$-modules
+    \item $\mm^{i-1}/\mm^i$ is Artinian as $A/\mm$-modules
     for all $i=1,2,\dots,N$
-    (as an $R/\mm$-module).
-    \item $\mm^{i-1}/\mm^i$ is Artinian as $R$-modules for all $i=1,2,\dots,N$
-    (as an $R$-module).
-    \item $R$ is Artinian (as $R$-module). 
+    (as an $A/\mm$-module).
+    \item $\mm^{i-1}/\mm^i$ is Artinian as $A$-modules for all $i=1,2,\dots,N$
+    (as an $A$-module).
+    \item $A$ is Artinian (as $A$-module). 
     (Use \Cref{prop:chain_condition_exact} again.) \qedhere
     \end{itemize}
     \end{enumerate}
@@ -681,12 +681,12 @@ if and only if $\Spec R$ has one point.
 Now, we can prove the main result for general Artinian ring.
 \begin{theorem}[General Artinian rings]
     \label{thm:artinian}
-   Let $R$ be a ring. The following are equivalent.
+   Let $A$ be a ring. The following are equivalent.
    \begin{alphenum}
-    \item $R$ is Artinian.
-    \item $R$ is Noetherian of dimension $0$.
-    \item $\Spec R$ is finite and has discrete topology.
-    \item $R$ is a finite product of Artinian local rings.
+    \item $A$ is Artinian.
+    \item $A$ is Noetherian of dimension $0$.
+    \item $\Spec A$ is finite and has discrete topology.
+    \item $A$ is a finite product of Artinian local rings.
    \end{alphenum}
 \end{theorem}
 The moral of this theorem is that 
@@ -698,16 +698,16 @@ We first show that (b), (c), and (d) are equivalent.
 \begin{itemize}
 \item \textbf{(b) $\Rightarrow$ (c).} \Cref{cor:finitely_minimal_primes} gives that 
 there are finitely minimal primes,
-and from $R$ has dimension $0$, 
+and from $A$ has dimension $0$, 
 every prime ideal is a minimal prime,
 so there are finitely many prime ideals.
 \item \textbf{(c) $\Rightarrow$ (d).} By
-\Cref{prob:product_ring}, if $\Spec R$
+\Cref{prob:product_ring}, if $\Spec A$
 is a disjoint union of points, it is a product ring
-$R_1\times\dots\times R_n$,
-where $\Spec R_i$ is a single point. 
-Note that $\Spec R_i$ is a single point, so by \Cref{thm:artinian_local_ring}
-((b) implies (a)), we get that $R_i$ is an Artinian 
+$A_1\times\dots\times A_n$,
+where $\Spec A_i$ is a single point. 
+Note that $\Spec A_i$ is a single point, so by \Cref{thm:artinian_local_ring}
+((b) implies (a)), we get that $A_i$ is an Artinian 
 local ring.
 \item \textbf{(d) $\Rightarrow$ (b).}
 The dimension $0$ part follows from 
@@ -734,18 +734,18 @@ $A\times B$ is Artinian.
 Finally, we show the hardest implication that (a) implies (c).
 This is in two steps.
 \begin{enumerate}
-\item \textbf{Every prime ideal of $R$ is maximal
-(i.e., $R$ has dimension $0$).}
-Let $\mathfrak p\subset R$ be prime but not maximal.
-Then, $A=R/\mathfrak p$ is a domain but not a field.
-Thus, there exist $0\neq f\in A$
+\item \textbf{Every prime ideal of $A$ is maximal
+(i.e., $A$ has dimension $0$).}
+Let $\mathfrak p\subset A$ be prime but not maximal.
+Then, $B=A/\mathfrak p$ is a domain but not a field.
+Thus, there exist $0\neq f\in B$
 such that $f$ is not a unit,
 producing an infinite descending chain
-$$A\supsetneq (f)\supsetneq (f^2)\supsetneq (f^3)
+$$B\supsetneq (f)\supsetneq (f^2)\supsetneq (f^3)
 \supsetneq \dots,$$
-which contradicts that fact that $A$ is Artinian.
-\item \textbf{$R$ has finitely many maximal ideals.}
-Suppose $\mm_1,\mm_2,\dots$ are distinct maximal ideals of $R$.
+which contradicts that fact that $B$ is Artinian.
+\item \textbf{$A$ has finitely many maximal ideals.}
+Suppose $\mm_1,\mm_2,\dots$ are distinct maximal ideals of $A$.
 Then, we product a chain 
 $$\mm_1\supsetneq \mm_1\mm_2 \supsetneq \mm_1\mm_2\mm_3
 \supsetneq\dots$$
@@ -759,11 +759,11 @@ Thus, we have an infinite descending chain.
 \end{enumerate}
 \end{proof}
 \begin{example}
-    Let $R=\mathbb C[x_1,\dots,x_n]/I$,
-    and suppose that the only point in $\Spec R$
+    Let $A=\mathbb C[x_1,\dots,x_n]/I$,
+    and suppose that the only point in $\Spec A$
     is $\vec 0$. Thus, $(x_1,\dots,x_n)$ is
     going to be the unique maximal ideal,
-    and $\mathfrak m^k=0$ in $R$ for some $k$.
+    and $\mathfrak m^k=0$ in $A$ for some $k$.
     Therefore, if $I$ is an ideal satisfying
     $$(x_1,\dots,x_n)^k \subset I\subset (x_1,\dots,x_n),$$
     then $\mathbb C[x_1,\dots,x_n]/I$ is Artinian.

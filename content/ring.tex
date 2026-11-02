@@ -33,33 +33,33 @@ which we introduce in this chapter.
 In this section, we set up some basic concepts of rings and ideals.
 \subsection{Ring Homomorphisms}
 The most basic object we are going to study
-is (commutative) rings. A commutative \vocab{ring} $R$ has operations addition $+$ and multiplication $\cdot$, which 
+is (commutative) rings. A commutative \vocab{ring} $A$ has operations addition $+$ and multiplication $\cdot$, which 
 must satisfies the following:
 \begin{itemize}
     \item addition forms an abelian group,
     i.e., it must be 
     \begin{itemize}
-    \item associative: $a+(b+c)=(a+b)+c$ for all $a,b,c\in R$.
-    \item commutative: $a+b=b+a$ for all $a,b\in R$.
-    \item identity: there exists $0\in R$ such that $a+0=0+a=a$
-    for all $a\in R$.
-    \item inverse: for all $a\in R$, there exists $(-a)\in R$ 
+    \item associative: $a+(b+c)=(a+b)+c$ for all $a,b,c\in A$.
+    \item commutative: $a+b=b+a$ for all $a,b\in A$.
+    \item identity: there exists $0\in A$ such that $a+0=0+a=a$
+    for all $a\in A$.
+    \item inverse: for all $a\in A$, there exists $(-a)\in A$ 
     such that $a+(-a)=(-a)+a=0$.
     \end{itemize}
     \item multiplication is 
     \begin{itemize}
     \item associative: $(a\cdot b)\cdot c = a\cdot (b\cdot c)$
-    for all $a,b,c\in R$.
-    \item commutative: $a\cdot b = b\cdot a$ for all $a,b\in R$.
-    \item has identity $1\in R$ such that $a\cdot 1 = 1\cdot a
-    = a$ for all $a\in R$.
+    for all $a,b,c\in A$.
+    \item commutative: $a\cdot b = b\cdot a$ for all $a,b\in A$.
+    \item has identity $1\in A$ such that $a\cdot 1 = 1\cdot a
+    = a$ for all $a\in A$.
     \end{itemize}
     \item Multiplication distributes over addition:
     $a\cdot (b+c)= (a\cdot b) + (a\cdot c)$
     and $(b+c)\cdot a = (b\cdot a) + (c\cdot a)$
-    for all $a,b,c\in R$.
+    for all $a,b,c\in A$.
 \end{itemize}
-We allow $0=1$, in which case $R=\{0\}$
+We allow $0=1$, in which case $A=\{0\}$
 is a \vocab{zero ring}.
 
 The word ``commutative'' in commutative rings 
@@ -76,25 +76,25 @@ Integers modulo $n$, $\ZZ/n\ZZ$, form a ring.
 \begin{example}[Constructing new rings]
 Here are some ways to construct a new ring.
 \begin{itemize}
-\item Given a ring $R$, one can adjoin a free element $x$
-to get a \vocab{polynomial ring} $R[x]$, which is 
+\item Given a ring $A$, one can adjoin a free element $x$
+to get a \vocab{polynomial ring} $A[x]$, which is 
 described by 
-$$R[x] = \{a_0 + a_1x + \dots + a_nx^n : a_0,\dots,a_n\in R\}.$$
-\notation{$R[x]$}{polynomial ring}
+$$A[x] = \{a_0 + a_1x + \dots + a_nx^n : a_0,\dots,a_n\in A\}.$$
+\notation{$A[x]$}{polynomial ring}
 Similarly, one can adjoin arbitrarily many elements 
-to get rings such as $R[x_1,\dots,x_m]$, 
+to get rings such as $A[x_1,\dots,x_m]$, 
 which is a ring of polynomials in $m$ variables
-with coefficients in $R$.
-\item Given two rings $R$ and $S$, one construct 
+with coefficients in $A$.
+\item Given two rings $A$ and $B$, one construct 
 the \vocab{product ring}
-$$R\times S = \{(r,s) : r\in R, s\in S\},$$
-\notation{$R\times S$}{product ring}
+$$A\times B = \{(r,s) : r\in A, s\in B\},$$
+\notation{$A\times B$}{product ring}
 where addition and multiplication are done component-wise.
 \end{itemize}
 \end{example}
-A \vocab{ring morphism} between two rings $R$ and $S$
-is a map $\phi : R\to S$,
-that satisfies $\phi(x+y) = \phi(x)+\phi(y)$, $\phi(xy) = \phi(x)\phi(y)$, and $\phi(1)=1$ for all $x,y\in R$.
+A \vocab{ring morphism} between two rings $A$ and $B$
+is a map $\phi : A\to B$,
+that satisfies $\phi(x+y) = \phi(x)+\phi(y)$, $\phi(xy) = \phi(x)\phi(y)$, and $\phi(1)=1$ for all $x,y\in A$.
 In particular,
 \begin{center}
     \fbox{We assume that all ring morphisms 
@@ -103,17 +103,17 @@ In particular,
 \begin{example}[Ring morphisms]
     We have the following examples:
     \begin{itemize}
-	\item For any ring $R$, there exists a unique ring
-    homomorphism $f : \mathbb Z\to R$
+	\item For any ring $A$, there exists a unique ring
+    homomorphism $f : \mathbb Z\to A$
     by
     $$f(n) = \underbrace{1+\dots+1}_n.$$
-    \item For any ring $R$, there exists a 
-	unique ring morphism $f : R\to \{0\}$.
+    \item For any ring $A$, there exists a 
+	unique ring morphism $f : A\to \{0\}$.
     \item If $p$ is a prime, and suppose
 	$\underbrace{1+\dots+1}_p = 0$
-	(i.e., $R$ has characteristic $p$),
+	(i.e., $A$ has characteristic $p$),
 	then we have the \vocab{Frobenius morphism}
-	$F : R\to R$ by
+	$F : A\to A$ by
 	$F(a) = a^p$.
 	(Proof: multiplication is obvious.
 	For addition, $(a+b)^p = a^p + \binom p1 a^{p-1}b
@@ -124,12 +124,12 @@ In particular,
 Ideals are a subset of ring that has special properties.
 Most importantly, it forms a quotient ring, which we 
 describe in the next subsection.
-A subset $I\subseteq R$ is an \vocab{ideal} if and only if it
+A subset $I\subseteq A$ is an \vocab{ideal} if and only if it
 \begin{itemize}
     \item is closed under addition:
 	if $a,b\in I$, then $a+b\in I$; and
     \item absorbs multiplication:
-	if $a\in I$ and $r\in R$, then $ra\in I$.
+	if $a\in I$ and $r\in A$, then $ra\in I$.
 \end{itemize}
 Notice that the second condition is stronger than 
 being closed under multiplication.
@@ -139,20 +139,20 @@ being closed under multiplication.
 	\item For any integer $n$, 
         $(n) = n\ZZ\subseteq \ZZ$ is an ideal.
         Moreover, all ideals of $\ZZ$ are of this form.
-	\item $\{0\}$ and $R$ itself is an ideal of $R$.
-	    If $R$ is a field, these two
-	    are the only ideals of $R$.
-	\item For each $a\in R$,
+	\item $\{0\}$ and $A$ itself is an ideal of $A$.
+	    If $A$ is a field, these two
+	    are the only ideals of $A$.
+	\item For each $a\in A$,
 	    we have the ideal 
 	    generated by $a$ defined by
-	    $(a) = \{ar : r\in R\}$.
+	    $(a) = \{ar : r\in A\}$.
 	    These ideals are called \vocab{principal ideals}.
 	    For $\mathbb Z$, every ideal is principal.
-	\item More generally, given some subset $T\subseteq R$,
+	\item More generally, given some subset $T\subseteq A$,
 	    we can define the ideal generated by $T$
 	    as the smallest ideal containing $T$, which is
 	    $$(T) = \left\{\sum_{i=1}^m a_it_i : 
-	    a_i\in R, t_i\in T\right\}.$$
+	    a_i\in A, t_i\in T\right\}.$$
             Ideals generated by $\{x_1,\dots,x_n\}$
             is often written as $(x_1,\dots,x_n)$.
             \notation{$(T)$}{ideal generated by set $T$}
@@ -160,28 +160,28 @@ being closed under multiplication.
     \end{itemize}
 \end{example}
 Another way to construct ideals is to take the kernel.
-Given a ring homomorphism $f : R\to S$, then
-$$\Ker f= f^{-1}(\{0\})\subseteq R$$
+Given a ring homomorphism $f : A\to B$, then
+$$\Ker f= f^{-1}(\{0\})\subseteq A$$
 \notation{$\Ker f$}{kernel of ring homomorphism}
-is always an ideal of $R$.
+is always an ideal of $A$.
 This is in fact a special case of
 a more general construction called contraction.
 \begin{definition}[Contraction and Extension]
     Consider a ring homomorphism
-    $f : R\to S$. 
+    $f : A\to B$. 
     \begin{itemize}
-    \item For each ideal $J\subseteq S$,
+    \item For each ideal $J\subseteq B$,
     the \vocab{contraction} 
-    $f^{-1}(J)\subseteq R$ is automatically an ideal.
-    \item For each ideal $I\subseteq R$,
-    the \vocab{extension} $IS$
-    \notation{$IS$}{extended ideal}
+    $f^{-1}(J)\subseteq A$ is automatically an ideal.
+    \item For each ideal $I\subseteq A$,
+    the \vocab{extension} $IB$
+    \notation{$IB$}{extended ideal}
     is the ideal \textbf{generated by} the image $f(I)$.
     \end{itemize}
 \end{definition}
 Finally, we have the following operations of ideals.
 \begin{definition}[Ideal operations]
-    Let $I,J$ be an ideal of a ring $R$. Then,
+    Let $I,J$ be an ideal of a ring $A$. Then,
     \begin{itemize}
     \item $I\cap J$ is an ideal.
     \item $I+J = \{i+j : i\in I, j\in J\}$ is an ideal.
@@ -233,11 +233,11 @@ of ring that unique factorization of ideals hold.
 \subsection{Quotient Rings}
 We now describe the most important way to generate new rings,
 called \vocab{quotient ring}.
-Given a ring $R$ and an ideal $I\subseteq R$,
-then we define the quotient ring $R/I$
-\notation{$R/I$}{quotient ring}
+Given a ring $A$ and an ideal $I\subseteq A$,
+then we define the quotient ring $A/I$
+\notation{$A/I$}{quotient ring}
 as the ring of cosets 
-$$\{[a] := a+I : a\in R\}.$$
+$$\{[a] := a+I : a\in A\}.$$
 We define the operations by
 $[a+b] = [a]+[b]$ and $[ab] = [a][b]$ 
 as expected. 
@@ -246,22 +246,22 @@ Indeed, if $a-a'\in I$, then e.g., $ab-a'b\in I$,
 so $[ab] = [a'b]$.
 
 We then also define the surjective ring homomorphism
-$\pi : R\to R/I$ by $\pi(a) = [a]$.
+$\pi : A\to A/I$ by $\pi(a) = [a]$.
 The kernel of this map is $I$.
 This map satisfies the following universal property:
-suppose $S$ is another ring and a homomorphism
-$f : R \to S$ such that $f(I) = 0$, then
+suppose $B$ is another ring and a homomorphism
+$f : A \to B$ such that $f(I) = 0$, then
 there exists a unique ring homomorphism
-$\overline f : R/I\to S$ such that
+$\overline f : A/I\to B$ such that
 the following diagram commutes:
 \begin{center}
 \begin{tikzcd}
-    R \arrow[rr, "\pi"]
+    A \arrow[rr, "\pi"]
     \arrow[rd, "f"]
     &
-    & R/I
+    & A/I
     \arrow[ld, "\exists ! \overline f"] \\
-    & S
+    & B
 \end{tikzcd}
 \end{center}
 (Proof: we are forced to have $\overline f([a]) = f(a)$
@@ -269,18 +269,18 @@ the following diagram commutes:
 because $f$ sends $I$ to $0$.)
 
 By the usual argument (see \Cref{sec:universal}),
-this universal property classify $\pi$ and $R/I$
+this universal property classify $\pi$ and $A/I$
 up to isomorphism.
 
 We now state an important theorem characterizing 
-ideals of $R/I$.
+ideals of $A/I$.
 \begin{theorem}[Correspondence Theorem]
     \index{correspondence theorem}
     \label{thm:correspondence}
     There is a bijection between
-    $$\{\text{ideals of } R/I\}
+    $$\{\text{ideals of } A/I\}
     \ \longleftrightarrow\ 
-    \{\text{ideals of } R \text{ containing } I\}.$$
+    \{\text{ideals of } A \text{ containing } I\}.$$
 \end{theorem}
 For example, the ideals of $\mathbb Z/6\mathbb Z$
 are $0$, $\mathbb Z/6\mathbb Z$, $2\mathbb Z/6\mathbb Z$,
@@ -289,12 +289,12 @@ while the ideals of $\mathbb Z$ that contains
 $6\mathbb Z$ are $6\mathbb Z$, $\mathbb Z$,
 $2\mathbb Z$, and $3\mathbb Z$.
 \begin{proof}
-    Let $\pi : R\to R/I$ be the quotient projection map.
+    Let $\pi : A\to A/I$ be the quotient projection map.
     The bijection is given by 
     \begin{align*}
-    \{\text{ideals of } R/I\}
+    \{\text{ideals of } A/I\}
     \ &\leftrightarrow\ 
-    \{\text{ideals of } R \text{ containing } I\} \\
+    \{\text{ideals of } A \text{ containing } I\} \\
     J' \ &\mapsto\ \pi^{-1}(J') \\
     \pi(J)\ &\mapsfrom\ J 
     \end{align*}
@@ -304,8 +304,8 @@ $2\mathbb Z$, and $3\mathbb Z$.
 \begin{theorem}[First Isomorphism Theorem]
 \label{thm:first_isomorphism}
 \index{first isomorphism theorem}
-Let $\phi : R\to S$ be a surjective ring morphism.
-Then, $S\simeq R/\Ker\phi$.
+Let $\phi : A\to B$ be a surjective ring morphism.
+Then, $B\simeq A/\Ker\phi$.
 \end{theorem}
 \begin{exercise}
 Prove the above theorem (\Cref{thm:first_isomorphism}).
@@ -315,37 +315,37 @@ Prove the above theorem (\Cref{thm:first_isomorphism}).
 We have a bunch of definitions of
 special elements of a ring.
 \begin{definition}[Units, zero divisors, nilpotents]
-    Given a ring $R$, an element $a\in R$ is
+    Given a ring $A$, an element $a\in A$ is
     \begin{itemize}
-    \item a \vocab{unit} if there exists $b\in R$ such that $ab=1$;
+    \item a \vocab{unit} if there exists $b\in A$ such that $ab=1$;
     \item a \vocab{zero divisor} if
-	there exists $b\neq 0\in R$ such that $ab=0$; and
+	there exists $b\neq 0\in A$ such that $ab=0$; and
     \item \vocab{nilpotent} if $a^n=0$ for some $n\geq 1$.
     \end{itemize}
 \end{definition}
 The set of nilpotent elements turns out to be an ideal.
 \begin{proposition}
-    \notation{$\Nil R$}{nilradical}
-    The set $\operatorname{Nil}R\subseteq R$
-    is an ideal of $R$, called the \vocab{nilradical}
-    of $R$.
+    \notation{$\Nil A$}{nilradical}
+    The set $\operatorname{Nil}A\subseteq A$
+    is an ideal of $A$, called the \vocab{nilradical}
+    of $A$.
 \end{proposition}
 \begin{proof}
     Absorbing multiplication is obvious.
-    To show that $\Nil(R)$ is closed under addition,
+    To show that $\Nil(A)$ is closed under addition,
     if $a^m=0$ and $b^n=0$, then the binomial expansion of $(a+b)^{m+n}$ 
     consists of monomials of the form $a^ib^j$.
     At least one of $i\geq m$ and $j\geq n$ must hold,
     so the monomial is divisible by either $a^m$ or $b^n$,
     both of which are $0$, so all monomials vanish,
-    which means $(a+b)^{m+n}=0$, so $a+b\in \Nil(R)$.
+    which means $(a+b)^{m+n}=0$, so $a+b\in \Nil(A)$.
 \end{proof}
 Each kind of special element leads to a type of ring.
 \begin{definition}[Field, domain, reduced rings]
-    A ring $R$ is
+    A ring $A$ is
     \begin{itemize}
-    \item a \vocab{field} if $R\neq 0$ and every $a\neq 0$ is a unit;
-    \item a \vocab{domain} if $R\neq 0$ and $0$ is the only zero divisor; and
+    \item a \vocab{field} if $A\neq 0$ and every $a\neq 0$ is a unit;
+    \item a \vocab{domain} if $A\neq 0$ and $0$ is the only zero divisor; and
     \item \vocab{reduced} if $0$ is the only nilpotent element.
     \end{itemize}
 \end{definition}
@@ -358,7 +358,7 @@ Each kind of special element leads to a type of ring.
     \begin{itemize}
     \item $\QQ$, $\RR$, $\CC$, and $\FF_p = \ZZ/p\ZZ$ are fields.
     \item $\mathbb Z$ and $\mathbb C[x]$ are domains.
-    (In fact, if $R$ is a domain, then so is $R[x]$,
+    (In fact, if $A$ is a domain, then so is $A[x]$,
     so $\CC[x_1,\dots,x_n]$ is a domain.)
     \item $\mathbb C[x,y] / (xy)$ is not a domain
     because in this ring, $xy=0$ but $x,y\neq 0$.
@@ -372,12 +372,12 @@ Each kind of special element leads to a type of ring.
 \end{exercise}
 \subsection{PID and UFD}
 \begin{definition}[PID and UFD]
-    A domain $R$ is a 
+    A domain $A$ is a 
     \begin{itemize}
     \item \vocab{principal ideal domain (PID)}
     if every ideal principal.
     \item \vocab{unique factorization domain (UFD)}
-    if every non-zero element $x\in R$ 
+    if every non-zero element $x\in A$ 
     can be written uniquely as a product of irreducible
     elements 
     $$x = p_1\cdots p_n,$$
@@ -387,9 +387,9 @@ Each kind of special element leads to a type of ring.
     such that $q_{\pi(i)}$ is equal to $p_i$ times a unit
     for all $i$.
 
-    An element $p\in R$ is \vocab{irreducible} if it is 
+    An element $p\in A$ is \vocab{irreducible} if it is 
     not a unit and not 
-    a product of two non-units in $R$.
+    a product of two non-units in $A$.
     \end{itemize}
 \end{definition}
 We note down two useful properties of PID and UFD proved in
@@ -399,8 +399,8 @@ are not central to these notes, so we will only sketch it.
     \label{thm:ufd_properties}
     \begin{alphenum}
     \item Any PID is a UFD.
-    \item If $R$ is a UFD, then so is $R[x]$
-    (hence, by induction, $R[x_1,\dots,x_n]$ is a UFD).
+    \item If $A$ is a UFD, then so is $A[x]$
+    (hence, by induction, $A[x_1,\dots,x_n]$ is a UFD).
     \end{alphenum}
 \end{theorem}
 \begin{proof}[Proof Sketch]
@@ -423,33 +423,33 @@ one of $q_1,\dots,q_n$, hence equal to $q_j$ for some $j$
 to $p_i$ for some $i$. Thus, the multiset of $p_i$ 
 and of $q_j$ are equal.
 \item 
-First, any polynomial in $R[x]$ can be written as 
+First, any polynomial in $A[x]$ can be written as 
 a product of irreducible polynomials because 
 we can repeatedly factor anything that is not 
 irreducible, and the degree decreases
 until it is constant polynomial, at which point
-we can utilize the fact that factoring in $R$ terminates.
+we can utilize the fact that factoring in $A$ terminates.
 
 To show uniqueness, by the same argument in (a),
-it suffices to show that if $f,g,h\in R[x]$
+it suffices to show that if $f,g,h\in A[x]$
 such that $f$ is irreducible and $f\mid gh$,
 then $f\mid g$ or $f\mid h$.
 To do this, we utilize the following lemma:
-``A polynomial $f\in R[x]$ is primitive if and only if
-no element in $R$ divides all coefficients in $f$.
+``A polynomial $f\in A[x]$ is primitive if and only if
+no element in $A$ divides all coefficients in $f$.
 If $f,g$ is primitive, then $fg$ is primitive.''
 To prove the lemma, suppose that an irreducible factor 
 $p$ divides all coefficients of $fg$. Then, $fg=0$ in
-$R/(p)[x]$. However, $R/(p)[x]$ is a domain (because $R/(p)$
+$A/(p)[x]$. However, $A/(p)[x]$ is a domain (because $A/(p)$
 is a domain), a contradiction.
 
-Let $K$ be the field of fraction of $R$.
-If $f,g,h\in R[x]$ such that $f$ is irreducible
+Let $K$ be the field of fraction of $A$.
+If $f,g,h\in A[x]$ such that $f$ is irreducible
 (hence primitive) and $f\mid gh$, then 
-$f\mid gh$ in $K[x]$, so there exists $d\in R$
-such that $\overline f(x) = d\cdot gh/f \in R[x]$.
+$f\mid gh$ in $K[x]$, so there exists $d\in A$
+such that $\overline f(x) = d\cdot gh/f \in A[x]$.
 Scale down so that $\overline f(x)$ is primitive,
-then the lemma forces $d=1$, so $f$ divides $gh$ in $R[x]$.
+then the lemma forces $d=1$, so $f$ divides $gh$ in $A[x]$.
 Hence, every irreducible element is prime.
 \qedhere
 \end{alphenum}
@@ -475,7 +475,7 @@ for example, $\mathbb Z/(12)\simeq \mathbb Z/(4)
 \times \mathbb Z/(3)$.
 This fact generalizes to any rings.
 \begin{definition}[Coprime ideals]
-    Given a ring $R$, two ideals $I,J\subset R$
+    Given a ring $A$, two ideals $I,J\subset A$
     are \vocab{coprime} if $I+J=(1)$.
 \end{definition}
 \begin{theorem}[Chinese Remainder Theorem]
@@ -484,10 +484,10 @@ This fact generalizes to any rings.
     If $I$ and $J$ are coprime, then
     \begin{enumerate}[label=(\alph*)]
     \item $I\cap J = IJ$.
-    \item The map $f : R\to R/I\times R/J$ by
+    \item The map $f : A\to A/I\times A/J$ by
 	$a\mapsto (a\bmod I, a\bmod J)$ is surjective.
     \item We have
-	$R/IJ \simeq R/I\times R/J$.
+	$A/IJ \simeq A/I\times A/J$.
     \end{enumerate}
 \end{theorem}
 The proof is the same as number theory class.
@@ -502,13 +502,13 @@ The proof is the same as number theory class.
 	Then, we have
 	$$a = a\cdot 1 = a\cdot j + i\cdot a,$$
 	and each term is in $I\cdot J$.
-    \item Let $[x]\in R/I$ and $[y]\in R/J$.
+    \item Let $[x]\in A/I$ and $[y]\in A/J$.
 	Set $a=xj+yi$, and see that
 	$a\equiv xj\equiv x\pmod I$ and $a\equiv yi
         \equiv y\pmod J$.
     \item By the first isomorphism theorem
     (\Cref{thm:first_isomorphism}),
-	we have $R/\Ker f \simeq R/I\times R/J$.
+	we have $A/\Ker f \simeq A/I\times A/J$.
         By (a),  we have $\Ker f = I\cap J = IJ$,
         so we are done.
 	\qedhere
@@ -519,21 +519,21 @@ The proof is the same as number theory class.
 \subsection{Definition and Basic Properties}
 \begin{definition}[Prime and Maximal Ideals]
     \begin{itemize}
-    \item An ideal $\frakp\subset R$ is a \vocab{prime ideal}
-    if $\frakp\neq R$ and $ab\in \frakp$
+    \item An ideal $\frakp\subset A$ is a \vocab{prime ideal}
+    if $\frakp\neq A$ and $ab\in \frakp$
     implies $a\in \frakp$ or $b\in \frakp$ (or both).
-    \item An ideal $\mathfrak m\in R$ is a \vocab{maximal ideal}
-    if $\mathfrak m\neq R$ and
+    \item An ideal $\mathfrak m\in A$ is a \vocab{maximal ideal}
+    if $\mathfrak m\neq A$ and
     there are no ideals $I$ such that
-    $\mathfrak m\subsetneq I\subsetneq R$.
+    $\mathfrak m\subsetneq I\subsetneq A$.
     \end{itemize}
 \end{definition}
 \begin{proposition}
     \begin{alphenum}
-    \item An ideal $\pp\subseteq R$ is prime 
-    if and only if $R/\frakp$ is a domain.
-    \item An ideal $\mathfrak m\subset R$ is maximal
-    if and only if $R/\mathfrak m$ is a field.
+    \item An ideal $\pp\subseteq A$ is prime 
+    if and only if $A/\frakp$ is a domain.
+    \item An ideal $\mathfrak m\subset A$ is maximal
+    if and only if $A/\mathfrak m$ is a field.
     \end{alphenum}
     Consequently, all maximal ideals are prime.
 \end{proposition}
@@ -543,25 +543,25 @@ The proof is the same as number theory class.
     Clear by simply reduce the definition of prime ideal modulo $\pp$.
     \item 
     By correspondence theorem (\Cref{thm:correspondence}),
-    $\frakm$ is maximal if and only if $R/\frakm$ has no ideal other than $0$ or $R/\frakm$.
+    $\frakm$ is maximal if and only if $A/\frakm$ has no ideal other than $0$ or $A/\frakm$.
     
-    If $R/\mathfrak m$ is a field, then $R/\frakm$
+    If $A/\mathfrak m$ is a field, then $A/\frakm$
     has only two ideals, because any nonzero ideal $I$
     must contain a nonzero element, which is a unit,
-    forcing $I$ to include all elements in $R/\frakm$.
+    forcing $I$ to include all elements in $A/\frakm$.
     
-    Otherwise, if $R/\mathfrak m$ is not a field,
+    Otherwise, if $A/\mathfrak m$ is not a field,
     then it has a non-unit $a$,
-    so $(a)$ is a nontrivial ideal of $R/\mathfrak m$. 
+    so $(a)$ is a nontrivial ideal of $A/\mathfrak m$. 
     \qedhere 
     \end{alphenum}
 \end{proof}
 \begin{example}[Prime and Maximal Ideals]
     We have the following examples.
     \begin{itemize}
-    \item $(0)$ is prime if and only if $R$ is a domain.
-    \item $(0)$ is maximal if and only if $R$ is a field.
-    \item If $R$ is a PID, then all prime ideals of $R$ are 
+    \item $(0)$ is prime if and only if $A$ is a domain.
+    \item $(0)$ is maximal if and only if $A$ is a field.
+    \item If $A$ is a PID, then all prime ideals of $A$ are 
     $(0)$ and $(f)$ for irreducible element $f$.
     Special cases of this are 
     \begin{itemize}
@@ -601,7 +601,7 @@ In fact, a ring with unique maximal ideal
 (like the last example)
 is relatively simpler to study that it bears a special name.
 \begin{definition}[Local ring]
-    $R$ is a \vocab{local ring} if it has
+    $A$ is a \vocab{local ring} if it has
     a unique maximal ideal.
 \end{definition}
 We also have that $k[[x_1,\dots,x_n]]$ is also local.
@@ -621,7 +621,7 @@ the study of rings can be reduced to the study of local rings.
 \begin{theorem}[Krull's Theorem]
 \label{thm:krull}
 \index{Krull's theorem}
-Let $R$ be a ring. Then, any ideal $I\subsetneq R$
+Let $A$ be a ring. Then, any ideal $I\subsetneq A$
 is contained in a maximal ideal. In particular,
 maximal ideals exist.
 \end{theorem}
@@ -630,7 +630,7 @@ is not maximal, then there exists a larger ideal
 $I_0\subsetneq I_1$.
 This continues, and we get a chain of ideals
 $$I_0\subsetneq I_1 \subsetneq I_2 \subsetneq\dots.$$
-If ring $R$ is horrible (example: $\ZZ[x_1,x_2,\dots]$
+If ring $A$ is horrible (example: $\ZZ[x_1,x_2,\dots]$
 and the chain is $(x_1)\subsetneq (x_1,x_2)\subsetneq \dots$), 
 then this process might continue indefinitely.
 
@@ -660,7 +660,7 @@ The following lemma is equivalent to axiom of choice.
 \end{lemma}
 \begin{proof}[Proof of \Cref{thm:krull}]
     Take a poset $(\calP, \subseteq)$, where
-    $$\calP = \{\text{ideal } J : I\subseteq J\subsetneq R\}$$
+    $$\calP = \{\text{ideal } J : I\subseteq J\subsetneq A\}$$
     ordered by containment.
     
     We need to verify the condition for Zorn's lemma
@@ -668,17 +668,17 @@ The following lemma is equivalent to axiom of choice.
     Suppose that $\calT$
     is a totally-ordered subset of ideals,
     then we claim that $K = \bigcup_{J\in \calT} J$ is an ideal
-    not equal to $R$. To do this, we need to check three things.
+    not equal to $A$. To do this, we need to check three things.
     \begin{itemize}
     \item \textbf{Closed under addition.}
     If $a,b\in K$, then there exists $J, J'\in\calT$
     such that $a\in J$ and $b\in J'$.
     Then, $a+b\in \max(J,J')$, which is a subset of $K$.
     \item \textbf{Absorbs multiplication.}
-    If $a\in K$ and $r\in R$,
+    If $a\in K$ and $r\in A$,
     then $a\in J$ for some $J\in \calT$,
     and so $ra\in J$, which implies $ra\in K$.
-    \item \textbf{$K$ is not equal to $R$.}
+    \item \textbf{$K$ is not equal to $A$.}
     Note that $1\notin J$ for all $J\in \calT$,
     so $1\notin K$. 
     \end{itemize}
@@ -695,34 +695,34 @@ The following lemma is equivalent to axiom of choice.
 %
 \section{Radicals}
 \subsection{Nilradical}
-Recall that $\Nil(R)$ is the set of all nilpotent
-elements of $R$.
-This is also called the \vocab{nilradical} of $R$.
+Recall that $\Nil(A)$ is the set of all nilpotent
+elements of $A$.
+This is also called the \vocab{nilradical} of $A$.
 We now use Zorn's lemma to prove the following 
 important property of nilradical.
 \begin{proposition}[Nilradical is intersection of prime ideals]
     \label{prop:nilradical} We have
-    $$\Nil(R) = \bigcap_{\mathfrak p\subseteq R
+    $$\Nil(A) = \bigcap_{\mathfrak p\subseteq A
     \text{ prime}}\mathfrak p$$ 
 \end{proposition}
 \begin{proof}
     We first show the direction $\subseteq$.
     To do this, we have to prove that
-    $\Nil R\subset\mathfrak p$ for all prime ideal $\pp$.
-    Indeed, $a\in\Nil R$, then $a^n=0\in\mathfrak p$,
+    $\Nil A\subset\mathfrak p$ for all prime ideal $\pp$.
+    Indeed, $a\in\Nil A$, then $a^n=0\in\mathfrak p$,
     so $a\in\mathfrak p$ by definition of prime ideal.
 
     In the direction $\supseteq$,
-    given $f\notin\Nil(R)$, we need to find a prime ideal
+    given $f\notin\Nil(A)$, we need to find a prime ideal
     not containing $f$.
     We use Zorn's lemma. Consider the poset $(\calP,\subseteq)$ where
     $$\calP = 
-    \Big\{\text{ideal } I\subsetneq R\ :\ 1,f,f^2,\dots 
+    \Big\{\text{ideal } I\subsetneq A\ :\ 1,f,f^2,\dots 
     \text{ are all not in } I
     \Big\}$$
     ordered by inclusion.
     
-    Notice that $f\notin\Nil(R)$, so $S\neq\emptyset$,
+    Notice that $f\notin\Nil(A)$, so $S\neq\emptyset$,
     so $0\in S$. Moreover, for any totally ordered subset 
     $\calT\subseteq \calP$, it is not hard to check that
     $\bigcup_{J\in\calT} J$ is an ideal in $\calP$
@@ -747,31 +747,31 @@ important property of nilradical.
 %
 %
 \subsection{Radical Ideal}
-We have shown that $\Nil(R)$ is the same as
-the intersection of all prime ideals of $R$.
+We have shown that $\Nil(A)$ is the same as
+the intersection of all prime ideals of $A$.
 We generalize this a little bit, restricting to
 only prime ideals that contains $I$.
 \begin{definition}[Radical ideal]
-    Given a ring $R$ and an ideal $I$,
+    Given a ring $A$ and an ideal $I$,
     we define the \vocab{radical ideal}
     \notation{$\sqrt I$}{radical ideal}
-    $$\sqrt I = \{a\in R : a^n\in I
+    $$\sqrt I = \{a\in A : a^n\in I
     \text{ for some positive integer } n\}.$$
-    (Example: if $R=\ZZ$, then $\sqrt{(48)} = (6)$.)
+    (Example: if $A=\ZZ$, then $\sqrt{(48)} = (6)$.)
     
     An ideal $I$ is called \vocab{radical}
     if $\sqrt I = I$.
 \end{definition}
-Let $\pi : R\to R/I$ be the quotient map.
+Let $\pi : A\to A/I$ be the quotient map.
 Then, the condition that $a^n\in I$ 
 for some positive integer $n$
-is equivalent to $\pi(a)\in\Nil(R/I)$. 
+is equivalent to $\pi(a)\in\Nil(A/I)$. 
 Therefore, we have 
 \begin{align*}\sqrt I 
-&= \pi^{-1}(\Nil(R/I)) \\
-&= \pi^{-1} \left(\bigcap_{\pp\subseteq R/I
+&= \pi^{-1}(\Nil(A/I)) \\
+&= \pi^{-1} \left(\bigcap_{\pp\subseteq A/I
 \text{ prime}} \pp\right) \tag{\Cref{prop:nilradical}} \\
-&= \bigcap_{I\subseteq \pp\subseteq R\text{ prime}}
+&= \bigcap_{I\subseteq \pp\subseteq A\text{ prime}}
 \pp. \tag{Correspondence theorem \Cref{thm:correspondence}}
 \end{align*}
 \section{Spectrum and Zariski Topology}
@@ -798,13 +798,13 @@ f_1(\vec x) = f_2(\vec x) = \dots = f_m(\vec x)=0\}
 where $f_1,\dots,f_m \in \CC[x_1,\dots,x_n]$.
 To understand variety, we want to consider a \vocab{ring 
 of regular functions} associated to it. 
-More specifically, we want to consider a ring $R$ of 
+More specifically, we want to consider a ring $A$ of 
 all \textbf{regular functions} $f : V\to \CC$,
 which are rational functions from $V\to\CC$
 defined everywhere in $V$.
 \begin{example}
     \begin{itemize}
-    \item If $V=\CC^n$, then $R=\CC[x_1,\dots,x_n]$
+    \item If $V=\CC^n$, then $A=\CC[x_1,\dots,x_n]$
     is our ring of regular functions. 
     Function $x_i$ would take a point in $V$ and output
     the $i$-th coordinate of $V$.
@@ -815,30 +815,30 @@ defined everywhere in $V$.
     Then, now, the function $x^2+y^2-1$ is the same as function $0$.
     Thus, the ring of regular functions 
     needs to be modded out by $(x^2+y^2-1)$,
-    so $R = \CC[x,y] / (x^2+y^2-1)$.
+    so $A = \CC[x,y] / (x^2+y^2-1)$.
     \end{itemize}
 \end{example}
 Thus, in general, if 
 $V = \{\vec x\in\CC^n : 
 f_1(\vec x) = f_2(\vec x) = \dots = f_m(\vec x)=0\}$,
-then the ring of regular functions $R$ would be
+then the ring of regular functions $A$ would be
 $$\CC[x_1,\dots,x_n]/(f_1,\dots,f_m).$$
 
-Many properties of ring of regular functions $R$ 
+Many properties of ring of regular functions $A$ 
 translates to properties
 of varieties $V$. We describe some connections below,
 although none of these are precise.
 \begin{itemize}
-\item Given an ideal $I\subset R$, the set of points
+\item Given an ideal $I\subset A$, the set of points
 in $V$ whose every function in $I$ vanishes
 is a closed subset of $V$ (in analytical sense).
 \item Suppose there is another variety $V'$
-with ring of regular functions $R'$.
+with ring of regular functions $A'$.
 Then, a morphism $\phi : V\to V'$
-corresponds to a ring morphism $\phi^* : R'\to R$
+corresponds to a ring morphism $\phi^* : A'\to A$
 that takes a function $f : V'\to \CC$ 
 to a function $f\circ\phi : V\to \CC$.
-\item $R$ is a domain if and only if $V$ is irreducible
+\item $A$ is a domain if and only if $V$ is irreducible
 (i.e., is not a union of two subvarieties).
 Suppose that $V$ is a union of two subvarieties $V_1\cup V_2$,
 where $V_1$ is cut out by equations $f_1(\vec x)
@@ -849,14 +849,14 @@ Then, $V_1\cup V_2$ is cut out by equations
 $f_i(\vec x)g_j(\vec x) = 0$.
 In particular, the function $f_i$ and $g_j$
 are nonzero regular functions on $V$,
-but they multiply to $0$, which makes $R$ not a domain.
-\item $R$ is a field if and only if $V$ has exactly one point.
+but they multiply to $0$, which makes $A$ not a domain.
+\item $A$ is a field if and only if $V$ has exactly one point.
 This is because informally, if $V$ has more than one point,
 we can create a function $f$ vanishing at one point
 but not the other, and this $f$ would not be invertible
 and not a unit.
 \item For the definition of variety defined above,
-we always have that $R$ is reduced.
+we always have that $A$ is reduced.
 In particular, cutting out by equation $(x-y)^2=0$
 or $x-y=0$ mean the same thing. 
 We can have a more subtle notion of geometric objects
@@ -873,21 +873,21 @@ We do not study schemes in these notes.
 \end{itemize}
 
 One idea of algebraic geometry is to go backward:
-given a ring of function $R$,
+given a ring of function $A$,
 construct a geometric space that can substitute
-the variety $V$ above. The space is called $\Spec R$,
+the variety $V$ above. The space is called $\Spec A$,
 and it will make all connections above precise.
 \subsection{Spectrum of a Ring}
 \begin{definition}[Spectrum]
     \begin{itemize}
-    \notation{$\Spec R$}{spectrum of $R$}
-    \item The \vocab{spectrum} of a ring $R$,
-    denoted $\Spec R$ is the set of
-    all prime ideals of $R$.
-    \notation{$\mSpec R$}{maximal spectrum of $R$}
-    \item The \vocab{maximal spectrum} of a ring $R$
-    is denoted $\mSpec R$
-    and is the set of all maximal ideals of $R$.
+    \notation{$\Spec A$}{spectrum of $A$}
+    \item The \vocab{spectrum} of a ring $A$,
+    denoted $\Spec A$ is the set of
+    all prime ideals of $A$.
+    \notation{$\mSpec A$}{maximal spectrum of $A$}
+    \item The \vocab{maximal spectrum} of a ring $A$
+    is denoted $\mSpec A$
+    and is the set of all maximal ideals of $A$.
     \end{itemize}
 \end{definition}
 For example, by Hilbert Nullstellensatz
@@ -901,27 +901,27 @@ $f\bmod \mm = f(a_1,\dots,a_n)$ is the value of
 $f$ evaluated at that point.
 
 In general, we can view a ring as a ring of regular functions.
-For any ring $R$ and $f\in R$,
+For any ring $A$ and $f\in A$,
 we want to think of $f$ as defining a ``function''
-on $\mSpec R$.
-This generalizes to $\Spec R$, and we will explain 
+on $\mSpec A$.
+This generalizes to $\Spec A$, and we will explain 
 later (in \Cref{rmk:why_prime}) 
 why we prefer to use prime ideals instead of maximal ideal.
 \begin{definition}
-    Given $\mathfrak p\in \Spec R$ and $f\in R$,
+    Given $\mathfrak p\in \Spec A$ and $f\in A$,
     the ``value'' of $f$ when ``evaluated'' at $\mathfrak p$
-    is $f\bmod\mathfrak p \in R/\mathfrak p$.
+    is $f\bmod\mathfrak p \in A/\mathfrak p$.
 \end{definition}
 For psychological reason, we occasionally use a different notation for
-points in $\Spec R$ with the prime ideals of $R$. Specifically,
+points in $\Spec A$ with the prime ideals of $A$. Specifically,
 \begin{itemize}
-    \item Point $x\in \Spec R$ corresponds to prime ideal 
-    $\pp_x\subseteq R$.
-    \item Prime ideal $\pp\subseteq R$ corresponds to point $[\pp]\in\Spec R$.
+    \item Point $x\in \Spec A$ corresponds to prime ideal 
+    $\pp_x\subseteq A$.
+    \item Prime ideal $\pp\subseteq A$ corresponds to point $[\pp]\in\Spec A$.
 \end{itemize}
 
 \subsection{Zariski Topology}
-We now equip a topology of $\Spec R$,
+We now equip a topology of $\Spec A$,
 which will be a substitute topology for our geometric space.
 
 As a quick reminder, to define a topological space $X$,
@@ -931,12 +931,12 @@ A set is \vocab[closed sets]{closed} iff its complement is open.
 Such collection is very arbitrary,
 and many intuition from metric spaces will break down.
 \begin{definition}[Zariski topology]
-    Let $R$ be a ring. For each ideal $I\subseteq R$, define 
+    Let $A$ be a ring. For each ideal $I\subseteq A$, define 
     \notation{$V(I)$}{closed set of Zariski topology}
-    $$V(I) = \{\pp\in\Spec R : I\subseteq \pp\}.$$
-    In \vocab{Zariski topology} of $\Spec R$,
-    a subset $S\subseteq\Spec R$
-    is closed if and only if $S=V(I)$ for some ideal $I\subseteq R$.
+    $$V(I) = \{\pp\in\Spec A : I\subseteq \pp\}.$$
+    In \vocab{Zariski topology} of $\Spec A$,
+    a subset $S\subseteq\Spec A$
+    is closed if and only if $S=V(I)$ for some ideal $I\subseteq A$.
 \end{definition}
 We have to check that this defines a topology.
 We verify the following.
@@ -960,7 +960,7 @@ $ij\notin\mathfrak p_x$. This forms a contradiction.
 
 The idea of this topology is that we want the coarsest 
 (having fewest open sets) topology
-such that functions in $R$ is continuous.
+such that functions in $A$ is continuous.
 This means we need preimage of $\{0\}$ 
 with respect to $f$ to be closed. This preimage is $V(f)$,
 which we then declare that it's closed.
@@ -1030,15 +1030,15 @@ Now, let's get into some examples of drawing spectrum.
     \end{center}
 \end{example}
 
-Another way to describe the topology of $\Spec R$
+Another way to describe the topology of $\Spec A$
 is by giving open set.
 \begin{proposition}[Distinguished open sets]
     \notation{$D(f)$}{distinguished open sets of 
     Zariski topology}
-    For each $f\in R$, define the \vocab{distinguished open set}
-    $$D(f) = \{\pp : f\notin \pp\} \ \subseteq\ \Spec R.$$
-    Then, $\{D(f) : f\in R\}$ forms a basis of topology
-    for $\Spec R$. In other words, any open set of $\Spec R$
+    For each $f\in A$, define the \vocab{distinguished open set}
+    $$D(f) = \{\pp : f\notin \pp\} \ \subseteq\ \Spec A.$$
+    Then, $\{D(f) : f\in A\}$ forms a basis of topology
+    for $\Spec A$. In other words, any open set of $\Spec A$
     is a union of set of the form $D(f)$.
 \end{proposition}
 \begin{proof}
@@ -1087,10 +1087,10 @@ of spectrum in the opposite direction.
     Zariski topology).
 \end{exercise}
 \begin{example}
-The quotient projection map $\pi : R\to R/I$.
-induces the map $\pi^\# : \Spec R/I \to \Spec R$.
-Map $\pi^\#$ is a homeomorphism from $\Spec R/I$
-to a closed subset $V(I)$ of $\Spec R$.
+The quotient projection map $\pi : A\to A/I$.
+induces the map $\pi^\# : \Spec A/I \to \Spec A$.
+Map $\pi^\#$ is a homeomorphism from $\Spec A/I$
+to a closed subset $V(I)$ of $\Spec A$.
 \end{example}
 \begin{exercise}
     The inclusion map $\RR[x]\to\CC[x]$ 
@@ -1099,7 +1099,7 @@ to a closed subset $V(I)$ of $\Spec R$.
     that visualizes this map.
 \end{exercise}
 Now, go back to \Cref{subsec:varieties} 
-and convince yourself that the space $\Spec R$
+and convince yourself that the space $\Spec A$
 substitute variety $V$ and still makes the connection
 outlined in the bulleted list valid.
 \subsection{\texorpdfstring{$\Spec\mathbb Z[x]$}{Spec Z[x]} and 
