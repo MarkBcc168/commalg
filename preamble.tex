@@ -1,0 +1,261 @@
+\usepackage{amsmath, amsfonts, amssymb, amsthm, dsfont, mathrsfs}
+\usepackage{adjustbox, graphicx, enumitem, fancyhdr, titlesec, etoolbox, environ, tabularx}
+\usepackage[svgnames, dvipsnames]{xcolor}
+\usepackage[left=1.25in, right=1.25in, top=1in, bottom=1in]{geometry}
+\usepackage[inline]{asymptote}
+\begin{asydef}
+import olympiad;
+defaultpen(fontsize(10pt));
+usepackage("amsmath");
+usepackage("amsfonts");
+usepackage("amssymb");
+\end{asydef}
+\usepackage{imakeidx}
+\usepackage{hyperref}
+\usepackage[nameinlink]{cleveref}
+\usepackage[framemethod=Tikz]{mdframed}
+\mdfsetup{nobreak=false}
+
+\usepackage[backend=biber, style=alphabetic, sorting=nyt]{biblatex}
+\addbibresource{references.bib}
+
+\usepackage{mark-macros}
+
+\usepackage{tikz-cd}
+
+
+%----------------------------------------------------%
+%                 Formatting Setup
+%----------------------------------------------------%
+\usepackage[tt=false]{libertine}
+\usepackage[scale=0.9]{noto-sans}
+
+\fancyhf{}
+\cfoot{-- \thepage~--}
+
+\fancypagestyle{plain}{ %
+  \fancyhf{} % remove everything
+  \renewcommand{\headrulewidth}{0pt} % remove lines as well
+  \cfoot{-- \thepage~--}
+}
+
+	
+%heading setup
+
+\newcommand{\todo}[1]{{\color{blue}[TODO: #1]}}
+\setlength{\parskip}{1ex plus 0.5ex minus 0.2ex}
+\setlength\arraycolsep{2pt}
+
+\makeindex[name=notations, title=Notations, intoc]
+\newcommand{\notation}[2]{\index[notations]{#1 {\small(#2)}}}
+
+\titleformat{\chapter}[hang]{\Large\bfseries\sffamily}
+{\scalebox{2.5}{\textcolor{BrickRed}{\thechapter}}\hspace{0.8cm}}{0pt}{\huge\bfseries\sffamily\boldmath}
+
+\titleformat{\section}[hang]{\Large\bfseries\sffamily}{\textcolor{BrickRed}{$\boldsymbol{\S}$\thesection}\hspace{0.6cm}}{0pt}{\Large\bfseries\sffamily\boldmath}
+
+\titleformat{\subsection}[hang]{\large\bfseries\sffamily}{\textcolor{BrickRed}{$\boldsymbol{\S}$\thesubsection}\hspace{0.6cm}}{0pt}{\large\bfseries\sffamily\boldmath}
+
+\titleformat{\paragraph}[runin]{\bfseries\sffamily}{}{0pt}{$\blacktriangleright$ \bfseries\sffamily\boldmath}
+
+
+\renewcommand{\textbf}[1]{{\bfseries\boldmath #1}}
+
+\newenvironment{alphenum}{\begin{enumerate}[label=(\alph*)]}
+{\end{enumerate}}
+
+\pagestyle{fancy}
+\fancyhead[LE, RO]{\thepage}
+\fancyhead[RE]{\nouppercase{\rightmark}}
+\fancyhead[LO]{\nouppercase{\leftmark}}
+\fancyfoot[LE, LO, RE, RO, CE, CO]{}
+\cfoot{-- \thepage~--}
+\setlength\headheight{15pt}
+
+\hypersetup{
+	 colorlinks,
+  	 linkcolor={MediumBlue!80!Black},
+   	 citecolor={green!50!black},
+  	 urlcolor={MediumBlue!80!Black}
+}
+
+
+%----------------------------------------------------%
+%                indexing
+%----------------------------------------------------%
+\usepackage{ifthen}
+\makeindex[intoc]
+\newcommand{\vocab}[2][]{%
+	\textcolor{BrickRed}{\textbf{\boldmath #2}}%
+	\index{\ifstrempty{#1}{#2}{#1}}%
+}
+
+
+%----------------------------------------------------%
+%                mdframed setup
+%----------------------------------------------------%
+\expandafter\let\expandafter\oldproof\csname\string\proof\endcsname
+\let\oldendproof\endproof
+\renewenvironment{proof}[1][\proofname]{%
+\oldproof[\sffamily\itshape\color{MediumBlue!80!Black}$\blacktriangleright$ #1\color{black}]%
+}{\oldendproof}
+
+\usepackage[svgnames, dvipsnames]{xcolor}
+
+\usepackage{twemojis}
+\usepackage[skins, breakable]{tcolorbox}
+\usepackage{keytheorems}
+\tcbuselibrary{theorems}
+
+\tcbset{enhanced,
+	coltitle=black, 
+	colback=white,
+	boxsep=1.75mm, 
+	sharp corners,
+	toprule=0.5pt,
+	leftrule=0pt,
+	titlerule=0pt,
+	bottomrule=0.5pt,
+	rightrule=0.5pt,
+	segmentation style={solid},
+	fonttitle = \bfseries\sffamily,
+	breakable=true,
+	parbox=false
+}
+\newkeytheoremstyle{thmbox}
+  {
+    tcolorbox={
+		colbacktitle=MediumBlue!15,
+		colframe=MediumBlue!40,
+		borderline west={1mm}{0pt}{MediumBlue!60!white},
+		before title=\large\texttwemoji{pencil}\normalsize\hspace{2mm},
+    },
+    notebraces={(}{)},
+    headpunct={.},
+    noteseparator={ },
+    headfont=\bfseries\sffamily,
+    bodyfont=\normalfont,
+  }
+\newkeytheoremstyle{defbox}
+  {
+    tcolorbox={
+		colbacktitle=Red!20,
+		colframe=Red!60,
+		borderline west={1mm}{0pt}{Red!70!white},
+		before title=\large\texttwemoji{clipboard}\normalsize\hspace{2mm},
+    },
+    notebraces={(}{)},
+    headpunct={.},
+    noteseparator={ },
+    headfont=\bfseries\sffamily,
+    bodyfont=\normalfont,
+  }
+\newkeytheoremstyle{examplebox}
+  {
+    tcolorbox={
+		colbacktitle=Green!25,
+		colframe=Green!70,
+		borderline west={1mm}{0pt}{Green},
+		before title=\large\texttwemoji{chart increasing}\normalsize\hspace{2mm},
+    },
+    notebraces={(}{)},
+    headpunct={.},
+    noteseparator={ },
+    headfont=\bfseries\sffamily,
+    bodyfont=\normalfont,
+  }
+
+\newkeytheoremstyle{remarkbox}
+  {
+    tcolorbox={
+		colbacktitle=Black!15,
+		colframe=Black!30,
+		borderline west={1mm}{0pt}{Black!50},
+		before title=\large\texttwemoji{information}\normalsize\hspace{2mm},
+    },
+    notebraces={(}{)},
+    headpunct={.},
+    noteseparator={ },
+    headfont=\bfseries\sffamily,
+    bodyfont=\normalfont,
+  }
+\newkeytheoremstyle{warningbox}
+  {
+    tcolorbox={
+		colbacktitle=Goldenrod!60,
+		colframe=Goldenrod!80!Black,
+		borderline west={1mm}{0pt}{Goldenrod!70!Black},
+		before title=\large\texttwemoji{warning}\normalsize\hspace{2mm},
+    },
+    notebraces={(}{)},
+    headpunct={.},
+    noteseparator={ },
+    headfont=\bfseries\sffamily,
+    bodyfont=\normalfont,
+  }
+
+\newkeytheoremstyle{exercisebox}
+  {
+    tcolorbox={
+    		detach title,
+    		before upper={\tcbtitle\ \ },
+		colback=White!93!Black,
+		colframe=White!50!Black,
+		leftrule = 1pt,
+		rightrule = 1pt,
+		toprule = 1pt,
+		bottomrule = 1pt,
+		boxsep = 1mm,
+		before title=\large\texttwemoji{writing hand}\normalsize\hspace{2mm},
+    },
+    notebraces={(}{)},
+    headpunct={.},
+    noteseparator={ },
+    headfont=\bfseries\sffamily,
+    bodyfont=\normalfont,
+  } 
+  
+  
+
+\newkeytheorem{theorem}[name=Theorem, style=thmbox, parent=section]
+\newkeytheorem{lemma}[name=Lemma, style=thmbox, sibling=theorem]
+\newkeytheorem{proposition}[name=Proposition, style=thmbox, sibling=theorem]
+\newkeytheorem{corollary}[name=Corollary, style=thmbox, sibling=theorem]
+\newkeytheorem{fact}[name=Fact, style=thmbox, sibling=theorem]
+
+
+\newkeytheorem{definition}[name = Definition, style=defbox, sibling=theorem]
+\newkeytheorem{setup}[name = Setup, style=defbox, sibling=theorem]
+\newkeytheorem{axiom}[name = Axiom, style=defbox, sibling=theorem]
+
+\newkeytheorem{example}[name=Example, style=examplebox, sibling=theorem]
+\newkeytheorem{conjecture}[name=Conjecture, style=examplebox, sibling=theorem]
+\newkeytheorem{idea}[name=Idea, style=examplebox, sibling=theorem]
+
+\newkeytheorem{remark}[name=Remark, style=remarkbox, sibling=theorem]
+\newkeytheorem{warn}[name = Warning, style=warningbox, sibling=theorem]
+\newkeytheorem{abuse}[name = Abuse of Notation, style=warningbox, sibling=theorem]
+
+\newkeytheorem{exercise}[name = Exercise, style=exercisebox, sibling=theorem]
+
+
+\newkeytheorem{lemma*}[name=Lemma, style=thmbox, numbered=no]
+\newkeytheorem{proposition*}[name=Proposition, style=thmbox, numbered=no]
+\newkeytheorem{corollary*}[name=Corollary, style=thmbox, numbered=no]
+\newkeytheorem{fact*}[name=Fact, style=thmbox, numbered=no]
+
+\newkeytheorem{definition*}[name = Definition, style=defbox, sibling=theorem, numbered=no]
+\newkeytheorem{setup*}[name = Setup, style=defbox, sibling=theorem, numbered=no]
+
+\newkeytheorem{example*}[name=Example, style=examplebox, sibling=theorem, numbered=no]
+\newkeytheorem{idea*}[name=Idea, style=examplebox, sibling=theorem, numbered=no]
+
+\newkeytheorem{remark*}[name=Remark, style=remarkbox, sibling=theorem, numbered=no]
+\newkeytheorem{warn*}[name = Warning, style=defbox, sibling=theorem, numbered=no]
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}[chapter]
+\renewcommand\theproblem{\thechapter.\Alph{problem}}
+
+
+

@@ -1,0 +1,335 @@
+%!TEX Root = ../main.tex
+\chapter{Background}
+\label{chap:background}
+This appendix provides some background material.
+\Cref{sec:category} and \Cref{sec:universal} 
+introduces basic category theory
+(readers interested in learning further are encouraged
+to consulte \cite{category}).
+\Cref{sec:topological_space} gives a quick review 
+of topological spaces and topological notions.
+
+\section{Category and Functors}
+\label{sec:category}
+Any mathematical structure you will care about
+forms a category.
+\begin{definition}
+    A \vocab{category} $\mathcal C$ consists of:
+    \begin{itemize}
+    \item a set of \vocab{objects}
+    $\operatorname{obj} \mathcal C$;
+    \notation{$\operatorname{obj}\calC$}{set of objects}
+    \item  for any
+    $A,B\in\operatorname{obj} \mathcal C$,
+    the set of \vocab{morphisms} $\operatorname{Mor}(A,B)$; and
+    \notation{$\operatorname{Mor}(A,B)$}{set of morphisms}
+    \item for any $A,B,C\in\operatorname{obj} \mathcal C$,
+    the composition operation $\circ$
+    which takes morphisms, one in $\operatorname{Mor}(A,B)$
+    and one in $\operatorname{Mor}(B,C)$
+    to get a morphism $\operatorname{Mor}(A,C)$
+    \end{itemize}
+    satisfying the following conditions 
+    (which are mild)
+    \begin{itemize}
+    \item \textbf{associativity.} 
+    $f\circ(g\circ h) = (f\circ g)\circ h$
+    for any compatible morphisms $f,g,h$.
+    \item \textbf{identity.}
+    for any $A\in \operatorname{obj}(\mathcal C)$,
+    there exists identity morphism $1_A \in 
+    \operatorname{Mor}(A,A)$ such that 
+    $1_A\circ f = f\circ 1_B = f$
+    for all $f\in \operatorname{Mor}(A,B)$.
+    \end{itemize}
+\end{definition}
+\begin{example}
+\notation{$\Rings$}{category of rings}
+Commutative rings form a category
+$\Rings$ with objects being rings 
+and morphisms being ring homomorphisms.
+
+Similarly, the category $\Mod R$ of $R$-modules
+has objects being $R$-modules and morphisms being 
+$R$-module homomorphisms.
+A special case of this is vector spaces (when $R=k$ is a field)
+and abelian groups (when $R=\ZZ$).
+\end{example}
+We can also study maps between two categories,
+called the \vocab{functor}.
+\begin{definition}
+    A \vocab{covariant functor} from $\mathcal C\to\mathcal D$
+    consists of two maps:
+    $F^{\text{obj}} : \operatorname{obj} \mathcal C
+    \to\operatorname{obj} \mathcal D$
+    and $F^{\text{Mor}} : 
+    \operatorname{Mor}(A,B) \to \operatorname{Mor}(F(A),F(B))$
+    satisfying the following conditions:
+    \begin{itemize}
+    \item \textbf{preserves composition.}
+    $F(f\circ g) = F(f)\circ F(g)$.
+    \item \textbf{perserves identity.}
+    $F(1_A) = 1_{F(A)}$ for all $A\in\operatorname{obj}\calC$
+    \end{itemize}
+
+    (In contrast, a \vocab{contravariant functor}
+    from $\calC\to \calD$ two maps:
+    $F^{\text{obj}} : \operatorname{obj} \mathcal C
+    \to\operatorname{obj} \mathcal D$
+    and $F^{\text{Mor}} : 
+    \operatorname{Mor}(A,B) \to 
+    \boldsymbol{\operatorname{Mor}(F(B),F(A))}$
+    satisfying similar axioms.
+    The difference is that it reverses the direction of morphisms.)
+\end{definition}
+\begin{example}
+    We have the following examples of functors.
+    \begin{itemize}
+	\item There is a functor from commutative rings
+    to abelian groups that maps a ring $A$
+    to a unit group $A^\times$.
+    The morphism mapping is given by
+    $(A\stackrel\phi\to B) \mapsto (A^\times\stackrel\phi\to B^\times)$
+    by just restriction.
+    \item There is a functor from commutative rings
+	to commutative rings by $A\mapsto A[x]$.
+    \end{itemize}
+\end{example}
+\section{Universal Properties}
+\label{sec:universal}
+\vocab[universal property]{Universal properties}
+(also known as \vocab[universal mapping property]{universal mapping properties}
+or \vocab[mapping property]{mapping properties})
+determine an object up to isomorphism.
+They are of a very specific format, which is best seen through examples.
+
+\paragraph{Product}
+Let $\calC$ be a category with objects $M$ and $N$.
+Then, the product $M\times N$ is an object $P$, 
+equipped with morphisms $\mu : P\to M$
+and $\nu : P\to N$, such that the following universal property holds:
+``for any object $P'$ and maps $\mu' : P'\to M$
+and $\nu' : P'\to N$
+\begin{center}
+\begin{tikzcd}
+    P' \arrow[rd, dashed] \arrow[rrd, "\mu'"]
+    \arrow[rdd, "\nu'", swap]\\
+    & P \arrow[r, "\mu", swap] \arrow[d, "\nu"] & M \\
+    & N
+\end{tikzcd},
+\end{center}
+there exists unique morphism $\phi : P'\to P$ 
+(in dashed arrow) that makes the diagram above commute.''
+
+(We say that a diagram of objects and morphisms \vocab{commutes}
+if for any objects $P$ and $Q$ in the diagram,
+every directed path from $P$ to $Q$ compose to the same 
+map $P\to Q$.)
+
+Let's suppose that $\calC$ is the category $\Sets$
+(objects are sets, and morphisms are any function
+between two sets). Given sets $M$ and $N$,
+why does the definition above agree with the usual product
+$$P = \{(m,n) : m\in M, n\in N\}?$$
+First, the morphisms $\mu$ and $\nu$ are defined by
+$\mu((m,n)) = m$ and $\nu((m,n)) = n$.
+Now, let us verify that the above property holds.
+Suppose that there exists $P'$, $\mu'$, and $\nu'$ as above.
+Then, $\phi : P'\to P$ is uniquely determined to be 
+$\phi(p) = (\mu'(p), \nu'(p))$.
+Thus, $P$ satisfy the above universal property.
+
+Now, we claim that \textbf{any two products satisfying
+the universal property above are isomorphic}.
+To prove this, suppose that we have two products $P_1$ and $P_2$:
+\begin{center}
+\begin{tikzcd}
+    P_1 \arrow[r, "\mu_1", swap] \arrow[d, "\nu_1"] & M \\
+     N
+\end{tikzcd}\quad and\quad
+\begin{tikzcd}
+    P_2 \arrow[r, "\mu_2", swap] \arrow[d, "\nu_2"] & M \\
+     N
+\end{tikzcd}.
+\end{center}
+Then, by letting $P_2$ play the role of $P$
+and $P_1$ play the role of $P'$ gives a morphism 
+$\phi_1 : P_1\to P_2$ making the following diagram commute.
+\begin{center}
+\begin{tikzcd}
+    P_2 \arrow[rd, bend left, "\phi_2"] 
+    \arrow[rrd, bend left, "\mu_2"]
+    \arrow[rdd, bend right, "\nu_2", swap]\\
+    & P_1 \arrow[lu, bend left, "\phi_1", swap] 
+    \arrow[r, "\mu_1", swap] \arrow[d, "\nu_1"] & M \\
+    & N
+\end{tikzcd}.
+\end{center}
+Similarly, there exists a morphism $\phi_2 : P_2\to P_1$
+that makes the diagram above commute.
+
+Now, we plug in $P=P'=P_1$. 
+Then, there exists a unique morphism $P_1\to P_1$ 
+that commutes with both $\mu_1$ and $\nu_1$.
+However, we can name two such morphisms:
+$\phi_2\circ\phi_1$ and the identity map.
+Thus, $\phi_2\circ\phi_1 = \id_{P_1}$.
+Similarly, $\phi_1\circ\phi_2 = \id_{P_2}$,
+so $P_1$ and $P_2$ are isomorphic.
+
+Notice how this argument does not use 
+the nature of our category $\calC$ at all.
+Thus, if one changes category $\calC$ to other categories
+(e.g., $\Rings$ or $\Mod{R}$), then 
+the exact same argument shows that any two products are isomorphic.
+What's left, however, is to show that product
+exists for each category that you want to define a product.
+
+\paragraph{Polynomial Rings}
+Let $R$ be a ring. Then, the polynomial ring $R[x]$
+is the ring $S$ with element $x\in S$ and morphism 
+$\iota : R\to S$ satisfying the following 
+universal property: ``for ring $S'$, element $y\in S'$, 
+and any morphism $\phi : R\to S'$,
+there exists a unique morphism $f : S\to S'$
+such that $f(x)=y$ and the diagram 
+\begin{center}
+\begin{tikzcd}
+    & R \arrow[ld, "\iota", swap]  \arrow[rd, "\phi"] \\
+    S \arrow[rr, "f"]& & S'  \\
+    x \arrow[u, "\in", phantom, sloped]
+    \arrow[rr, maps to] & & y \arrow[u, "\in", phantom, sloped] 
+\end{tikzcd}
+\end{center}
+commutes".
+\begin{exercise}
+Using the same argument as products, 
+verify that the universal property given above 
+characterizes $S$ up to isomorphism.
+\end{exercise}
+We now check that a ring $S$ satisfying the above universal 
+property exists. 
+To do this, we give the usual construction: define 
+$$S = \{a_0 + a_1x + \dots + a_nx^n : 
+a_0,a_1,\dots,a_n\in R\},$$
+and the addition / multiplication operations 
+are the standard polynomial addition / multiplication.
+Then, for any $S'$ and $\phi$ satisfying the above,
+one can see that the map $f : S\to S'$ is forced to be
+$$f(a_0 + a_1x + \dots + a_nx^n)
+= \phi(a_0) + \phi(a_1)y + \dots + \phi(a_n)y^n.$$
+We leave the reader to check that this defines 
+a valid morphism.
+To do this, one needs to check that it is compatible 
+under polynomial addition (easy) and multiplication
+(harder, but still straightforward).
+\paragraph{Universal Property in General}
+In general, the recipe for defining an object through 
+universal properties is as follows.
+\begin{enumerate}
+    \item Define the universal property.
+    \item Prove that this property characterizes an object 
+    up to an isomorphism (a routine process).
+    \item Give a construction of an object
+    (possibly difficult).
+\end{enumerate}
+In these notes, we will soon see examples (e.g., tensor product, \Cref{sec:tensor}) where Step 3.
+is nontrivial, and therefore, the construction of the object
+itself makes it very hard to prove properties.
+When such situation arises, we often forget about Step 3.
+and use universal properties to deduce properties about that object.
+\begin{remark}[Towards Yoneda's lemma]
+In fact, one can formalize a theorem which says that 
+``any universal property determines an object up to isomorphism''.
+The result is \vocab{Yoneda's lemma},
+which require a little bit more category theory to state
+than we want to do here (see \cite[\S 4.2]{category} for more details).
+
+As a starting point towards Yoneda's lemma,
+let us rephrase the universal properties of product 
+and polynomial rings a little bit.
+\begin{itemize}
+\item $(P,\mu, \nu)$ is a product if for each $P'$,
+there exists a bijective corresondence between
+$$\{\text{morphisms } \phi : P'\to P\} 
+\ \longleftrightarrow\ 
+\{(\text{morphisms }\mu' : P'\to M \text{ and } \nu' : P'\to N)\}.$$
+\item $(S,x)$ is a polynomial ring if for each $S'$,
+there exists a bijective correspondence between 
+$$\{\text{morphisms } S\to S'\} 
+\ \longleftrightarrow\ 
+\{\text{morphisms } R\to S', \text{ image of }x\}.$$
+\end{itemize}
+In the first case, the universal property is classifying 
+morphisms from any object to $P$,
+while in the second case, the universal property is classifying
+morphisms from $S$ to any object.
+
+These represent two types of universal properties of $X$:
+properties classifying the set of morphisms \textbf{from} $X$
+and properties classifying the set of morphisms \textbf{to} $X$.
+Yoneda's lemma states that, provided with some other mild conditions,
+properties of these two types classify objects up to isomorphism.
+\end{remark}
+\section{Topological Spaces}
+\label{sec:topological_space}
+We give a quick review of topological spaces
+and topological notions used in commutative algebra.
+\begin{definition}
+A \vocab{topological space} $(X,\calT)$ consists of 
+\begin{itemize}
+    \item a set $X$ of points.
+    \item a set $\calT\subseteq 2^X$ of \vocab{open sets}
+\end{itemize}
+that satisfy the following conditions:
+\begin{itemize}
+    \item $\emptyset$ and $X$ are both in $\calT$.
+    \item for an arbitrary (possibly infinite, even uncountable) collection 
+    $(U_i)_{i\in I}$ where $U_i\in\calT$,
+     we have $\bigcup_{i\in I} U_i\in \calT$.
+    \item for any $U_1,U_2\in\calT$, we have 
+    $U_1\cap U_2\in\calT$.
+\end{itemize}
+A set is \vocab[closed sets]{closed} if and only if its complement is open.
+\end{definition}
+Originally, these terms are constructed to model geometric 
+spaces such as $\bbR^n$ or a torus (see \cite{topology} 
+for more details). 
+However, in algebra, we often borrow words from topology to describe structure that may or may not have geometric meaning.
+The words necessary for commutative algebra are as follows.
+\begin{definition}
+    Let $(X,\calT)$ be a topological space,
+    and let $S\subseteq X$.
+    Then, the \vocab{induced topology}
+    on $S$ is defined by the list of open sets
+    $$\calT' = \{V\subseteq S : V=U\cap S
+    \text{ for some open set }U\in\calT\}.$$
+\end{definition}
+\begin{definition}[Bases]
+    Let $(X,\calT)$ be a topological space.
+    A collection of open sets $\calB\subseteq \calT$
+    forms a \vocab{bases} if and only if any open set 
+    in $\calT$ can be written as a union of sets in $\calB$.
+\end{definition}
+
+\begin{definition}[Connectedness and Quasicompactness]
+\label{def:compact}
+A topological space $(X,\calT)$ is said to be 
+\begin{itemize}
+    \item \vocab{connected} if $\emptyset$ and $X$
+    are the only subsets that are both closed and open
+    (equivalently, $X$ cannot be partition into 
+    disjoint union of open sets $U_1\sqcup U_2$).
+    \item \vocab{quasicompact} if any open covering has a finite subcovering. In other words, for any collection $(U_i)_{i\in I}$ such that $\bigcup_{i\in I}U_i=X$,
+    there exists a finite subset $J\subseteq I$ such that 
+    $\bigcup_{j\in J} U_j = X$.
+\end{itemize}
+\end{definition}
+\begin{remark}
+    In some other contexts, the definition of quasicompact 
+    given above is the definition of compact,
+    but in some places, compact means quasicompact and Hausdorff. Thus, we use the word quasicompact to make clear that we do not need Hausdorff condition.
+\end{remark}
+\begin{exercise}
+    Prove that any closed subset (with its induced topology) of a quasicompact space is quasicompact.
+\end{exercise}

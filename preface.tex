@@ -1,0 +1,98 @@
+\chapter*{Preface}
+\paragraph{What is Commutative Algebra?}
+The origin of commutative algebra comes from the following
+two fields:
+\begin{itemize}
+\item \textbf{algebraic number theory,}
+which studies prime factorization in number fields (such as $\mathbb Q(\sqrt{-5})$)
+and its ring of integers (such as $\mathbb Z$ and $\mathbb Z[\sqrt{-5}]$).
+\item \textbf{algebraic geometry,} which studies 
+solutions of systems of algebraic equations 
+(such as $x^2+y^2=1$), which can be turned 
+to study of quotients of polynomial rings 
+(such as $\CC[x,y]/(x^2+y^2-1)$).
+\end{itemize}
+Throughout time, people have realize that theory from these 
+two subjects can be unified into a single theory of 
+commutative rings. This results in a single, clean theory of commutative algebra that stands on its own, but its true purpose is to be applied in the context of number theory and algebraic geometry
+\paragraph{Prerequisite}
+We assume that the reader is familiar with rings and modules at an undergraduate level (e.g., as in \cite{artin}). 
+Basic concepts of rings and modules will be rapidly reviewed 
+in \Cref{chap:rings} and \Cref{chap:modules}.
+Familiarity with basic category theory and topology 
+is assumed, but we quickly review those in \Cref{chap:background}.
+Knowledge of field theory at an undergraduate level is assumed in some places. 
+
+\paragraph{Content}
+These notes cover standard material typically covered in an introductory graduate course (such as 18.705 at MIT).
+The goal is to develop basic theory of rings and modules
+necessary in the study of algebraic number theory 
+and algebraic geometry. 
+Although we do not cover algebraic geometry
+or algebraic number theory,
+we try, whenever possible, to point out motivations and 
+connections from these two subjects.
+The breakdown by chapter is as follows.
+\begin{itemize}
+    \item \textbf{Chapter 1 (Rings).} 
+    We start out by quickly reviewing the notions of rings and ideals, including primary and maximal ideals.
+    The spectrum of a ring, which is a central notion in algebraic geometry, is introduced in \Cref{sec:spec}.
+    \item \textbf{Chapter 2 (Modules).}
+    We quickly review basis notions of modules,
+    then we proceed to discuss properties and constructions related to modules at a significantly greater depth
+    than typically covered in undergraduate algebra.
+    We discuss Cayley-Hamilton theorem from linear algebra and its consequence on modules that we will use multiple times throughout.
+    Then, we discuss important constructions related to modules: exactness, colimits, and tensor products.
+    \item \textbf{Chapter 3 (Localization).}
+    Localization is the ``art of adding denominators'' to rings. 
+    This construction has a geometric interpretation of ``zooming into'' open sets or points
+    and is immensely useful in studying rings.
+    \item \textbf{Chapter 4 (Integral Extensions).}
+    Integral extension and integral closure is a fundamental notion that connects to finite maps, smooth curves, and ring of algebraic integers.
+    As a consequence of this theory, we present Noether normalization lemma and use it to prove Hilbert nullstellensatz and study dimension of a variety.
+    \item \textbf{Chapter 5 (Chain Conditions).}
+    We discuss Noetherian rings and modules, the fundamental finiteness conditions that has numerous consequences.
+    Artinian rings are also discussed.
+    \item \textbf{Chapter 6 (Associated Primes and 
+    Primary Decomposition).}
+    In unique factorization domains such as $\ZZ$,
+    every element can be factored uniquely into products of primes.
+    We discuss a analogue of this in a general ring,
+    which will allow us to decompose an ideal into intersection of primary ideals (which is an analogue of prime power).
+    \item \textbf{Chapter 7 (DVR and Dedekind Domains).}
+    Discrete valuation rings (DVR) are the simplest kind of rings after fields. 
+    Geometrically, its ``valuation'' comes naturally from trying to define order of vanishing of functions at a point.
+    A global analogue of DVR is a Dedekind domain,
+    which arise naturally from ring of integers (in number theory) and a smooth curve (in algebraic geometry).
+    We discuss their properties.
+    \item \textbf{Chapter 8 (Completion).}
+    As power series is useful in studying functions in real and complex analysis, we develop the notion of power series 
+    in commutative algebra, resulting in construction known as completion.
+    We prove several nice properties of completion.
+    \item \textbf{Chapter 9 (Dimension Theory).}
+    Although dimension is an intuitive concept in geometry,
+    proving properties about dimension of rings are notoriously difficult.
+    In this chapter, we develop a robust framework to study and compute dimensions.
+    A brief treatment of regular local rings
+    (rings corresponding to smooth varieties) is discussed.
+    \item \textbf{Chapter 10 (Flatness).}
+    We study flat modules (defined in Chapter 2 in terms of tensor products) in more detail, discussing various geometric consequence such as going-down property, and constant dimension of fiber.
+\end{itemize}
+The text is meant to be read in order, although dependencies between many chapters are weak, and some flexibility is possible.
+
+All contents existed in standard commutative algebra textbooks.
+The one closest to our notes is \cite{atiyah_macdonald}.
+Other books that influenced our presentation are \cite{altman_kleiman}, \cite{eisenbud}, and \cite{vakil}.
+I claim no originality in any of these materials.
+
+\paragraph{History and Acknowledgements}
+These notes were based on the notes that I took when taking 
+the Fall 2023 instance of 18.705 (a commutative algebra course) at MIT,
+taught by Davesh Maulik.
+Since then, many parts were rewritten, and a new \Cref{chap:flatness} on flatness was added.
+Nevertheless, the structure of these notes still largely follows how Maulik taught the class, and his insights and presentation is still imparted throughout these notes.
+The flatness chapter was based on the Fall 2024 instance of 18.705, taught by Miguel Moreira, which also influences the presentation of various parts of theses notes as well.
+
+We thank Derek Liu for contributing part of \Cref{chap:flatness}.
+We also thank Srinivas Arun, David Dong, and Linus Tang
+ for useful comments and suggestions.

@@ -1,0 +1,88 @@
+\chapter{Table of Local Properties}
+\newcommand{\entry}[2]{\begin{tabular}{c}
+#1 \\ \footnotesize #2 \end{tabular}}
+\begin{definition}
+    Let P be a property of ring $A$ that is preserved 
+    under localization ($S^{-1}A$ has property P
+    for all multiplicative set $S\subset A$.
+    Then, each of the following is stronger than the next.
+    \begin{alphenum}
+    \item $A$ has property P.
+    \item There exists $f_1,\dots,f_n\in A$ generating a unit ideal such that $A_{f_i}$ has property P for all $i$.
+    \item $A_\pp$ has property P for all prime ideal 
+    $\pp\subset A$.
+    \end{alphenum}
+    Then, we make the definition. Property P is
+    \begin{itemize}
+    \item \vocab{stalk-local}
+    if (c) implies (a).
+    \item \vocab{open cover local} if (b) implies (a).
+    \item \vocab{spreading out} if for every prime ideal $\pp$ such that $A_\pp$ has property P,
+    there exists $f\notin\pp$ such that $A_f$ has property P.
+    (This is stronger than (c) implies (b).)
+    \end{itemize}
+\end{definition}
+One can similarly define these three words for properties of 
+$A$-modules, a pair of $A$-modules, etc.
+
+\paragraph{Comments}
+\begin{enumerate}
+    \item The following statement is true:
+    if $A$ is Noetherian, $\Spec A$ is connected,
+    and $A_\pp$ is a domain for every prime ideal $\pp$,
+    then $A$ is a domain.
+    \label{list:domain}
+    \item If we assume $M$ is finitely-presented,
+    then this entry would be YES.
+    \label{list:free}
+\end{enumerate}
+\begin{table}
+\begin{tabular}{c|ccc}
+    \def\arraystretch{1.25}
+    Property & Stalk-local & Open cover local & Spreading out \\ \hline
+    $A$ is a domain\textsuperscript{\ref{list:domain}.} 
+    & NO & NO & ? \\
+    & & {\footnotesize($\CC\times\CC$)} 
+    &\\
+    $A$ is reduced & YES & YES & YES \\
+    $A$ is Noetherian & NO & YES & NO \\
+    & & & {\footnotesize($\prod_{i=1}^\infty\CC$)}  \\ \hline 
+    Domain $A$ is a PID & NO  & NO & NO? \\
+    & & {\footnotesize($\ZZ[\sqrt{-5}]$)} 
+    & {\footnotesize($\CC[x,y]/(y^2-x^3-x)$???)}\\
+    Domain $A$ is a UFD  &NO  & NO & NO? \\
+    & & {\footnotesize($\ZZ[\sqrt{-5}]$)} 
+    & {\footnotesize($\CC[x,y]/(y^2-x^3-x)$???)} \\
+    Domain $A$ is integrally closed 
+    & YES & YES & YES \\ \hline 
+    $I$ is invertible & YES & YES & YES \\ 
+    $I$ is principal & NO & NO & YES \\
+    & & {\footnotesize($(2,1+\sqrt{-5})\subset \ZZ[\sqrt{-5}]$)} \\
+    $I$ is radical & YES & YES & YES \\
+    \hline 
+    $B$ is a finitely-generated
+    $A$-algebra & ? & ? & ? \\
+    $B$ is a finite $A$-algebra & ? & YES & ? \\
+    $A\to B$ is integral & ? & YES & ?  \\ \hline
+    $M=0$ & YES & YES & YES \\ 
+    $M$ is torsion-free & YES & YES & YES \\
+    $M$ is flat & YES & YES & YES \\
+    %$M$ is projective & ? & ? & ? \\
+    $M$ is free & NO & NO & NO\textsuperscript{\ref{list:free}.}  \\
+    & & {\footnotesize($(2,1+\sqrt{-5})\subset \ZZ[\sqrt{-5}]$)}
+    & {\footnotesize{($\tfrac 12\ZZ + \tfrac 13\ZZ 
+    + \tfrac 15\ZZ + \dots \subset\QQ$})}\\
+    $M$ is finitely-generated & NO & YES & NO \\
+    & & & {\footnotesize{($\tfrac 12\ZZ + \tfrac 13\ZZ 
+    + \tfrac 15\ZZ + \dots \subset\QQ$})} \\
+    $M$ is finitely-presented & NO & YES & NO \\
+    & & & {\footnotesize{($\tfrac 12\ZZ + \tfrac 13\ZZ 
+    + \tfrac 15\ZZ + \dots \subset\QQ$})} \\
+    \hline 
+    $M\to N$ is injective & YES & YES & YES \\ 
+    $M\to N$ is surjective & YES & YES & YES \\ 
+    $M\to N$ is an isomorphism & YES & YES & YES \\ 
+    $L\to M\to N$ is exact  & YES & YES & YES \\ 
+\end{tabular}
+\caption{Local Properties}
+\end{table}

@@ -1,0 +1,621 @@
+%!TEX Root = ../main.tex
+\chapter{Associated Primes and Primary Decomposition}
+In this chapter, we will discuss primary decomposition,
+which is a theory that tries to decompose a general ring
+into a simpler set of ideals, called \vocab{primary ideals}.
+
+Many theorems in this chapter requires Noetherian assumption.
+We will try to be careful about which part requires
+Noetherian hypothesis, but for most part,
+you should assume that all rings are Noetherian.
+
+\section{Associated Primes}
+\subsection{Definition}
+\begin{definition}[Associated primes]
+    Let $M$ be an $A$-module.
+    A prime ideal $\pp\subset A$ is an \vocab{associated prime} $M$
+    if there exists $x\in M$ for which
+    $\Ann(x) = \pp$.
+    \notation{$\Ass(M)$}{associated primes}
+
+    The set of associated primes is (unfortunately) denoted $\Ass(M)$
+    (or $\Ass_A(M)$ if the ground ring is not clear).
+\end{definition}
+Equivalent definitions: $\pp\in\Ass(M)$ iff
+the following (equivalent) conditions hold:
+\begin{itemize}
+    \item there exists $x\in M$ such that the map 
+    $A\stackrel{\cdot x}\longto M$ has kernel $\pp$.
+    \item there exists an injective map $A/\pp\to M$.
+\end{itemize}
+
+Let's do some examples.
+\begin{example}
+    We have some examples for $\mathbb Z$ module.
+    \begin{itemize}
+    \item If $M=\mathbb Z/(p^aq^b)$, then
+	$\Ass(M) = \{(p), (q)\}$,
+	where $(p) = \Ann(p^{a-1}q^b)$, $(q) = \Ann(p^aq^{b-1})$.
+    \item If $M=\mathbb Z\oplus\mathbb Z/2$,
+	then $\Ass(M) = \{(0), (2)\}$.
+    \end{itemize}
+\end{example}
+\begin{exercise}
+Let $M$ and $N$ be two $R$-modules.
+Prove that $\Ass(M\oplus N) = \Ass(M)\cup \Ass(N)$.
+\end{exercise}
+%
+%
+%
+%
+\subsection{Basic Properties}
+\begin{proposition}
+    \label{prop:basic_ass}
+    We have the following.
+    \begin{enumerate}[label=(\alph*)]
+    \item If $x\in M$ and $\Ann(x)=\pp$.
+	Suppose that $0\neq y\in Ax$, then $\Ann(y)=\pp$ also.
+    \item $\Ass(A/\pp) = \{\pp\}$.
+   \end{enumerate}
+\end{proposition}
+\begin{proof}
+    \begin{enumerate}[label=(\alph*)]
+    \item We have $Ax \simeq A/\pp\subset M$,
+	and since $A/\pp$ is a domain and $y\neq 0$,
+	we have $\Ann_{A/\pp} y = (0)$.
+	Thus, $\Ann_A y = \pp$.
+    \item Follows directly from (a). \qedhere
+    \end{enumerate}
+\end{proof}
+
+We now prove that there exists at least one associated prime.
+\begin{theorem}[Existence]
+    \label{thm:ass_exists}
+    If $A$ is Noetherian and $y\neq 0\in M$, 
+    then there exists a prime $\pp\in \Ass(M)$
+    such that $\pp\supseteq \Ann(y)$.
+
+    \noindent 
+    In particular, if $M\neq 0$, then $\Ass(M)\neq\emptyset$.
+\end{theorem}
+\begin{proof}  
+Make a poset
+$$\Sigma = \{\Ann(x) : x\neq 0\in M\}$$
+ordered by inclusion.
+
+We claim that every maximal element must be in $\Ass(M)$.
+To show this, suppose $I\in\Sigma$ is maximal element,
+so $I=\Ann(x)$ for some $x\in M$. 
+It suffices to that $I$ is prime.
+To that end, given $f,g\in A$ and $fg\in I$.
+Then, $(fg)x=0$. 
+
+Assume that $g\notin I$. Thus, $gx\neq 0$.
+Then, we have that
+$(I,f)\subset \Ann(gx) \in\Sigma,$
+but $I$ is maximal in $\Sigma$, 
+so the only way this could happen is $\Ann(gx)=I$ and $f\in I$.
+
+Finally, if $\Ann(y)$ is not maximal in $\Sigma$,
+we keep climbing up the poset, forming an infinite
+ascending chain that must stabilize because $A$ is Noetherian.
+The poset must stabilize at a maximal element of $\Sigma$,
+which is in $\Ass(M)$ by the above claim.
+\end{proof}
+\begin{remark}
+    \Cref{thm:ass_exists} does not hold when $A$ is not Noetherian.
+    Example: $R=M=C(\RR,\RR)$, the ring of continuous functions
+    on a real line.
+\end{remark}
+\begin{corollary}
+    \label{cor:union_ass}
+    We have
+    $$\bigcup_{\pp\in \Ass(M)} \pp = \bigcup_{y\neq 0\in M}
+     \Ann(y) = \{\text{zero divisors of } M\}.$$
+\end{corollary}
+We now show that for a Noetherian module,
+there are finitely many associated primes.
+\begin{theorem}[Finiteness]
+\label{thm:ass_is_finite}
+\begin{alphenum}
+    \item If we have a short exact sequence of $A$-modules
+    $$0\longto L\stackrel\phi\longto M \stackrel\pi \longto N\longto 0,$$ 
+    then
+    $$\Ass(L)\ \subseteq\ \Ass(M)\ \subseteq\ \Ass(L)\cup \Ass(N).$$
+    \item If $M$ is a Noetherian $A$-module,
+    then $\Ass(M)$ is finite.
+\end{alphenum}
+\end{theorem}
+\begin{proof}
+\begin{alphenum}
+\item 
+For the first containment, we have
+the composition $0\to A/\pp\to L\stackrel\phi\to M$ of injective maps,
+therefore, $\pp\in\Ass(M)$ also.
+
+We now prove the second containment.
+Let $\pp\in\Ass(M)$, so there exists injective map
+$\alpha : A/\pp \to M$. By viewing $L$ as a submodule of $M$,
+we assume that $L=\Ker\pi$.  We have two cases.
+\begin{itemize}
+\item \textbf{If $\Im(\alpha)\cap L = 0$},
+then $\pi\circ\alpha$ is an injective from
+$A/\pp\to N$, and so $\pp\in\Ass(N)$.
+\item \textbf{Otherwise}, there exists $y\in\Im(\alpha)\cap L$.
+By \Cref{prop:basic_ass} (a), we have that $\Ann(y) = \pp$, so $\pp\in\Ass(L)$.
+\end{itemize}
+\item 
+It suffices to make a chain of submodules
+$$0=M_0\subseteq M_1 \subseteq M_2 \subseteq \dots \subseteq M_n
+= M$$
+such that $M_i/M_{i-1} = A/\pp_i$ for prime ideal $\pp_i$.
+If we have this, then (a) gives $\Ass(M)\subseteq \{\pp_1,\dots,\pp_n\}$.
+
+To prove this, by \Cref{thm:ass_exists},
+pick $\pp_1\in\Ass(M)$, so
+there exists element $x_1\in M$ such that $\Ann_M(x_1)=\pp_1$.
+Thus, we let $M_1 = Ax_1 \simeq A/\pp_1$.
+
+If $M_1=M$, then we are done.
+Otherwise, by \Cref{thm:ass_exists}, pick $\pp_2 \in \Ass(M/M_1)$,
+so there exists element $x_2\in M$ such that 
+$\Ann_{M/M_1}(x_2) = \pp_2$. Therefore, $M_2 = Ax_2$
+satisfies $M_2/M_1 = A/\pp_2$. 
+Continue this process forever, and it must terminate because
+$M$ is a Noetherian $A$-module. \qedhere
+\end{alphenum}
+\end{proof}
+\begin{example}
+    Consider the exact sequence
+    $$0\to\mathbb Z\stackrel{\cdot 2}{\longrightarrow}\mathbb Z
+    \to \mathbb Z/2\to 0.$$
+    Then, we have $\Ass M = \{(0)\} \neq \Ass(L)\cup\Ass(N)
+    =  \{(0), (2)\}$.
+\end{example}
+\begin{theorem}
+    \label{thm:ann_ass}
+    \begin{alphenum}
+    \item For any multiplicative set $S\subseteq A$, we have
+    $$\Ass_{S^{-1}A}(S^{-1}M) = \{S^{-1}\pp : 
+    \pp\in \Ass_A(M)\text{ such that }\pp\cap S=\emptyset\}.$$
+    \item If $A$ is Noetherian, $M$ is finitely-generated, and $\pp$ is a prime ideal 
+    minimal among those containing $\Ann(M)$,
+    then $\pp\in\Ass(M)$.
+    \end{alphenum}
+\end{theorem}
+\begin{proof}
+    \begin{alphenum}
+    \item Mostly definition-chasing.
+    
+    If $\pp\in\Ass_A(M)$ and $\pp\cap S = \emptyset$,
+    then there is an injective map $R/\pp \hookrightarrow M$,
+    which turns to $S^{-1}(A/\pp) = S^{-1}A/S^{-1}\pp 
+    \hookrightarrow S^{-1}M$,
+    where we used \Cref{thm:localization_exact}
+    to commute localization inside quotient and 
+    see that it preserves injectivity.
+    This gives $S^{-1}\pp \in \Ass_{S^{-1}A}(S^{-1}M)$.
+
+    Conversely, by \Cref{thm:prime_ideal_localize},
+    suppose that $S^{-1}\pp \in \Ass_{S^{-1}A}(S^{-1}M)$,
+    where $\pp\cap S=\emptyset$,
+    then we have an injective map 
+    $S^{-1}(A/\pp) \hookrightarrow S^{-1}M$.
+    Suppose that this map takes $1$ to $x/s$ for some $x\in M$
+    and $s\in S$. 
+    We claim that $\Ann(x) = \pp$.
+    To see this, suppose that $rx=0$ for some $r\in A$.
+    Then, $r\tfrac xs = 0$, so $r=0$ in $S^{-1}(A/\pp)$.
+    Therefore, $ur = 0\pmod\pp$ for some $u\in S$,
+    and since $S\cap\pp\neq\emptyset$,
+    we have $u\notin\pp$, so $r\in\pp$.
+
+    \item First, we show that $M_\pp\neq 0$.
+    Suppose $M_\pp=0$. Suppose $x_1,x_2,\dots,x_n$ generates $M$.
+    Then, since the image of $x_i$ in $M_\pp$ is $0$,
+    there exists $a_i\notin\pp$ such that $a_ix_i=0$.
+    Now, note that the product $a_1\cdots a_n$ annihilates $x_1,\dots,x_n$,
+    and hence annihilates $M$, so $a_1\cdots a_n \in \Ann(M)$,
+    but $a_1\cdots a_n\notin\pp$, a contradiction.
+    
+    By \Cref{thm:ass_exists}, we have 
+    $\Ass_{A_\pp}(M_\pp) \neq \emptyset$.
+    However, from (a), this set correspond to $\qq\in \Ass(M)$
+    such that $\qq\subseteq\pp$. Note that $\qq$ contains $\Ann(M)$,
+    so by minimality, $\qq=\pp$. Hence $\pp\in\Ass(M)$.
+    \qedhere
+    \end{alphenum}
+\end{proof}
+%
+%
+%
+%
+\subsection{Local Property and Associated Primes}
+\begin{corollary}[Local Property and Associated Primes]
+    \label{cor:local_element_ass}
+    Let $A$ be Noetherian ring, $M$ be an $A$-module.
+    Suppose that $x\in M$ such that for all $\pp\in\Ass(M)$,
+    the image of $x$ in $M_\pp$ is $0$.
+    Then, $x=0$.
+\end{corollary}
+\begin{proof}
+    Assume $x\neq 0$.
+    By \Cref{thm:ass_exists}, $\Ann(x)$ is contained in
+    some associated prime $\pp$.
+    Then, if the image of $x$ in $M_\pp$ is $0$,
+    then $ax=0$ for some $a\notin\pp$.
+    This contradicts $\Ann(x) \subseteq\pp$.
+\end{proof}
+This gives the following two corollaries.
+\begin{corollary}  
+    \label{cor:local_ass}
+    Let $A$ be Noetherian and $M$ be an $A$-module.
+    Then,
+    \begin{alphenum}
+    \item If $K$ is a submodule of $M$, 
+        then $K=0$ if and only if $K_\pp=0$
+	for all $\pp\in \Ass(M)$.
+    \item If $\phi : M\to N$, then 
+	$\phi$ is injective
+	if and only if $\phi_\pp : M_\pp \to N_\pp$
+	is injective for $\pp\in\Ass(M)$.
+    \end{alphenum}
+\end{corollary}
+\begin{proof}
+    \begin{alphenum}
+    \item Clear from \Cref{cor:local_element_ass}.
+    \item Apply (a) with $K=\Ker\phi\subseteq M$. \qedhere
+    \end{alphenum}
+\end{proof}
+%
+%
+%
+%
+%
+%
+\section{Primary Decomposition}
+\label{sec:primary_decomp}
+\begin{center}
+    \fbox{For this entire section, let $A$ be a
+    a Noetherian ring.}
+\end{center}
+The goal of this section is to develop 
+the theory that decompose ideals of $A$ into simpler ideals.
+We have seen two special cases of this.
+\begin{itemize}
+    \item If $A$ is a PID (hence UFD), then 
+    an ideal $I=(f)$ can be written in form
+    $$I = (p_1)^{a_1} \cdots (p_k)^{a_k}
+    = \bigcap_{i=1}^k (p_i)^{a_i},$$
+    where $p_1,\dots,p_k$ are prime elements of $A$.
+    In order words, any ideal is an intersection of 
+    prime powers. 
+    Special cases of this include $A=\ZZ$
+    and $A=k[x]$.
+    \item From \Cref{subsec:irreducible_comp},
+    any radical ideal $I$ is an intersection of 
+    prime ideals minimal among those containing $I$.
+\end{itemize}
+Our theorem will be that for any Noetherian ring $A$,
+any ideal $I$ can be written as the intersection
+of a special kind of ideas called primary ideals.
+When $A$ is a PID, primary ideals coincide with 
+prime powers. 
+However, the notion of primary ideals is more general.
+%
+%
+%
+\subsection{Primary Ideals}
+\begin{definition}
+    An ideal $Q\subsetneq A$ is 
+    \begin{itemize}
+        \item \vocab[primary ideals]{primary}
+    if whenever $fg\in Q$, either $f\in Q$ or $g^n\in Q$
+    for some $n\geq 1$.
+        \item \vocab{$\pp$-primary} (where $\pp$ is a prime ideal) if $Q$ is primary and $\sqrt Q=\pp$.
+    \end{itemize}
+\end{definition}
+In other words, $Q$ is primary if and only if
+every zero divisor in $A/Q$ is nilpotent.
+For example, prime powers in $\mathbb Z$ are primary.
+\begin{lemma}
+    If $Q$ is primary, then $\sqrt Q$ is prime.
+\end{lemma}
+\begin{proof}
+    Note that 
+    $$fg\in\sqrt Q\implies f^ng^n\in Q
+    \implies f^n\in Q\text{ or } g^{mn}\in Q.$$
+    Either way, this implies that $f\in\sqrt Q$
+    or $g\in\sqrt Q$.
+\end{proof}
+In the definition above, since we assumed that $A$ is Noetherian,
+$\pp$ is finitely generated,
+so there exists $m>0$ such that $\pp^m\subset Q\subset\pp$.
+\begin{warn}
+\label{warn:primary_ideals}
+\begin{itemize}
+\item \textbf{If $\sqrt Q$ is prime, then $Q$ is 
+not necessarily primary.}
+For example,
+$$I = (x^2,xy)\subset\mathbb C[x,y] \implies \sqrt I = (x).$$
+We have $(x^2)\subset I\subset (x)$, but $I$ is not primary.
+We have $xy\in I$ but $x\notin I$ and $y\notin\sqrt I$.
+\item \textbf{Prime powers are not necessarily
+primary}. To see an example, take
+$$A = \frac{\mathbb C[x,y,z]}{(xz-y^2)},\ \pp=(x,y).$$
+Then, we claim that $\pp^2 = (x^2, xy, y^2)$ is not primary.
+To see why, note that $xz = y^2$,
+but $x\notin\pp^2$ and $z\notin\pp$.
+\end{itemize}
+\end{warn}
+\begin{proposition}
+    \label{prop:max_ideal_primary}
+    Given an ideal $Q\subset A$ such that $\sqrt Q = \mathfrak m$
+    is maximal, then $Q$ is $\mathfrak m$-primary.
+\end{proposition}
+\begin{proof}
+    Suppose that $f\notin Q$, then the ideal
+    $I =\{g\in A : fg\in Q\}$ is a proper ideal of $A$,
+    so it is contained in a maximal ideal $\mathfrak m'$.
+    In particular, we have $Q\subset I\subset\mathfrak m'$.
+    Thus, we have $\sqrt Q\subset\sqrt{\mathfrak m'}
+    \implies \mathfrak m \subset\mathfrak m'$,
+    and so $\mathfrak m = \mathfrak m'$.
+    Thus, $I\subset\mathfrak m$.
+    Therefore, if $fg\in Q$, we must have $g\in I$,
+    so $g\in\mathfrak m$
+    or $g^n\in Q$ for some $I$.
+\end{proof}
+We now connect primary ideal to associated primes
+we studied earlier in the previous section.
+\begin{theorem}[Primary if and only if one associated prime]
+    \label{thm:primary_one_ass}
+    $Q$ is $\pp$-primary if and only if 
+    $\Ass(A/Q) = \{\mathfrak p\}$.
+\end{theorem}
+\begin{proof}
+    $(\Rightarrow)$. 
+    Pick $x\in A$ such that
+    the image $\overline x\in A/Q$ is nonzero and
+    such that $\Ann_{A/Q}(\overline x)$ is a prime ideal.
+    Then, we observe that
+    \begin{align*}
+        Q \subseteq \Ann_{A/Q}(\overline x) 
+        &= \{y \in A : xy\in Q\} \\
+        &\subseteq \{y : y^n\in Q\text{ for some }n\geq 0\} 
+        \tag{def. of primary ideal}\\
+        &\subseteq \sqrt{Q} = \pp.
+    \end{align*}
+    Since $\Ann_{A/Q}(\overline x)$ is prime ideal,
+    taking radical both sides gives 
+    $\pp\subseteq \Ann_{A/Q}(\overline x)
+    \subseteq \pp$, so $\Ann_{A/Q}(\overline x) = \pp$,
+    so any associated prime must be $\pp$.
+    Since $\Ass(A/Q)\neq\emptyset$ (\Cref{thm:ass_exists}),
+    it follows that $\Ass(A/Q)=\{\pp\}$.
+    
+    ($\Leftarrow$) If $\Ass(A/Q) = \{\pp\}$,
+    then any nonzero submodule of $A/Q$ also has only $\pp$
+    as associated prime.
+    Given $0\neq M\subset A/Q$, we note by definition 
+    of radical that
+    \begin{equation}
+    \label{eq:primary_ass}
+    \sqrt{\Ann M} = \bigcap_{\qq\supseteq\Ann(M)} \qq
+    = \bigcap_{\qq\in\Ass(M)}\qq = \pp
+    \end{equation}
+    (where we used \Cref{thm:ann_ass} in the middle equality).
+    In particular, plugging $M=A/Q$ into \eqref{eq:primary_ass} gives $\sqrt Q = \pp$.
+
+    Now, given $f,g$ such that $fg\in Q$.
+    If $f\notin Q$, then we reduce
+    $0\neq \overline f\in A/Q$,
+    giving a submodule $M=A\overline f \subset A/Q$ 
+    generated by single element $\overline f$
+    We have $g\in\Ann(M)$, so using \eqref{eq:primary_ass}
+    with this choice of $M$, we have
+    $g\in\sqrt{\Ann(M)} = \pp$, so $g^n\in\pp$
+    for some $n$. Hence, $Q$ is primary.
+\end{proof}
+\begin{remark}
+    All the theory above generalizes by replacing
+    $A$ with arbitrary modules $M$.
+    In that case, a submodule $N\subseteq M$
+    is $\pp$-primary if $\Ass(M/N) = \{\pp\}$.
+    The theorem then says that any submodule of $M$
+    can be expressed as an intersection of $\pp$-primary
+    submodules.
+    Moreover, the set of primes that appear is precisely
+    $\Ass(M)$.
+\end{remark}
+%
+%
+%
+%
+%
+\subsection{Primary Decomposition}
+We are now ready to state primary decomposition theorem.
+\begin{definition}[Primary decoposition]
+    Given $I\subset A$, a \vocab{primary decomposition}
+    of $I$ is an expression
+    $$I=\bigcap_{i=1}^n Q_i$$
+    such that
+    \begin{itemize}
+    \item $Q_i$ is $\pp_i$-primary for all $i$.
+    \item 
+    $I\not\subset\bigcap_{i\neq j} Q_i$ for each $j$.
+    \item $\pp_i\neq\pp_j$ for all $i,j$.
+    \end{itemize}
+\end{definition}
+The second one is to clean out redundant elements.
+For the third one, if $\pp_i=\pp_j$ for some $i$ and $j$,
+then the following lemma tells us that 
+we can combine $Q_i$ and $Q_j$ into a single ideal.
+\begin{lemma}
+    If $Q_1$ and $Q_2$ are both $\pp$-primary,
+    then so is $Q_1\cap Q_2$.
+\end{lemma}
+\begin{proof}
+    The map $A/(Q_1\cap Q_2) \longto A/Q_1\oplus A/Q_2$
+    is injective. Thus, by \Cref{thm:ass_is_finite} (a),
+    $$\Ass(A/(Q_1\cap Q_2))\ \subseteq\ \Ass(A/Q_1)
+    \cup \Ass(A/Q_2) \ =\ \{\pp\},$$
+    so since $\Ass(A/(Q_1\cap Q_2))\neq\emptyset$
+    (\Cref{thm:ass_exists}),
+    it follows that $\Ass(A/(Q_1\cap Q_2)) = \{\pp\}$,
+    so the result follows from \Cref{thm:primary_one_ass}.
+\end{proof}
+Thus, to prove that primary decomposition exists,
+we must show that any ideal can be written as
+intersection of primary ideals; there is no need to care
+about the second and third condition.
+
+Let us demonstrate some examples of what primary 
+decomposition look like.
+\begin{example}
+Consider
+$$I = (x^2,xy)\subset\mathbb C[x,y].$$
+This ideal is contained in the maximal ideal $(x,y)$, and in fact, we have
+$$(x^2,xy) = (x)\cap (x,y)^2,$$
+which is one primary decomposition.
+However, there are also other decompositions. For example,
+\begin{align*}
+    I &= (x)\cap (x^2,y) \\
+      &= (x)\cap (x^2 y-\alpha x).
+\end{align*}
+\end{example}
+\begin{example}
+    Consider
+    $$A = \frac{\mathbb C[x,y,z]}{(xz-y^2)},\quad \pp=(x,y).$$
+    We have seen in \Cref{warn:primary_ideals} that
+    $\pp^2$ is not primary.
+    Its primary decomposition looks like
+    $$\pp^2 = (x)\cap (x,y,z)^2.$$
+\end{example}
+We now prove that primary decomposition exists.
+\begin{theorem}
+    If $A$ is Noetherian, then primary decomposition always exists.
+\end{theorem}
+To prove this theorem, we first make the definition.
+\begin{definition}[Indecomposable ideals]
+    An ideal $I\subset A$ is \vocab{indecomposable}
+    if whenever $I = J\cap K$ for ideals $J$ and $K$,
+    then $I=J$ or $I=K$.
+\end{definition}
+Thus, by repeatedly breaking down decomposable ideals,
+any ideal $I$ must be written as $J_1\cap J_2\cap\dots\cap J_n$,
+where $J_i$ indecomposable.
+Since $A$ is Noetherian, the process must stop.
+
+Thus, to prove that primary decomposition exists,
+it suffices to show the following.
+\begin{proposition}[Indecomposable implies primary]
+    If $Q$ is indecomposable ideal
+    of a Noetherian ring $A$, then $Q$ is primary.
+\end{proposition}
+\begin{proof}
+    By replacing $A$ with $A/Q$, we may assume that $Q=(0)$.
+
+    If $xy=0$, then we have
+    $$y\in\Ann(x)\subset\Ann(x^2)\subset \Ann(x^3)\subset\dots$$
+    This chain must stabilize, so for some $k$, we have
+    $\Ann(x^k) = \Ann(x^{k+1})$.
+
+    Now, we claim $(x^k)\cap (y)=(0)$.
+    To see why, if $a\in (x^k)\cap (y)$, then
+    $ax=0$ and $a=bx^k$. Thus, $bx^{k+1}=0\implies
+    b\in\Ann(x^{k+1}) = \Ann(x^k)$.
+    Thus, $a=bx^k = 0$ as claimed.
+
+    Since $(0)$ is indecomposable, we must have
+    either $(x^k) = (0)$ or $(y)=(0)$.
+    Thus,  $x^k=0$ or $y=0$, as desired.
+\end{proof}
+%
+%
+%
+%
+%
+\subsection{Quasi-uniqueness of Primary Decomposition}
+Unfortunately, as seen above,
+primary decompositions are not unique.
+However, we can say something about uniqueness.
+\begin{theorem}[Quasi-uniqueness]
+    Let $A$ be a Noetherian ring.
+    If an ideal $I$ has a primary decomposition $I=\bigcap Q_i$
+    such that $Q_i$ is $\pp_i$-primary,
+    then $\{\pp_1,\dots,\pp_n\} = \Ass(A/I)$.
+
+    In particular, the set $\{\pp_1,\dots,\pp_n\}$
+    is unique.
+\end{theorem}
+\begin{proof}
+    Consider the direct sum of projection
+    $$f : A\to \bigoplus_{i=1}^n A/Q_i.$$
+    We have $\ker f = I$. Thus, $A/I$
+    is a subring of these direct sums.
+    In particular,
+    $$\Ass(A/I) \subseteq \Ass\left(\bigoplus_{i=1}^n A/Q_i\right)
+    = \bigcup_{i=1}^n \Ass(A/Q_i) = \{\pp_1,\dots,\pp_n\}.$$
+
+    We now show that for each $i$, we have $\pp_i\in \Ass(A/I)$.
+    Let
+    $$N = \frac{\bigcap_{j\neq i} Q_j}{I}\subset A/I.$$
+    By irredundant condition, 
+    $N\neq 0$. Moreover, we have the composition
+    $N\to A/I\to \bigoplus_{j=1}^n A/Q_j$ is zero on each factor $j\neq i$,
+    and it is injective onto $A/Q_i$.
+    Thus, $\Ass(N) \subset \Ass(A/Q_i) =  \{\pp_i\}$,
+    so $\Ass(N) = \{\pp_i\}$ (because it must not be empty),
+    and so $\pp_i\in\Ass(A/I)$.
+\end{proof}
+\section{Problems}
+\begin{problem}
+Let $R=\mathbb C[x,y]/(xy)$-module and let $M$ be an $R$-module with generators $a$ and $b$ and a single relation $xa+yb=0$ (the same module as in \Cref{prob:diff_xy}). Determine $\operatorname{Ass} M$.
+\end{problem}
+\begin{problem}
+Let $A$ be a Noetherian ring and $M$ be a finitely-generated module. Suppose that $I$ is an ideal of $A$ with property that for every $a\in I$, there exists $0\neq m_a\in M$ such that $am_a = 0$. Prove that there exists $0\neq m\in M$ such that $I\cdot m=0$.
+
+Hint: prime avoidance, \Cref{prob:prime_avoidance}.
+\end{problem}
+\begin{problem} 
+\label{prob:ass_reduced}
+Let $R$ be a Noetherian ring and $I$ be an ideal.
+\begin{alphenum}
+\item Explain why every prime ideal minimal over $I$ 
+(i.e., minimal among those containing $I$)
+ must be an associated prime of $R/I$.
+\item If $R/I$ is reduced 
+(i.e., $I$ is a radical ideal), 
+prove that every associated prime of $R/I$ is minimal over $I$. 
+\end{alphenum}
+\end{problem}
+\begin{problem}
+\label{prob:ass_denominator}
+Let $A$ be a Noetherian domain and $r\in\Frac A$.
+Suppose that for every $f\in A$ and $\pp\in \Ass(A/(f))$,
+we have $r\in A_\pp$. Prove that $r\in A$.
+
+(Hint: suppose that $r=a/b$. Let $M$ be a submodule of 
+$A/(b)$ generated by $a$ and consider $\pp\in \Ass M$.)
+\end{problem}
+\begin{problem}
+\label{prob:primary_quotient_localization}
+Let $R$ be a ring and $Q$ be a primary ideal.
+\begin{alphenum}
+\item If $\phi : S\to R$ is a ring homomorphism,
+then prove that $\phi^{-1}(Q)$ is a primary ideal in $S$.
+\item Prove that for every multiplicative set 
+$S\subseteq R$, $S^{-1}Q$ is either equal to $S^{-1}R$
+or a primary ideal in $S^{-1}R$.
+\end{alphenum}
+\end{problem}
+\begin{problem}
+Find a primary decomposition of the following ideals.
+\begin{alphenum}
+\item Ideal $(x+y,xy)$ of $\mathbb C[x,y]$.
+\item Ideal $(xy, x-yz)$ of $\mathbb C[x,y,z]$.
+\item Ideal $(x^2,xy^2,y^2z,xz)$ of $\mathbb C[x,y,z]$.
+\end{alphenum}
+(\Cref{prob:primary_quotient_localization} might be helpful.)
+\end{problem}

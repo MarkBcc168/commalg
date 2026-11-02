@@ -1,0 +1,959 @@
+%!TEX Root = ../main.tex
+\chapter{Completion}
+This chapter discusses completion,
+which is a construction that attach a power series
+to a ring.
+Roughly speaking, if $A$ is a ring
+and $A_\pp$ is a local ring at prime ideal $\pp$,
+then the completion $\widehat{A_\pp}$
+is a ring that zooms in closer at $\pp$.
+
+As a motivating example, consider
+$$R = \frac{\mathbb C[x,y]}{(y^2-x^2-x^3)}
+\quad S = \frac{\mathbb C[x,y]}{(y^2-x^2)}.$$
+These rings correspond to nodal curves
+$y^2=x^3+x^2$ and $y^2=x^2$.
+In particular, the open neighborhoods around $(0,0)$
+of both curves look like segments with slope $1$ and $-1$.
+\begin{center}
+\begin{adjustbox}{valign=m}
+\begin{asy}
+size(4cm,0);
+import graph;
+real x(real t){return t^2-1;}
+real y(real t){return t*(t^2-1);}
+draw(graph(x,y,-1.3,1.3), linewidth(1));
+draw((-0.5,-0.5)--(0.5,0.5), dashed);
+draw((-0.5,0.5)--(0.5,-0.5), dashed);
+dot((0,0));
+label("$\operatorname{Spec} R$", (0,y(-1.3)), S);
+\end{asy}
+\end{adjustbox}
+\qquad
+\begin{adjustbox}{valign=m}
+\begin{asy}
+size(2.5cm,0);
+import graph;
+draw((-1,1)--(1,-1), linewidth(1));
+draw((-1,-1)--(1,1), linewidth(1));
+dot((0,0));
+label("$\operatorname{Spec} S$", (0,-1), S);
+\end{asy}
+\end{adjustbox}
+\end{center}
+Localization carries a lot more detail
+than the slope of these two lines.
+For example, the localization of $R$ and $S$ at maximal ideal $(x,y)$
+(the one corresponding to point $(0,0)$) are not the same.
+In particular, since $R$ is a domain, the localization of $R$ at $(0,0)$ is still a domain.
+In contrast, localization of $S$ at $(0,0)$ is not a domain.
+A geometric intuition for this is localization of $R$
+still carries the whole curve.
+
+In contrast, completion is a more brutal version of localization
+that only keeps information in a very close range.
+We will later see that the completion of $R$ and $S$
+at maximal ideal $(0,0)$ are isomorphic!
+Completion thus loses some information. 
+However, it also allows us to make sense of the notion
+that two rings are \emph{analytically} the same.
+This allows us to also simplify the study of rings
+by first studying its completion first.
+
+\section{Construction}
+\subsection{Inverse Limit}
+For simplicity, we define inverse limit on 
+a sequence of group, which is sufficient for us.
+(Similar to direct limit, it's possible to generalize this to
+index by direct sets, or even small category.)
+\begin{definition}[Inverse limit]
+    An \vocab{inverse system} is a sequence of groups $(A_n)_{n\geq 0}$
+with homomorphisms $\theta_{n+1} : A_{n+1}\to A_n$.
+For any inverse system, we can define an \vocab{inverse limit}
+$$\varprojlim A_n := \{(a_n)_{n\geq 0} : a_n\in A_n,
+\theta_{n+1}(a_{n+1}) = a_n\}.$$
+\notation{$\varprojlim_n A_n$}{inverse limit}
+The sequences $(a_n)$ above are called \vocab{coherent sequences}.
+\end{definition}
+\begin{example}[Formal series ring]
+    Let $A$ be a ring and ideal $\mathfrak a\subset A$.
+    Then, we have an inverse system
+    $$A\supset\mathfrak a\supset\mathfrak a^2\supset\mathfrak a^3
+    \supset\dots.$$
+    A special case of this is the inverse system
+    $$\mathbb C[t] \supset (t)\supset (t^2)\supset (t^3)\supset\dots.$$
+    In this case, we have
+    $$\varprojlim (t^n) = \{(b_n) : b_n\in\mathbb C[t]/(t^n),
+    b_{n+1}\equiv b_n\pmod{t^{n+1}}\}\simeq\mathbb C[[t].$$
+    In particular, $c_0+c_1t+c_2t^2+\dots$ maps to
+    $$(c_0, c_0+c_1t, c_0+c_1t+c_2t^2, \dots).$$
+    One needs to check that this respect ring structure,
+    but it is indeed correct.
+\end{example}
+\begin{example}[$p$-adic number]
+    Consider an inverse system
+    $$\mathbb Z\supset (p) \supset (p^2)\supset (p^3)\supset\dots.$$
+    Then, the inverse limit is
+    $$\varprojlim (p^n) = \mathbb Z_p
+    = \{c_0+c_1p+c_2p^2+\dots, c_i\in\{0,1,\dots,p-1\}\}.$$
+    The ring structure of this is different from $\mathbb Z[[t]]$:
+    there is a carry in modulo $p$.
+\end{example}
+The above two examples are a special case of the following
+construction.
+\begin{definition}[$I$-adic completion]
+    For any ring $A$ and ideal $I$, the \vocab{$I$-adic completion} is
+    $$\widehat A = \varprojlim_{n\geq 0} A/I^n$$
+    (so each element is a sequence of $(x\bmod I, x\bmod I^2,\dots)$). Often, $I$ is a maximal ideal.
+    \notation{$\widehat A$}{$I$-adic completion of a ring}
+\end{definition}
+It's natural to ask whether inverse limit preserves
+exactness or not. The following lemma gives the answer.
+\begin{lemma}[Inverse limit preserves exactness]
+\label{lem:inverse_limit_exact}
+Suppose that we have a short exact sequence of 
+inverse systems
+$$0\longto (A_n)_{n\geq 0} \stackrel f\longto  (B_n)_{n\geq 0} \stackrel g\longto (C_n)_{n\geq 0}\longto 0,$$
+i.e., the commutative diagram with exact rows
+\begin{center}
+\begin{tikzcd}
+    & \dots \arrow[d] & \dots \arrow[d] & \dots \arrow[d] \\
+    0 \arrow[r]
+    & A_{n} \arrow[r, "f_{n}"] \arrow[d,"\theta_n^A"]
+    & B_{n} \arrow[r, "g_{n}"] \arrow[d,"\theta_n^B"] 
+    & C_{n} \arrow[r] \arrow[d,"\theta_n^C"]  
+    & 0 \\
+    0 \arrow[r]
+    & A_{n-1} \arrow[r, "f_{n-1}"] \arrow[d]
+    & B_{n-1} \arrow[r, "g_{n-1}"] \arrow[d]
+    & C_{n-1} \arrow[r] \arrow[d]
+    & 0 \\
+    & \dots & \dots & \dots
+\end{tikzcd}.
+\end{center}
+\begin{alphenum}
+\item We have the left exact sequence
+$$0\longto \varprojlim_n A_n \longto \varprojlim_n B_n
+\longto \varprojlim_n C_n.$$
+\item If $\theta_n^A : A_n \to A_{n-1}$ is surjective for all $n$,
+then we have the exact sequence
+$$0\longto \varprojlim_n A_n \longto \varprojlim_n B_n
+\longto \varprojlim_n C_n\longto 0.$$
+\end{alphenum}
+\end{lemma}
+\begin{proof}
+    \begin{alphenum}
+    \item 
+    Let $\mathbf A = \prod_{n\geq 0} A_n$, and define 
+    the map 
+    \begin{align*}
+    d^A : \mathbf A &\to \mathbf A \\
+    (a_0,a_1,\dots) &\mapsto (a_n - \theta_{n+1}^A(a_{n+1}))_{n\geq 0}.
+    \end{align*}
+    Define $\mathbf B$, $\mathbf C$, $d^B$, and $d^C$ similarly.
+    Then, $\varinjlim_{n\geq 0} A_n = \Ker d^A$,
+    and similarly for $B$ and $C$. 
+    Moreover, we have the commutative diagram
+    \begin{center}
+    \begin{tikzcd}
+        0  \arrow[r]
+        & \mathbf A \arrow[r, "f"] \arrow[d, "d^A"] 
+        & \mathbf B \arrow[r, "g"] \arrow[d, "d^B"]
+        & \mathbf C \arrow[r] \arrow[d, "d^C"] 
+        & 0 \\
+        0  \arrow[r]
+        & \mathbf A \arrow[r, "f"]
+        & \mathbf B \arrow[r, "g"]
+        & \mathbf C \arrow[r]
+        & 0.
+    \end{tikzcd}
+    \end{center}
+    Thus, Snake Lemma (\Cref{lem:snake}) gives the exact sequence
+    $$0\longto \Ker d^A \longto \Ker d^B \longto \Ker d^C
+    \longto \Coker d^A,$$
+    which gives the desired left exactness.
+    \item From above, we have to show that $d^A$ is surjective
+    (so $\Coker d^A = 0$).
+    To do that, suppose $(b_0,b_1,\dots,b_n)\in\mathbf A$.
+    We need to find $(a_0,a_1,\dots)$ such that
+    $a_n - \theta_{n+1}^A(a_{n+1}) = b_n$ for all $n$.
+    Begin by choosing $a_0$ arbitrarily.
+    Then, since $\theta_n^A$ is surjective for all $n$,
+    we can select $a_1$ so that $a_0 - \theta_1^A(a_1) = b_0$,
+    select $a_2$ such that $a_1 - \theta_2^A(a_2)=b_1$,
+    and so on.
+    \qedhere
+    \end{alphenum}
+\end{proof}
+%
+%
+%
+\subsection{Completion with respect to Filtration}
+Let $A$ be a ring, and $M$ be an $A$-Module.
+\begin{definition}[Filtration and completion]
+A \vocab{filtration} of $M$ by submodules is a sequence
+$M\supset F_1\supset F_2\supset\dots$.
+Then, the \vocab{completion} of $M$ with respect to
+this filtration is
+$$\widehat M = \varprojlim_n M/F_n,$$
+which is an inverse limit of the inverse system
+$$\dots\longto M/F_3\longto M/F_2\longto M/F_1\longto 0.$$
+\end{definition}
+Each element of $\widehat M$ is a sequence 
+$f=(f_1,f_2,\dots)$, where $f_i\in M/F_i$,
+and the image of $f_{i+1}$ onto $M/F_i$
+is equal to $f_i$ (i.e., they are consistent).
+
+Different filtrations can result in the same completion.
+\begin{definition}[Bounded difference filtration]
+Two filtrations $(F_n)_{n\geq 0}$ 
+and $(G_n)_{n\geq 0}$ have \vocab{bounded difference}
+if and only if there exists $c$ such that
+$F_{n+c}\subset G_n$ and $G_{n+c}\subset F_n$
+for all $n\geq 0$.
+\end{definition}
+\begin{proposition}[Bounded difference filtrations gives
+the same completion]
+    If $(F_n)_{n\geq 0}$ and $(G_n)_{n\geq 0}$
+    are two filtrations with bounded difference,
+    then they result in the same completion 
+    $$\varprojlim\limits_n M/F_n \simeq \varprojlim\limits_n M/G_n.$$
+\end{proposition}
+\begin{proof}
+    Given $(f_1,f_2,\dots) \in \varprojlim\limits_n M/F_n$,
+    we map it to element $(g_1,g_2,\dots) \in \varprojlim\limits_n M/G_n$ by letting $g_n$ be the image of $f_{n+c}$
+    through the quotient projection $M/F_{n+c}\to M/G_n$.
+    The inverse map can be constructed similarly,
+    and it is easy to see that they are inverses.
+\end{proof}
+
+
+A key example of completion is consider an ideal $I\subset A$
+and the $I$-adic filtration 
+$A\supset I\supset I^2\supset I^3\supset\dots$.
+An analogue of this for a module is the following.
+\begin{definition}[Filtrations related to ideal $I$]
+    \begin{itemize}
+    \item The \vocab{$I$-adic filtration} is the filtration
+    $$M\supset IM\supset I^2M\supset\dots.$$
+    In particular, the \vocab{$I$-adic completion}
+    of $M$, often denoted $\widehat M$ is 
+    \notation{$\widehat M$}{$I$-adic completion of module}
+    $$\widehat M = \varprojlim_{n\geq 0} M/I^nM.$$
+    \item 
+    An \vocab{$I$-filtration} on $M$ is a filtration
+    $(F_n)_{n\geq 0}$ such that $IF_n\subset F_{n+1}$ for all $n$.
+    \item 
+    A \vocab{stable $I$-filtration} is a filtration
+    $(F_n)_{n\geq 0}$ such that $IF_n = F_{n+1}$ for all $n$.
+    \end{itemize}
+\end{definition}
+In fact, stable $I$-filtrations are not much different
+from the $I$-adic filtration. We have the following lemma.
+\begin{lemma}
+    Any stable $I$-filtration $(F_n)_{n\geq 0}$ on $M$
+    has bounded difference from $I$-adic filtration
+    $I\supset I^2\supset \dots$,
+    thus inducing the same completion as the $I$-adic completion.
+\end{lemma}
+\begin{proof}
+    For one direction, note that $IF_{n-1}\subset F_n$,
+    so we have $I^n \subset I^{n-1}F_1\subset I^{n-2}F_2
+    \subset\dots\subset IF_{n-1}\subset F_n$,
+    so $I^n\subset F_n$, proving one direction.
+
+    For the other direction, pick $c$ such that
+    $I^k F_c = F_{c+n}$ for all $n$.
+    This gives $F_{n+c}\subset I^n$, done.
+\end{proof}
+%
+%
+%
+\section{Hensel's Lemma}
+Completion allows us to solve many algebraic expression 
+/ equation that we cannot do in normal ring. 
+For example, identities like
+\begin{align*}
+    \frac{1}{1-x} &= 1+x+x^2+\dots \\
+    \sqrt{1+x} &= 1+\frac 12 x - \frac 18 x^2
+    + \frac 3{16}x^3 - \dots = \sum_{n=0}^\infty \binom{1/2}n x^n
+\end{align*}
+were not valid in a normal polynomial ring,
+but they are valid once you extend to infinite series
+(i.e., take completion).
+There is a very general process of solving
+polynomial equation in the completed ring, called
+\vocab{Hensel's lemma}.
+
+\begin{theorem}[Hensel's Lemma]
+    Let $A$ be a ring, and let $I\subset A$ be an ideal.
+    Let $f(x)\in A[x]$.
+    Suppose we have $\overline a\in A/I$ such that 
+    \begin{itemize}
+    \item $f(\overline a) = 0$ in $A/I$ and
+    \item $f'(\overline a)$ is invertible $A/I$.
+    \end{itemize}
+    Then, there exists unique $\alpha\in\widehat A$
+    such that $f(\alpha)=0$ and $\alpha\equiv \overline a\pmod I$.
+\end{theorem}
+\begin{proof}
+    Let $a=a_1$.
+    It suffices to find a unique
+    $a_n\in A/I^n$ such that
+    \begin{itemize}
+	\item $a_n\equiv a_{n-1}\pmod{I^{n-1}}$.
+    \item $f(a_n)=0\in A/I^n$.
+    \end{itemize}
+    The sequence $a_1,a_2,\dots$ defines $\alpha\in \widehat A
+    = \varprojlim A/I^n$. We have $f(\alpha)=0$
+    since $f(a_n)=0$ for all $n$.
+
+    We prove this by induction on $n$.
+    Pick $b\in A/I^{n+1}$ such that $b\equiv a_n\pmod{I^n}$.
+    Then, for $\eps\in I^n/I^{n+1}$, we have
+    $$f(b+\eps) = f(b) + \eps f'(b) \in A/I^{n+1}$$
+    because all the $\eps^2$ terms got canceled out.
+    Then, since $f'(\overline a)$ is invertible in $A/I$,
+    we have $f'(b)$ is invertible in $A/I$, so
+    there exists $t\in A$ such that $f'(b)t \equiv 1\pmod I$.
+
+    Thus, we have $f(b+\eps)=0$ if and only if $\eps = -f(b)t$,
+    so this gives unique $a_{n+1} = b+\eps$.
+    The uniqueness of $a_1,a_2,\dots$ gives the uniqueness of $a$.
+\end{proof}
+\begin{example}[Taylor expansion of $\sqrt{1+x}$]
+    Let $A = \CC[x]$, $I=(x)$,  and $f(t)=t^2-(1+x)\in A[t]$.
+    Then,
+    \begin{itemize}
+    \item $f(1) = -x\in I$.
+    \item $f'(t) = 2t-(1+x)$, so $f'(1) = 2-(1+x) = 1-x$,
+    which reduces to $1\in A/I$, which is invertible.
+    \end{itemize}
+    Thus, Hensel's lemma gives that there exists
+    $a$ such that $a\equiv 1\pmod x$ and $a^2=1+x$.
+    Define $\sqrt{1+x} := a$.
+    More concretely, the first few terms of $\sqrt{1+x}$ is
+    $$\sqrt{1+x}=1+\frac 12 x - \frac 18 x^2 + \frac 3{16}x^3 - \dots.$$
+\end{example}
+We now revisit the nodal curves in the introduction
+of this chapter. Consider
+$$R = \left(\frac{\CC[x,y]}{(y^2-x^3-x^2)}\right)_{(x,y)}
+\quad\text{and}\quad 
+S = \left(\frac{\CC[u,v]}{(u^2-v^2)}\right)_{(u,v)},$$
+which are the rings of the curves $y^2=x^3+x^2$
+and $u^2=v^2$, localized at $(0,0)$.
+One can check that $R\not\simeq S$.
+However, we claim that the $(x,y)$-adic completion
+$\widehat R$ of $R$ is isomorphic to the 
+$(u,v)$-adic completion $\widehat S$ of $S$,
+and the isomorphism is given by
+\begin{equation}
+\label{eq:nodal_curve_1}
+u=x\sqrt{1+x},\quad v=y.
+\end{equation}
+To define the inverse map, one needs to solve $x^3+x^2=u^2$. 
+Let $x=ut$, so we have to solve the equivalent equation
+$ut^3 + t^2 = 1$.
+We again uses Hensel's lemma: set $f(t) = ut^3+t^2-1$,
+and we check that
+\begin{itemize}
+    \item $f(1) = u\in (u)$.
+    \item $f'(1) = 3u+2$, which is invertible in $S/(u)$.
+\end{itemize}
+Hence, Hensel's lemma gives that there exists
+$t\equiv 1\pmod u$ such that $ut^3+t^2=1$.
+More concretely, the first few terms of $t$ is
+$$t = 1 - \frac 12 u + \frac 58 u^2 - u^3 - \dots$$
+There is no closed form of the coefficients, but Hensel's lemma
+guarantees that you can compute as many terms as you want.
+Finally, the inverse map is desired by
+\begin{equation}
+\label{eq:nodal_curve_2}
+x = u - \frac 12 u^2 + \frac 58 u^3 - u^4 - \dots,\quad y=v,
+\end{equation}
+and we leave the reader to check that 
+\eqref{eq:nodal_curve_1} and \eqref{eq:nodal_curve_2}
+define an isomorphism between $\widehat R$ and $\widehat S$.
+
+%
+%
+%
+%
+\section{Artin-Rees Lemma}
+We now begin proving nice properties of completion.
+To do that, Artin-Rees lemma is a powerful tool.
+\subsection{Statement}
+Next, given a module $M$ with $I$-adic filtration.
+For any submodule $M'\subset M$, there are two natural
+choices of filtrations.
+\begin{itemize}
+    \item the $I$-adic filtration of $M'$ and
+    \item the induced \vocab{subspace filtration}
+	$F'_n = M\cap F_n$.
+\end{itemize}
+These two filtrations are very different.
+If $A=\mathbb Z$, $I=(p)$,
+then the $I$-adic filtration of $\mathbb Q$
+is a stupid $\mathbb Q\supset\mathbb Q\supset\dots$,
+so passing this to $\mathbb Z$ gives $\mathbb Z\supset\mathbb Z
+\supset\dots$.
+On the other hand, the $I$-adic filtration on $\mathbb Z$
+is $\mathbb Z\supset (p)\supset (p^2)\supset\dots$,
+so these are very different.
+
+The natural question is when are these filtrations
+the same. It turns out that if $A$ is Noetherian
+and $M$ is finitely generated, then they are the same!
+%
+%
+%
+\begin{theorem}[Artin-Rees Lemma]
+    \label{thm:artin_rees}
+    \index{Artin-Rees lemma}
+    Let $A$ be a Noetherian ring, $I\subset A$ be an ideal,
+    and $M$ be a finitely-generated $A$-module.
+    Let $M\supset F_1\supset F_2\supset\dots$
+    be a stable $I$-adic filtration.
+    Then, for any submodule $M'\subset M$,
+    the filtration $F_n' = M'\cap F_n$ is stable
+    $I$-adic filtration too!
+\end{theorem}
+\subsection{Proof}
+Proving this theorem requires a quick digression to
+\vocab{graded rings}.
+\begin{definition}[Graded ring and graded modules]
+    A ring is a \vocab{graded ring} if and only if
+    it can be written as
+    $$A_\bullet = \bigoplus_{n=0}^\infty A_n$$
+    such that $A_r\cdot A_s\subset A_{r+s}$ for all $r,s$.
+    We also let $A_+ = \bigoplus_{n\geq 1} A_n$ be an ideal.
+    \notation{$A_\bullet$}{a graded ring}
+    \notation{$A_+$}{ideal of positive degree elements}
+
+    A \vocab[graded module]{graded $A_\bullet$-module} 
+    is a direct sum
+    \notation{$M_\bullet$}{a graded module}
+    $$M_\bullet = \bigoplus_{n=0}^\infty M_n,$$
+    such that $A_jM_i\subset M_{i+j}$ for all $i,j\geq 0$.
+\end{definition}
+An example of graded ring is
+$\mathbb C[x] = \mathbb C \oplus \mathbb Cx
+\oplus \mathbb Cx^2 \oplus\dots$.
+\begin{lemma}[Condition for graded rings to be Noetherian]
+    \label{lem:graded_ring_noetherian}
+    The following are equivalent.
+    \begin{alphenum}
+    \item $A_\bullet$ is Noetherian
+    \item $A_0$ is Noetherian and $A_\bullet$ is a finitely-generated algebra.
+    \end{alphenum}
+\end{lemma}
+\begin{proof}
+    $(\Leftarrow)$ 
+    Note that $A_0[x_1,\dots,x_n]$ is Noetherian
+    by Hilbert Basis theorem (\Cref{thm:hilbert_basis}).
+    Thus, $A_\bullet$, which is a quotient of $A_0[x_1,\dots,x_n]$
+    is Noetherian.
+    
+    ($\Rightarrow$) We have $A_0 = A_\bullet / A_+$ so it is Noetherian.
+    As an ideal, we have $A_+ = (z_1,\dots,z_m)$.
+    Then, $z_1,\dots,z_m$ generates $A_\bullet$ as $A_0$-algebra
+    (i.e, $A_0[z_1,\dots,z_m] = A_\bullet$).
+\end{proof}
+Next, we will do the following clever construction.
+For any ring $A$, we construct the 
+\vocab{blowup algebra} (also known as \vocab{Rees algebra})
+$$\Bl_I A = \bigoplus_{n\geq 0} I^n
+\  \subset\ \bigoplus_{n\geq 0} A = A[t].$$
+\notation{$\Bl_I A$}{blowup algebra}
+This is a graded ring because $I^n I^m\subset I^{n+m}$.
+
+Observe that if $A$ is Noetherian,
+then by \Cref{lem:graded_ring_noetherian},
+we get $\Bl_I A$ is Noetherian.
+
+Now, given a finitely-generated module $M$
+and an $I$-filtration $(F_n)_{n\geq 0}$, define
+the \vocab{blowup module}
+$$\Bl_F M = \bigoplus_{n\geq 0} F_n.$$
+\notation{$\Bl_F M$}{blowup module}
+Therefore, $\Bl_F M$ is a graded $\Bl_I A$-module.
+\begin{lemma}
+    \label{lem:blowup_fin_gen}
+    $(F_n)$ is a stable $I$-filtration
+    if and only if $\Bl_F M$ is a finitely-generated $\Bl_I A$-module.
+\end{lemma}
+\begin{proof}
+    Observe the following.
+    \begin{enumerate}[label=(\roman*)]
+    \item $M\oplus F_1\oplus\dots\oplus F_n$ is
+     a finitely-generated $A$-submodule of $\Bl_F M$.
+    \item Therefore, if
+    $$M_n^\star := M\oplus F_1\oplus \dots\oplus F_n 
+    \oplus IF_n \oplus I^2F_n \oplus\dots \ \subset\ 
+    \Bl_F M,$$
+    the submodule generated by $M\oplus F_1\oplus\dots\oplus F_n$,
+    then $M_n^\star$ is finitely-generated $\Bl_I A$-module.
+    \item We have an infinite ascending chain 
+    $$M_0^\star \subset M_1^\star \subset \dots \subset 
+    \Bl_F M.$$
+    \end{enumerate}
+    
+    We are now ready to finish the proof.
+    Each of the following is equivalent to the next.
+    \begin{itemize}
+    \item $ \Bl_F M$ is finitely-generated $\Bl_I A$-module.
+    \item $ \Bl_F M = M_n^\star$ for some $n$
+    (follows from (ii) and (iii)).
+\item $\bigoplus_{k\geq 0} F_k = 
+	M\oplus F_1\oplus\dots\oplus F_n\oplus IF_n\oplus I^2F_n
+	\oplus\dots$
+	for some $n$.
+    \item There exists $k$ such that
+	$F_{n+k} = I^kF_n$ for all $k$.
+    \item The filter $(F_n)$ is stable. \qedhere
+    \end{itemize}
+\end{proof}
+Finally, we prove Artin-Rees Lemma.
+\begin{proof}[Proof of Artin-Rees Lemma (\Cref{thm:artin_rees})]
+   Consider the blowup module of $M'$
+   $$ \Bl_F M' = \bigoplus_{n\geq 0} (F_n\cap M') \subset \Bl_F M.$$
+   Since $F$ is stable, we have by the previous \Cref{lem:blowup_fin_gen} 
+   $\Bl_F M$ is finitely-generated.
+   Since $\Bl_I A$ is Noetherian, by \Cref{prop:noetherian_module_fin_gen}, 
+   $\Bl_F M'$ is finitely-generated.
+   Thus, $F_n\cap M'$ is stable!
+\end{proof}
+%
+%
+%
+\section{Properties of Completion}
+We now prove various properties of completion.
+\subsection{Exactness}
+\begin{theorem}[Exactness of $I$-adic completion]
+\label{thm:completion_is_exact}
+Let $A$ be a Noetherian ring, $I$ be an ideal,
+and we have a short exact sequence of $A$-module
+$$0\longto M\longto N\longto P\longto 0.$$
+If $N$ is finitely-generated, then the $I$-adic completions
+form an exact sequence
+$$0\longto \widehat M\longto \widehat N\longto\widehat P\longto 0.$$
+\end{theorem}
+\begin{proof}
+    View $M$ as a submodule of $N$.
+    Then, we have a commutative diagram with exact rows
+    \begin{center}
+    \begin{tikzcd}
+        0 \arrow[r]
+        & M\cap I^kN \arrow[r, hook] \arrow[d, hook] 
+        & I^kN \arrow[r] \arrow[d, hook] 
+        & I^kP \arrow[r] \arrow[d, hook] 
+        & 0 \\
+        0 \arrow[r]
+        & M \arrow[r, hook] 
+        & N \arrow[r] 
+        & P \arrow[r] 
+        & 0
+    \end{tikzcd}.
+    \end{center}
+    We apply Snake lemma (\Cref{lem:snake}).
+    Reading from $\Ker(I^kP\to P)$ onwards,
+    we get the exact sequence
+    $$0\longto M/(M\cap I^kN) 
+    \longto N/I^kN \longto P/I^k P \longto 0.$$
+    The inverse limit of $N/I^kN$ and $P/I^kP$
+    are $\widehat N$ and $\widehat P$.
+    By Artin-Rees lemma (\Cref{thm:artin_rees}),
+    the inverse limit of $M/(M\cap I^kN)$ is $\widehat M$.
+    Hence, by taking inverse limit of the above sequence
+    and using \Cref{lem:inverse_limit_exact},
+    we get the desired exact sequence
+    \[0\longto \widehat M\longto\widehat N
+    \longto\widehat P\longto 0. \qedhere\]
+\end{proof}
+\subsection{Flatness}
+\begin{theorem}[Flatness of $I$-adic completion]
+    Let $A$ be a Noetherian ring and $I$ be an ideal.
+    \begin{alphenum}
+    \item If $M$ is finitely-generated, then 
+    $\widehat A\otimes_A M \simeq \widehat M$.
+    \item $\widehat A$ is a flat $A$-module.
+    \end{alphenum}
+\end{theorem}
+\begin{warn}
+    For any modules $M$, $N$, $P$, the sequence
+    $$0\longto \widehat A\otimes_A M 
+    \longto \widehat A \otimes_A N
+    \longto \widehat A\otimes_A P \longto 0$$
+    is always exact.
+
+    In contrast, the sequence
+    $$0\longto \widehat M 
+    \longto \widehat N
+    \longto \widehat P\longto 0$$
+    is \textbf{not always exact}, specifically when 
+    $N$ is not finitely-generated.
+    For example, if $A=\ZZ$, $I=(p)$, 
+    $M=\ZZ$, viewed as a submodule
+    of $N=\QQ$, then $\widehat N=0$, so the sequence
+    is definitely not exact.
+\end{warn}
+\begin{proof}
+    \begin{alphenum}
+    \item We note that there is a natural map
+    $$\eta_M : \widehat A \otimes_A M \to \widehat M$$
+    arising from the obvious bilinear map 
+    $\widehat A\times M \to \widehat M$ by sending
+    $(a_0,a_1,\dots)$ and $m$ to $(a_0m, a_1m,\dots)$
+    where $a_n\in A/I^n$ and so $a_nm\in M/I^nM$.
+    
+    We claim that $\eta_M$ is an isomorphism for all 
+    finitely-generated $M$.
+    This is obvious when $M=A^{\oplus r}$. 
+    We are going to reduce to this case.
+
+    To do that, we claim that there exists a right exact sequence
+    $$G \stackrel\beta\longto F \stackrel\alpha\longto M\longto 0$$
+    such that $F$ and $G$ are free and finitely-generated.
+    To find this, take any surjective map $F\to M$
+    (exists since $M$ is finitely-generated).
+    Then, by \Cref{prop:noetherian_module_fin_gen},
+    the kernel of this map is finitely-generated,
+    and so one can find a surjective map from a free module $G$
+    to this kernel, giving the desired map.
+
+    Thus, we have the following commutative diagram.
+    The rows are exact by \Cref{thm:tensor_is_right_exact}
+    and \Cref{thm:completion_is_exact}.
+    \begin{center}
+    \begin{tikzcd}
+	 \widehat A\otimes_A G \arrow[r, "\beta_*"] \arrow[d, "\eta_G"', "\sim"] &
+	\widehat A\otimes_A F
+	\arrow[r, "\alpha_*"] \arrow[d, "\eta_F"', "\sim"] &
+	\widehat A\otimes_A M
+	\arrow[r] \arrow[d,"\eta_M"] & 0 \\
+  \widehat G \arrow[r, "\widehat\beta"]  &
+	\widehat F
+	\arrow[r, "\widehat\alpha"] &
+	\widehat M \arrow[r] & 0 
+    \end{tikzcd}
+    \end{center}
+    If you know \textbf{Five lemma} (see e.g.,
+    \cite[(5.23)]{altman_kleiman}), then the conclusion is immediate.
+    If not, then it is still a straightforward diagram chase.
+    \begin{itemize}
+    \item \textbf{Surjectivity.}
+    Note that $\eta_M\circ\alpha_* = \widehat\alpha \circ\eta_F$.
+    The right hand side is surjective since 
+    $\widehat\alpha$ and $\eta_F$ are surjective,
+    so is the left hand side. Hence, $\eta_M$ is surjective.
+    \item \textbf{Injectivity.}
+    Suppose that $m\in \widehat A\otimes_A M$ 
+    satisfies $\eta_M(m) = 0$.
+    \begin{center}
+    \begin{tikzcd}
+	 g \arrow[r, "\beta_*", maps to] 
+     \arrow[d, "\eta_G", maps to] 
+     &  f \arrow[r, "\alpha_*", maps to] 
+     \arrow[d, "\eta_F", maps to] &
+	 m
+	\arrow[r, maps to] \arrow[d,"\eta_M", maps to] & 0 \\
+  \hat g \arrow[r, "\widehat\beta", maps to]  &
+	\hat f
+	\arrow[r, "\widehat\alpha", maps to] &
+	0 \arrow[r, maps to] & 0 
+    \end{tikzcd}
+    \end{center}
+    \begin{itemize}
+    \item Since $\alpha_*$ is surjective,
+    find $f\in \widehat A\otimes_A F$ 
+    such that $\alpha_*(f)=m$. 
+    \item Since $\hat f=\eta_F(f)\in\Ker\widehat\alpha$, so by exactness,
+    there exists $\hat g\in \widehat G$ such that 
+    $\widehat\beta(\hat g) = \hat f$.
+    \item Since $\eta_G$ is surjective,
+    there exists $g\in \widehat A\otimes_A G$ such that
+    $\eta_G(g)=\hat g$.
+    \item Thus, $\beta_*(g) = f$, so $f\in \Im\beta_*$,
+    so $f\in \Ker\alpha_*$, implying that $m=\alpha_*(f)=0$.
+    \end{itemize}
+    This complete the proof.
+    \end{itemize}
+    \item 
+    Suppose that we have a map $\phi : M\to N$ is injective.
+    We have to show that the induced map 
+    $\phi_* : \widehat A\otimes M\to \widehat A\otimes N$
+    is injective.
+    If we had that $M$ and $N$ are finitely-generated,
+    we would be done by combining (a) and 
+    exactness of completion (\Cref{thm:completion_is_exact}).
+    However, we do not, so we need to do a little more work.
+
+    Suppose that $0\neq\sum_{i=1}^n a_i\otimes m_i \in \Ker\phi_*$,
+    where $a_i\in\widehat A$ and $m_i\in M$.
+    Let $M'$ be the submodule of $M$
+    generated by $m_1,\dots,m_n$,
+    and let $N' = \phi(M')$,
+    which is clearly finitely-generated.
+    Then, the restriction $\phi : M'\to N'$
+    is injective, but the induced map on tensor
+    $\phi_* : \widehat A\otimes_A M' 
+    \to \widehat A \otimes_A N'$
+    has element $\sum_{i=1}^n a_i\otimes m_i$ in the kernel,
+    hence not injective.
+    This contradicts the previous paragraph.
+    \qedhere
+    \end{alphenum}
+\end{proof}
+We note the following useful corollary.
+\begin{corollary}
+    \label{cor:completion_isomorphism}
+    Let $A$ be Noetherian and $I,J$ be ideals.
+    Let $\widehat A$ be the $I$-adic completion.
+    \begin{enumerate}[label=(\alph*)]
+     \item $\widehat J = J\widehat A$.
+     \item $\widehat{J^n} = (\widehat J)^n$.
+     \item $A/I^n \simeq \widehat A/\widehat{I^n}$.
+     (In particular, taking inverse limit
+     shows that $\widehat{\widehat A} = \widehat A$.)
+      \item $I^n/I^{n+1} = \widehat{I^n} / \widehat{I^{n+1}}$.
+     \end{enumerate}
+     (Notation: $J\widehat A$ denotes ideal extension,
+     while $\widehat J$ denote $I$-adic completion
+     of $J$ as $A$-module.)
+\end{corollary}
+\begin{proof}
+    \begin{enumerate}[label=(\alph*)]
+     \item The exact sequence of $A$-module
+ 	$$0\longto J\longto A\longto A/J\longto 0$$
+ 	gives an exact sequence of $\widehat A$-module
+ 	$$0\longto \widehat J\longto\widehat A
+ 	\longto\widehat{A/J} \longto 0.$$
+ 	Thus, the third factor is $\widehat A / \widehat J$.
+        However, $\widehat{A/J} \simeq \widehat A\otimes_A A/J
+        = \widehat A/J\widehat A$,
+ 	giving the result.
+     \item From (a), we have $\widehat J^n = J^n\widehat A
+ 	= (J\widehat A)^n$.
+     \item Note that $\widehat{A/I^n} = A/I^n$
+     because the inverse limit diagram stabilizes at $A/I^n$.
+     However, by exactness, 
+     $\widehat{A/I^n} = \widehat A / (\widehat I)^n
+     = \widehat A/\widehat{I^n}$,
+     implying that $A/I^n = \widehat A/\widehat{I^n}$,
+     \item From (c), we get that
+      $A/I^n = \widehat A/\widehat{I^n}$
+      and  $A/I^{n+1} = \widehat A/\widehat{I^{n+1}}$
+     Taking quotient yields the result.
+     \qedhere
+     \end{enumerate}
+\end{proof}
+Finally, we note that completion of local ring is a local ring.
+\begin{proposition}[Completion of local ring is local]
+    \label{prop:completion_local}
+    Let $A$ be Noetherian local ring with maximal ideal $\mm$.
+    Then, the $\mm$-adic completion $\widehat A$
+    is a local ring with maximal ideal $\widehat \mm$.
+\end{proposition}
+\begin{proof}
+    Note that $A/\mm = \widehat A/\widehat\mm$,
+    so $\widehat\mm$ is a maximal ideal.
+    Now, for any $x\in \widehat \mm$,
+    we have $(1+x)^{-1} = 1-x+x^2-\dots$,
+    converging in $\widehat A$, so $1+x$ is a unit.
+    This implies that $\widehat \mm$ is the only maximal ideal.
+\end{proof}
+
+\subsection{Associated Graded Ring and Noetherianess}
+We will prove the following.
+\begin{theorem}[Completion of Noetherian ring is Noetherian]
+    \label{thm:completion_is_noetherian}
+    If $A$ is Noetherian, then the $I$-adic completion
+    $\widehat A$ is Noetherian.
+\end{theorem}
+This theorem would be easy if all ideals of $\widehat A$
+comes from extension of $A$.
+However, this is not true because there are way more ideals
+generated by power series. Thus, we need to do some trick.
+The plan of the proof is the following.
+\begin{enumerate}[label=(\roman*)]
+    \item Prove that if $A$ is Noetherian,
+    then the formal series ring in $k$ variables
+    $A[[x_1,\dots,x_k]]$ is Noetherian.
+    \notation{$A[[x_1,\dots,x_k]]$}{formal series ring}
+    \item Prove that $\widehat A$ is a quotient 
+    of $A[[x_1,\dots,x_k]]$ for some $k$.
+\end{enumerate}
+Clearly, the theorem would follows from (i) and (ii).
+Part (i) was left as \Cref{prob:formal_series},
+and the proof is basically imitating the proof of 
+Hilbert Basis Theorem (\Cref{thm:hilbert_basis}).
+We thus focus on showing (ii).
+More precisely, we will prove the following lemma.
+\begin{proposition}
+    \label{prop:completion_is_quotient}
+    If $I$ is finitely-generated, then
+    $\widehat A$ is a quotient of $A[[x_1,\dots,x_k]]$
+    for some $k\geq 0$.
+\end{proposition}
+To prove this, we introduce a useful construction
+that will help us in the next chapter as well.
+\begin{definition}[Associated Graded Ring]
+\label{def:gr}
+If $I$ is an ideal of $A$, then the \vocab{associated graded ring}
+is the graded ring
+    $$\gr_I A := \bigoplus_{n\geq 0} I^n/I^{n+1}.$$
+\notation{$\gr_I A$}{associated graded ring}
+For any module $M$ and $I$-filtration $F_n$,
+we define the \vocab{associated graded module}
+\notation{$\gr_F M$}{associated graded module}
+$$\gr_F M := \bigoplus_{n\geq 0} F_n/F_{n+1}.$$
+\end{definition}
+Observe that $\gr_F M$ is a quotient of $\Bl_F M$.
+Thus, if $F$ is a stable $I$-filtration,
+then by \Cref{lem:blowup_fin_gen}, $\Bl_F M$ is finitely-generated,
+so $\gr_F M$ is finitely-generated.
+
+Now, we have the following key lemma, which will
+help us check when maps on completions are injective
+or surjective.
+\begin{lemma}
+    \label{lem:gr_injective_surjective}
+    Suppose that $(F_n)_{n\geq 0}$ and $(G_n)_{n\geq 0}$ are two arbitrary filtrations of abelian groups $M$ and $N$.
+    If $f : M\to N$ be a map such that $f(F_n)\subset G_n$.
+    We thus have two induced maps
+    $$\widehat f : \widehat M\to\widehat N
+    ,\quad \gr f
+    : \gr_F M \to \gr_G N$$
+    Then, if $\gr f$ is injective (resp. surjective),
+    then $\widehat f$ injective (resp. surjective).
+\end{lemma}
+\begin{proof}
+    Let $\alpha_n : M/F_n\to N/G_n$.
+    We will prove by induction that $\alpha_n$ is
+    injective/surjective for all $n$.
+    We have the commuting diagram with exact rows
+    \begin{center}
+    \begin{tikzcd}
+	0 \arrow[r] &
+	F_n/F_{n+1} \arrow[r] \arrow[d, "\gr_n f"] &
+	M/F_{n+1} \arrow[r] \arrow[d, "\alpha_{n+1}"] &
+	M/F_n \arrow[r] \arrow[d, "\alpha_n"] &
+	0 \\
+	0 \arrow[r] &
+	G_n/G_{n+1} \arrow[r] &
+	N/G_{n+1} \arrow[r] &
+	N/G_n \arrow[r] &
+	0
+    \end{tikzcd}
+    \end{center}
+    Applying Snake Lemma \Cref{lem:snake} 
+    gives the long exact sequence
+    $$0\to \Ker( \gr_n f) \to \Ker \alpha_{n+1}
+    \to \Ker \alpha_n \to \Coker( \gr_n f)
+    \to \Coker \alpha_{n+1} \to \Coker \alpha_n\to 0.$$
+    
+    If $\gr_n f$ is injective for all $n$,
+    we assume the inductive hypothesis $\Ker(\alpha_n)=0$.
+    Looking at the first few terms gives
+    $0\to \Ker\alpha_{n+1}\to 0$, so
+    $\Ker\alpha_{n+1}=0$.
+    This gives $\alpha_n$ injective for all $n$,
+    so $M/F_n\to N/G_n$ is injective for all $n$.
+    Since inverse limit is exact (\Cref{lem:inverse_limit_exact}),
+    we get that $\widehat M\to \widehat N$ is injective.
+
+    If $\gr f$ surjective,
+    we instead assume $\Coker\alpha_n = 0$.
+    Thus, $\Coker\alpha_{n+1}$ is sandwiched
+    between two zeroes, so it is zero.
+    Thus, $M/F_n\to N/G_n$ is surjective for all $n$.
+    Again, using the fact that inverse limit
+    is exact (\Cref{lem:inverse_limit_exact}) gives the result.
+\end{proof}
+Finally, we prove \Cref{prop:completion_is_quotient}.
+\begin{proof}[Proof of \Cref{prop:completion_is_quotient}]
+    Let $I=(f_1,\dots,f_n)$. Define the map
+    \begin{align*}
+        \phi : A[x_1,\dots,x_n] &\to  A \\
+        x_i &\mapsto f_i.
+    \end{align*}
+    Let $J = (x_1,\dots,x_k)$. Then, $\phi(J)=I$,
+    it induces the map on $J$-adic completion
+    on left side and $I$-adic completion on the right side
+    $$\widehat \phi : A[[x_1,\dots,x_k]] \to \widehat A.$$
+    We claim that $\widehat\phi$ is surjective,
+    which finishes the proof.
+    To check this, by \Cref{lem:gr_injective_surjective},
+    it suffices to show that the induced map
+    $$\gr f : \bigoplus_{n\geq 0} I^n/I^{n+1} \to 
+    \bigoplus_{n\geq 0} J^n/J^{n+1}$$
+    is surjective.
+    
+    However, note that each element in $J^n/J^{n+1}$
+    is of the form $f_1^{a_1}\dots f_k^{a_k}$
+    where $a_1+\dots+a_k=n$.
+    This is preimage of $x_1^{a_1}\dots x_k^{a_k}$,
+    so we are done.
+\end{proof}
+\section{Problems}
+\begin{problem}
+Describe the $(x,y)$-adic completion of 
+$\mathbb C[x,y]/(y^2-x^3)$.
+\end{problem}
+\begin{problem}
+Let $f\in\CC[x,y]$ be an irreducible polynomial,
+and let $R=(\CC[x,y]/(f))_{(x,y)}$.
+Suppose that at least one of $(\partial f/\partial x)_{(0,0)}$
+and $(\partial f/\partial y)_{(0,0)}$ is nonzero.
+Prove that the $(x,y)$-adic 
+completion $\widehat R$ is isomorphic to $\CC[[t]]$.
+
+(In other words, completition of a smooth curve 
+is isomorphic to $\CC[[t]]$.
+We will see a generalization of this in \Cref{thm:completion_regular_local}.)
+\end{problem}
+\begin{problem}
+Let $A$ be a local ring with maximal ideal $\mathfrak m$ and residue field $k=A/\mathfrak m$ such that $A$ is $\mathfrak m$-adically complete. 
+Let $f\in A[x]$ be a monic polynomial, and let $\overline f\in k[x]$ be its reduction modulo $\mathfrak m$.
+If $\overline f = \overline g \overline h$, where $\overline g$ and $\overline h$ are monic polynomials in relatively prime in $k[x]$, prove that there exist polynomials $g,h\in A[x]$ such that $g\equiv \overline g\pmod{\mathfrak m}$, $h\equiv \overline h\pmod{\mathfrak m}$, and $f=gh$.
+\end{problem}
+\begin{problem}
+Let $\mathbb Z_p$ be the ring of $p$-adic integers, defined as the $(p)$-adic completion of $\mathbb Z$. Let $\mathbb Q_p$ be the fraction field of $\mathbb Z_p$.
+\begin{alphenum}
+\item Prove that every element of $\mathbb Q_p$ is of the form $p^{-u}v$ where $u\in\mathbb Z$ and $v\in\mathbb Z_p$.
+\item Determine all quadratic extensions of $\mathbb Q_p$ (there are finitely many of them!%
+\footnote{It is a standard fact in algebraic number theory that there are finitely many degree $n$ extension of $\mathbb Q_p$.}). 
+The answer is different for $p=2$, so be careful.
+\end{alphenum} 
+\end{problem}
+\begin{problem}[Krull's intersection theorem]
+Let $R$ be a Noetherian local ring with maximal ideal $\mathfrak m$.
+Krull's intersection theorem states that 
+$\textstyle{\bigcap_{n\geq 0} \mathfrak m^n=0}$.
+\begin{alphenum}
+\item What's wrong with the following proof: 
+let $I=\textstyle{\bigcap_{n\geq 0} \mathfrak m^n}$, which is finitely-generated. Then,
+$$\mathfrak mI = \mathfrak m\bigcap_{n\geq 0} \mathfrak m^n 
+= \bigcap_{n\geq 0} \mathfrak m^{n+1} 
+= \bigcap_{n\geq 1}\mathfrak m^n = I,$$
+so by Nakayama's lemma, $I=0$?
+\item Using Artin-Rees lemma (\Cref{thm:artin_rees}),
+prove Krull's intersection theorem.
+\end{alphenum}
+\end{problem}
+\begin{problem}
+Let $A$ be a Noetherian ring and $I$ be an ideal in $A$.
+Let $\widehat A$ be the $I$-adic completion of $A$.
+Suppose that $x\in A$ is not a zero divisor.
+Prove that the image $\widehat x$ of $x$ in $\widehat A$
+is also not a zero divisor in $\widehat A$.
+\end{problem}
+\begin{problem}
+\label{prob:compute_gr}
+For each of the following rings $R$ and maximal ideal $\mathfrak m$, compute $\operatorname{gr}_{\mathfrak m} R$.
+\begin{alphenum}
+\item $R=\mathbb C[x,y]/(y^2-x^3-x)$ and $\mathfrak m = (x,y)$.
+\item $R=\mathbb C[x,y,z]/(xy, xz)$ and $\mathfrak m=(x,y,z)$.
+\item $R=\mathbb C[x,y,z,t]/(x^2+y^3+z^4+t^5)$ and $\mathfrak m=(x,y,z,t)$.
+\end{alphenum}
+\end{problem}

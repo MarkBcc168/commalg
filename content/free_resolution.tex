@@ -1,0 +1,230 @@
+\chapter{More About Free Resolutions}
+The goal of this appendix is to prove
+\Cref{thm:tor_properties} (a),
+that $\Tor_i^R(M,N)$ 
+does not depend on the choice of free resolution of $N$.
+To do this, we need to introduce a little more 
+homological algebra.
+\section{Chain Homotopy}
+First, we define morphism between two chain complexes.
+\begin{definition}[Morphism between chain complexes]
+    Let $C_*$ and $D_*$ be two chain complexes of $R$-modules.
+    A \vocab{morphism} between two chain complexes
+    $f : C_*\to D_*$ is the sequence of morphisms
+    $\dots, f_0, f_1,\dots$ such that the following diagram commutes
+    \begin{center}
+    \begin{tikzcd}
+        \dots \arrow[r] 
+        & C_1 \arrow[d, "f_{-1}"] \arrow[r, "\partial_1"]
+        & C_0 \arrow[d, "f_0"] \arrow[r, "\partial_0"]
+        & C_{-1} \arrow[d, "f_1"] \arrow[r]
+        & \dots  \\
+        \dots \arrow[r] 
+        & D_1 \arrow[r, "\partial_1"]
+        & D_0 \arrow[r, "\partial_0"]
+        & D_{-1} \arrow[r]
+        & \dots   
+    \end{tikzcd}
+    \end{center}
+    This promotes the set of chain complexes
+    of $R$-modules to be a category $\operatorname{ch}(\Mod R)$.
+    \notation{$\operatorname{ch}(\Mod R)$}{category
+    of chain complexes of $R$-modules}
+\end{definition}
+For any morphism $f : C_* \to D_*$,
+you can check that $f_n$ induces a map
+$H_n(f) : H_n(C_*) \to H_n(D_*)$.
+(This makes $H_n$ a functor 
+$H_n : \operatorname{ch}(\Mod R) \to \Mod R$.)
+\notation{$H_n(f)$}{induced map of homology groups}
+For any two maps $f,g$, we are interested
+in the condition at which $H_n(f) = H_n(g)$.
+One sufficient condition is chain homotopy.
+\begin{definition}[Chain homotopy]
+    Let $C_*$ and $D_*$ be two chain complexes of $R$-modules.
+    A \vocab{chain homotopy} between two morphisms
+    $f,g : C_*\to D_*$ is a sequence of morphism 
+    $h_n : C_n \to D_{n+1}$ such that
+    $$\partial_{n+1}h_n - h_{n-1}\partial_n = g_n-f_n.$$
+    If there exists such $h$, then we say that
+    $f$ and $g$ are \vocab{chain homotopic}.
+\end{definition}
+\begin{proposition}
+    \label{prop:chain_homotopy}
+    If $h$ is a chain homotopy between
+    $f,g : C_*\to D_*$, then $H_n(f) = H_n(g)$
+    (as homomorphisms from $H_n(C_*)\to H_n(D_*)$) for all $n$.
+\end{proposition}
+\begin{proof}
+    Suppose that $z\in \Ker(\partial_n)$,
+    i.e., $\partial_n(z)=0$.
+    We need to show that $f(z)-g(z) \in \Im(\partial_{n+1})$.
+    To do this, we note that
+    \[g_n(z)-f_n(z) = \partial_{n+1}(h_n(z)) - h_{n-1}(\partial_n(z))
+    =\partial_{n+1}(h_n(z)) \in \Im\partial_{n+1}
+    \qedhere\]
+\end{proof}
+
+\section{Fundamental Theorem of Homological Algebra}
+\begin{theorem}[Fundamental theorem of homological algebra]
+\label{thm:homological_alg}
+Let $N$ and $N'$ be two $R$-modules.
+Let $N_*$ and $N'_*$ be free resolutions of $N$ and $N'$.
+Then, any morphism $\phi : N\to N'$ can be lifted to
+morphism between free resolutions $\widetilde\phi : N_*\to N'_*$.
+Furthermore, any two lifts are chain homotopic.
+\end{theorem}
+\begin{proof}
+    We use the following properties labeled ($\spadesuit$) 
+    of free modules:
+    if $F$ is a free module,
+    then for any surjective map $f : P\to Q$,
+    it is possible to lift any map $\pi : F\to Q$ to 
+    $\widetilde\pi : F\to P$
+    \begin{center}
+    \begin{tikzcd}
+        & F \arrow[ld, dashed, "\exists\widetilde\pi", swap] 
+        \arrow[d, "\psi"]\\
+        P \arrow[r, two heads, "f", swap] & Q
+    \end{tikzcd}.
+    \end{center}
+    (Aside: Modules with this property are called 
+    \vocab{projective modules}, and this is the only condition
+    of $N_i$ that we need to make this theorem works,
+    so instead of free resolutions, you can use a more general projective resolutions.)
+    To verify this property, simply send
+    a generator $e_i\in F$ to any element in 
+    $f^{-1}(\{\psi(e_i)\})$.
+
+    Now, we prove the theorem. 
+    
+    \textbf{Existence of a lift.}
+    First, we show existence
+    by construction the map $\widetilde\phi_i : N_i\to N'_i$ by induction.
+    In the base case, consider the following diagram
+    \begin{center}
+    \begin{tikzcd}
+        N_0  \arrow[d, dashed] \arrow[r, two heads]
+        \arrow[rd]
+        & N  \arrow[d, "\phi"] \\
+        N'_0 \arrow[r, two heads] & N' 
+    \end{tikzcd}
+    \end{center}
+    Thus, we use $(\spadesuit)$ to find the map
+    $\widetilde\phi_0$ such that the diagram above commute.
+
+    Now, for the inductive step, suppose we have
+    $\widetilde\phi_{i-1} : N_{i-1}\to N'_{i-1}$.
+    Let $K_{i-1} = \Ker(N_{i-1}\to N_{i-2})$
+    and $K'_{i-1} = \Ker(N'_{i-1}\to N'_{i-2})$
+    Then, $\widetilde\phi_{i-1}$ 
+    induces the map $\widetilde\phi_{i-1} : 
+    K_{i-1} \to K'_{i-1}$. Then, we have the diagram
+    \begin{center}
+    \begin{tikzcd}
+        N_i \arrow[d, dashed] \arrow[r, two heads]
+        \arrow[rd]
+        & K_{i-1}  \arrow[d, "\widetilde\phi_{i-1}"] \\
+        N'_i \arrow[r, two heads] & K'_{i-1}
+    \end{tikzcd},
+    \end{center}
+    and again, we can use $(\spadesuit)$
+    to find $\widetilde\phi_i : N_i\to N'_i$
+    so that the above diagram commutes.
+
+    \textbf{Any two lifts are chain homotopic.}
+    We have to construct the chain homotopy.
+    Consider two lifts $\psi, \pi : N_*\to N_*'$.
+    Let $\ell = \psi-\pi$.
+    We need $h$ such that $\partial h - h\partial = \ell$.
+    We, again, do this by induction. 
+    Ths base case is to find $h_0$ so that the 
+    following diagram commutes:
+    \begin{center}
+    \begin{tikzcd}
+        &
+        & N_0  \arrow[d, "\ell_0"]
+        \arrow[lld, dashed, "h_0", swap]
+        \arrow[ld, dashed] \arrow[r, two heads]
+        & N \arrow[d, "0"] \\
+        N'_1 \arrow[r, two heads] 
+        & K'_1 \arrow[r, hook] 
+        & N'_0  \arrow[r, two heads]
+        & N'
+    \end{tikzcd}
+    \end{center}
+    This is done in two steps.
+    First, note that the composition 
+    $N\to N_0'\to N'$ is zero map,
+    so that composition factors through $K_1'$.
+    Therefore, we get $N_0\to K_1'$.
+    Then, use $(\spadesuit)$ again to find $N_0\to N_1'$.
+    Since the term $h\partial$ vanishes,
+    we get that the chain homotopy condition
+    is verified at $0$.
+
+    Now, the inductive step is similar. We have the diagram
+    \begin{center}
+    \begin{tikzcd}
+        &
+        & N_i 
+        \arrow[lld, dashed, "h_i", swap]
+        \arrow[ld, dashed] 
+        \arrow[d, "\ell_i + h_{i-1}\partial_i"] \\
+        N'_{i+1} \arrow[r, two heads] 
+        & K'_{i+1} \arrow[r, hook] 
+        & N'_i  
+    \end{tikzcd}
+    \end{center}
+    We have to construct $h_i$ such that
+    $\partial_{i+1}h_i - h_{i-1}\partial_i = \ell_i$.
+    To do this, we first note that
+    \begin{align*}
+    \partial_i\Big(\ell_i + h_{i-1}\partial_i\Big)
+    &= \partial_i\ell_i + \partial_i h_{i-1}\partial_i \\
+    &= \ell_{i-1}\partial_i + \partial_ih_{i-1}\partial_i 
+    \tag{$\ell$ commutes with boundary maps}\\
+    &= (\ell_{i-1} + \partial_{i}h_{i-1})\partial_i \\
+    &= h_{i-2}\partial_{i-1}\partial_i 
+    \tag{chain homotopy definition}\\
+    &= 0,
+    \end{align*}
+    so $\ell_i + h_{i-1}\partial_i$ factors through
+    $K'_{i+1}$, getting the map 
+    $N_i\to K_{i+1}'$. Finally, use $(\spadesuit)$
+    to lift it to $h_i$, giving the desired
+    chain homotopy condition.
+\end{proof}
+\section{Proof that Tor does not Depend on Free Resolution}
+We now prove \Cref{thm:tor_properties} (a).
+\begin{theorem}[Tor does not depend on free resolution]
+    \label{thm:tor_free_res}
+    The functor $\Tor_n^R(M,N)$ 
+    (defined in \Cref{def:tor}) does not depend on the 
+    choice of $N_*$.
+\end{theorem}
+\begin{proof}
+    Consider two free resolutions $N_*$ and $N'_*$
+    for $N$. Thus, by the fundamental theorem of homological algebra (\Cref{thm:homological_alg}),
+    the identity map $\id : N\to N$ lifts to 
+    $\phi : N_* \to N'_*$ and $\psi : N'_*\to N_*$.
+    Then, $\phi\circ\psi : N_*\to N_*$
+    is a lift of $\id$ as well. However, the identity map
+    is one such liftlift of $\id$, so $\phi\circ\psi$
+    is chain homotopic to identity.
+    
+    Tensoring with $M$, we get two maps
+    $\phi_* : M\otimes N_* \to M\otimes N_*'$
+    and $\psi_* : M\otimes N'_* \to M\otimes N_*$.
+    Since everything is an additive functor,
+    the chain homotopic condition is preserved through
+    tensoring with $M$. 
+    Thus, $\phi_*\circ\psi_*$ is chain homotopic to identity.
+    Similarly, $\psi_* \circ\phi_*$ is chain homotopic to identity.
+    Thus, by using \Cref{prop:chain_homotopy},
+    $H_n(\phi_*)$ and $H_n(\psi_*)$
+    provide isomorphism between
+    $H_n(M\otimes N_*) \simeq H_n(M\otimes N'_*)$.
+    This implies that $\Tor_n^R(M,N)$ gives the same result
+    for two resolutions $N_*$ and $N'_*$.
+\end{proof}
