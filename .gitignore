@@ -1,0 +1,44 @@
+.DS_Store
+
+# LaTeX compilation files
+*.aux
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.fls
+*.fdb_latexmk
+*.synctex
+*.synctex.gz
+*.synctex(busy)
+*.synctex.gz(busy)
+
+# Bibliography files (keep .bib sources)
+*.bbl
+*.bcf
+*.blg
+*.run.xml
+
+# Index and glossary files
+*.idx
+*.ilg
+*.ind
+*.ist
+*.glo
+*.glg
+*.gls
+*.acn
+*.acr
+*.alg
+*.glsdefs
+
+# Generated Asymptote files (any figure number)
+/commalg.pre
+/commalg-[0-9]*.asy
+/commalg-[0-9]*.pre
+/commalg-[0-9]*.tex
+/commalg-[0-9]*.pdf
+/commalg-[0-9]*.eps
+/commalg-[0-9]*.ps
+
