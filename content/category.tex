@@ -112,8 +112,8 @@ and $\nu : P\to N$, such that the following universal property holds:
 and $\nu' : P'\to N$
 \begin{center}
 \begin{tikzcd}
-    P' \arrow[rd, dashed] \arrow[rrd, "\mu'"]
-    \arrow[rdd, "\nu'", swap]\\
+    P' \arrow[rd, dashed] \arrow[rrd, bend left, "\mu'"]
+    \arrow[rdd, bend right, "\nu'", swap]\\
     & P \arrow[r, "\mu", swap] \arrow[d, "\nu"] & M \\
     & N
 \end{tikzcd},
@@ -194,11 +194,11 @@ and any morphism $\phi : A\to B'$,
 there exists a unique morphism $f : B\to B'$
 such that $f(x)=y$ and the diagram 
 \begin{center}
-\begin{tikzcd}
-    & A \arrow[ld, "\iota", swap]  \arrow[rd, "\phi"] \\
-    B \arrow[rr, "f"]& & B'  \\
-    x \arrow[u, "\in", phantom, sloped]
-    \arrow[rr, maps to] & & y \arrow[u, "\in", phantom, sloped] 
+\begin{tikzcd}[column sep=1.5cm]
+     A \arrow[rd, "\iota", swap]  \arrow[rrd, "\phi", bend left] \\
+    & B \arrow[r, "f"] &  B'  \\
+    & x \arrow[u, "\in", phantom, sloped]
+    \arrow[r, maps to] & y \arrow[u, "\in", phantom, sloped] 
 \end{tikzcd}
 \end{center}
 commutes".

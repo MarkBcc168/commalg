@@ -15,6 +15,7 @@ in commutative algebra.
 This chapter introduces basic notions and properties of modules.
 \section{Modules}
 \subsection{Definition and Basic Properties}
+\begin{definition}[Modules]
 Given a ring $A$, a \vocab{module} $M$ is an abelian group $(M,+)$
 with mutliplication by elements in $A$:
 a map $A\times M\to M$ satisfying
@@ -25,15 +26,23 @@ such that multiplication is compatible with ring operations:
     \item $(a+b)\cdot m = am + bm$ for all $a,b\in A$ and $m\in M$.
     \item $a\cdot (bm) = (ab)m$ for all $a,b\in A$
     and $m\in M$.
+    \item $1\cdot m = m$ for all $m\in M$.
 \end{itemize}
+\end{definition}
 \begin{example}
 \begin{itemize}
-    \item When $A=k$, a field, $A$-module is a $k$-vector space.
-    \item When $A=\mathbb Z$, a $\mathbb Z$-module is just
-	an abelian group.
+    \item When $A=k$, a field, a $k$-module is the same as 
+    a $k$-vector space.
+    \item When $A=\mathbb Z$, a $\mathbb Z$-module is the same 
+    as an abelian group, since the $\ZZ$-multiplication 
+    structure is forced.
     \item When $A=\mathbb C[x]$, an $\mathbb C[x]$-module
 	is a $\mathbb C$-vector space associated with
 	a linear map representing a multiplication by $x$.
+    \item For any ring $A$, $A$ is an $A$-module.
+    \item For any ring $A$ and ideal $I$, the ideal $I$ 
+    can be viewed as an $A$-module (it is a submodule of $A$).
+    Moreover, the quotient ring $A/I$ is also an $A$-module.
 \end{itemize}
 \end{example}
 If there is a subset $N\subset M$ preserved by
@@ -41,9 +50,9 @@ addition and scalar multiplication, then
 $N$ is an $A$-\vocab{submodule} of $M$.
 
 We can also define an $A$-\vocab{module homomorphism}
-to be a map between two $A$-modules $\phi : M\to N$
+to be a map between two $A$-modules $\varphi : M\to N$
 that is a group homomorphism and
-$\phi(am) = a\phi(m)$.
+$\varphi(am) = a\varphi(m)$ for all $a\in A$ and $m\in M$.
 
 The category of $A$-module is denoted $\Mod A$.
 \notation{$\Mod A$}{the category of $A$-modules}
@@ -52,140 +61,182 @@ The category of $A$-module is denoted $\Mod A$.
 %
 %
 \subsection{Constructions of Modules}
-We have some constructions of modules.
+We list various constructions of modules.
+Most of these are intuitive, and you should be 
+able to guess the meaning of many of the below notations 
+without reading the precise definition.
 
-\paragraph{Quotient}
+\paragraph{Quotient.}
 For any submodule $N\subset M$,
 one can define the \vocab{quotient module}
 $M/N$ \notation{$M/N$}{quotient module}
-by defining operation on cosets $\{N+a : a\in M\}$
-as usual.
-We also have the following universal property:
+to be the modules of cosets of the form $\{m+N : m\in M\}$,
+and the operations are defined in an obvious way.
 
-For any $A$-module $P$ and a map $\phi : M\to P$,
-such that $\phi(N)=0$, then there exists unique
-ring homomorphism $\overline\phi : M/N\to P$
-such that $\phi=\overline\phi\circ\pi$.
 
-\paragraph{Kernel, Image, Cokernel}
-Given $\phi : M\to N$, then 
-\notation{$\Ker\phi$}{kernel of module morphism}
-\notation{$\Im\phi$}{image}
-\notation{$\Coker\phi$}{cokernel}
+\textbf{Universal property of quotient module.}
+The module $M/N$ satisfies the following universal property.
+For any $A$-module $P$ and a map $\varphi : M\to P$,
+such that $\varphi(N)=0$, then there exists unique
+ring homomorphism $\widetilde\varphi : M/N\to P$
+such that $\varphi=\widetilde\varphi\circ\pi$.
+\begin{center}
+\begin{tikzcd}
+    M \arrow[rr, "\pi"]
+    \arrow[rd, "\varphi"]
+    &
+    & M/N
+    \arrow[ld, "\exists ! \widetilde\varphi"] \\
+    & P
+\end{tikzcd}
+\end{center}
+Similar to the universal property of quotient ring,
+this universal property can be interpreted as that 
+there is a correspondence between 
+$$\{\text{maps }M/N\to P\}\ \longleftrightarrow\ 
+\{\text{maps }M\to P\text{ sending }N\text{ to }0\}.$$
+
+\paragraph{Kernel, Image, Cokernel.}
+Given $\varphi : M\to N$, then 
+\notation{$\Ker\varphi$}{kernel of module morphism}
+\notation{$\Im\varphi$}{image}
+\notation{$\Coker\varphi$}{cokernel}
 $$\begin{array}{rrcll}
     \text{\vocab{kernel}}\quad &
-    \Ker\phi &:=& \{m\in M : \phi(m)=0\}
+    \Ker\varphi &:=& \{m\in M : \varphi(m)=0\}
     &\ \subseteq\ M\\[4pt]
     \text{\vocab{image}}\quad &
-    \Im\phi &:=& \{\phi(m) : m\in M\} 
+    \Im\varphi &:=& \{\varphi(m) : m\in M\} 
     &\ \subseteq\ N\\[4pt]
     \text{\vocab{cokernel}}\quad &
-    \Coker\phi &:=& N/\Im\phi
+    \Coker\varphi &:=& N/\Im\varphi
 \end{array}$$
 are all modules.
 The following isomorphism theorems follow similarly
 from ones in group theory:
 \begin{itemize}
-    \item $M/\Ker\phi\simeq\Im\phi$
+    \item $M/\Ker\varphi\simeq\Im\varphi$
     \item Given a chain of modules $L\subseteq M\subseteq N$,
     we have $(N/L)/(M/L) \simeq N/M$.
 \end{itemize}
-\paragraph{Hom}
+\paragraph{The $\Hom$ Module.}
 \notation{$\Hom_A(M,N)$}{$\Hom$ module}
 Given two modules $M,N$, $\Hom_A(M,N)$ is also a module.
 The operation is defined by
 \begin{itemize}
-    \item $(\phi_1 + \phi_2)(m) = \phi_1(m) + \phi_2(m)$ 
-    \item $(a\phi)(m) =a\phi(m)$.
+    \item $(\varphi_1 + \varphi_2)(m) = \varphi_1(m) + \varphi_2(m)$ 
+    \item $(a\varphi)(m) =a\varphi(m)$.
 \end{itemize}
-\notation{$\End_A(M)$}{endomorphism module}
-When, $M=N$, there is another notation $\End_A(M)
-:= \Hom_A(M,M)$, which is a noncommutative ring
-whose multiplication is given by composition.
-\paragraph{Submodules Generated by Ideal}
+for any $a\in A$ and $\varphi,\varphi_1,\varphi_2\in \Hom_A(M,N)$.
+\paragraph{Submodules Generated by Ideal.}
 Given an $A$-module $M$ and $I\subset A$,
 we can define a module
 \notation{$IM$}{submodule generated by ideal}
 $$IM := \left\{\sum_{i=1}^k a_im_i : a_i\in I, m_i\in M\right\}.$$
-\paragraph{Annihilator}
-We have the \vocab{annihilator} of an element:
-\notation{$\Ann(m)$}{annihilator of an element}
-$$\Ann(m) := \{a\in A : am=0\}$$
-and of the entire module
-\notation{$\Ann(M)$}{annihilator of the module}
-$$\Ann(M) := \{a\in A : am=0\text{ for all }m\in M\}.$$
 
-\paragraph{Restriction of Scalar}
-Let $\kappa : A\to B$ be a ring
-homomorphism. Let $N$ be a $B$-module,
-then we can define the \vocab{restriction of scalar},
-which is an $A$-module $_A N$
-\notation{$_A N$}{restriction of scalar}
-(or $\Res_A(N)$) by using the same abelian group $N$
-and define $a\cdot n = \kappa(a)\cdot n$.
-This is a functor from $\Mod B$ to $\Mod A$.
-\paragraph{Direct sum and direct product}
-Given a collection of modules $(M_\alpha)_{\alpha\in T}$, 
+\paragraph{Direct Product.}
+Given a collection of modules $(M_i)_{i\in I}$, 
 the \vocab{direct product} (also known as \vocab[product of modules]{product})
 is defined by
-\notation{$\prod_{\alpha\in T}M_\alpha$}{product of modules}
-$$\prod_{\alpha\in T} M_\alpha
-:= \{(m_\alpha)_{\alpha\in T}\},$$
+\notation{$\prod_{i\in I}M_i$}{product of modules}
+$$\prod_{i\in I} M_i := \{(m_i)_{i\in I}\},$$
 and all operations are done independently on each coordinate.
 (If it is a finite collection, we write
 $M_1\times M_2 \times \dots\times M_n$.)
 \notation{$M_1\times\dots\times M_n$}
 {product of modules}
+
+\textbf{Universal property of products.}
 The universal property is similar to universal property
-of products in \Cref{sec:universal}:
-if $\tau_\alpha : P \to M_\alpha$, then
-there exists unique $\tau : P\to \prod M_\alpha$.
+of products in \Cref{sec:universal}.
+In particular, the product comes with the projection maps 
+$\pi_j : \prod_{i\in I} M_i \to M_j$ such that if 
+there is a module $P$ together with maps $\tau_j : P\to M_j$,
+then there exists a map $\tau :P\to\prod_{i\in I}M_i$
+such that $\pi_j \circ \tau = \tau_j$ for all $j$:
+\begin{center}
+\begin{tikzcd}
+    P \arrow[rd, dashed] \arrow[rrd, bend left, "\tau_j"]
+    \arrow[rdd, bend right, "\tau_k", swap]\\
+    & \prod_{i\in I}M_i \arrow[r, "\pi_j", swap] \arrow[d, "\pi_k"] 
+    & M_j \\ & M_k & \iddots
+\end{tikzcd},
+\end{center}
 
-
+\paragraph{Direct Sum.}
 The \vocab{direct sum} (also known as \vocab{coproduct}) 
 is defined as
-\notation{$\bigoplus_{\alpha\in T}M_\alpha$}{direct sum of modules}
+\notation{$\bigoplus_{i\in I}M_i$}{direct sum of modules}
 \begin{align*}
-\bigoplus_{\alpha\in T} M_\alpha
-= \Big\{(m_\alpha)_{\alpha\in T} : \text{
-only finitely many } m_\alpha \text{ are nonzero.}\Big\}
+\bigoplus_{i\in I} M_i
+= \Big\{(m_i)_{i\in I} : \text{
+only finitely many } m_i \text{ are nonzero.}\Big\}
 \end{align*}
 (If it is a finite collection, we write
 $M_1\oplus M_2 \oplus \dots\oplus M_n$.)
 \notation{$M_1\oplus\dots\oplus M_n$}
 {direct sum of modules}
-Let $i_\alpha : M_\alpha\to\bigoplus M_\alpha$
+
+\textbf{Universal Property of Direct Sum.}
+The universal property of direct sum is basically the same 
+as that of direct product, except all arrows are reversed.
+
+Let $\iota_j : M_j\to\bigoplus_{i\in I}  M_i$
 be the inclusion map. 
 Then, we have the universal property:
-for any $\phi_\alpha : M_\alpha\to P$,
-then there exists unique $\phi : \bigoplus M_\alpha\to P$
-such that $\phi_\alpha = \phi\circ i_\alpha$.
-This is exactly the same as the universal property of product,
-but all arrows are reversed.
+for any $\varphi_j : M_j\to P$,
+then there exists unique $\varphi : \bigoplus_{i\in I} M_i\to P$
+such that $\varphi_j = \varphi\circ \iota_j$ for all $j\in I$.
+\begin{center}
+\begin{tikzcd}
+    P  \\
+    & \prod_{i\in I}M_i \arrow["\varphi", lu, dashed] 
+    
+    & M_j \arrow[l, "\iota_j", swap]  
+    \arrow[llu, bend right, "\varphi_j", swap]\\ 
+    & M_k \arrow[u, "\iota_k"]  
+    \arrow[luu, bend left, "\varphi_k"] & \iddots
+\end{tikzcd},
+\end{center}
+We observe the following.
+\begin{itemize}
+\item Finite direct sums and direct products are the same: 
+$M_1\oplus \dots\oplus M_n\simeq M_1\times \dots\times M_n$.
+This is a special property of the category of modules
+and can only be seen through the explicit construction.
+\item However, infinite direct sums and infinite direct products 
+are not the same. In particular, $\bigoplus_{i\in I}M_i$ 
+is a submodule of $\prod_{i\in I}M_i$.
 
-Notice that finite direct sum is the same as finite product,
-but infinite direct sums and products are not the same.
-
-
+For example, the cardinality of $\prod_{n=1}^\infty \FF_2$ 
+is uncountable, while the cardinality of $\bigoplus_{n=1}^\infty \FF_2$ 
+is countable, because you only allow finitely many entries 
+to be nonzero.
+\end{itemize}
 A \vocab[free module]{free} $A$-module is the direct sum of
 copies of $A$. We write it as $A^{\oplus n}$
 for integer $n\geq 0$ 
-or $A^{\oplus T}$ for some set $T$.
+or $A^{\oplus I}$ for some index set $I$.
 \notation{$A^{\oplus n}$}{free module}
 
 \paragraph{Generators}
-An $A$-module $M$ is a
+An $A$-module $M$ is
 \begin{itemize}
     \item \vocab[finitely-generated module]{finitely-generated}
     (or just \vocab[finite module]{finite}) if 
-    there exists a surjective map $\phi : A^{\oplus n}\to M$
+    there exists a surjective map $\varphi : A^{\oplus n}\to M$
     for some integer $n\geq 0$.
     \item \vocab[finitely-presented module]{finitely-presented} if 
-    the $\phi$ above exists and $\Ker\phi$ is finitely-generated.
-    \item \vocab[cyclic module]{cyclic} if the $\phi$ above exists with $n=1$
-    (i.e., $M=A/I$ for some ideal $I$).
+    the $\varphi$ above exists and $\Ker\varphi$ is finitely-generated.
 \end{itemize}
-%
+\begin{warn}
+Submodules of finitely-generated modules might not 
+be finitely-generated. In particular, if $A=\ZZ[x_1,x_2,\dots]$,
+then the ideal $(x_1,x_2,\dots)$ is not finitely-generated 
+(check!). However, for most rings $A$ we care about,
+submodules of a finitely-generated modules are 
+finitely-generated (\Cref{ex:noetherian_submodule})
+\end{warn}
 %
 %
 %
@@ -275,10 +326,10 @@ We now explain some consequence of this theorem.
     \label{cor:cayley_hamilton}
     \index{Cayley-Hamilton Theorem}
     Let $M$ be a finitely-generated $A$-module.
-    Let $\phi : M\to M$ be an endormorphism
-    such that $\phi(M) \subset IM$ for some ideal $I\subset A$.
+    Let $\varphi : M\to M$ be an endormorphism
+    such that $\varphi(M) \subset IM$ for some ideal $I\subset A$.
     Then,
-    $$\phi^n + c_{n-1}\phi^{n-1} + \dots + c_1\phi + c_0 
+    $$\varphi^n + c_{n-1}\varphi^{n-1} + \dots + c_1\varphi + c_0 
     = 0,$$
     for some $c_0,\dots,c_{n-1}\in I$.
 \end{corollary}
@@ -289,12 +340,12 @@ We now explain some consequence of this theorem.
     generates $M$.
 
     We claim that there exists $a_{ij}\in I$ such that
-    $\phi(\overline e_i) = \sum_{j=1}^n a_{ij} \overline e_{ij}$.
-    To see this, we note that since $\phi(\overline m_i)
+    $\varphi(\overline e_i) = \sum_{j=1}^n a_{ij} \overline e_{ij}$.
+    To see this, we note that since $\varphi(\overline m_i)
     \in IM$, it is a sum of elements in form $im$
     for $i\in I$ and $m\in M$.
     However, $m$ is an $A$-linear combination of $\overline e_1,\dots,\overline e_n$,
-    so $im$ (and hence $\phi(\overline m_i)$)
+    so $im$ (and hence $\varphi(\overline m_i)$)
     is an $I$-linear combination of $\overline e_1,\dots,\overline e_n$.
 
     The elements $(a_{ij})_{1\leq i,j\leq n}$ form a matrix 
@@ -303,7 +354,7 @@ We now explain some consequence of this theorem.
     there exists $c_0,\dots,c_{n-1}$ such that
     $$T^n + c_{n-1}T^{n-1} + \dots + c_1T + c_0 = 0.$$
     Reducing this equation into $M$ gives
-    $$\phi^n + c_{n-1}\phi^{n-1} + \dots + c_1\phi + c_0=0.$$
+    $$\varphi^n + c_{n-1}\varphi^{n-1} + \dots + c_1\varphi + c_0=0.$$
     Note that $c_0,c_1,\dots,c_{n-1}\in I$
     because $c_0,\dots,c_{n-1}$ come from characteristic polynomial of $T$, and each entry of $T$ is in $I$. 
     Hence, we are done.
@@ -324,7 +375,7 @@ in this file.)
     (Mnemonic: $IM=M$ implies $im=m$.)
 \end{lemma}
 \begin{proof}
-    Apply the previous corollary (\Cref{cor:cayley_hamilton}) to $\phi = \id_M$.
+    Apply the previous corollary (\Cref{cor:cayley_hamilton}) to $\varphi = \id_M$.
     Then, we have that
     $$(\id)^n + c_{n-1}(\id)^{n-1} + \dots + c_1(\id) + c_0 = 0,$$
     for some $c_0,\dots,c_{n-1}\in I$. This equation simplifies to
@@ -414,12 +465,12 @@ We have some basic examples of exactness.
 \begin{itemize}
     \item $0\longto L\stackrel\psi\longto M$ is exact iff $\psi$
 	is injective.
-    \item $M\stackrel\phi\longto N\longto 0$
-	is exact iff $\phi$ is surjective.
+    \item $M\stackrel\varphi\longto N\longto 0$
+	is exact iff $\varphi$ is surjective.
     \item $0\longto L\stackrel\psi\longto M
-	\stackrel\phi\longto N$ is exact iff $L\simeq \Ker\phi$.
+	\stackrel\varphi\longto N$ is exact iff $L\simeq \Ker\varphi$.
     \item $L\stackrel\psi\longto M
-	\stackrel\phi\longto N\longto 0$ is exact iff
+	\stackrel\varphi\longto N\longto 0$ is exact iff
 	$\Coker\psi \simeq N$.
 \end{itemize}
 \end{example}
@@ -437,11 +488,11 @@ $0\longto L\longto M\longto N\longto 0$,
     we have a short exact sequence
     $$0\longto N\longto M\longto M/N\longto 0.$$
     \item 
-    Even more generally, if $\phi : M\to N$
+    Even more generally, if $\varphi : M\to N$
     is a module morphism, then we have a short exact sequence
-    $$0\longto \Ker\phi \longto M
-    \stackrel\phi\longto \Im\phi\longto 0.$$
-    (The map $\Ker\phi\longto M$ is inclusion map).
+    $$0\longto \Ker\varphi \longto M
+    \stackrel\varphi\longto \Im\varphi\longto 0.$$
+    (The map $\Ker\varphi\longto M$ is inclusion map).
     \item For any modules $M,N$,
     we have the short exact sequence
     $$0\to M\to M\oplus N\to N\to 0,$$
@@ -544,11 +595,11 @@ We begin with a (not very important) definition.
     \Hom_A(P,\bullet) : \Mod A & \to\Mod A \\
     M &\mapsto \Hom_A(P,M).
     \end{align*}
-    To define the induced map, for any $\phi : M\to N$,
-    we need to define a map $\phi_*: \Hom(P,M)\to \Hom(P,N)$.
-    This map is simply compose by $\phi$: mapping
-    $\pi$ to $\phi\circ \pi$
-    (so we have diagram $P\longto M \stackrel\phi\longto N$).
+    To define the induced map, for any $\varphi : M\to N$,
+    we need to define a map $\varphi_*: \Hom(P,M)\to \Hom(P,N)$.
+    This map is simply compose by $\varphi$: mapping
+    $\pi$ to $\varphi\circ \pi$
+    (so we have diagram $P\longto M \stackrel\varphi\longto N$).
     One  can check that it is additive.
     
     \item \textbf{The $\Hom_A(\bullet, P)$ functor.}
@@ -558,19 +609,19 @@ We begin with a (not very important) definition.
     \Hom_A(\bullet,P) : \Mod A & \to\Mod A \\
     M &\mapsto \Hom_A(M,P).
     \end{align*}
-    To define the induced map, for any $\phi : M\to N$,
-    we need to define a map $\phi^* : \Hom(N,P)\to \Hom(M,P)$.
-    This map is simply compose by $\phi$: mapping
-    $\pi$ to $\pi\circ \phi$
-    (so we have diagram $M\stackrel\phi\longto N \longto P$).
+    To define the induced map, for any $\varphi : M\to N$,
+    we need to define a map $\varphi^* : \Hom(N,P)\to \Hom(M,P)$.
+    This map is simply compose by $\varphi$: mapping
+    $\pi$ to $\pi\circ \varphi$
+    (so we have diagram $M\stackrel\varphi\longto N \longto P$).
     \item \textbf{The ``Mod $I$'' functor}
     For any ideal $I\subset A$, we have the covariant functor
     \begin{align*}
         F : \Mod A &\to \Mod{A/I} \\
         M &\mapsto M/IM.
     \end{align*}
-    For each map $\phi : M\to N$, one can define
-    $\phi_* : M/IM \to I/IN$ so that
+    For each map $\varphi : M\to N$, one can define
+    $\varphi_* : M/IM \to I/IN$ so that
     it commutes with quotient projection.
     This functor is additive.
     \end{itemize}
@@ -625,29 +676,29 @@ Let us now investigate functors from \Cref{ex:functors}.
 \end{proposition}
 \begin{proof}
     \begin{alphenum}
-    \item Given $0\to L\stackrel\phi\to N\stackrel\pi\to Q$
+    \item Given $0\to L\stackrel\varphi\to N\stackrel\pi\to Q$
     is exact. We need to show that
-    $$0\longto F(L)\stackrel{\phi_*}\longto F(N)
+    $$0\longto F(L)\stackrel{\varphi_*}\longto F(N)
     \stackrel{\pi_*}\longto F(Q)$$ 
     is exact.
 
     First, we show exactness at $F(L)$,
-    i.e., $\phi_*$ is injective.
-    Suppose $\phi_*(g) =\phi\circ g = 0$ for some $g$,
-    then for all $p\in P$, $\phi(g(p)) = 0$.
-    However, $\phi$ is injective, so $g(p)=0$ for all $p\in P$,
+    i.e., $\varphi_*$ is injective.
+    Suppose $\varphi_*(g) =\varphi\circ g = 0$ for some $g$,
+    then for all $p\in P$, $\varphi(g(p)) = 0$.
+    However, $\varphi$ is injective, so $g(p)=0$ for all $p\in P$,
     so $g=0$.
 
-    Now, we show exactness at $F(N)$, i.e., $\Im\phi_* = \Ker\pi_*$.
-    First, note that $\pi_*(\phi_*(f)) = f\circ\phi\circ\pi = 0$, so $\Im\phi_*\subseteq \Ker\pi_*$.
+    Now, we show exactness at $F(N)$, i.e., $\Im\varphi_* = \Ker\pi_*$.
+    First, note that $\pi_*(\varphi_*(f)) = f\circ\varphi\circ\pi = 0$, so $\Im\varphi_*\subseteq \Ker\pi_*$.
     In other direction, let $g\in\Hom_A(P,N)$
     such that $\pi_*(g)=\pi\circ g = 0$. We want to show that
-    $g=\phi\circ f=\phi_*(f)$ for some $f$.
+    $g=\varphi\circ f=\varphi_*(f)$ for some $f$.
     We have that for all $p\in P$, $\pi(g(p))=0$,
-    so $g(p)\in\Ker\pi = \Im\phi$.
+    so $g(p)\in\Ker\pi = \Im\varphi$.
     With that in mind, we can define $f(p)$ to be
-    the (unique) preimage of $g(p)$ w.r.t. $\phi$,
-    so $\phi(f(p)) = g(p)$. It is easy to see that
+    the (unique) preimage of $g(p)$ w.r.t. $\varphi$,
+    so $\varphi(f(p)) = g(p)$. It is easy to see that
     $f$ is a module morphism, and then we are done.
     \item Left as an exercise.
     \item You can try to prove this now, but this is a special case of \Cref{thm:tensor_is_right_exact}
@@ -773,12 +824,12 @@ in terms of universal property.
 	(i.e., everything commutes).
     \item for any $A$-module $N$ and mapping
 	$q_i : M_i\to N$ satisfying the above condition,
-	there exists unique $\phi : M\to N$
-	such that $q_i = \phi \circ p_i$ for all $i\in I$.
+	there exists unique $\varphi : M\to N$
+	such that $q_i = \varphi \circ p_i$ for all $i\in I$.
     \begin{center}
     \begin{tikzcd}
         & & N \\
-        & & M \arrow[u,"\exists!\phi",swap] \\
+        & & M \arrow[u,"\exists!\varphi",swap] \\
         M_{i} \arrow[rruu, "q_i", bend left] \arrow[rru, "p_i"] \arrow[r,"f_{ij}",swap]&
         M_{j} \arrow[ruu, "q_j"] 
         \arrow[ru, "p_j", swap] & & 
@@ -804,13 +855,13 @@ Let us prove that colimit exists and unique.
     % (e.g., in \Cref{subsec}
     % If $M$ and $M'$ works, then,
     % by applying UMP for $M$ with $N=M'$, we get
-    % the mapping $\phi : M\to M'$.
+    % the mapping $\varphi : M\to M'$.
     % Similarly, by applying UMP for $M'$ with $N=M$,
     % we get the mapping $\psi : M'\to M$.
     %
-    % Now, $\phi\circ\psi = \id_{M'}$ by uniqueness
-    % in the UMP for $M'$. Similarly, $\psi\circ\phi=\id_{M}$,
-    % so $\phi$ and $\psi$ are inverses and act as
+    % Now, $\varphi\circ\psi = \id_{M'}$ by uniqueness
+    % in the UMP for $M'$. Similarly, $\psi\circ\varphi=\id_{M}$,
+    % so $\varphi$ and $\psi$ are inverses and act as
     % an isomorphism.
     The uniqueness part follows the same pattern
     as universal property arguments,
@@ -930,13 +981,13 @@ Let us make this more precise.
 \end{example}
 \begin{definition}[Morphism of directed systems]
     Given directed system $M_I$ and $N_I$, a morphism from $M_I$
-    to $N_I$ is given by $\phi_i : M_i\to N_i$ for each $i$
+    to $N_I$ is given by $\varphi_i : M_i\to N_i$ for each $i$
     such that for each $i\leq j$, the diagram
     \begin{center}
     \begin{tikzcd}
 	M_i \arrow[r, "f_{ij}"]
-	    \arrow[d, "\phi_i"]
-	& M_j \arrow[d, "\phi_j"] \\
+	    \arrow[d, "\varphi_i"]
+	& M_j \arrow[d, "\varphi_j"] \\
 	N_i \arrow[r, "g_{ij}"]
 	& N_j
     \end{tikzcd}
@@ -948,11 +999,11 @@ Let us make this more precise.
     Let $I$ be a \textbf{filtered} poset.
     Suppose that 
     $$L_I \stackrel{\{\psi_i\}}\longto
-    M_I \stackrel{\{\phi_i\}}\longto N_I$$
+    M_I \stackrel{\{\varphi_i\}}\longto N_I$$
     is a sequence of morphisms of directed systems
     such that
     $L_i \stackrel{\psi_i}\to M_i
-    \stackrel{\phi_i}\to N_i$
+    \stackrel{\varphi_i}\to N_i$
     is exact for all $i\in I$.
     Then, we have the exact sequence
     $$\varinjlim L_I \longto \varinjlim M_I
@@ -1035,11 +1086,11 @@ which is where the filtered condition comes into play.
     \item Let $L = \varinjlim L_I$, $M=\varinjlim M_I$,
     and $N=\varinjlim N_I$.
     \item Let the resulting maps
-    be $\psi : L\to M$ and $\phi : M\to N$.
+    be $\psi : L\to M$ and $\varphi : M\to N$.
     \end{itemize}
     It suffices to show exactness at $M$.
 
-    We show that $\Ker\psi \subseteq \Im\phi$
+    We show that $\Ker\psi \subseteq \Im\varphi$
     Let $m\in M$ such that $\psi(m)=0$.
     By \Cref{lem:direct_limit_exact} (a), 
     $m$ is image of $m_i\in M_i$ for some $i$.
@@ -1056,7 +1107,7 @@ which is where the filtered condition comes into play.
     while the right hand side is $p_i(m_i) = m$,
     so $m$ lies in the image.
 
-    The proof that $\Im\phi\subseteq\Ker\psi$
+    The proof that $\Im\varphi\subseteq\Ker\psi$
     is essentially the reverse of this argument.
 \end{proof}
 \begin{exercise}
@@ -1118,16 +1169,16 @@ $\RR$-algebra to $\CC$-algebra.
 \paragraph{Bilinear maps}
 \begin{definition}[Bilinear maps]
     Given modules $M,N,P$, the map
-    $$\phi : M\times N\to P$$
-    is \vocab{bilinear} if and only if $\phi$ is $A$-linear
+    $$\varphi : M\times N\to P$$
+    is \vocab{bilinear} if and only if $\varphi$ is $A$-linear
     in each entry.
 \end{definition}
 Each map
-$$f_\phi : M\to \Hom_A(N,P)$$
+$$f_\varphi : M\to \Hom_A(N,P)$$
 induces a bilinear map
 \begin{align*}
-    \phi : M\times N&\to P \\
-	(m,n) &\mapsto f_\phi(m)(n).
+    \varphi : M\times N&\to P \\
+	(m,n) &\mapsto f_\varphi(m)(n).
 \end{align*}
 This establishes a natural isomorphism between
 \begin{equation}
@@ -1146,11 +1197,11 @@ a ``universal module'' represent those bilinear maps.
     \notation{$M\otimes_A N$}{tensor product}
     Given $A$-modules $M,N$, the \vocab{tensor product}
     $M\otimes_A N$ is an $A$-module $T$
-    with a bilinear map $\phi : M\times N \to T$
+    with a bilinear map $\varphi : M\times N \to T$
     such that for any $A$-module $P$ and a bilinear map
     $\psi : M\times N\to P$,
     there exists unique module homomorphism
-    $\pi : T\to P$ such that $\psi = \pi\circ\phi$.
+    $\pi : T\to P$ such that $\psi = \pi\circ\varphi$.
     \begin{center}
     \begin{tikzcd}
         M\times N \arrow[rr, "\text{bilinear}"]
@@ -1170,14 +1221,15 @@ Thus, we need to prove that $M\otimes_A N$ exists.
     Now, we need to mod out by something to force maps to be bilinear.
     We let $S$ be the submodule generated by
     \begin{align*}
-    re_{(m,n)} - e_{(rm,n)} \\
-    re_{(m,n)} - e_{(m,rn)} \\
+    ae_{(m,n)} - e_{(am,n)} \\
+    ae_{(m,n)} - e_{(m,an)} \\
     e_{(m+m',n)} - e_{(m,n)} - e_{(m',n)} \\
     e_{(m,n+n')} - e_{(m,n)} - e_{(m,n')}.
     \end{align*}
-    (i.e., the things we want it to be zero).
+    (i.e., the things we want it to be zero) for all 
+    $m,m'\in M$, $n,n'\in N$, and $a\in A$.
     Then, one can compose $M\times N\to F\to F/S$
-    to get $\phi : M\times N\to F/S$, which is bilinear.
+    to get $\varphi : M\times N\to F/S$, which is bilinear.
 
     Now, for any $P$ and $\psi:M\times N\to P$ bilinear,
     define $\widetilde\pi : F\to P$ by $e_{(m,n)} = \psi(m,n)$.
@@ -1375,17 +1427,17 @@ We have the functor
 \end{align*}
 \notation{$\bullet\otimes_A M$}{the tensor functor}%
 To define this functor, we need to, given 
-morphism $\phi : N\to P$, define a map
+morphism $\varphi : N\to P$, define a map
 $N\otimes_A M\to P\otimes_A M$. 
 To do this, we note that the map 
 \begin{align*}
     N\times M &\to P\otimes_A M \\
-    (n,m) &\mapsto \phi(n)\otimes m
+    (n,m) &\mapsto \varphi(n)\otimes m
 \end{align*}
 is bilinear, and so by universal property of tensor,
-we get the map $\phi_* : N\otimes_A M\to P\otimes_A M$
-(the map is also often denoted $\phi\otimes\id$)
-that sends $n\otimes m$ to $\phi(n)\otimes m$.
+we get the map $\varphi_* : N\otimes_A M\to P\otimes_A M$
+(the map is also often denoted $\varphi\otimes\id$)
+that sends $n\otimes m$ to $\varphi(n)\otimes m$.
 
 It turns out that this functor is right-exact.
 \begin{theorem}[Tensor is Right Exact]
@@ -1448,18 +1500,18 @@ The idea of this proof is the following proposition.
     However, this map is injective by exactness at $\Hom_A(N,T)$, 
     so $\pi=0$, and so $g$ is surjective.
     \item \textbf{$\Ker g\subseteq\Im f$.}
-    We set $T=M/\Im f$ and let $\phi : M\to T$ be 
+    We set $T=M/\Im f$ and let $\varphi : M\to T$ be 
     the projection map.
     Under the map $\Hom_A(M,T)\to \Hom_A(L,T)$,
-    element $\phi\in\Hom_A(M,T)$ is sent to
-    $\phi\circ f = 0$.
-    Thus, $\phi\in \Ker(\Hom_A(M,T)\to\Hom_A(L,T))$.
+    element $\varphi\in\Hom_A(M,T)$ is sent to
+    $\varphi\circ f = 0$.
+    Thus, $\varphi\in \Ker(\Hom_A(M,T)\to\Hom_A(L,T))$.
     
-    By exactness at $\Hom_A(M,T)$, $\phi$ is in image from $\Hom_A(N,T)$.
+    By exactness at $\Hom_A(M,T)$, $\varphi$ is in image from $\Hom_A(N,T)$.
     In other words, there exists $\psi : N\to M/\Im(f)$
-    such that $\psi\circ g = \phi$.
+    such that $\psi\circ g = \varphi$.
     Therefore, if $b\in \Ker g$, then 
-    $g(b)=0$, so $\phi(b)=0$, implying that $b\in\Im f$.
+    $g(b)=0$, so $\varphi(b)=0$, implying that $b\in\Im f$.
     \qedhere
     \end{enumerate}
 \end{proof}
@@ -1525,11 +1577,13 @@ We will study flat modules in detail in
     with homomorphism $f : A\to B$.
     It has the obvious $A$-module structure.
 \end{definition}
-Let $B$ be an $A$-algebra.
+Let $B$ be an $A$-algebra coming from map $f : A\to B$.
 Recall the ``restriction of scalar'' functor that given
 an $B$-module $N$, one can construct the $A$-module
-$_A N$ by forgetting multiplication in $B$.
-What about other direction?
+$_A N$, and the $A$-multiplication is given by 
+$$a\cdot n = f(a)\cdot n,$$
+where $\cdot$ on the right hand side is the action on the 
+original $B$-module.
 
 In another direction, we have the following construction.
 \begin{definition}[Base Change]
@@ -1663,7 +1717,7 @@ Let $A$ be a local ring, and let $P$ and $Q$ be $A$-modules such that $P\oplus Q
 \end{problem}
 \begin{problem}
 \label{prob:surjective_map}
-Let $A$ be a ring and $M$ be a finitely-generated module. Prove that any surjective map $\phi : M\to M$ is an isomorphism.
+Let $A$ be a ring and $M$ be a finitely-generated module. Prove that any surjective map $\varphi : M\to M$ is an isomorphism.
 
 (Hint: apply Nakayama's lemma on an $A[x]$-module.)
 \end{problem}
@@ -1673,13 +1727,13 @@ Let $A$ be a ring, and let $P$ be an $A$-module.
 \begin{alphenum}
 \item Prove that the following are equivalent:
 \begin{enumerate}[label=(\roman*)]
-\item For every surjective map $\phi : P\to N$,
-there exists a map $\psi : N\to P$ such that $\phi\circ \psi = \id$.
+\item For every surjective map $\varphi : P\to N$,
+there exists a map $\psi : N\to P$ such that $\varphi\circ \psi = \id$.
 \item If $0\to M\to P\to N\to 0$ is an exact sequence,
 then $P\simeq M\oplus N$.
 \item There exists a module $Q$ such that $P\oplus Q$ is free.
-\item For every surjective map of modules $\phi : M\to N$,
-the induced map $\phi_* : \Hom_A(P,M)\to\Hom_A(P,N)$ 
+\item For every surjective map of modules $\varphi : M\to N$,
+the induced map $\varphi_* : \Hom_A(P,M)\to\Hom_A(P,N)$ 
 is surjective (i.e., $\Hom_A(P,\bullet)$ is an exact functor).
 \end{enumerate}
 Module $P$ is said to be \vocab{projective} if it satisfies the above (equivalent) conditions.

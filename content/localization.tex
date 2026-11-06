@@ -554,14 +554,14 @@ being the zero module or not.
     so we need to check that (c) $\Rightarrow$ (a).
 
     If $M_{\mathfrak m}=0$ for all maximal ideal $\mathfrak m$,
-    then for each $y\in M$, we have $\frac y1=0$
+    then for each $x\in M$, we have $\frac x1=0$
     in $M_{\mathfrak m}$.
-    Thus, there exists $a\notin\mathfrak m$
-    such that $ay=0\in M$.
-    However, this means that $\Ann(y)\not\subset\mathfrak m$
-    for each $\mathfrak m$, so by Krull's theorem
-    \Cref{thm:krull},
-    $\Ann(y) = A$, so $y=0$.
+    Thus, there exists $b\notin\mathfrak m$
+    such that $bx=0\in M$.
+    However, the set $I=\{a\in A : ax=0\}$ is an ideal of $A$
+    that does not contain in $\frakm$ for all $\frakm$.
+    Thus, by Krull's theorem \Cref{thm:krull}, we have $I=A$, 
+    which implies that $x=0$.
 \end{proof}
 We say that $M_{\mathfrak p}$ is a \vocab{stalk}
 of $M$ at point $[\pp]\in\Spec A$.

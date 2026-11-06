@@ -1,39 +1,40 @@
 %!TEX Root = ../main.tex
 \chapter{Rings}
 \label{chap:rings}
-The origins of commutative algebra goes back
-to about 150 years ago, when the following subjects
-are studied.
-\begin{itemize}
-    \item \textbf{Algebraic Number Theory}, which
-	studies about a specific kind of commutative rings
-	generated from \vocab{number fields}.
-	(e.g., $\mathbb Q$, $\mathbb Z[i]$, $\mathbb Z_p$,
-	$\mathbb Z/p\mathbb Z$, etc.)
-    \item 
-    \textbf{Algebraic Geometry},
-    which studies about polynomial rings
-    $k[x]$, $k[x_1,\dots,x_n]$, and their quotients
-    (where $k$ is a field).
-    The most important casae is when $k=\mathbb C$,
-    but modern algebraic geomety have extended to studying
-    polynomial equations over arbitrary field too.
-\end{itemize}
-However, people then realize that these two subjects
-have the same foundation.
-In particular, theorems about Algebraic Number Theory and
-theorems in Algebraic Geometry have a lot in common,
-and the common foundation
---- properties of commutative rings --- establishes
-\vocab{commutative algebra}.
-The central object of commutative algebra is ring,
-which we introduce in this chapter.
+In this chapter, we introduces the our basic objects of studies:
+rings and ideals. 
+Readers familiar with undergraduate algebra should 
+find most of \Cref{sec:rings_ideals}, \ref{sec:ring_properties},
+and \ref{sec:primes_maximal_ideals} a review,
+although they should quickly skim through those sections 
+to fill in possible gaps and because the material is presented 
+here with slightly higher level of sophistication than 
+a typical undergraduate algebra course.
+The material \Cref{sec:radicals} and \ref{sec:spec} 
+is not typically covered in an undergraduate algebra course.
+
+We begin in \Cref{sec:rings_ideals} with the basic 
+constructions of rings and ideals.
+In \Cref{sec:ring_properties}, we introduce various 
+basic properties of rings.
+In \Cref{sec:primes_maximal_ideals}, we introduce the 
+notion of prime and maximal ideals, which is central to 
+the entire book.
+The short \Cref{sec:radicals} introduces the notion 
+of radical and proves our first important result that 
+nilradical is the intersection of prime ideals.
+Finally, \Cref{sec:spec} discusses spectrum of a ring,
+which describes how commutative ring theory is used in algebraic geometry.
+
 
 \section{Rings and Ideals}
+\label{sec:rings_ideals}
 In this section, we set up some basic concepts of rings and ideals.
-\subsection{Ring Homomorphisms}
+\subsection{Ring and Ring morphisms}
 The most basic object we are going to study
-is (commutative) rings. A commutative \vocab{ring} $A$ has operations addition $+$ and multiplication $\cdot$, which 
+is (commutative) rings. 
+\begin{definition}[Rings]
+A commutative \vocab{ring} $A$ has operations addition $+$ and multiplication $\cdot$, which 
 must satisfies the following:
 \begin{itemize}
     \item addition forms an abelian group,
@@ -59,8 +60,9 @@ must satisfies the following:
     and $(b+c)\cdot a = (b\cdot a) + (c\cdot a)$
     for all $a,b,c\in A$.
 \end{itemize}
-We allow $0=1$, in which case $A=\{0\}$
-is a \vocab{zero ring}.
+\end{definition}
+We allow $0=1$, in which case $A=\{0\}$ is a \vocab{zero ring},
+typically denoted just $0$.
 
 The word ``commutative'' in commutative rings 
 indicates that multiplication is commutative.
@@ -69,61 +71,141 @@ Noncommutative rings are not the focus of these notes.
     \fbox{In these notes, we assume all rings are commutative and contain $1$.}
 \end{center}
 \begin{example}[Basic rings]
-The most basic example of ring is integers $\ZZ$. 
-Furthermore, $\QQ$, $\RR$, and $\CC$ are all rings.
-Integers modulo $n$, $\ZZ/n\ZZ$, form a ring.
+The most basic example of rings are the integers $\ZZ$,
+rational numbers $\QQ$, real numbers $\RR$, complex numbers $\CC$,
+and integers modulo $n$, $\ZZ/n$.
 \end{example}
 \begin{example}[Constructing new rings]
+\label{ex:construct_rings}
 Here are some ways to construct a new ring.
 \begin{itemize}
+\item Given two rings $A$ and $B$, one construct 
+the \vocab{product ring}
+$$A\times B = \{(r,s) : r\in A, s\in B\},$$
+where addition and multiplication are done component-wise.
+Similarly, we can take a product of $n$ rings 
+$A_1\times A_2\times\dots\times A_n$, or product of rings 
+with arbitrary index set $\prod_{i\in I}A_i$.
+\notation{$A\times B$}{product ring}
 \item Given a ring $A$, one can adjoin a free element $x$
 to get a \vocab{polynomial ring} $A[x]$, which is 
 described by 
-$$A[x] = \{a_0 + a_1x + \dots + a_nx^n : a_0,\dots,a_n\in A\}.$$
-\notation{$A[x]$}{polynomial ring}
+$$A[x] = \{a_0 + a_1x + \dots + a_nx^n : a_0,\dots,a_n\in A\},$$
+where additions and multiplications are done via polynomial 
+addition and multiplication.
 Similarly, one can adjoin arbitrarily many elements 
 to get rings such as $A[x_1,\dots,x_m]$, 
 which is a ring of polynomials in $m$ variables
 with coefficients in $A$.
-\item Given two rings $A$ and $B$, one construct 
-the \vocab{product ring}
-$$A\times B = \{(r,s) : r\in A, s\in B\},$$
-\notation{$A\times B$}{product ring}
-where addition and multiplication are done component-wise.
+\notation{$A[x]$}{polynomial ring}
 \end{itemize}
 \end{example}
-A \vocab{ring morphism} between two rings $A$ and $B$
-is a map $\phi : A\to B$,
-that satisfies $\phi(x+y) = \phi(x)+\phi(y)$, $\phi(xy) = \phi(x)\phi(y)$, and $\phi(1)=1$ for all $x,y\in A$.
+\begin{definition}[Ring morphisms]
+A \vocab{ring morphism} (or \vocab{ring map}, or just map) 
+between two rings $A$ and $B$ is a map $\phi : A\to B$,
+that satisfies 
+$$\phi(x+y) = \phi(x)+\phi(y),\quad 
+\phi(xy) = \phi(x)\phi(y),\quad\text{and}\quad 
+\phi(1)=1$$ 
+for all $x,y\in A$.
+A ring morphism is an \vocab{isomorphism} if it is 
+invertible. Equivalently, it is injective and surjective.
+\end{definition}
 In particular,
 \begin{center}
     \fbox{We assume that all ring morphisms 
     preserve $1$.}
 \end{center}
 \begin{example}[Ring morphisms]
+    \label{ex:morphisms}
     We have the following examples:
     \begin{itemize}
 	\item For any ring $A$, there exists a unique ring
-    homomorphism $f : \mathbb Z\to A$
+    morphism $f : \mathbb Z\to A$
     by
     $$f(n) = \underbrace{1+\dots+1}_n.$$
     \item For any ring $A$, there exists a 
-	unique ring morphism $f : A\to \{0\}$.
+	unique ring morphism $f : A\to 0$ from $A$ to the zero ring.
     \item If $p$ is a prime, and suppose
-	$\underbrace{1+\dots+1}_p = 0$
+	$\overbrace{1+\dots+1}^p = 0$
 	(i.e., $A$ has characteristic $p$),
 	then we have the \vocab{Frobenius morphism}
-	$F : A\to A$ by
-	$F(a) = a^p$.
-	(Proof: multiplication is obvious.
-	For addition, $(a+b)^p = a^p + \binom p1 a^{p-1}b
+	$F : A\to A$ by $F(a) = a^p$.
+
+	(Proof: that $F$ perserves multiplication is obvious.
+	For that $F$ perserves addition, we note that  
+    $(a+b)^p = a^p + \binom p1 a^{p-1}b
 	+ \binom p2 a^{p-2}b^2 + \dots + b^p = a^p+b^p$.)
     \end{itemize}
+\end{example}
+\paragraph{Universal Properties.}
+The constructions of rings given in \Cref{ex:construct_rings}
+can be described by its universal properties. 
+Readers unfamiliar with universal properties should consult 
+\Cref{sec:universal} for an introduction to universal properties.
+
+\textbf{Universal Properties of Product Rings.}
+Given two rings $A$ and $B$, the product ring
+$A\times B$ comes with the projection maps
+$\pi_A : A\times B\to A$ and $\pi_B : A\times B\to B$ such that for any ring 
+$P$ and maps $\mu : P\to A$ and $\nu : P'\to B$,
+\begin{center}
+\begin{tikzcd}
+    P \arrow[rd, dashed] \arrow[rrd, bend left, "\mu"]
+    \arrow[rdd, bend right, "\nu", swap]\\
+    & A\times B \arrow[r, "\pi_A", swap] \arrow[d, "\pi_B"] & A \\
+    & B
+\end{tikzcd},
+\end{center}
+there exists unique map $P\to A\times B$ that makes the diagram 
+above commutes.
+(In particular, the projection maps send $(a,b)\mapsto a$ 
+and $(a,b)\mapsto b$, respectively.)
+
+One useful way to think about this universal properties 
+is that there is a bijection between 
+$$\{\text{maps } P \to A\times B\} 
+\ \longleftrightarrow\ 
+\{\text{maps }P\to A\} \times \{\text{maps }P\to B\}.$$
+
+\textbf{Universal Properties of Polynomial Rings.}
+Given a ring $A$, the polynomial ring $A[x]$ comes with 
+the inclusion map $\iota : A\to A[x]$ and a canonical element $x\in A[x]$ 
+that is universal, i.e., for any ring $P$ with ring morphism 
+$\phi : A\to P$ and an element $y\in P$,
+there exists a map $f : A[x]\to P$ such that 
+$f(x)=y$ and the following diagram commutes:
+\begin{center}
+\begin{tikzcd}[column sep=1.5cm]
+     A \arrow[rd, "\iota", swap]  \arrow[rrd, "\phi", bend left] \\
+    & A[x] \arrow[r, "f"] &  P  \\
+    & x \arrow[u, "\in", phantom, sloped]
+    \arrow[r, maps to] & y \arrow[u, "\in", phantom, sloped] 
+\end{tikzcd}.
+\end{center}
+
+One useful way to think about this universal properties 
+is that there is a bijection between 
+$$\{\text{map } A[x] \to P\} 
+\ \longleftrightarrow\ 
+\{(f,y) : \text{map } f : A\to P, y\in P\}.$$
+In other words, to specify a map $A[x]\to P$,
+one needs to specify a map $A\to P$ and an element of $P$ 
+(that will be where $x$ goes to).
+
+\begin{example}
+A morphism $\ZZ[x]\to A$ for any ring $A$ 
+is determined by an element in $A$. 
+This because there is a unique ring morphism $\ZZ\to A$ 
+(cf. \Cref{ex:morphisms}) and from universal properties 
+of polynomial rings, one need to specify an element in $A$
+to be an image of $x$.
 \end{example}
 \subsection{Ideals}
 Ideals are a subset of ring that has special properties.
 Most importantly, it forms a quotient ring, which we 
 describe in the next subsection.
+\begin{definition}[Ideal]
 A subset $I\subseteq A$ is an \vocab{ideal} if and only if it
 \begin{itemize}
     \item is closed under addition:
@@ -131,6 +213,7 @@ A subset $I\subseteq A$ is an \vocab{ideal} if and only if it
     \item absorbs multiplication:
 	if $a\in I$ and $r\in A$, then $ra\in I$.
 \end{itemize}
+\end{definition}
 Notice that the second condition is stronger than 
 being closed under multiplication.
 \begin{example}
@@ -139,15 +222,12 @@ being closed under multiplication.
 	\item For any integer $n$, 
         $(n) = n\ZZ\subseteq \ZZ$ is an ideal.
         Moreover, all ideals of $\ZZ$ are of this form.
-	\item $\{0\}$ and $A$ itself is an ideal of $A$.
-	    If $A$ is a field, these two
-	    are the only ideals of $A$.
+	\item $(0)=\{0\}$ and $A$ itself are ideals of $A$.
 	\item For each $a\in A$,
 	    we have the ideal 
 	    generated by $a$ defined by
 	    $(a) = \{ar : r\in A\}$.
 	    These ideals are called \vocab{principal ideals}.
-	    For $\mathbb Z$, every ideal is principal.
 	\item More generally, given some subset $T\subseteq A$,
 	    we can define the ideal generated by $T$
 	    as the smallest ideal containing $T$, which is
@@ -155,19 +235,23 @@ being closed under multiplication.
 	    a_i\in A, t_i\in T\right\}.$$
             Ideals generated by $\{x_1,\dots,x_n\}$
             is often written as $(x_1,\dots,x_n)$.
+        An ideal $I$ is \vocab{finitely-generated} if 
+        there exists finitely many elements $x_1,\dots,x_n\in A$ such that 
+        $I=(x_1,\dots,x_n)$.
             \notation{$(T)$}{ideal generated by set $T$}
             \notation{$(x_1,\dots,x_n)$}{ideal generated by $x_1,\dots,x_n$}
     \end{itemize}
 \end{example}
-Another way to construct ideals is to take the kernel.
-Given a ring homomorphism $f : A\to B$, then
+Another way to construct ideals is to take the kernel
+of a ring morphism.
+Given a ring morphism $f : A\to B$, then
 $$\Ker f= f^{-1}(\{0\})\subseteq A$$
-\notation{$\Ker f$}{kernel of ring homomorphism}
+\notation{$\Ker f$}{kernel of ring morphism}
 is always an ideal of $A$.
 This is in fact a special case of
 a more general construction called contraction.
 \begin{definition}[Contraction and Extension]
-    Consider a ring homomorphism
+    Consider a ring morphism
     $f : A\to B$. 
     \begin{itemize}
     \item For each ideal $J\subseteq B$,
@@ -186,7 +270,7 @@ Finally, we have the following operations of ideals.
     \item $I\cap J$ is an ideal.
     \item $I+J = \{i+j : i\in I, j\in J\}$ is an ideal.
     \notation{$I+J$}{ideal addition}
-    \item $IJ$ is the ideal generated by $\{ij : i\in I, j\in J\}$.
+    \item $IJ$ is the ideal \textbf{generated by} $\{ij : i\in I, j\in J\}$.
     \notation{$IJ$}{ideal multplication}
     \end{itemize}
     They are analogue of $\lcm$, $\gcd$, and product, respectively.
@@ -194,6 +278,11 @@ Finally, we have the following operations of ideals.
     $(4)\cap (6) = (12)$, $(4)+(6)=(2)$,
     and $(4)(6) = (24)$.
 \end{definition}
+\begin{exercise}
+Find an example of a ring $A$ and two ideals $I$ and $J$
+of $A$ such that $\{ij : i\in I, j\in J\}$ is 
+\textbf{not} and ideal of $A$.
+\end{exercise}
 \begin{remark}[Origin of ideals]
 The first usage of the word \textbf{ideal}
 is by Dedekind, who is a algebraic number theorist.
@@ -232,27 +321,47 @@ of ring that unique factorization of ideals hold.
 \end{remark}
 \subsection{Quotient Rings}
 We now describe the most important way to generate new rings,
-called \vocab{quotient ring}.
+called quotient ring.
+\begin{definition}[Quotient ring]
 Given a ring $A$ and an ideal $I\subseteq A$,
-then we define the quotient ring $A/I$
+then we define the \vocab{quotient ring} $A/I$
 \notation{$A/I$}{quotient ring}
 as the ring of cosets 
-$$\{[a] := a+I : a\in A\}.$$
-We define the operations by
+$$\{a+I : a\in A\}.$$
+Denote the coset $a+I$ by $[a]$. We define the operations by
 $[a+b] = [a]+[b]$ and $[ab] = [a][b]$ 
 as expected. 
-This map is well-defined.
-Indeed, if $a-a'\in I$, then e.g., $ab-a'b\in I$,
-so $[ab] = [a'b]$.
+\end{definition}
+The ring operations above are well-defined.
+Indeed, if $a$ and $a'$ are in the same coset, then 
+$a-a'\in I$. Similarly, if $b$ and $b'$ are in the same cosets,
+then $b-b'\in I$. Then 
+\begin{align*}
+(a+b)-(a'+b') &= (a-a')+(b-b') \in I \\
+ab - a'b' &= a(b-b') + b'(a-a') \in I,
+\end{align*}
+so $a+b$ and $a'+b'$ are in the same coset
+and $ab$ and $a'b'$ are in the same coset, implying that 
+the ring operations are well-defined. 
+Notice that in the process of checking that multiplication 
+is well-defined, we have to use the fact that $I$ 
+\emph{absorbs} multiplication.
+We leave the reader to verify the remaining ring axioms.
 
-We then also define the surjective ring homomorphism
-$\pi : A\to A/I$ by $\pi(a) = [a]$.
-The kernel of this map is $I$.
+We then also define the surjective ring morphism
+\begin{align*}
+\pi : A &\to A/I \\
+a &\mapsto [a],
+\end{align*}
+which has kernel $I$. This is the canonical \vocab{quotient 
+projection map}.
+
+\textbf{Universal Properties of Quotient Rings.}
 This map satisfies the following universal property:
-suppose $B$ is another ring and a homomorphism
+suppose $B$ is another ring and a morphism
 $f : A \to B$ such that $f(I) = 0$, then
-there exists a unique ring homomorphism
-$\overline f : A/I\to B$ such that
+there exists a unique ring morphism
+$\widetilde f : A/I\to B$ such that
 the following diagram commutes:
 \begin{center}
 \begin{tikzcd}
@@ -264,30 +373,56 @@ the following diagram commutes:
     & B
 \end{tikzcd}
 \end{center}
-(Proof: we are forced to have $\overline f([a]) = f(a)$
-, so $f$ is unique. Moreover, this is well-defined
-because $f$ sends $I$ to $0$.)
+In particular, we want to define $\widetilde f$ by 
+$\widetilde f([a]) = f(a)$, but the issue is that if 
+$a$ and $a'$ are in the same cosets, then we need the map 
+to be consistent, i.e., $f(a)=f(a')$.
+This is guaranteed by the fact that $f(I)=0$.
 
-By the usual argument (see \Cref{sec:universal}),
-this universal property classify $\pi$ and $A/I$
-up to isomorphism.
+Anothe way to state universal properties of quotient is that 
+there is a bijection 
+$$\{\text{map } A/I\to B\} \ \longleftrightarrow\ 
+\{\text{map }A\to B\text{ that sends }I\text{ to }0\}.$$
+\begin{example}
+We define a map 
+$$\frac{\CC[x,y]}{(y-x^2)} \to \CC[t]$$
+as follows: by the universal property of polynomial rings,
+there is a map $\CC[x,y]\to \CC[t]$ that sends 
+$x\mapsto t$ and $y\mapsto t^2$. This map sends 
+$y-x^2\mapsto 0$, so by the universal property of quotient ring,
+the map $\CC[x,y]\to\CC[t]$ descends to the map 
+$\CC[x,y]/(y-x^2) \to \CC[t]$.
+
+It turns out that this map is an isomorphism.
+The inverse is given by $\CC[t] \to \CC[x,y]/(y-x^2)$
+by $t\mapsto x$. 
+\end{example}
+
 
 We now state an important theorem characterizing 
 ideals of $A/I$.
 \begin{theorem}[Correspondence Theorem]
     \index{correspondence theorem}
     \label{thm:correspondence}
-    There is a bijection between
+    There exists an inclusion-preserving bijection between
     $$\{\text{ideals of } A/I\}
     \ \longleftrightarrow\ 
     \{\text{ideals of } A \text{ containing } I\}.$$
+    Furthermore, this correspondence takes prime ideals to 
+    prime ideals and takes maximal ideals to maximal ideals 
+    (both words are defined in \Cref{def:prime_maximal})
 \end{theorem}
-For example, the ideals of $\mathbb Z/6\mathbb Z$
-are $0$, $\mathbb Z/6\mathbb Z$, $2\mathbb Z/6\mathbb Z$,
-and $3\mathbb Z/6\mathbb Z$,
-while the ideals of $\mathbb Z$ that contains
-$6\mathbb Z$ are $6\mathbb Z$, $\mathbb Z$,
-$2\mathbb Z$, and $3\mathbb Z$.
+For example, here is the correspondence when 
+$A=\ZZ$ and $I=(6)$:
+\begin{center}
+\begin{tabular}{c|c}
+Ideals of $\ZZ/6$ & Ideals of $\ZZ$ containing $(6)$ \\ \hline
+$(0)$ & $(6)$ \\
+ $\{0,3\}$ & $(3)$ \\
+$\{0,2,4\}$ & $(2)$ \\
+$\{0,1,2,3,4,5\}$ & $\ZZ$
+\end{tabular}.
+\end{center}
 \begin{proof}
     Let $\pi : A\to A/I$ be the quotient projection map.
     The bijection is given by 
@@ -311,6 +446,7 @@ Then, $B\simeq A/\Ker\phi$.
 Prove the above theorem (\Cref{thm:first_isomorphism}).
 \end{exercise}
 \section{Properties of Rings}
+\label{sec:ring_properties}
 \subsection{Special Elements}
 We have a bunch of definitions of
 special elements of a ring.
@@ -332,14 +468,19 @@ The set of nilpotent elements turns out to be an ideal.
 \end{proposition}
 \begin{proof}
     Absorbing multiplication is obvious.
-    To show that $\Nil(A)$ is closed under addition,
+    To show that $\Nil A$ is closed under addition,
     if $a^m=0$ and $b^n=0$, then the binomial expansion of $(a+b)^{m+n}$ 
     consists of monomials of the form $a^ib^j$.
     At least one of $i\geq m$ and $j\geq n$ must hold,
     so the monomial is divisible by either $a^m$ or $b^n$,
     both of which are $0$, so all monomials vanish,
-    which means $(a+b)^{m+n}=0$, so $a+b\in \Nil(A)$.
+    which means $(a+b)^{m+n}=0$, so $a+b\in \Nil A$.
 \end{proof}
+\begin{exercise}[to be used a lot]
+\label{ex:nilradical_fg}
+Prove that if $N = \Nil A$ is finitely-generated, then 
+there exists $m$ such that $N^m = (0)$.
+\end{exercise}
 Each kind of special element leads to a type of ring.
 \begin{definition}[Field, domain, reduced rings]
     A ring $A$ is
@@ -490,7 +631,6 @@ This fact generalizes to any rings.
 	$A/IJ \simeq A/I\times A/J$.
     \end{enumerate}
 \end{theorem}
-The proof is the same as number theory class.
 \begin{proof}
     The fact that $I$ and $J$ are coprime
     means that there exists $i\in I$ and $j\in J$
@@ -516,8 +656,10 @@ The proof is the same as number theory class.
 \end{proof}
 
 \section{Primes and Maximal Ideals}
+\label{sec:primes_maximal_ideals}
 \subsection{Definition and Basic Properties}
 \begin{definition}[Prime and Maximal Ideals]
+    \label{def:prime_maximal}
     \begin{itemize}
     \item An ideal $\frakp\subset A$ is a \vocab{prime ideal}
     if $\frakp\neq A$ and $ab\in \frakp$
@@ -694,17 +836,18 @@ The following lemma is equivalent to axiom of choice.
 %
 %
 \section{Radicals}
+\label{sec:radicals}
 \subsection{Nilradical}
-Recall that $\Nil(A)$ is the set of all nilpotent
+Recall that $\Nil A$ is the set of all nilpotent
 elements of $A$.
 This is also called the \vocab{nilradical} of $A$.
 We now use Zorn's lemma to prove the following 
 important property of nilradical.
-\begin{proposition}[Nilradical is intersection of prime ideals]
+\begin{theorem}[Nilradical is the intersection of prime ideals]
     \label{prop:nilradical} We have
-    $$\Nil(A) = \bigcap_{\mathfrak p\subseteq A
+    $$\Nil A = \bigcap_{\mathfrak p\subseteq A
     \text{ prime}}\mathfrak p$$ 
-\end{proposition}
+\end{theorem}
 \begin{proof}
     We first show the direction $\subseteq$.
     To do this, we have to prove that
@@ -713,7 +856,7 @@ important property of nilradical.
     so $a\in\mathfrak p$ by definition of prime ideal.
 
     In the direction $\supseteq$,
-    given $f\notin\Nil(A)$, we need to find a prime ideal
+    given $f\notin\Nil A$, we need to find a prime ideal
     not containing $f$.
     We use Zorn's lemma. Consider the poset $(\calP,\subseteq)$ where
     $$\calP = 
@@ -722,7 +865,7 @@ important property of nilradical.
     \Big\}$$
     ordered by inclusion.
     
-    Notice that $f\notin\Nil(A)$, so $S\neq\emptyset$,
+    Notice that $f\notin\Nil A$, so $S\neq\emptyset$,
     so $0\in S$. Moreover, for any totally ordered subset 
     $\calT\subseteq \calP$, it is not hard to check that
     $\bigcup_{J\in\calT} J$ is an ideal in $\calP$
@@ -747,7 +890,7 @@ important property of nilradical.
 %
 %
 \subsection{Radical Ideal}
-We have shown that $\Nil(A)$ is the same as
+We have shown that $\Nil A$ is the same as
 the intersection of all prime ideals of $A$.
 We generalize this a little bit, restricting to
 only prime ideals that contains $I$.
@@ -1049,7 +1192,7 @@ We now have a map that takes a ring $A$ to a topological space $\Spec A$.
 Now, we want to promote this to a functor.
 In order to do so, we need the following proposition.
 \begin{proposition}[Contraction of prime ideal is prime]
-    If $A,B$ be rings and $\phi : A\to B$ be a homomorphism.
+    If $A,B$ be rings and $\phi : A\to B$ be a morphism.
     If $\mathfrak q\subseteq B$ is a prime ideal,
     then the contraction $\phi^{-1}(\mathfrak q)$
     is prime.
@@ -1107,14 +1250,14 @@ outlined in the bulleted list valid.
 We draw pictures of $\Spec \ZZ[x]$ and $\Spec\CC[x,y]$.
 \begin{theorem}[Ideals of $A[y]$ where $A$ is a PID]
     \label{thm:ideal_pid}
-    Let $A$ be a PID. Then, the prime ideals of $A[y]$ are
+    Let $A$ be a PID. Then, the prime ideals of $A[x]$ are
     \begin{itemize}
     \item the zero ideal $(0)$;
-    \item the ideal $(f(y))$, where $f$ irreducible;
-    \item pick an irreducible element $p\in A$ and $g(y)\in A[y]$
-	such that $\overline g(y) \in A/(p)[y]$
+    \item the ideal $(f(x))$, where $f$ irreducible;
+    \item pick an irreducible element $p\in A$ and $g(x)\in A[x]$
+	such that $\overline g(x) \in A/(p)[x]$
 	is irreducible (in field $A/(p)$),
-	then we have $(p, g(y))$.
+	then we have $(p, g(x))$.
     \end{itemize}
     Only the last category is a maximal ideal.
 \end{theorem}
@@ -1246,7 +1389,8 @@ Let $A$ be a ring and $\mathfrak p_1,\dots,\mathfrak p_n$ be prime ideals. Suppo
 \end{problem}
 \begin{problem}
 \label{prob:ideal_pid}
-Prove \Cref{thm:ideal_pid}.
+Prove \Cref{thm:ideal_pid} (classification of ideals of $A[x]$
+where $A$ is a PID).
 \end{problem}
 \begin{problem}
 Let $A$ be a ring. Prove that the following are equivalent.
